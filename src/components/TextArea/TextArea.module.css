@@ -1,0 +1,45 @@
+.inputContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.inputContainer:not(:last-child) {
+    margin-bottom: 1.5rem;
+}
+
+.inputLabel {
+    font-size: var(--font-size-normal);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-primary);
+    margin-bottom: 0.3rem;
+
+}
+
+.inputField {
+    outline: none;
+    border: none;
+    background-color: transparent;
+    padding: 0.3rem 0;
+    color: var(--color-primary);
+    flex:0 0 100%;
+}
+
+.inputFieldContainer {
+    display: flex;
+    align-items: center;
+    font-size: var(--font-size-normal);
+    border-bottom: 0.14rem solid var(--color-primary);
+}
+
+.inputFieldError {
+    display: flex;
+    align-items: center;
+    font-size: var(--font-size-normal);
+    border-bottom: 0.14rem solid var(--color-danger-1);
+}
+
+.inputFieldIcon {
+    margin-left: -2rem;
+    color: var(--color-primary);
+    cursor: pointer;
+}

@@ -1,0 +1,38 @@
+.showNotification {
+    position: relative;
+    z-index: 20;
+    transform: translateY(-27rem);
+    background-color: var(--color-white);
+    padding: 1rem;
+    width: 40rem;
+    border: 0.2rem solid var(--color-danger-2);
+    border-radius: var(--border-radius-medium);
+    text-align: center;
+    margin-bottom: -5rem;
+    transition: transform ease-in-out 0.5s;
+    /* backdrop-filter: blur; */
+}
+
+.hideNotification {
+    position: relative;
+    transform: translateY(-90rem);
+    background-color: var(--color-white);
+    padding: 1rem;
+    width: 40rem;
+    border: 0.2rem solid var(--color-danger-2);
+    border-radius: var(--border-radius-medium);
+    margin-bottom: -5rem;
+    text-align: center;
+    transition: transform ease-in-out 0.5s;
+}
+
+.errorTitle {
+    font-size: var(--font-size-medium);
+
+}
+
+.errorMsg {
+    font-size: var(--font-size-normal);
+    font-weight: var(--font-weight-normal);
+    letter-spacing: 0.07rem;
+}

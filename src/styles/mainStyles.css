@@ -1,0 +1,154 @@
+:root {
+    --color-primary: #010f24;
+    --color-secondary: #01142F;
+
+    --color-white: #f7f7f7;
+
+    --color-grey-light-1: #F1F2F2;
+    --color-grey-light-2: #E6E7E8;
+    --color-grey-light-3: #D1D3D4;
+    --color-grey-light-4: #BCBEC0;
+
+    --color-grey-dark-1:#333;
+    --color-grey-dark-2:#777;
+    --color-grey-dark-3:#999;
+
+    --color-danger-1: #FF0000;
+    --color-danger-2: #EE3D48;
+
+    --color-success-1: #41B619;
+    --color-success-2: #5BFF62;
+
+    --border-radius-small: 0.4rem;
+    --border-radius-medium: 0.8rem;
+    --border-radius-large: 2rem;
+    --border-radius-round: 50%;
+
+    --font-size-extra-small:1rem;
+    --font-size-small:1.2rem;
+    --font-size-normal: 1.4rem;
+    --font-size-medium: 1.8rem;
+    --font-size-large: 2rem;
+    --font-size-extra-large: 2.5rem;
+    --font-size-huge: 8rem;
+
+    --color-gradien-1: 1, 20, 47;
+    --color-gradien-2: 1, 15, 36;
+
+    --color-gradient-1: 0, 201, 255;
+    --color-gradient-2: 146, 254, 157;
+
+    --font-weight-normal: 400;
+    --font-weight-medium: 700;
+    --font-weight-bold: 900;
+
+    --box-shadow-light: 0 0.2rem 0.3rem 0.2rem rgba(110, 110, 110, 0.2);
+    --box-shadow-medium: 0 0.2rem 0.5rem 0.3rem rgba(87, 87, 87, 0.5);
+    --box-shadow-heavy: 0 0.2rem 0.4rem rgba(56, 56, 56, 0.7);
+
+    --linear-gradient-1: linear-gradient(to right, rgba(var(--color-gradient-2), 0.03), rgba(var(--color-gradient-1), 0.1));
+    --linear-gradient-2: linear-gradient(to right, rgba(var(--color-gradient-1), 0.5), rgba(var(--color-gradient-2), 0.7));
+    --linear-gradient-3: linear-gradient(to right, rgba(var(--color-gradient-2), 0.7), rgba(var(--color-gradient-1), 0.5));
+    --linear-gradient-4: linear-gradient(to right, #ffffff46, #ffffff67);
+
+    --longest-width: 112.5em;
+    --default-width: 75em;
+    --longer-width: 56.25em;
+    --medium-width: 37.5em;
+    --phone-width: 25.75em; 
+
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+*,
+*::after,
+*::before {
+    box-sizing: inherit;
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 62.5%; /* 1rem = 10px, 10px/16px * 100% = 62.5% */
+}
+
+@media only screen and (max-width: 75em) {
+    html {
+        font-size: 56.25%;
+    }
+}
+
+@media (max-width: 56.25em) {
+    html {
+        font-size: 50%;
+    }
+}
+
+@media only screen and (max-width: 37.5em) {
+    html {
+        font-size: 43.75%;
+    }
+}
+
+@media only screen and (max-width: 25.75em) {
+    html {
+        font-size: 37.5%;
+    }
+}
+
+@media (min-width: 112.5em) {
+    html {
+        font-size: 75%;
+    }
+}
+
+body {
+    line-height: 1.6;
+    font-weight: 400;
+    color: var(--color-primary); 
+    padding: 3.5rem;
+    background-image: linear-gradient(to right bottom, rgba(var(--color-gradient-2), 0.7), rgba(var(--color-gradien-1), 0.9 ), rgba(var(--color-gradien-2), 0.7));
+    background-repeat: no-repeat;
+    min-height: 100vh;
+}
+
+body::-webkit-scrollbar{
+    width: .4rem;
+    /* margin: 10rem 0; */
+    background-color: #242240bb;
+}
+
+body::-webkit-scrollbar-thumb {
+    width: .4rem;
+    background-color: var(--color-primary);
+    border-radius: 2rem;
+    /* margin: 10rem 0; */
+}
+
+body::-webkit-scrollbar-track {
+    background-color: transparent;
+    /* margin: 18rem 0; */
+    width: 0.2rem;
+}
+
+@media only screen and (max-width: 75em) {
+    body {
+        padding: 0;
+    }
+}
+
+@media only screen and (max-width: 56.25em) {
+    body {
+        padding: 3.5rem;
+    }
+}
+
+
+@media only screen and (max-width: 37.5em) {
+    body {
+        padding: 0;
+    }
+}

@@ -1,0 +1,71 @@
+.dashboardSection {}
+
+.searchContainer {
+    display: flex;
+    margin: 1.2rem 0;
+}
+
+.cardsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin: 1rem 0;
+    flex-direction: row;
+    /* border: 2px solid red; */
+}
+
+@media only screen and (max-width: 37.5em) {
+    .cardsContainer {
+        justify-content: space-evenly;
+    }
+}
+
+.adminsText {
+    font-size: var(--font-size-extra-large);
+    color: var(--color-grey-dark-2);
+}
+
+
+.tempo {
+    font-size: var(--font-size-small);
+    color: var(--color-grey-dark-2);
+    margin-right: 2.8rem;
+}
+
+.sectionTitle {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sectionCard {
+    width: 22rem;
+    height: 9rem;
+    padding: 1rem;
+    border-radius: var(--border-radius-medium);
+    background-color: var(--color-primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 1rem;
+    cursor: pointer;
+}
+
+.sectionInfo {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: var(--font-size-large);
+    margin-bottom: 0.4rem;
+    color: var(--color-grey-dark-3);
+}
+
+.sectionText {
+    width: 18rem;
+    /* margin-left: 1.2rem; */
+    text-align: center;
+}
+
+.icon {}

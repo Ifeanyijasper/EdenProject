@@ -1,0 +1,4 @@
+.referedContainer {
+    display: flex;
+    flex-wrap: wrap;
+}

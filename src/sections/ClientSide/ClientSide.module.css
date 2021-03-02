@@ -1,0 +1,70 @@
+.clientSide {
+    flex: 0 0 24%;
+    background-color: var(--color-secondary);
+    border-top-left-radius: var(--border-radius-medium);
+    border-bottom-left-radius: var(--border-radius-medium);
+    padding: 1rem;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.imageContainer {}
+
+.userImage {
+    height: 20rem;
+    width: 20rem;
+    border: 0.35rem solid var(--color-white);
+    border-radius: var(--border-radius-round);
+    margin: 1rem 0;
+}
+
+.clientInfoContainer {
+    align-self: flex-start;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+.clientInfoContainer:not(:last-child) {
+    margin-bottom: 2rem;
+}
+
+.clientInfoTitle {
+    font-size: var(--font-size-small);
+    color: var(--color-grey-dark-3);
+    padding:0.3rem 0.8rem;
+    margin-bottom: 0.6rem;
+    /* text-align: center; */
+}
+
+.clientInfoDetails {
+    font-size: var(--font-size-normal);
+    padding: 0.2rem 1.5rem;
+    color: var(--color-grey-dark-3);
+    display: flex;
+    align-items: center;
+    /* text-align: center; */
+}
+
+.clientIcon {
+    margin-right: 0.6rem;
+}
+
+.footerContainer {
+    margin-top: auto;
+}
+
+.footerContainerText {
+    text-align: center;
+    color: var(--color-white);
+}
+
+.footerLink {
+    outline: none;
+    text-decoration: none;
+    color: var(--color-success-2);
+}

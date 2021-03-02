@@ -1,0 +1,30 @@
+.sectionCard {
+    width: 22rem;
+    height: 9rem;
+    padding: 1rem;
+    border-radius: var(--border-radius-medium);
+    background-color: rgba(var(--color-gradien-2), 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 1rem;
+}
+
+.sectionInfo {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: var(--font-size-large);
+    margin-bottom: 0.4rem;
+    color: var(--color-grey-dark-3);
+}
+
+.sectionText {
+    width: 18rem;
+    /* margin-left: 1.2rem; */
+    text-align: center;
+}
+
+.icon {
+}

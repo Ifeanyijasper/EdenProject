@@ -1,0 +1,45 @@
+.buttonContainer {
+    outline: none;
+    color: var(--color-white);
+    border: 0.2rem solid transparent;
+    padding: 1rem;
+    margin: 0.5rem 0.8rem;
+    min-width: 9rem;
+    border-radius: var(--border-radius-small);
+    cursor: pointer;
+    transition: all ease-in-out 0.4s;
+    align-self: center;
+}
+
+.dangerColor {
+    background-color: var(--color-danger-1);
+}
+
+.dangerColor:hover {
+    border: 0.2rem solid var(--color-danger-1);
+    color: var(--color-danger-1);
+    background-color: var(--color-white);
+}
+
+.generalColor {
+    background-color: var(--color-primary);
+}
+
+.generalColor:hover {
+    border: 0.2rem solid var(--color-primary);
+    color: var(--color-primary);
+    background-color: var(--color-white);
+}
+
+.buttonText {
+    color: inherit;
+    font-size: var(--font-size-normal);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: 0.03rem;
+}
+
+@media only screen and (max-width: 56.25em) {
+    .buttonText {
+        font-size: 1.65rem;
+    }
+}

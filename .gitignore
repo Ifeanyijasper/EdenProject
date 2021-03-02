@@ -1,0 +1,4 @@
+eden
+**/*.pyc
+node_modules/
+.vscode

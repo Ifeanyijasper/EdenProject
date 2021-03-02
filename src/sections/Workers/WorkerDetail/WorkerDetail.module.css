@@ -1,0 +1,136 @@
+.detailContainer {
+    flex: 1;
+    padding: 3rem 0;
+}
+
+.detailHide {
+    display: none;
+}
+
+.workerDetails {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+@media only screen and (max-width: 56.25em) {
+    .workerDetails {
+        border-bottom: 0.3rem solid var(--color-primary);
+    }
+}
+
+.workerImage {
+    height: 18rem;
+    width: 18rem;
+    border: 0.3rem solid var(--color-primary);
+    border-radius: var(--border-radius-round);
+    margin-bottom: 1.5rem;
+}
+
+.workerIni {
+    height: 18rem;
+    width: 18rem;
+    border-radius: var(--border-radius-round);
+    border: 0.3rem solid var(--color-primary);
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: var(--font-size-huge);
+    color: var(--color-primary);
+    letter-spacing: 0.4rem;
+}
+
+@media only screen and (max-width: 56.25em) {
+    .workerIni {
+        border: none;
+    }
+}
+
+@media only screen and (max-width: 37.5em) {
+    .workerIni {
+        margin-bottom: 0;
+        font-size: 9rem;
+    }
+}
+
+.workerContact  {
+    font-size: var(--font-size-normal);
+    color: var(--color-grey-dark-2);
+}
+
+@media only screen and (max-width: 56.25em) {
+    .workerContact {
+        font-size: 1.7rem;
+    }
+
+    .workerContact:last-child {
+        margin-bottom: 0.8rem;
+    }
+}
+
+@media only screen and (max-width: 37.5em) {
+    .workerContact {
+        font-size: 2rem;
+    }
+}
+
+.referedList {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+@media only screen and (max-width: 56.25em) {
+    .referedList {
+        justify-content: flex-start;
+    }
+}
+
+.detailActions {
+    display: flex;
+    justify-content: center;
+}
+
+.close {
+    position: fixed;
+    right: 5rem;
+    outline: none;
+    border: 0.2rem solid var(--color-primary);
+    height: 3rem;
+    width: 3rem;
+    border-radius: var(--border-radius-round);
+    font-size: var(--font-size-normal);
+    font-weight: var(--font-weight-medium);
+    transition: all ease-in-out 0.5s;
+    cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media only screen and (max-width: 56.25em) {
+    .close {
+        position: absolute;
+        right: 3.7rem;
+        border-width: 0.3rem;
+        width: 4rem;
+        height: 4rem;
+        font-size: 1.7rem;
+    }
+}
+
+.close:hover {
+    background-color: var(--color-danger-1);
+    border-color: var(--color-danger-1);
+    color: var(--color-white);
+}
+
+@media only screen and (max-width: 56.25em) {
+    .actions {
+        font-size: 1.8rem;
+    }
+}

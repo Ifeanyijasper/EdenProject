@@ -1,0 +1,22 @@
+.route {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: var(--font-size-extra-small);
+}
+
+.routePath {
+    display: flex;
+    align-items: center;
+    margin-right: 0.4rem;
+    color: var(--color-primary);
+}
+
+.routeName {
+    color: rgba(var(--color-gradien-2), 0.7);
+}
+
+.icon {
+    margin-left: 0.4rem;
+}

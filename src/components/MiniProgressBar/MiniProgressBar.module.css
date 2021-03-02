@@ -1,0 +1,27 @@
+.progress {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    color: rgba(var(--color-gradien-2), 0.7);
+}
+
+.progressContainer {
+    background-color: rgba(var(--color-gradient-2), 0.1);
+    height: 0.4rem;
+    margin-left: 0.7rem;
+    border-radius: var(--border-radius-small);
+}
+
+.progressBar {
+    border-radius: var(--border-radius-small);
+    background-color: rgba(var(--color-gradient-2), 0.6);
+    height: 0.4rem;
+}
+
+.progressPercentage {
+    font-size: var(--font-size-small);
+    margin-left: 0.7rem;
+    color: inherit;
+}
