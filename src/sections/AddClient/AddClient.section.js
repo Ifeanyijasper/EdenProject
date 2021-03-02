@@ -101,8 +101,8 @@ const AddClient = (props) => {
         fetch(`${BASE_URL}/register/`, {
           method: 'POST',
           headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Basic ' + Buffer.from(username + ':' + password).toString('base64'),
+            'Content-Type': 'application/json',
+            'Authorization': 'Basic ' + Buffer.from(username + ':' + password).toString('base64'),
             },
           body: JSON.stringify(body),
         })

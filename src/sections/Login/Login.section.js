@@ -76,9 +76,9 @@ const Login = (props) => {
             
         }
         
-        fetch(url, {
+        fetch(url+'/', {
             method: 'GET',
-            headers: {
+            headersu: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Basic ' + Buffer.from(userName + ':' + password).toString('base64'),
             },

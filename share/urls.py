@@ -8,6 +8,6 @@ router.register('purchase', views.PurchasesViewSet)
 app_name = 'share'
 urlpatterns = [
     path('', views.index, name='index'),
-    path('', include(router.urls)),
+    # path('', include(router.urls)),
 
 ]

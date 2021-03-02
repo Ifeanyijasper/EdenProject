@@ -30,10 +30,10 @@ SECRET_KEY = '(zqwuwy*x8csw*f@yn(ogfcj^natc@ge(sagxd8q1(nyl-syc@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['inspireafrica-edenbeauty.herokuapp.com']
+ALLOWED_HOSTS = ['https://inspireafrica-edenbeauty.herokuapp.com']
 
 # Application definition
-
+CORS_ORIGIN_ALLOW_ALL = True
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
