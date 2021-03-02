@@ -15,7 +15,6 @@ const PurchaseReducer = (state = INITIAL_STATE, action) => {
     let product, _product, _index, total;
     switch (action.type) {
         case SET_ADDPRODUCT:
-            console.log('incremented');
             product = action.payload;
             _product = [...state.product];
             total = state.total;
@@ -30,7 +29,6 @@ const PurchaseReducer = (state = INITIAL_STATE, action) => {
             }
             return {...state, product: _product, total: total};
         case SET_SUBPRODUCT:
-            console.log('subtracted');
             product = action.payload;
             _product = [...state.product];
             _index = _product.findIndex((p) => p.id === product.id);
@@ -42,7 +40,6 @@ const PurchaseReducer = (state = INITIAL_STATE, action) => {
             }
             return {...state, product};
         case SET_CLEARPURCHASE:
-            console.log('done');
             return {...state, product: [], total: 0, service: []}
         default:
             return state;

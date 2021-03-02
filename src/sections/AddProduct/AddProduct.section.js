@@ -55,8 +55,6 @@ const AddProduct = (props) => {
           description: about
         }
 
-        console.log(JSON.stringify(body));
-
         fetch(`${BASE_URL}/product/`, {
           method: 'POST',
           headers: {

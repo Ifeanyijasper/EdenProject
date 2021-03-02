@@ -98,8 +98,6 @@ const AddClient = (props) => {
           password: 'Eden-Beauty'
         };
 
-        console.log(body);
-
         fetch(`${BASE_URL}/register/`, {
           method: 'POST',
           headers: {

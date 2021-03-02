@@ -54,8 +54,6 @@ const AddService = (props) => {
           description: about
         }
 
-        console.log(JSON.stringify(body));
-
         fetch(`${BASE_URL}/service/`, {
           method: 'POST',
           headers: {

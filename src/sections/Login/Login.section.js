@@ -55,7 +55,6 @@ const Login = (props) => {
             password: password,
         };
         
-        console.log(JSON.stringify(body));
         let url = `${BASE_URL}`;
 
         const fetchUsers = async () => {
