@@ -75,10 +75,10 @@ const Login = (props) => {
             }
             
         }
-        
+
         fetch(url+'/', {
             method: 'GET',
-            headersu: {
+            headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Basic ' + Buffer.from(userName + ':' + password).toString('base64'),
             },
