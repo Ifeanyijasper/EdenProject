@@ -33,6 +33,7 @@ const EditProduct = (props) => {
     const [aboutError, setAboutError] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [notify, setNotify] = useState(false);
+    const [msg, setMsg] = useState({});
 
     useEffect(() => {
       setName(detail.name)
@@ -89,14 +90,25 @@ const EditProduct = (props) => {
         })
         .then(res => {
           setIsLoading(false);
-          setIsOpen(false);
           props.setRefresh(true);
-          setIsDetail(false);
-          console.log(res);
+          setNotify(true);
+          setMsg({
+            type: 'Successful',
+            message: 'Product details updated.'
+          })
+        })
+        .then(res => {
+          setTimeout(() => {
+            setIsOpen(false);
+            setIsDetail(false);
+          }, 3000);
         })
         .catch(err => {
-          console.log(err);
           setNotify(true);
+          setMsg({
+            type: 'Unexpected',
+            message: 'An error occured, check you internet connection'
+          })
         })
     }
 
@@ -147,8 +159,8 @@ const EditProduct = (props) => {
                     </>)}
                 </div>
             </div>
-            <Notify notify={notify} setNotify={setNotify} />
             <SummitTech title="Eden Beauty" />
+            <Notify notify={notify} setNotify={setNotify} msg={msg} />
         </Modal>
     )
 }

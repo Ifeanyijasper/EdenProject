@@ -1,4 +1,4 @@
-import {SET_USER, SET_TOKEN} from '../types';
+import {SET_USER, SET_TOKEN, SET_PASSWORD, SET_USERNAME} from '../types';
 
 const INITIAL_STATE = {
   user: {},
@@ -14,6 +14,12 @@ const AuthReducer = (state = INITIAL_STATE, action) => {
     case SET_TOKEN:
       const token = action.payload;
       return {...state, token};
+    case SET_PASSWORD: 
+      const password = action.payload;
+      return {...state, password};
+    case SET_USERNAME:
+      const username = action.payload;
+      return {...state, username, user: {...state.user, username}};
     default:
       return state;
   }

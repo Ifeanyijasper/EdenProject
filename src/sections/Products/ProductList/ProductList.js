@@ -64,12 +64,15 @@ const ProductList = (props) => {
         <div className={isDetail ? styles.listContainerDetail : styles.listContainer}>
             <RouteIndicator route="Dashboard" current="Products" />
             <Search placeholder="Search" isOpen={isOpenAdd} setIsOpen={setIsOpenAdd} newButton={true} title={'Product'} filters={filters} filter={filter} setFilter={setFilter} text={text} setText={setText} />
-            <h2 className={styles.productTitle}>Top 6 Products</h2>
-            <hr className={styles.horizontalLine} />
-            <div className={styles.productContainer}>
-                {isLoading ? (<Activity2 />) : products.map((product, index) => ((Math.floor(Number(product.discount)) < 10 && index < 7)&&
-                <ItemCard item={product} onClick={() => showDetails(product)} key={product.id} />))}
-            </div>
+            { text.length <= 0 &&   <>
+                    <h2 className={styles.productTitle}>Top 6 Products</h2>
+                    <hr className={styles.horizontalLine} />
+                    <div className={styles.productContainer}>
+                        {isLoading ? (<Activity2 />) : products.map((product, index) => ((Math.floor(Number(product.discount)) < 10 && index < 7)&&
+                        <ItemCard item={product} onClick={() => showDetails(product)} key={product.id} />))}
+                    </div>
+                </>
+            }
             <hr className={styles.horizontalLine} />
                 <h2 className={styles.productTitle}>{products.length || 0} Product{products.length !== 1 && 's'}</h2>
             <hr className={styles.horizontalLine} />

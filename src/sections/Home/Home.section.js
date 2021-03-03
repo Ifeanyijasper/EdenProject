@@ -21,7 +21,7 @@ const HomeSection = (props) => {
         if(!welcome) {
             setTimeout(() => {
                 props.setWelcome();
-            }, 5000);
+            }, 3000);
         }
     }, []);
 

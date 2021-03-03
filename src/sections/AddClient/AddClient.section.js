@@ -22,6 +22,7 @@ const AddClient = (props) => {
     const [isLoading, setIsLoading] = useState(false);
     const [notify, setNotify] = useState(false);
     const [options, setOptions] = useState([]);
+    const [msg, setMsg] = useState({});
 
     useEffect(() => {
       let _referals = [];
@@ -112,7 +113,16 @@ const AddClient = (props) => {
         })
         .then(res => {
           setIsLoading(false);
-          setIsOpen(false);
+          setNotify(true);
+          setMsg({
+            type: 'Successful',
+            message: 'Client has been added successfully.'
+          })
+        })
+        .then(res => {
+          setTimeout(() => {
+            setIsOpen(false); 
+          }, 3000);
           setTel('');
           setName('');
           setRefer('');
@@ -121,6 +131,10 @@ const AddClient = (props) => {
         .catch(err => {
           setIsLoading(false);
           setNotify(true);
+          setMsg({
+            type: 'Unexpected',
+            message: 'An error occured, check you internet connection'
+          })
         })
     }
 
@@ -180,7 +194,7 @@ const AddClient = (props) => {
                 </div>
             </div>
             <SummitTech title="Eden Beauty" />
-            <Notify notify={notify} setNotify={setNotify} />
+            <Notify notify={notify} setNotify={setNotify} msg={msg} />
         </Modal>
     )
 }

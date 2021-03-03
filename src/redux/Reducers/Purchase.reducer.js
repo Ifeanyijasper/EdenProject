@@ -8,7 +8,6 @@ import {
 const INITIAL_STATE = {
     total: 0,
     product: [],
-    service: [],
 }
 
 const PurchaseReducer = (state = INITIAL_STATE, action) => {
@@ -31,14 +30,17 @@ const PurchaseReducer = (state = INITIAL_STATE, action) => {
         case SET_SUBPRODUCT:
             product = action.payload;
             _product = [...state.product];
-            _index = _product.findIndex((p) => p.id === product.id);
+            total = state.total;
+            _index = _product.findIndex((p) => p.name === product.name);
              if (_index >= 0) {
-                _product[_index].count -= 1;
-                if (_product[_index].count === 0) {
-                    _product.splice(_index, 1);
-                }
+                 if (_product[_index].count === 0) {
+                     _product.splice(_index, 1);
+                    }
+                    _product[_index].count -= 1;
+                    total -= _product[_index].price;
+                    console.log(total)
             }
-            return {...state, product};
+            return {...state, product: _product, total: total};
         case SET_CLEARPURCHASE:
             return {...state, product: [], total: 0, service: []}
         default:

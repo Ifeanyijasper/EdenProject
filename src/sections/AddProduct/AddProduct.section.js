@@ -18,6 +18,7 @@ const AddProduct = (props) => {
     const [aboutError, setAboutError] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [notify, setNotify] = useState(false);
+    const [msg, setMsg] = useState({});
 
     const authenticate = () => {
       let hasError;
@@ -51,7 +52,7 @@ const AddProduct = (props) => {
         const body =  {
           name,
           price,
-          discount,
+          discount: discount || 0,
           description: about
         }
 
@@ -68,7 +69,16 @@ const AddProduct = (props) => {
         })
         .then(res => {
           setIsLoading(false);
-          setIsOpen(false);
+          setNotify(true);
+          setMsg({
+            type: 'Successful',
+            message: 'Product has been added to store.'
+          })
+        })
+        .then(res => {
+          setTimeout(() => {   
+            setIsOpen(false);
+          }, 3000);
           setPrice('');
           setName('');
           setDiscount('');
@@ -77,7 +87,10 @@ const AddProduct = (props) => {
         .catch(err => {
           setIsLoading(false);
           setNotify(true);
-          console.log(err);
+          setMsg({
+            type: 'Unexpected',
+            message: 'An error occured, check you internet connection'
+          })
         })
     }
 
@@ -128,7 +141,7 @@ const AddProduct = (props) => {
                 </div>
             </div>
             <SummitTech title="Eden Beauty" />
-            <Notify notify={notify} setNotify={setNotify} />
+            <Notify notify={notify} setNotify={setNotify} msg={msg} />
         </Modal>
     )
 }

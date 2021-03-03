@@ -10,4 +10,6 @@ export const SET_ADDPRODUCT = 'set_addproduct';
 export const SET_CLEARPURCHASE = 'set_clearpurchase';
 export const SET_POINTS = 'set_points';
 export const CLEAR_POINTS = 'clear_points';
+export const SET_USERNAME = 'set_username';
+export const SET_PASSWORD = 'set_password';
 

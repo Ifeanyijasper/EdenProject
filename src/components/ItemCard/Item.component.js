@@ -34,7 +34,7 @@ const ItemCard = (props) => {
         } else {
             price = ((100 - Number(item.discount))/100) * Number(item.price)
         }
-        props.setAddToCart(item.id, item.name, price, counter.current);
+        props.setSubFromCart(item.id, item.name, price, counter.current);
     }
 
     return (

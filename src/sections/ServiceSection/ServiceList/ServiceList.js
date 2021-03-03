@@ -62,13 +62,16 @@ const ServiceList = (props) => {
         <div className={isDetail ? styles.listContainerDetail : styles.listContainer}>
             <h1 className={styles.Title}>Services</h1>
             <Search placeholder="Search" isOpen={isOpenAdd} setIsOpen={setIsOpenAdd} newButton={false} title={'Service'} filters={filters} filter={filter} setFilter={setFilter} text={text} setText={setText} />
-            <h2 className={styles.serviceTitle}>Top 6 Services</h2>
-            <hr className={styles.horizontalLine} />
-            <div className={styles.serviceContainer}>
-                {isLoading ? (<Activity2 />) : services.map((service, index) => ((Math.floor(Number(service.discount)) < 10 && index < 7)&&
-                <ItemCard item={service} onClick={() => showDetails(service)} key={service.id} />
-                ))}
-            </div>
+            { text.length <= 0 &&   <>
+                    <h2 className={styles.serviceTitle}>Top 6 Services</h2>
+                    <hr className={styles.horizontalLine} />
+                    <div className={styles.serviceContainer}>
+                        {isLoading ? (<Activity2 />) : services.map((service, index) => ((Math.floor(Number(service.discount)) < 10 && index < 7)&&
+                        <ItemCard item={service} onClick={() => showDetails(service)} key={service.id} />
+                        ))}
+                    </div>
+                </>
+            }
             <hr className={styles.horizontalLine} />
             <h2 className={styles.serviceTitle}>{services.length} Service{services.length !== 1 && 's'}</h2>
             <hr className={styles.horizontalLine} />

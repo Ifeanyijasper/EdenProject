@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import { connect } from 'react-redux';
-import Select from 'react-select';
 import { bindActionCreators } from 'redux';
 
-import { Button, Input, SummitTech } from '../../components';
+import { Activity, Button, Input, Notify, SummitTech } from '../../components';
 import { BASE_URL } from '../../utils/globalVariable';
 import styles from './EditClient.module.css';
 import {setRefresh} from '../../redux/Actions/Refresh.actions';
@@ -46,6 +45,7 @@ const EditClient = (props) => {
     const [emailError, setEmailError] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [notify, setNotify] = useState(false);
+    const [msg, setMsg] = useState({});
 
     const authenticate = () => {
       let hasError;
@@ -89,13 +89,25 @@ const EditClient = (props) => {
         .then(res => {
           setIsLoading(false);
           props.setRefresh(true);
-          setIsDetail(false);
-          setIsOpen(false);
+          setNotify(true);
+          setMsg({
+            type: 'Successful',
+            message: 'Client information updated'
+          })
+        })
+        .then(res => {
+          setTimeout(() => {
+            setIsDetail(false);
+            setIsOpen(false);
+          }, 3000);
         })
         .catch(err => {
           setIsLoading(false);
           setNotify(true);
-          console.log(err, 'I failed');
+          setMsg({
+            type: 'Unexpected',
+            message: 'An error occured, check you internet connection'
+          })
         })
     }
 
@@ -141,11 +153,15 @@ const EditClient = (props) => {
                 setError={() => setEmailError} />
 
                 <div className={styles.actionButtons}>
-                    <Button title="Edit" onClick={() => authenticate()} />
-                    <Button title="Cancel" onClick={()=> setIsOpen(!isOpen)} />
+                    {isLoading ? (<Activity />) :(
+                    <>
+                      <Button title="Edit" onClick={() => authenticate()} />
+                      <Button title="Cancel" onClick={()=> setIsOpen(!isOpen)} />
+                    </>)}
                 </div>
             </div>
             <SummitTech title="Eden Beauty" />
+            <Notify notify={notify} setNotify={setNotify} msg={msg} />
         </Modal>
     )
 }
