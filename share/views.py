@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from rest_framework import viewsets
 from rest_framework.response import Response
-from .serializer import RegisterSerializer, UserSerializer, ProductsSerializer, ServicesSerializer,PurchasesSerializer
+from .serializer import RegisterSerializer, UserSerializer, ProductsSerializer, ServicesSerializer,TestimonialSerializer,PurchasesSerializer
 from .models import *
 from rest_framework.authentication import BasicAuthentication, TokenAuthentication, SessionAuthentication
 from rest_framework.permissions import IsAuthenticated, AllowAny
@@ -64,6 +64,20 @@ class PurchasesViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,)
 
     def list(self, request, *args, **kwargs):
-        Purchase = Purchases.objects.all()
-        serializer = PurchasesSerializer(Purchase, many=True)
+        purchase = Purchases.objects.all()
+        serializer = PurchasesSerializer(purchase, many=True)
+        return Response(serializer.data)
+
+
+class TestimonialViewSet(viewsets.ModelViewSet):
+    """ 
+    API enddpoint that allows users to be viewed or edited. 
+    """
+    queryset = Testimonial.objects.all()
+    serializer_class = TestimonialSerializer
+    permission_classes = (IsAuthenticated,)
+
+    def list(self, request, *args, **kwargs):
+        testimonial = Testimonial.objects.all()
+        serializer = TestimonialSerializer(testimonial, many=True)
         return Response(serializer.data)

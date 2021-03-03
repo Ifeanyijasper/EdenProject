@@ -46,3 +46,11 @@ class Purchases(models.Model):
 
     def __str__(self):
         return self.client
+
+class Testimonial(models.Model):
+    client_name     = models.CharField(max_length=150)
+    testimonial     = models.CharField(max_length=500)
+    date            = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return self.client_name

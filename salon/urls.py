@@ -26,6 +26,7 @@ router.register('register', views.RegisterViewSet)
 router.register('product', views.ProductsViewSet)
 router.register('service', views.ServicesViewSet)
 router.register('purchase', views.PurchasesViewSet)
+router.register('testimonial', views.TestimonialViewSet)
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API
 
