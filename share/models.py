@@ -36,10 +36,10 @@ class Services(models.Model):
         
 class Purchases(models.Model):
     client_id   = models.IntegerField()
+    worker_id   = models.IntegerField()
     client      = models.CharField(max_length = 200, null=True)
     worker      = models.CharField(max_length = 200, null=True)
-    product     = models.JSONField(null=True,blank=True)
-    service     = models.JSONField(null=True,blank=True)
+    item        = models.JSONField(null=True,blank=True)
     date        = models.DateTimeField(auto_now_add=True)
     point       = models.FloatField()
     total       = models.FloatField()

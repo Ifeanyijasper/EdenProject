@@ -36,4 +36,4 @@ class ServicesSerializer(serializers.ModelSerializer):
 class PurchasesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Purchases
-        fields = ('id','client_id','client','worker','product','service','date','total','point')
+        fields = ('id','client_id','client_id','client','worker','item','date','total','point')
