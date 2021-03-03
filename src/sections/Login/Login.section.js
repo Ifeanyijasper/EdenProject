@@ -129,8 +129,8 @@ const Login = (props) => {
                 <div className={styles.loginForm}>
                     <h2 className={styles.formName}>Eden-Beauty Complex</h2>
                     <Input 
-                    label="Userame" 
-                    placeholder="Jume Brice" 
+                    label="Username" 
+                    placeholder="Eden-Beauty" 
                     secureText={false}
                     type="text"
                     value={userName}
@@ -154,7 +154,7 @@ const Login = (props) => {
                     }
                 </div>
             </div>
-            <SummitTech title="Summit Tech" />
+            <SummitTech title="Eden Beauty" />
             <Notification notify={notify} setNotify={setNotify} msg={msg} />
         </div>
     )

@@ -63,7 +63,7 @@ const ServiceList = (props) => {
     return (
         <div className={isDetail ? styles.listContainerDetail : styles.listContainer}>
             <RouteIndicator route="Dashboard" current="Services" />
-            <Search placeholder="Search Services" isOpen={isOpenAdd} setIsOpen={setIsOpenAdd} newButton={true} title={'Service'} filters={filters} filter={filter} setFilter={setFilter} text={text} setText={setText} />
+            <Search placeholder="Search" isOpen={isOpenAdd} setIsOpen={setIsOpenAdd} newButton={true} title={'Service'} filters={filters} filter={filter} setFilter={setFilter} text={text} setText={setText} />
             <h2 className={styles.serviceTitle}>Top 6 Services</h2>
             <hr className={styles.horizontalLine} />
             <div className={styles.serviceContainer}>

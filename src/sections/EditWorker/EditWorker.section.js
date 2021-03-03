@@ -144,7 +144,7 @@ const EditWorker = (props) => {
                     <Button title="Cancel" onClick={()=> setIsOpen(!isOpen)} />
                 </div>
             </div>
-            <SummitTech title="Summit Tech" />
+            <SummitTech title="Eden Beauty" />
         </Modal>
     )
 }

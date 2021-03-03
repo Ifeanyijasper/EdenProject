@@ -125,7 +125,7 @@ const AddService = (props) => {
                   </>)}
                 </div>
             </div>
-            <SummitTech title="Summit Tech" />
+            <SummitTech title="Eden Beauty" />
             <Notify notify={notify} setNotify={setNotify} />
         </Modal>
     )

@@ -148,7 +148,7 @@ const EditProduct = (props) => {
                 </div>
             </div>
             <Notify notify={notify} setNotify={setNotify} />
-            <SummitTech title="Summit Tech" />
+            <SummitTech title="Eden Beauty" />
         </Modal>
     )
 }

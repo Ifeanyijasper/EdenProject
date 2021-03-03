@@ -129,8 +129,8 @@ const AddClient = (props) => {
             <SummitTech title="Add New Client" />
             <div className={styles.formContainer}>
               <Input 
-                placeholder="Jon Doe" 
-                label="Name"
+                placeholder="Eden Beauty" 
+                label="Fullname"
                 secureText={false}
                 type="text"
                 value={name}
@@ -138,7 +138,7 @@ const AddClient = (props) => {
                 error={nameError}
                 setError={() => setNameError} />
                 <Input 
-                placeholder="jon-doe" 
+                placeholder="eden-beauty" 
                 label="Username"
                 secureText={false}
                 type="text"
@@ -147,8 +147,8 @@ const AddClient = (props) => {
                 error={userNameError}
                 setError={() => setUserNameError} />
                 <Input 
-                placeholder="681726633" 
-                label="Tel"
+                placeholder="6X1234567" 
+                label="Telephone Number"
                 secureText={false}
                 type="number"
                 value={tel}
@@ -161,7 +161,7 @@ const AddClient = (props) => {
                 onChange={(value) => setRefer(value)}
                 className={styles.selector} />
                 <Input 
-                placeholder="bricejume@gmail.com" 
+                placeholder="beautycomplex@gmail.com" 
                 label="Email"
                 secureText={false}
                 type="email"
@@ -179,7 +179,7 @@ const AddClient = (props) => {
                   )}
                 </div>
             </div>
-            <SummitTech title="Summit Tech" />
+            <SummitTech title="Eden Beauty" />
             <Notify notify={notify} setNotify={setNotify} />
         </Modal>
     )
