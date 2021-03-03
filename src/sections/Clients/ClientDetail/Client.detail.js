@@ -88,15 +88,15 @@ const ClientDetail = (props) => {
                 <h2 className={styles.clientContact}>{detail.fullname || detail.username} | {detail.phone}</h2>
                 <h2 className={styles.clientContact}>Invited: {referers.length}</h2>
             </div>
-            <h2 className={styles.subTitle}>My Points</h2>
+            <h2 className={styles.subTitle}>My Bonuses</h2>
             <div className={styles.progress}>
-                <MiniProgressBar progress={mypoints/10 || 0} />
-                <p>{mypoints.toFixed(2)} / 1000 points</p>
+                <MiniProgressBar progress={detail.my_bonus/100 || 0} />
+                <p>{detail.my_bonus || 0} / 10,000 XAF</p>
             </div>
-            <h2 className={styles.subTitle}>Refer Points</h2>
+            <h2 className={styles.subTitle}>Refer Bonuses</h2>
             <div className={styles.progress}>
-                <MiniProgressBar progress={referPoints/20 || 0} />
-                <p>{referPoints.toFixed(2)/2} / 1000 points</p>
+                <MiniProgressBar progress={detail.refer_bonus/100 || 0} />
+                <p>{detail.refer_bonus || 0} / 10,000 XAF</p>
             </div>
             <div className={styles.actions}>
             </div>

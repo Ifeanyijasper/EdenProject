@@ -1,14 +1,23 @@
 import React, {useEffect, useState} from "react";
 import { NewPurchase } from "../..";
 
-import { Activity, RouteIndicator, Search } from "../../../components";
+import { Activity, Activity2, RouteIndicator, Search } from "../../../components";
 import styles from './FinanceList.module.css';
 import search from '../../../utils/search';
 import { BASE_URL } from "../../../utils/globalVariable";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { setData } from '../../../redux/Actions/Data.actions';
 
 const FinanceList = (props) => {
-    const {isDetail, setIsDetail, username, password, setDetail} = props;
+    const {
+        isDetail, 
+        setIsDetail, 
+        username, 
+        password, 
+        setDetail,
+        data,
+    } = props;
     const [isOpen, setIsOpen] = useState(false);
     const [text, setText] = useState('');
     const [finances, setFinances] = useState([]);
@@ -16,16 +25,16 @@ const FinanceList = (props) => {
     const [purchases, setPurchases] = useState([]);
     const [filter, setFilter] = useState('');
     const [filters] = useState([
-        'Client name',
-        'Worker name',
-        'Price',
+        'Client',
+        'Worker',
     ]);
 
     useEffect(() => {
-        search(text, finances, setFinances);
+        search(text, data, setPurchases, filter.toLowerCase());
     }, [text]);
 
     useEffect(() => {
+        setIsLoading(true);
         fetch(`${BASE_URL}/purchase/`, {
             method: 'GET',
             headers: {
@@ -38,17 +47,17 @@ const FinanceList = (props) => {
                 return response;
             })
             .then(res => {
-                setIsLoading(false);
-                console.log(res);
                 let  _res = res.reverse();
+                props.setData(_res);
                 setPurchases(_res);
+                setIsLoading(false);
             })
             .catch(err => {
                 console.log(err);
                 setIsLoading(false);
             })
         
-    }, [isOpen,]);
+    }, [isOpen]);
 
     const showDetail = (purchase) => {
         setIsDetail(!isDetail);
@@ -69,7 +78,7 @@ const FinanceList = (props) => {
                 setFilter={setFilter}
                 text={text}
                 setText={setText} />
-            <h2 className={styles.durationTitle}>Today</h2>
+            {/* <h2 className={styles.durationTitle}>Today</h2> */}
             <div className={styles.tableContainer}>
                 <table className={styles.table}>
                     <thead className={styles.tableHead}>
@@ -79,7 +88,7 @@ const FinanceList = (props) => {
                         <td className={styles.tableHeadData}>Total</td>
                         <td className={styles.tableHeadData}>Details</td>
                     </thead>
-                    {purchases.map((purchase, index) => 
+                    {isLoading ? (<td colSpan={5} style={{margin: 'auto', paddingTop: '10px'}}><Activity2 /></td>) : purchases.map((purchase, index) => 
                         (<tr className={styles.tableRow}>
                             <td className={styles.tableData}>{purchase.client}</td>
                             <td className={styles.tableData}>{new Date(purchase.date).toLocaleTimeString('en-US')}</td>
@@ -92,17 +101,21 @@ const FinanceList = (props) => {
                     
                 </table>
             </div>
-            <Activity />
             <NewPurchase isOpen={isOpen} setIsOpen={setIsOpen} />
         </div>
     )
 }
 
-const mapStateToProps = ({auth}) => {
+const mapStateToProps = ({auth, data}) => {
     return {
         username: auth.username,
         password: auth.password,
+        data: data.data,
     }
 }
 
-export default connect(mapStateToProps)(FinanceList);
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({setData}, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(FinanceList);

@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import {IoPeople, IoWalk } from 'react-icons/io5';
 import { connect } from 'react-redux';
 import { MiniProgressBar, AdminCard, ClientCard, RouteIndicator, Activity2 } from '../../components';
-import { BASE_URL } from '../../utils/globalVariable';
 
+import { BASE_URL } from '../../utils/globalVariable';
 import styles from './DashboardSection.module.css';
 
 const Dashboard = (props) => {
@@ -35,12 +35,10 @@ const Dashboard = (props) => {
             },
         })
             .then(response => {
-                console.log(response);
                 const res = response.json();
                 return res;
             })
             .then(res => {
-                console.log(res);
                 let _clients = res.filter(data => data.is_client);
                 let _workers = res.filter(data => data.is_worker);
                 setStats({

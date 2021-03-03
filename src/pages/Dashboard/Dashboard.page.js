@@ -7,6 +7,7 @@ import {
     Dashboard, 
     FinanceSection, 
     ProductSection, 
+    Profile, 
     ServiceSection, 
     SideNav, 
     WorkerSection 
@@ -25,6 +26,7 @@ const DashBoard = () => {
                     <Route path="/dashboard/finances" component={FinanceSection} />
                     <Route path="/dashboard/products" component={ProductSection} />
                     <Route path="/dashboard/services" component={ServiceSection} />
+                    <Route path="/dashboard/profile" component={Profile} />
                 </Switch>
             </WorkArea>
         </div>

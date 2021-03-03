@@ -26,6 +26,8 @@ import EditClient from './EditClient /EditClient.section';
 import EditWorker from './EditWorker/EditWorker.section';
 import EditService from './EditService/EditService.section';
 import EditProduct from './EditProduct/EditProduct.section';
+import Profile from './Profile/Profile.section';
+import EditPassword from './EditPassword/EditPassword.section';
 
 export {
     SideNav, 
@@ -56,4 +58,6 @@ export {
     EditProduct,
     EditService,
     EditWorker,
+    Profile,
+    EditPassword,
 }

@@ -20,6 +20,7 @@ const AddWorker = (props) => {
     const [emailError, setEmailError] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [notify, setNotify] = useState(false);
+    const [msg, setMsg] = useState({});
 
     const authenticate = () => {
       let hasError;
@@ -71,18 +72,29 @@ const AddWorker = (props) => {
           body: JSON.stringify(body),
         })
         .then(res => {
-          console.log(res, 'It worked');
+          setNotify(true);
           setIsLoading(false);
-          setIsOpen(false);
+          setMsg({
+            type: 'Succesful',
+            message: 'We have a new team mate'
+          })
+        })
+        .then(res => {
+          setTimeout(() => {
+            setIsOpen(false);
+          }, 3000);
           setTel('');
           setName('');
           setEmail('');
-          setUserName('')
+          setUserName('');
         })
         .catch(err => {
           setIsLoading(false);
           setNotify(true);
-          console.log(err, 'I failed');
+          setMsg({
+            type: 'Unexpected',
+            message: 'An error occured, check you internet connection'
+          })
         })
     }
     return (
@@ -134,7 +146,7 @@ const AddWorker = (props) => {
                 </div>
             </div>
             <SummitTech title="Eden Beauty" />
-            <Notify notify={notify} setNotify={setNotify} />
+            <Notify notify={notify} setNotify={setNotify} msg={msg} />
         </Modal>
     )
 }
