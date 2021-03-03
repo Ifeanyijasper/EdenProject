@@ -19,6 +19,7 @@ const ClientDetail = (props) => {
         password,
         clients,
         table,
+        user,
     } = props;
     const [isOpen, setIsOpen] = useState(false);
     const [referers, setReferers] = useState([]);
@@ -104,7 +105,7 @@ const ClientDetail = (props) => {
                 {referers.map((referer, index) => <ReferCard refer={referer} key={referer.id} />)}
             </div>
             <div className={styles.detailActions}>
-                <Button title="Delete" type="danger" onClick={() => authenticate(detail.id)} />
+                {user.is_superuser && <Button title="Delete" type="danger" onClick={() => authenticate(detail.id)} />}
                 <Button title="Edit" onClick={() => setIsOpen(!isOpen)} />
             </div>
             <EditClient isOpen={isOpen} setIsOpen={setIsOpen} detail={detail} setIsDetail={setIsDetail} />
@@ -118,6 +119,7 @@ const mapStateToProps = ({auth, data, points}) => {
         password: auth.password,
         clients: data.data,
         table: points.table,
+        user: auth.user,
     }
 }
 

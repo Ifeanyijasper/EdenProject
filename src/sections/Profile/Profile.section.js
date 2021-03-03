@@ -4,7 +4,6 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import { Activity, Button, Input, RouteIndicator } from '../../components';
-import { img_2 } from '../../res/images';
 import { EditPassword } from '..';
 import styles from './Profile.module.css';
 import { BASE_URL } from '../../utils/globalVariable';

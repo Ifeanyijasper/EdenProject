@@ -58,6 +58,10 @@ const Dashboard = (props) => {
                 })
             })
     }, []);
+
+    const nothing = () => {
+        return 1;
+    }
     
     return (
         <section className={styles.dashboardSection}>
@@ -107,7 +111,7 @@ const Dashboard = (props) => {
             </div>
             <div className={styles.cardsContainer}>
                 {isLoading ? (<Activity2 />) : clients.map((client, index) => 
-                    <ClientCard client={client} key={index} />
+                    <ClientCard client={client} key={index} setDetail={() => nothing()} setIsDetail={() => nothing()} />
                 )}
             </div>
         </section>
