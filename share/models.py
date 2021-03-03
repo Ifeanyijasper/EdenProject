@@ -5,12 +5,16 @@ from django.dispatch import receiver
 
 # Create your models here.
 class User(AbstractUser):
-    fullname = models.CharField(max_length=200, null=True)
+    fullname       = models.CharField(max_length=200, null=True)
     is_client      = models.BooleanField(default=False)
     is_worker      = models.BooleanField(default=False)
-    phone          = models.CharField(max_length = 200, null=True) 
+    phone          = models.CharField(max_length = 200) 
     friend         = models.ForeignKey("self",on_delete=models.SET_NULL, related_name="referral", null=True, blank=True)
     updated        = models.DateTimeField(auto_now_add=True)
+    served         = models.IntegerField(null=True)
+    my_bonus       = models.FloatField(null=True)
+    refer_bonus    = models.IntegerField(null=True)
+    location       = models.CharField(max_length = 500,null=True)
 
 class Products(models.Model):
     name        = models.CharField(max_length =200, null=True)
