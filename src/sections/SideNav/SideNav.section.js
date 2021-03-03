@@ -37,7 +37,7 @@ const SideNav = (props) => {
                             <li className={styles.linksItem} onClick={() => setShowLinks(false)}><NavLink className={styles.linksLink} activeClassName={styles.linksActive} to='/dashboard/finances'><IoWallet className={styles.icons} />Finances</NavLink></li>
                             <li className={styles.linksItem} onClick={() => setShowLinks(false)}><NavLink className={styles.linksLink} activeClassName={styles.linksActive} to='/dashboard/services'><IoBody className={styles.icons} />Services</NavLink></li>
                             <li className={styles.linksItem} onClick={() => setShowLinks(false)}><NavLink className={styles.linksLink} activeClassName={styles.linksActive} to='/dashboard/products'><IoBriefcase className={styles.icons} />Products</NavLink></li>    
-                            <li className={styles.linksItem} onClick={() => setShowLinks(false)}><NavLink className={styles.linksLink} activeClassName={styles.linksActive} to='/dashboard/profile'><IoCreate className={styles.icons} />Profile</NavLink></li>    
+                            {/* <li className={styles.linksItem} onClick={() => setShowLinks(false)}><NavLink className={styles.linksLink} activeClassName={styles.linksActive} to='/dashboard/profile'><IoCreate className={styles.icons} />Profile</NavLink></li>     */}
                         </div>
                         
                     </>
