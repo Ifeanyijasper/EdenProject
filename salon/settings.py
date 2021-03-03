@@ -104,8 +104,8 @@ WSGI_APPLICATION = 'salon.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'servicesalon',
-        'USER': 'edenadmin',
+        'NAME': 'edenbeauty',
+        'USER': 'edenuser',
         'PASSWORD' : 'password',
         'HOST' : 'localhost',
         'PORT' : '5432',

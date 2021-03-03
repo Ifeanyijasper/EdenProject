@@ -26,6 +26,7 @@ router.register('register', views.RegisterViewSet)
 router.register('product', views.ProductsViewSet)
 router.register('service', views.ServicesViewSet)
 router.register('purchase', views.PurchasesViewSet)
+router.register('testimonial', views.TestimonialViewSet)
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API
 
@@ -34,6 +35,7 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('api-token-auth/', obtain_jwt_token),
     path('api-token-refresh/', refresh_jwt_token),
+    path('api/change-password/', views.ChangePasswordView.as_view(), name='change-password'),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     re_path('.*', TemplateView.as_view(template_name='index.html'))
 ]

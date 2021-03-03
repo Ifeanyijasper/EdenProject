@@ -5,7 +5,7 @@ from .models import *
 class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id','username','fullname','email','is_client','is_superuser','is_worker','phone','friend','password')
+        fields = ('id','username','fullname','email','is_client','is_superuser','is_worker','phone','friend','served','my_bonus','refer_bonus','location','password')
         extra_kwargs = {'password': {'write_only': True}}
         
     def create(self, validated_data):
@@ -36,4 +36,18 @@ class ServicesSerializer(serializers.ModelSerializer):
 class PurchasesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Purchases
-        fields = ('id','client_id','client','worker','product','service','date','total','point')
+        fields = ('id','client_id','worker_id','client','worker','item','date','total','point')
+
+class TestimonialSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Testimonial
+        fields = ('id','client_name','testimonial','date')
+
+class ChangePasswordSerializer(serializers.Serializer):
+    model = User
+
+    """
+    Serializer for password change endpoint.
+    """
+    old_password = serializers.CharField(required=True)
+    new_password = serializers.CharField(required=True)
