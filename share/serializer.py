@@ -41,7 +41,7 @@ class PurchasesSerializer(serializers.ModelSerializer):
 class TestimonialSerializer(serializers.ModelSerializer):
     class Meta:
         model = Testimonial
-        fields = ('id','client_name','testimonial','date')
+        fields = ('id','client_name','testimonial')
 
 class ChangePasswordSerializer(serializers.Serializer):
     model = User
