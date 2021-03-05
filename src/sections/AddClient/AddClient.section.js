@@ -38,7 +38,7 @@ const AddClient = (props) => {
                 return res;
             })
             .then(res => {
-              if(res.length > 1) {
+              if(res.length >= 1) {
                 let _res = res.filter((data) => data.is_client || data.is_superuser);
                 if(_res.length > 0) {
                   _res.map((re, index) => (
@@ -58,11 +58,6 @@ const AddClient = (props) => {
     const authenticate = () => {
       let hasError;
         setIsLoading(true);
-
-        if(name.length < 6) {
-            setNameError(true);
-            hasError = true;
-        }
 
         if(userName.length < 6) {
             setUserNameError(true);
@@ -125,6 +120,7 @@ const AddClient = (props) => {
           }, 3000);
           setTel('');
           setName('');
+          setUserName('');
           setRefer('');
           setEmail('');
         })

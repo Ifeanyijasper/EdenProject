@@ -12,10 +12,12 @@ import {
     IoEllipsisHorizontal,
     IoCreate
 } from "react-icons/io5";
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
 import styles from './SideNav.module.css';
-import { connect } from 'react-redux';
 import { logo } from '../../res/images';
+import {resetUser} from '../../redux/Actions/Auth.actions';
 
 const SideNav = (props) => {
     const {user} = props;
@@ -58,8 +60,8 @@ const SideNav = (props) => {
                 <p className={styles.linksTitle}>Other</p>
                 {/* <li className={styles.linksItem}><NavLink className={styles.linksLink} activeClassName={styles.linksActive} to='/language'><IoLanguage className={styles.icons} />Language</NavLink></li> */}
                 {/* <li className={styles.linksItem}><NavLink to='/support' className={styles.linksLink} activeClassName={styles.linksActive}><IoHelp className={styles.icons} />Support</NavLink></li> */}
-                <li className={[styles.linksItem, styles.logOut].join(' ')}><NavLink to='/' exact className={styles.linksLink} activeClassName={styles.linksActive}><IoLogOut className={styles.icons} />Logout</NavLink></li>
-                <li className={styles.linkLogout}><NavLink to="/" exact className={styles.linksLogout}><IoPower className={styles.linksIcons}/></NavLink></li>
+                <li className={[styles.linksItem, styles.logOut].join(' ')} onClick={() => props.resetUser()}><NavLink to='/' exact className={styles.linksLink} activeClassName={styles.linksActive}><IoLogOut className={styles.icons} />Logout</NavLink></li>
+                <li className={styles.linkLogout} onClick={() => props.resetUser()}><NavLink to="/" exact className={styles.linksLogout}><IoPower className={styles.linksIcons}/></NavLink></li>
             </ul>
             <div className={styles.footerContainer}>
                 <p className={styles.footerContainerText}>Copyright @ <NavLink to='/summit-tech' className={styles.footerLink}>Summit Tech</NavLink></p>
@@ -74,7 +76,11 @@ const mapStateToProps = ({auth}) => {
     }
 }
 
-export default connect(mapStateToProps)(SideNav);
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({resetUser}, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SideNav);
 
 const customStyles = {
     // borderWidth: '1px', 

@@ -72,10 +72,10 @@ const Dashboard = (props) => {
                 <div className={styles.sectionCard}>
                     <div className={styles.sectionInfo}>
                         <IoPeople className={styles.icon} />
-                        <p className={styles.sectionText}>Clients: {stats.client}</p>
+                        <p className={styles.sectionText}>Clients: {clients.length}</p>
                     </div>
                     <p>Goal: {50}</p>
-                    <MiniProgressBar progress={stats.client/50 * 100} />
+                    <MiniProgressBar progress={clients ? (clients.length/50 * 100) : 0} />
                 </div>
 
                 {/* <div className={styles.sectionCard}>
@@ -90,10 +90,10 @@ const Dashboard = (props) => {
                 <div className={styles.sectionCard}>
                     <div className={styles.sectionInfo}>
                         <IoWalk className={styles.icon} />
-                        <p className={styles.sectionText}>Workers: {stats.worker}</p>
+                        <p className={styles.sectionText}>Workers: {workers.length || 0}</p>
                     </div>
                     <p>Goal: {10}</p>
-                    <MiniProgressBar progress={stats.worker/30 * 100} />
+                    <MiniProgressBar progress={workers ? (workers/30 * 100) : 0} />
                 </div>
             </div>
             <div className={styles.sectionTitle}>

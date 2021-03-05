@@ -1,4 +1,4 @@
-import {SET_USER, SET_TOKEN, SET_PASSWORD, SET_USERNAME} from '../types';
+import {SET_USER, SET_TOKEN, SET_PASSWORD, SET_USERNAME, RESET_USER} from '../types';
 
 export const setUser = (user, username, password) => {
   return {
@@ -25,5 +25,11 @@ export const setPassword = (password) => {
   return {
     type: SET_PASSWORD,
     payload: password,
+  }
+}
+
+export const resetUser = () => {
+  return {
+    type: RESET_USER,
   }
 }
