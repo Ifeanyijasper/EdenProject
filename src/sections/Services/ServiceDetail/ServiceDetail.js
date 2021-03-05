@@ -29,7 +29,6 @@ const ServiceDetail = (props) => {
         .then(res => {
             props.setRefresh(true);
             setIsDetail(false);
-            console.log(res);
         })
         .catch(err => {
             console.log(err);

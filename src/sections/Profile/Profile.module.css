@@ -2,6 +2,12 @@
     padding: 4rem 9rem;
 }
 
+@media only screen and (max-width: 37.5em) {
+    .profileContainer {
+        padding: 4rem 3rem;
+    }
+}
+
 .profileUser {
     display: flex;
     align-items: center;
@@ -85,10 +91,19 @@
     font-weight: var(--font-weight-normal);
 }
 
+@media only screen and (max-width: 56.25em) {
+    .profileName {
+        font-size: 2rem;
+    }
+    
+    .profileLocation {
+        font-size: 1.5rem;
+    }
+}
+
 .profileForm {
     display: flex;
     flex-wrap: wrap;
-    /* flex-direction: column; */
     justify-content: space-around;
     background-color: var(--color-white);
     border-radius: var(--border-radius-medium);
@@ -96,9 +111,40 @@
     padding-bottom: 2.5rem;
 }
 
+@media only screen and (max-width: 56.25em) {
+    .profileForm {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 20em) {
+    .profileForm {
+        width: 40rem;
+    }
+}
+
+
 .profileFormSection {
     width: 27rem;
     /* border: 2px solid teal; */
+}
+
+@media only screen and (max-width: 75em) {
+    .profileFormSection {
+        width: 42rem;
+    }
+}
+
+@media only screen and (max-width: 56.25em) {
+    .profileFormSection {
+        width: 25rem;
+    }
+}
+
+@media only screen and (max-width: 37.5em) {
+    .profileFormSection {
+        width: 35.5rem;
+    }
 }
 
 .profileActions {
@@ -115,6 +161,12 @@
     box-shadow: var(--box-shadow-light);
     margin: 5rem 7rem;
     padding: 0.5rem;
+}
+
+@media only screen and (max-width: 56.25em) {
+    .border {
+        margin: 5rem 0rem;
+    }
 }
 
 .isLoading {
