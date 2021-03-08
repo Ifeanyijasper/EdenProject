@@ -106,8 +106,13 @@ const Login = (props) => {
                     .then(res => {
                         let _list = res[1].filter(data => userName === data.username);
                         setIsLoading(false);
+                        console.log(_list[0].is_client);
                         props.setUser(_list[0], userName, password);
-                        props.history.push({pathname: '/dashboard'});
+                        if(_list[0].is_client) {
+                            props.history.push({pathname: '/client'});
+                        } else {
+                            props.history.push({pathname: '/dashboard'});
+                        }
                     })
                 }
             })

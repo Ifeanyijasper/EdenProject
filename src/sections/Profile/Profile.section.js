@@ -102,7 +102,7 @@ const Profile = (props) => {
 
     return (
         <div>
-            <RouteIndicator route="Dashboard" current="Profile" />
+            {(user.is_worker || user.is_superuser) && <RouteIndicator route="Dashboard" current="Profile" /> }
             <div className={styles.profileContainer}>
                 <div className={styles.profileUser}>
                     <div className={styles.profileImgContainer}>
@@ -113,7 +113,7 @@ const Profile = (props) => {
                     <div className={styles.profileCredentials}>
                         <h2 className={styles.profileName}>{name  || "'empty'"} | {userName}</h2>
                         <h4 className={styles.profileLocation}>{location || "'Null'"}</h4>
-                        <h4 className={styles.profileLocation}>Served: {served || '0'} Clients</h4>
+                        <h4 className={styles.profileLocation}>Served: {served || '0'} {(user.is_worker || user.is_superuser) ? 'Clients' : 'Times'}</h4>
                     </div>
                 </div>
                 <div className={styles.border}>

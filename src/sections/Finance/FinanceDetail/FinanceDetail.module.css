@@ -9,6 +9,12 @@
     align-items: center;
 }
 
+@media only screen and (max-width: 56.25em) {
+    .detailContainer {
+        min-height: 80vh;
+    }
+}
+
 .detailHide {
     display: none;
 }

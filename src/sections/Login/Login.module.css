@@ -15,7 +15,7 @@
         border-top-right-radius: 0;
         border-bottom-right-radius: var(--border-radius-medium);
         border-bottom-left-radius: var(--border-radius-medium);
-        min-height: 55rem;
+        min-height: 70rem;
     }
 }
 

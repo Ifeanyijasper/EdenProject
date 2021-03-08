@@ -25,9 +25,16 @@
     text-transform: uppercase;
 }
 
+@media only screen and (max-width: 37.5rem) {
+    .clientRating {
+       text-align: center;
+       font-size: 1.8rem;
+    }
+}
+
 .clientHeader {
+    margin: 1.8rem 0;
     margin-left: 0.8rem;
-    margin-top: 2.5rem;
 }
 
 .navContainer {
@@ -81,21 +88,30 @@
     justify-content: space-between;
 }
 
-.clientButton {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
+@media only screen and (min-width: 56.25em) {
+    .clientButton {
+        display: none;
+    }
+}
 
-    outline: none;
-    border: 0.25rem solid transparent;
-    background-color: var(--color-primary);
-    color: var(--color-white);
-    min-width: 7rem;
-    padding: 0.8rem;
-    border-radius: var(--border-radius-small);
-    transition: all ease-in-out 0.4s;
+@media only screen and (max-width: 56.25em) {
+    .clientButton {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
     
-    cursor: pointer;
+        outline: none;
+        border: 0.25rem solid transparent;
+        background-color: var(--color-primary);
+        color: var(--color-white);
+        min-width: 7rem;
+        padding: 0.8rem;
+        border-radius: var(--border-radius-small);
+        transition: all ease-in-out 0.4s;
+        
+        cursor: pointer;
+    }
+
 }
 
 .clientButton:hover {

@@ -23,37 +23,10 @@ const ClientDetail = (props) => {
     } = props;
     const [isOpen, setIsOpen] = useState(false);
     const [referers, setReferers] = useState([]);
-    const [mypoints, setPoints] = useState(0);
-    const [referPoints, setReferPoints] = useState(0);
 
     useEffect(() => {
         props.setRefresh(false);
     }, [isDetail]);
-
-    useEffect(() => {
-        fetch(`${BASE_URL}/purchase/`, {
-            method: 'GET',
-            headers: {
-                Authorization: 'Basic ' + Buffer.from(username + ':' + password).toString('base64'),
-            }
-        })
-            .then(res => {
-                const response = res.json();
-                return response;
-            })
-            .then(res => {
-                let _points = 0 ;
-                let points = res.filter(data => data.client_id === detail.id);
-                _points = points.reduce((sum, {point}) => sum + point, 0);
-                setPoints(_points);
-                let referPoints = table.filter(data => data.friend === detail.id);
-                let _referPoints = referPoints.reduce((sum, {points}) => sum + points, 0);
-                setReferPoints(_referPoints);
-            })
-            .catch(err => {
-                console.log(err);
-            })
-    }, [detail])
 
     useEffect(() => {
         let _referers = clients.filter(data => data.friend === detail.id);

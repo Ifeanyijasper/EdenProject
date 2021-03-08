@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import { NewPurchase } from "../..";
 
-import { Activity, Activity2, RouteIndicator, Search } from "../../../components";
+import { Activity2, RouteIndicator, Search } from "../../../components";
 import styles from './FinanceList.module.css';
 import search from '../../../utils/search';
 import { BASE_URL } from "../../../utils/globalVariable";
@@ -20,7 +20,6 @@ const FinanceList = (props) => {
     } = props;
     const [isOpen, setIsOpen] = useState(false);
     const [text, setText] = useState('');
-    const [finances, setFinances] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [purchases, setPurchases] = useState([]);
     const [filter, setFilter] = useState('');

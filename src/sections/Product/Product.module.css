@@ -2,6 +2,12 @@
     flex: 0 0 100%;
 }
 
+@media only screen and (max-width: 56.25em) {
+    .listContainer {
+        min-height: 100vh;
+    }
+}
+
 .productTitle {
     font-size: var(--font-size-extra-large);
     color: var(--color-grey-dark-2);

@@ -10,6 +10,10 @@
     .listContainerDetail {
         display: none;
     }
+
+    .listContainer {
+        min-height: 100vh;
+    }
 }
 
 .productTitle {

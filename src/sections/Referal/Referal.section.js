@@ -1,22 +1,59 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import styles from './Referal.module.css';
-import { ClientCard } from '../../components';
-import { img_1, img_2, img_3, img_4, img_5, img_6 } from '../../res/images';
+import { Activity2, ClientCard } from '../../components';
+import { BASE_URL } from '../../utils/globalVariable';
+import { connect } from 'react-redux';
 
-const Referal = () => {
+const Referal = (props) => {
+    const {user, password} = props;
+    const [loading, setLoading] = useState(false);
+    const [refered, setRefered] = useState([]);
+    const [notify, setNotify] = useState(false);
+    const [msg, setMsg] = useState({});
+
+    useEffect(() => {
+        setLoading(true);
+        fetch(`${BASE_URL}/register/`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Basic ' + Buffer.from(user.username + ':' + password).toString('base64'),
+            },
+        })
+            .then(response => {
+                const res = response.json();
+                return res;
+            })
+            .then(res => {
+                let _refered = res.filter(data => data.friend === user.id);
+                setRefered(_refered);
+                props.setData(_refered);
+                setLoading(false);
+            })
+            .catch(err => {
+                setLoading(false);
+                setNotify(true);
+                setMsg({
+                    title: 'Authentication',
+                    message: 'Invalid username or password.'
+                })
+            })
+    }, []);
+
     return (
         <div className={styles.referedContainer}>
-            {workers.map((worker, index) => <ClientCard client={worker} />)}
+            {loading ? <Activity2 /> : refered.map((worker, index) => <ClientCard client={worker} />)}
         </div>
     )
 }
 
-export default Referal;
+const mapStateToProps = ({auth}) => {
+    return {
+        user: auth.user,
+        password: auth.password,
+    }
+}
 
 
-const workers = [
-    {id: 1, name:'James Br', age: 22, sex: 'Male', numberOfClients: 45, progress: 80, img: img_1},
-    {id: 2, name:'Kate Lv', age: 27, sex: 'Female', numberOfClients: 40, progress: 76, img: img_2},
-    {id: 3, name:'Cynthia Cr', age: 26, sex: 'Female', numberOfClients: 36, progress: 70, img: img_3},
-]
+export default connect(mapStateToProps)(Referal);
