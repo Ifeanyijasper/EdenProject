@@ -28,7 +28,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '(zquwuy*x8csw*f@yn(ogfcj^natc@ge(sagxd8q1(nyl-syc@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['https://inspireafrica-edenbeauty.herokuapp.com']
 
