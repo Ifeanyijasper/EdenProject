@@ -12,6 +12,17 @@
     min-height: 100vh;
 }
 
+@media only screen and (max-width: 56.25rem) {
+    .clientSide {
+        border-bottom-left-radius: 0;
+        border-top-right-radius: var(--border-radius-medium);
+        min-height: auto;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
 .imageContainer {}
 
 .userImage {
@@ -20,6 +31,35 @@
     border: 0.35rem solid var(--color-white);
     border-radius: var(--border-radius-round);
     margin: 1rem 0;
+}
+
+.userIni {
+    height: 20rem;
+    width: 20rem;
+    border: 0.35rem solid var(--color-white);
+    border-radius: var(--border-radius-round);
+    margin: 1rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--color-white);
+    font-size: var(--font-size-huge);
+    letter-spacing: 0.5rem;
+}
+
+@media only screen and (max-width: 56.25rem) {
+    .userImage {
+        height: 7rem;
+        width: 7rem;
+        margin-left: 1rem;
+    }
+
+    .userIni {
+        height: 7rem;
+        width: 7rem;
+        font-size: var(--font-size-extra-large);
+        margin-left: 1rem;
+    }
 }
 
 .clientInfoContainer {
@@ -33,12 +73,24 @@
     margin-bottom: 2rem;
 }
 
+@media only screen and (max-width: 56.25rem) {
+    .clientInfoContainer {
+        display: none;
+    }
+}
+
 .clientInfoTitle {
     font-size: var(--font-size-small);
     color: var(--color-grey-dark-3);
     padding:0.3rem 0.8rem;
     margin-bottom: 0.6rem;
     /* text-align: center; */
+}
+
+@media only screen and (max-width: 56.25rem) {
+    .clientInfoTitle {
+        display: none;
+    }
 }
 
 .clientInfoDetails {
@@ -50,12 +102,24 @@
     /* text-align: center; */
 }
 
+@media only screen and (max-width: 56.25rem) {
+    .clientInfoDetails {
+        font-size: 1.7rem;
+    }
+}
+
 .clientIcon {
     margin-right: 0.6rem;
 }
 
 .footerContainer {
     margin-top: auto;
+}
+
+@media only screen and (max-width: 56.25rem) {
+    .footerContainer {
+        display: none;
+    }
 }
 
 .footerContainerText {
@@ -67,4 +131,102 @@
     outline: none;
     text-decoration: none;
     color: var(--color-success-2);
+}
+
+.linksNavSide {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+}
+
+@media only screen and (max-width: 56.25em) {
+    .linksNavSide {
+        flex-direction: row;
+        min-width: 65%;
+        justify-content: space-between;
+        position: relative;
+    }
+}
+
+@media only screen and (max-width: 37.5em) {
+    .linksNavSide {
+        min-width: 82%;
+    }
+}
+
+.linksItem {
+    margin: 1rem 0;
+    min-width: 9rem;
+    /* width: 100%; */
+}
+
+@media only screen and (max-width: 56.25em) {
+    .linksItem {
+        margin: 1rem auto;
+    }
+}
+
+.linksLink,
+.linksLink:link,
+.linksLink:visited {
+    outline: none;
+    text-decoration: none;
+    color: var(--color-white);
+    font-size: var(--font-size-normal);
+    padding: 0.8rem;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    background-image: var(--linear-gradient-1);
+    transition: all ease-in-out 0.5s;
+}
+
+.linksLink:hover {
+    background-image: var(--linear-gradient-2);
+}
+
+.linksActive,
+.linksActive:active {
+    background-image: var(--linear-gradient-2) !important;
+}
+
+@media only screen and (max-width: 56.25em) {
+    .logOut {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 56.25em) {
+    .linkLogout {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 56.25em) {
+    .linkLogout {
+        margin: 1rem 0rem;
+        margin-left: auto;
+    }
+
+    .linksLogout,
+    .linksLogout:visited,
+    .linksLogout:link {
+        outline: none;
+        text-decoration: none;
+        padding: 0.8rem;
+        display: flex;
+        justify-content: center;
+    }
+
+    .linksIcons {
+        color: var(--color-white);
+        font-size: var(--font-size-large);
+        font-weight: var(--font-weight-bold);
+    }
+}
+
+.icons {
+    margin-right: 0.8rem;
+    font-size: var(--font-size-normal);
 }

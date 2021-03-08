@@ -1,5 +1,11 @@
 .dashboardSection {}
 
+@media only screen and (max-width: 56.25em) {
+    .dashboardSection {
+        min-height: 100vh;
+    }
+}
+
 .searchContainer {
     display: flex;
     margin: 1.2rem 0;

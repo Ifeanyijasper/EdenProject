@@ -2,7 +2,16 @@
     display: flex;
     align-items: baseline;
 
-    margin-bottom: 1.5rem;
+}
+
+
+
+@media only screen and (max-width: 37.5rem) {
+    .rankRate {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 }
 
 .rank {
@@ -10,15 +19,101 @@
     color: rgba(var(--color-gradien-2), 0.7);
 }
 
+@media only screen and (max-width: 56.25rem) {
+    .rank {
+        font-size: 1.3rem;
+    }
+}
+
+.rankProgress {
+    width: 40%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media only screen and (max-width: 75rem) {
+    .rankProgress {
+        width: 52%;
+    }
+}
+
+
+@media only screen and (max-width: 56.25rem) {
+    .rankProgress {
+        width: 55%;
+    }
+
+}
+
+@media only screen and (max-width: 37.5rem) {
+    .rankProgress {
+        width: 95%;
+    }
+
+}
+
 .rateContainer {
     background-color: rgba(var(--color-gradien-2), 0.3);
     height: 0.8rem;
     border-radius: var(--border-radius-medium);
-    margin: 0 1rem;
+    margin: 1rem;
+    overflow: hidden;
 }
 
 .rateBar {
     background-image: var(--linear-gradient-2);
     height: 0.8rem;
     border-radius: var(--border-radius-medium);
+}
+
+@media only screen and (max-width: 37.5rem) {
+    .rateContainer {
+        margin: 1rem 0;
+    }
+
+    .rank {
+        margin-bottom: 0.5rem;
+        font-size: 1.7rem;
+    }
+}
+
+.rateButton {
+    outline: none;
+    border: none;
+    display: flex;
+    background-color: var(--color-white);
+    justify-content: center;
+    align-items: center;
+    font-size: var(--font-size-normal);
+    margin: 0 1rem;
+    border-bottom: 0.2rem solid var(--color-primary);
+    padding: 0.8rem;
+}
+
+@media only screen and (max-width: 56.25rem) {
+    .rateButton {
+        border-bottom-width: 0.3rem;
+    }
+}
+
+@media only screen and (max-width: 37.5rem) {
+    .rateButton {
+        font-size: 1.7rem;
+
+    }
+}
+
+.rateIcon {
+    font-size: var(--font-size-normal);
+    margin-right: 0.5rem;
+}
+
+.rateActivate {
+    cursor: pointer;
+}
+
+.rateDeactivate {
+    cursor: not-allowed;
+    opacity: 0.7;
 }

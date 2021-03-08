@@ -1,29 +1,35 @@
 import React from 'react';
-import { IoBarChart, IoCard, IoLocation, IoMail, IoPeople, IoPhonePortrait, IoWallet } from 'react-icons/io5';
+import { IoBarChart, IoCard, IoLocation, IoLogOut, IoMail, IoPeople, IoPhonePortrait, IoPower, IoWallet } from 'react-icons/io5';
+import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
 
 import { img_4 } from '../../res/images';
+import extractInitials from '../../utils/extractIni';
 import styles from './ClientSide.module.css';
+import {resetUser} from '../../redux/Actions/Auth.actions'
 
-const ClientSide = () => {
+const ClientSide = (props) => {
+    const {user} = props;
     return (
         <div className={styles.clientSide}>
             <div className={styles.imageContainer}>
-                <img src={img_4} alt="Client Name" className={styles.userImage} />
+                {user.img ? 
+                    <img src={img_4} alt="Client Name" className={styles.userImage} />: 
+                    <h2 className={styles.userIni}>{extractInitials(user.fullname || user.username || 'Eden Beauty')}</h2>
+                }
             </div>
             <div className={styles.clientInfoContainer}>
                 <p className={styles.clientInfoTitle}>Contact</p>
-                <h2 className={styles.clientInfoDetails}><IoCard className={styles.clientIcon} />$James345</h2>
-                <h2 className={styles.clientInfoDetails}><IoMail className={styles.clientIcon} />brownjames@gmail.com</h2>
-                <h2 className={styles.clientInfoDetails}><IoLocation className={styles.clientIcon} />Tarred Malingo </h2>
-                <h2 className={styles.clientInfoDetails}><IoPhonePortrait className={styles.clientIcon} />681-726-633 </h2>
+                <h2 className={styles.clientInfoDetails}><IoCard className={styles.clientIcon} />{user.username}</h2>
+                <h2 className={styles.clientInfoDetails}><IoMail className={styles.clientIcon} />{user.email}</h2>
+                <h2 className={styles.clientInfoDetails}><IoLocation className={styles.clientIcon} />{user.location} </h2>
+                <h2 className={styles.clientInfoDetails}><IoPhonePortrait className={styles.clientIcon} />{user.phone} </h2>
             </div>
-            <div className={styles.clientInfoContainer}>
-                <p className={styles.clientInfoTitle}>Details</p>
-                <h2 className={styles.clientInfoDetails}><IoBarChart className={styles.clientIcon} /> Rank | 23</h2>
-                <h2 className={styles.clientInfoDetails}><IoPeople className={styles.clientIcon} /> Invited | 3</h2>
-                <h2 className={styles.clientInfoDetails}><IoWallet className={styles.clientIcon} /> Total Expense | 23,000 FCFA</h2>
-            </div>
+            <ul className={styles.linksNavSide}>
+                <li className={[styles.linksItem, styles.logOut].join(' ')} onClick={() => props.resetUser()}><NavLink to='/' exact className={styles.linksLink} activeClassName={styles.linksActive}><IoLogOut className={styles.icons} />Logout</NavLink></li>
+                <li className={styles.linkLogout} onClick={() => props.resetUser()}><NavLink to="/" exact className={styles.linksLogout}><IoPower className={styles.linksIcons}/></NavLink></li>
+            </ul>
             <div className={styles.footerContainer}>
                 <p className={styles.footerContainerText}>Copyright @ <NavLink to='/summit-tech' className={styles.footerLink}>Summit Tech</NavLink></p>
             </div>
@@ -31,4 +37,15 @@ const ClientSide = () => {
     )
 }
 
-export default ClientSide;
+const mapStateToProps = ({auth}) => {
+    return {
+        user: auth.user,
+        password: auth.password,
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({resetUser}, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ClientSide);
