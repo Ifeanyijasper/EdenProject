@@ -21,18 +21,36 @@ class Products(models.Model):
     price       = models.DecimalField(max_digits=7, decimal_places=2)
     discount    = models.DecimalField(max_digits=5, decimal_places=2)
     description = models.CharField(max_length = 500)
+    img       = models.ImageField(null=True, blank=True)
 
     def __str__(self):
         return self.name
+    
+    @property
+    def imageURL(self):
+        try:
+            url = self.image.url
+        except:
+            url = ''
+        return url
 
 class Services(models.Model):
     name        = models.CharField(max_length = 200, null=True)
     price       = models.DecimalField(max_digits=7, decimal_places=2)
     discount    = models.DecimalField(max_digits=5, decimal_places=2)
     description = models.CharField(max_length = 500)
+    img       = models.ImageField(null=True, blank=True)
     
     def __str__(self):
         return self.name
+
+    @property
+    def imageURL(self):
+        try:
+            url = self.image.url
+        except:
+            url = ''
+        return url
         
 class Purchases(models.Model):
     client_id   = models.IntegerField()
@@ -54,3 +72,18 @@ class Testimonial(models.Model):
 
     def __str__(self):
         return self.client_name
+
+class Checkout(models.Model):
+    STATUS_CHOICES = (
+        ('Pending', 'Pending'),
+        ('Processed', 'Processed'),
+    )
+    status   = models.CharField(max_length=10, choices=STATUS_CHOICES)
+    client_id= models.IntegerField()
+    client   = models.CharField(max_length=150)
+    bonus    = models.CharField(max_length=500)
+    date     = models.DateTimeField(auto_now_add=True)
+    amount   = models.FloatField()
+
+    def __str__(self):
+        return self.status

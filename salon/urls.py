@@ -18,6 +18,8 @@ from django.urls import path, include, re_path
 from django.views.generic import TemplateView
 from rest_framework import routers
 from share import views
+from django.conf.urls.static import static
+from django.conf import settings
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
 router = routers.DefaultRouter()
@@ -27,6 +29,7 @@ router.register('product', views.ProductsViewSet)
 router.register('service', views.ServicesViewSet)
 router.register('purchase', views.PurchasesViewSet)
 router.register('testimonial', views.TestimonialViewSet)
+router.register('Checkout', views.CheckoutViewSet)
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API
 
@@ -39,3 +42,5 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     re_path('.*', TemplateView.as_view(template_name='index.html'))
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

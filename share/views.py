@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from rest_framework import viewsets
 from rest_framework.response import Response
-from .serializer import RegisterSerializer, UserSerializer, ProductsSerializer, ServicesSerializer,ChangePasswordSerializer,TestimonialSerializer,PurchasesSerializer
+from .serializer import *
 from .models import *
 from rest_framework.authentication import BasicAuthentication, TokenAuthentication, SessionAuthentication
 from rest_framework.permissions import IsAuthenticated, AllowAny
@@ -79,6 +79,19 @@ class TestimonialViewSet(viewsets.ModelViewSet):
     def list(self, request, *args, **kwargs):
         testimonial = Testimonial.objects.all()
         serializer = TestimonialSerializer(testimonial, many=True)
+        return Response(serializer.data)
+
+class CheckoutViewSet(viewsets.ModelViewSet):
+    """ 
+    API enddpoint that allows users to be viewed or edited. 
+    """
+    queryset = Checkout.objects.all()
+    serializer_class = CheckoutSerializer
+    permission_classes = (IsAuthenticated,)
+
+    def list(self, request, *args, **kwargs):
+        checkout = Checkout.objects.all()
+        serializer = CheckoutSerializer(checkout, many=True)
         return Response(serializer.data)
 
 class ChangePasswordView(generics.UpdateAPIView):

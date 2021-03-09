@@ -25,13 +25,13 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 class ProductsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Products
-        fields = ('id','name','price','discount','description')
+        fields = ('id','name','price','discount','description','img')
 
 
 class ServicesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Services
-        fields = ('id','name','price','discount','description')
+        fields = ('id','name','price','discount','description','img')
 
 class PurchasesSerializer(serializers.ModelSerializer):
     class Meta:
@@ -42,6 +42,11 @@ class TestimonialSerializer(serializers.ModelSerializer):
     class Meta:
         model = Testimonial
         fields = ('id','client_name','testimonial','date')
+
+class CheckoutSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Checkout
+        fields = ('id','status','client_id','client','bonus','date','amount')
 
 class ChangePasswordSerializer(serializers.Serializer):
     model = User
