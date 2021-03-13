@@ -28,6 +28,7 @@ import EditService from './EditService/EditService.section';
 import EditProduct from './EditProduct/EditProduct.section';
 import Profile from './Profile/Profile.section';
 import EditPassword from './EditPassword/EditPassword.section';
+import Checkout from './Checkout/Checkout.section';
 
 export {
     SideNav, 
@@ -60,4 +61,5 @@ export {
     EditWorker,
     Profile,
     EditPassword,
+    Checkout,
 }

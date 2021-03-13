@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Select from 'react-select';
 import { bindActionCreators } from 'redux';
 
-import { Activity, Button, Input, Notify, SummitTech } from '../../components';
+import { Activity, Button, Input, Notification, Notify, SummitTech } from '../../components';
 import { BASE_URL } from '../../utils/globalVariable';
 import styles from './EditPassword.module.css';
 import {setPassword} from '../../redux/Actions/Auth.actions';
@@ -64,7 +64,7 @@ const EditPassword = (props) => {
           setNotify(true);
           props.setPassword(newPw);
           setMsg({
-            type: 'Successful',
+            title: 'Successful',
             message: res.message
           })
         })
@@ -76,7 +76,7 @@ const EditPassword = (props) => {
         .catch(err => {
           setIsLoading(false);
           setMsg({
-            type: 'Unexpected',
+            title: 'Unexpected Error',
             message: 'An error occured, check you internet connection'
           })
           setNotify(true);
@@ -124,7 +124,7 @@ const EditPassword = (props) => {
                 </div>
             </div>
             <SummitTech title="Eden Beauty" />
-            <Notify notify={notify} setNotify={setNotify} msg={msg} />
+            <Notification notify={notify} setNotify={setNotify} msg={msg} />
         </Modal>
     )
 }

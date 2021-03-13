@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 import { connect } from 'react-redux';
 import Select from 'react-select';
 
-import { Activity, Button, Input, Notify, SummitTech } from '../../components';
+import { Activity, Button, Input, Notification, SummitTech } from '../../components';
 import { BASE_URL } from '../../utils/globalVariable';
 import styles from './AddWorker.module.css';
 
@@ -75,7 +75,7 @@ const AddWorker = (props) => {
           setNotify(true);
           setIsLoading(false);
           setMsg({
-            type: 'Succesful',
+            title: 'Succesful',
             message: 'We have a new team mate'
           })
         })
@@ -92,7 +92,7 @@ const AddWorker = (props) => {
           setIsLoading(false);
           setNotify(true);
           setMsg({
-            type: 'Unexpected',
+            title: 'Unexpected Error',
             message: 'An error occured, check you internet connection'
           })
         })
@@ -146,7 +146,7 @@ const AddWorker = (props) => {
                 </div>
             </div>
             <SummitTech title="Eden Beauty" />
-            <Notify notify={notify} setNotify={setNotify} msg={msg} />
+            <Notification notify={notify} setNotify={setNotify} msg={msg} />
         </Modal>
     )
 }

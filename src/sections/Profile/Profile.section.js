@@ -23,6 +23,7 @@ const Profile = (props) => {
     const [userNameError, setUserNameError] = useState(false);
     const [nameError, setNameError] = useState(false);
     const [emailError, setEmailError] = useState(false);
+    const [referBonus, setReferBonus] = useState(0);
     const [locationError, setLocationError] = useState(false);
     const [phoneError, setPhoneError] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -94,6 +95,7 @@ const Profile = (props) => {
             setEmail(res.email);
             setLocation(res.location);
             setServed(res.served);
+            setReferBonus(res.refer_bonus)
         })
         .catch(err => {
             console.log(err);
@@ -111,9 +113,10 @@ const Profile = (props) => {
                         <button className={styles.profileEdit}><IoPencil className={styles.profileEditIcon} /></button>
                     </div>
                     <div className={styles.profileCredentials}>
-                        <h2 className={styles.profileName}>{name  || "'empty'"} | {userName}</h2>
+                        <h2 className={styles.profileName}>{name  || "'Empty'"} | {userName}</h2>
                         <h4 className={styles.profileLocation}>{location || "'Null'"}</h4>
                         <h4 className={styles.profileLocation}>Served: {served || '0'} {(user.is_worker || user.is_superuser) ? 'Clients' : 'Times'}</h4>
+                        {(user.is_worker || user.is_superuser) && <h4 className={styles.profileLocation}>Refer Bonuses: {referBonus || '0'} XAF</h4>}
                     </div>
                 </div>
                 <div className={styles.border}>

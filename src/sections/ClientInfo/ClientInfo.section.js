@@ -31,11 +31,11 @@ const ClientInfo = (props) => {
                 <>
                     <div className={styles.clientHeader}>
                         <h2 className={styles.clientRating}>My Bonuses</h2>
-                        <RankRate rank={25} rate={user.my_bonus || 0} />
+                        <RankRate user={user} bonus={'my_bonus'} rate={user.my_bonus || 0} />
                     </div>
                     <div className={styles.clientHeader}>
                         <h2 className={styles.clientRating}>Referer Bonuses</h2>
-                        <RankRate rank={25} rate={user.refer_bonus || 0} />
+                        <RankRate user={user} bonus={'refer_bonus'} rate={user.refer_bonus || 0} />
                     </div>
                 </>
             }

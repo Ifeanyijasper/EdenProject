@@ -79,23 +79,6 @@ const ClientList = (props) => {
                 setClients(_clients);
                 props.setData(_clients);
                 setLoading(false);
-                if(!loading) {
-                    const purchases = fetchPurchases();
-                    purchases
-                    .then(purchases => {
-                        return [_clients, purchases]
-                    })
-                    .then(purchases => {
-                        let n = 0, friend;
-                        let client = purchases[0];
-                        let purchase = purchases[1];
-                        while (n < purchase.length) {
-                            friend = client.filter(data => data.id === purchase[n].client_id)[0].friend;
-                               props.setPoint(purchase[n].client_id, purchase[n].point, friend);
-                            n++;
-                        }
-                    })
-                }
             })
             .catch(err => {
                 setLoading(false);

@@ -11,9 +11,9 @@ const ReferCard = (props) => {
         <div className={styles.referCard}>
             <div className={styles.referDetails}>
                 { refer.img ? 
-                <img src={img_3} alt="Refer name" className={styles.referImage}/>
-                : 
-                 <p className={styles.referIni}>{refer.fullname ? extractInitials(refer.fullname) : extractInitials(refer.username)}</p>
+                    <img src={img_3} alt="Refer name" className={styles.referImage}/>
+                    : 
+                    <p className={styles.referIni}>{refer.fullname ? extractInitials(refer.fullname) : extractInitials(refer.username)}</p>
                 }
                 <h2 className={styles.referName}>{refer.fullname || refer.username}</h2>
             </div>

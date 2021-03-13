@@ -1,1 +1,1 @@
-export const BASE_URL = 'https://inspireafrica-edenbeauty.herokuapp.com/api';
+export const BASE_URL = 'https://inspireafrica-edenbeauty.com/api';

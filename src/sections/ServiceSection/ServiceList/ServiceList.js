@@ -66,7 +66,7 @@ const ServiceList = (props) => {
                     <h2 className={styles.serviceTitle}>Top 6 Services</h2>
                     <hr className={styles.horizontalLine} />
                     <div className={styles.serviceContainer}>
-                        {isLoading ? (<Activity2 />) : services.map((service, index) => ((Math.floor(Number(service.discount)) < 10 && index < 7)&&
+                        {isLoading ? (<Activity2 />) : services.map((service, index) => ((Math.floor(Number(service.discount)) < 10 && index < 6)&&
                         <ItemCard item={service} onClick={() => showDetails(service)} key={service.id} />
                         ))}
                     </div>

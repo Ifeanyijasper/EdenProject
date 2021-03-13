@@ -7,7 +7,7 @@ import {
   Activity, 
   Button, 
   Input, 
-  Notify, 
+  Notification, 
   SummitTech, 
   TextArea 
 } from '../../components';
@@ -27,10 +27,12 @@ const EditService = (props) => {
     const [name, setName] = useState('');
     const [discount, setDiscount] = useState('');
     const [about, setAbout] = useState('');
+    const [image, setImage] = useState('');
     const [priceError, setPriceError] = useState(false);
     const [nameError, setNameError] = useState(false);
     const [discountError, setDiscountError] = useState(false);
     const [aboutError, setAboutError] = useState(false);
+    const [imageError, setImageError] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [notify, setNotify] = useState(false);
     const [msg, setMsg] = useState({});
@@ -88,7 +90,7 @@ const EditService = (props) => {
           props.setRefresh(true);
           setNotify(true);
           setMsg({
-            type: 'Successful',
+            title: 'Successful',
             message: 'Service detail updated.'
           })
         })
@@ -102,7 +104,7 @@ const EditService = (props) => {
           setIsLoading(true);
           setNotify(true);
           setMsg({
-            type: 'Unexpected',
+            title: 'Unexpected Error',
             message: 'An error occured, check you internet connection'
           })
         })
@@ -139,6 +141,14 @@ const EditService = (props) => {
                 setValue={(event) => setPrice(event.target.value)}
                 error={priceError}
                 setError={() => setPriceError} />
+                {/* <Input 
+                  label="Image"
+                  secureText={false}
+                  type="file"
+                  // value={image}
+                  setValue={(event) => setImage(event.target.files)}
+                  error={imageError}
+                  setError={() => setImageError} /> */}
                 <TextArea
                 placeholder="Write about the product you are adding" 
                 label="About"
@@ -155,7 +165,7 @@ const EditService = (props) => {
                 </div>
             </div>
             <SummitTech title="Eden Beauty" />
-            <Notify notify={notify} setNotify={setNotify} msg={msg} />          
+            <Notification notify={notify} setNotify={setNotify} msg={msg} />          
         </Modal>
     )
 }

@@ -6,7 +6,7 @@ import Select from 'react-select';
 import { bindActionCreators } from 'redux';
 
 import { Product, Service } from '..';
-import { Activity, Button, Notify } from '../../components';
+import { Activity, Button, Notification, Notify } from '../../components';
 import { BASE_URL } from '../../utils/globalVariable';
 import styles from './NewPurchase.module.css';
 import {setClearPurchase} from '../../redux/Actions/Purchase.actions';
@@ -193,7 +193,7 @@ const NewPurchase = (props) => {
         props.setPoint(client.value, total/2000, friend[0].friend);
         setNotify(true);
         setMsg({
-            type: 'Successful',
+            title: 'Successful Purchase',
             message: 'Purchase completed, you served one more person.'
           })
         if(friend[0].served === null && friend[0].friend !== null) {
@@ -225,14 +225,14 @@ const NewPurchase = (props) => {
           let data = fetchMyBonus(friendId);
           data
             .then(res => {
-              let myBonus = Number(res[2]) + (total * 0.03);
+              let myBonus = Number(res[2]) + (total * 0.025);
               updateReferBonus(friendId, myBonus);
             })
             .then(res => {
               let data = fetchMyBonus(client.value);
                 data
                   .then(res => {
-                    let myBonus = Number(res[0]) + (total * 0.02);
+                    let myBonus = Number(res[0]) + (total * 0.05);
                     let served = Number(res[1]) + 1;
                     updateMyBonus(client.value, myBonus);
                     updateServed(client.value, served);
@@ -258,7 +258,7 @@ const NewPurchase = (props) => {
         setIsLoading(false);
         setNotify(true);
         setMsg({
-            type: 'Unexpected',
+            title: 'Unexpected Error',
             message: 'An error occured, check you internet connection'
           })
       })
@@ -295,7 +295,7 @@ const NewPurchase = (props) => {
             <div className={styles.purchaseButton}>
               {isLoading ? <Activity /> : <Button title="Purchase" onClick={() => purchased()} />}
             </div>
-            <Notify notify={notify} setNotify={setNotify} msg={msg} />    
+            <Notification notify={notify} setNotify={setNotify} msg={msg} />    
         </Modal>
     )
 }

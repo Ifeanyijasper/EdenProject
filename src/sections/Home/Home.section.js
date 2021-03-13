@@ -82,7 +82,7 @@ const HomeSection = (props) => {
             <h1 className={styles.title} id="services">Services</h1>
             <h3 className={styles.subTitle}>At Company we offer the best of</h3>
             <div className={styles.container} style={{backgroundImage: "linear-gradient(to right, #92fe9d79, #00c8ff50), url(" + eden + ")"}}>
-                {isLoading ? (<Activity2 />) : services.map((service, index) => ((Math.floor(Number(service.discount)) < 10 && index < 7)&&
+                {isLoading ? (<Activity2 />) : services.map((service, index) => ((Math.floor(Number(service.discount)) < 10 && index < 6)&&
                 <ItemCard item={service} onClick={() => active()} key={service.id} />
                 ))}
             </div>
@@ -95,7 +95,7 @@ const HomeSection = (props) => {
             <h1 className={styles.title} id="products">Products</h1>
             <h3 className={styles.subTitle}>At Company we offer the best of</h3>
             <div className={styles.container} style={{backgroundImage: "linear-gradient(to right, #00c8ff50, #92fe9d79), url(" + beauty + ")"}}>
-                {isLoading ? (<Activity2 />) : products.map((product, index) => ((Math.floor(Number(product.discount)) < 10 && index < 7)&&
+                {isLoading ? (<Activity2 />) : products.map((product, index) => ((Math.floor(Number(product.discount)) < 10 && index < 6)&&
                 <ItemCard item={product} onClick={() => active()} key={product.id} />))}
             </div>
             <div className={styles.testiCardCon}>

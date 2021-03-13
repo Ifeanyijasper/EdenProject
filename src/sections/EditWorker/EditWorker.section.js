@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { Activity, Button, Input, Notify, SummitTech } from '../../components';
+import { Activity, Button, Input, Notification, SummitTech } from '../../components';
 import styles from './EditWorker.module.css';
 import { BASE_URL } from '../../utils/globalVariable';
 import {setRefresh} from '../../redux/Actions/Refresh.actions';
@@ -92,7 +92,7 @@ const EditWorker = (props) => {
           props.setRefresh(true);
           setNotify(true);
           setMsg({
-            type: 'Successful',
+            title: 'Successful',
             message: 'Worker information updated.'
           })
         })
@@ -106,7 +106,7 @@ const EditWorker = (props) => {
           setIsLoading(false);
           setNotify(true);
           setMsg({
-            type: 'Unexpected',
+            title: 'Unexpected Error',
             message: 'An error occured, check you internet connection'
           })
         })
@@ -161,7 +161,7 @@ const EditWorker = (props) => {
                 </div>
             </div>
             <SummitTech title="Eden Beauty" />
-            <Notify notify={notify} setNotify={setNotify} msg={msg} />    
+            <Notification notify={notify} setNotify={setNotify} msg={msg} />    
         </Modal>
     )
 }

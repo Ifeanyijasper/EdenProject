@@ -4,7 +4,17 @@ import { IoEye, IoEyeOff } from 'react-icons/io5';
 import styles from './Input.module.css';
 
 const Input = (props) => {
-    const {placeholder, type, label, secureText, value, setValue, error, setError} = props;
+    const {
+        placeholder, 
+        type, 
+        label, 
+        secureText, 
+        value, 
+        setValue, 
+        error, 
+        setError,
+        name,
+    } = props;
     const [_secureText, setSecureText] = useState(secureText);
 
     return (
@@ -15,7 +25,8 @@ const Input = (props) => {
                     type={_secureText ? 'password' : type} 
                     placeholder={secureText ? (_secureText ? placeholder : 'dix134$5ive') : placeholder} 
                     className={styles.inputField}
-                    onFocus={() => setError(false)}
+                    name={name}
+                    // onFocus={() => setError(false)}
                     onChange={setValue}
                     value={value} 
                 />
@@ -28,8 +39,6 @@ const Input = (props) => {
                     <IoEye className={styles.inputFieldIcon} />}
                 </div>
                 )}
-                
-                
             </div>
         </div>
     )

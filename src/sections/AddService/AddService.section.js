@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
 
-import { Activity, Button, Input, Notify, SummitTech, TextArea } from '../../components';
+import { Activity, Button, Input, Notification, SummitTech, TextArea } from '../../components';
 import { BASE_URL } from '../../utils/globalVariable';
 import styles from './AddService.module.css';
 
@@ -11,10 +11,12 @@ const AddService = (props) => {
     const [name, setName] = useState('');
     const [about, setAbout] = useState('');
     const [discount, setDiscount] = useState('');
+    const [image, setImage] = useState('');
     const [priceError, setPriceError] = useState(false);
     const [nameError, setNameError] = useState(false);
     const [aboutError, setAboutError] = useState(false);
     const [discountError, setDiscountError] = useState(false);
+    const [imageError, setImageError] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [notify, setNotify] = useState(false);
     const [msg, setMsg] = useState({});
@@ -70,7 +72,7 @@ const AddService = (props) => {
           setIsLoading(false);
           setNotify(true);
           setMsg({
-            type: 'Succesful',
+            title: 'Succesful',
             message: 'We have a new service for our clients'
           })
         })
@@ -87,7 +89,7 @@ const AddService = (props) => {
           setIsLoading(false);
           setNotify(true);
           setMsg({
-            type: 'Unexpected',
+            title: 'Unexpected Error',
             message: 'An error occured, check you internet connection'
           })
         })
@@ -116,14 +118,22 @@ const AddService = (props) => {
                 error={discountError}
                 setError={() => setDiscountError} />
                 <Input 
-                placeholder="5000" 
-                label="Price"
-                secureText={false}
-                type="text"
-                value={price}
-                setValue={(event) => setPrice(event.target.value)}
-                error={priceError}
-                setError={() => setPriceError} />
+                  placeholder="5000" 
+                  label="Price"
+                  secureText={false}
+                  type="text"
+                  value={price}
+                  setValue={(event) => setPrice(event.target.value)}
+                  error={priceError}
+                  setError={() => setPriceError} />
+                {/* <Input 
+                  label="Image"
+                  secureText={false}
+                  type="file"
+                  // value={image}
+                  setValue={(event) => setImage(event.target.files)}
+                  error={imageError}
+                  setError={() => setImageError} /> */}
                 <TextArea
                 placeholder="Write about the product you are adding" 
                 label="About"
@@ -139,7 +149,7 @@ const AddService = (props) => {
                 </div>
             </div>
             <SummitTech title="Eden Beauty" />
-            <Notify notify={notify} setNotify={setNotify} msg={msg} />
+            <Notification notify={notify} setNotify={setNotify} msg={msg} />
         </Modal>
     )
 }

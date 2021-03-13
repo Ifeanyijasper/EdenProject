@@ -1,0 +1,103 @@
+.detailContainer {
+    flex: 1;
+    padding: 3rem 0;
+    padding-bottom: 1rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    align-items: center;
+}
+
+@media only screen and (max-width: 56.25em) {
+    .detailContainer {
+        min-height: 80vh;
+    }
+}
+
+.detailHide {
+    display: none;
+}
+
+.imgsContainer {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+}
+
+.clientImage {
+    width: 20rem;
+    height: 20rem;
+    border-radius: var(--border-radius-round);
+    margin-left: 1rem;
+    border: 0.3rem solid var(--color-primary)
+}
+
+.clientIni {
+    width: 20rem;
+    height: 20rem;
+    border-radius: var(--border-radius-round);
+    margin-left: 1rem;
+    display: flex;
+    font-size: var(--font-size-huge);
+    justify-content: center;
+    align-items: center;
+    border: 0.3rem solid var(--color-primary)
+}
+
+.workerImage {
+    width: 7rem;
+    height: 7rem;
+    border-radius: var(--border-radius-round);
+    margin-left: -6rem;
+    border: 0.3rem solid var(--color-success-2);
+}
+
+.workerIni {
+    width: 7rem;
+    height: 7rem;
+    font-size: var(--font-size-extra-large);
+    border-radius: var(--border-radius-round);
+    margin-left: -6rem;
+    background-color: var(--color-white);
+    align-self: flex-end;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0.3rem solid var(--color-success-2);
+}
+
+.infoContainer {
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.clientName {
+    font-size: var(--font-size-normal);
+    text-align: left;
+}
+
+.workerName {
+    font-size: var(--font-size-small);
+    font-weight: var(--font-weight-normal);
+    letter-spacing: 0.06rem;
+    text-align: left;
+}
+
+.subTitle {
+    text-align: left;
+    margin-top: 1.5rem;
+    font-size: var(--font-size-medium   );
+}
+
+.list {
+    margin-left: 2rem;
+    margin-top: .6rem;
+    text-align: left;
+    font-size: var(--font-size-normal);
+    word-spacing: .2rem;
+}
+
+.progress {
+    color: var(--color-primary);
+}

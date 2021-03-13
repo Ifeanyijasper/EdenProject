@@ -10,7 +10,8 @@ import {
     IoBriefcase, 
     IoPower,
     IoEllipsisHorizontal,
-    IoCreate
+    IoCreate,
+    IoCash
 } from "react-icons/io5";
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -37,6 +38,7 @@ const SideNav = (props) => {
                         <button className={styles.showButton} onClick={() => setShowLinks(!showLinks)}><IoEllipsisHorizontal /></button>
                         <div className={[styles.showList, showLinks ? styles.showOverflow : styles.hideOverflow].join(' ')}>
                             <li className={styles.linksItem} onClick={() => setShowLinks(false)}><NavLink className={styles.linksLink} activeClassName={styles.linksActive} to='/dashboard/finances'><IoWallet className={styles.icons} />Finances</NavLink></li>
+                            <li className={styles.linksItem} onClick={() => setShowLinks(false)}><NavLink className={styles.linksLink} activeClassName={styles.linksActive} to='/dashboard/checkout'><IoCash className={styles.icons} />Checkouts</NavLink></li>    
                             <li className={styles.linksItem} onClick={() => setShowLinks(false)}><NavLink className={styles.linksLink} activeClassName={styles.linksActive} to='/dashboard/services'><IoBody className={styles.icons} />Services</NavLink></li>
                             <li className={styles.linksItem} onClick={() => setShowLinks(false)}><NavLink className={styles.linksLink} activeClassName={styles.linksActive} to='/dashboard/products'><IoBriefcase className={styles.icons} />Products</NavLink></li>    
                             <li className={styles.linksItem} onClick={() => setShowLinks(false)}><NavLink className={styles.linksLink} activeClassName={styles.linksActive} to='/dashboard/profile'><IoCreate className={styles.icons} />Profile</NavLink></li>    

@@ -6,6 +6,8 @@ import { bindActionCreators } from 'redux';
 import extractInitials from '../../utils/extractIni';
 import styles from './ItemCard.module.css';
 import {setAddToCart, setSubFromCart} from '../../redux/Actions/Purchase.actions';
+import { BASE_URL } from '../../utils/globalVariable';
+import { IMG_URL } from '../../utils/imageVariable';
 
 
 const ItemCard = (props) => {
@@ -42,7 +44,7 @@ const ItemCard = (props) => {
             <div className={styles.imageContainter}>
                 {
                     item.img ? 
-                    <img src={item.img} alt={item.name} className={styles.image} /> :
+                    <img src={`${IMG_URL}${item.img}`} alt={item.name} className={styles.image} /> :
                     <h3 className={styles.name}>{extractInitials(item.name)}</h3>
                 }
                 <div className={styles.itemInfo}>

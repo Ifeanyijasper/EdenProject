@@ -1,32 +1,43 @@
 .showNotification {
     position: absolute;
-    transform: translateY(-27rem);
+    /* transform: translateY(-27rem); */
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     background-color: var(--color-white);
+    z-index: 10;
     padding: 1rem;
     width: 40rem;
     border: 0.2rem solid var(--color-primary);
     border-radius: var(--border-radius-medium);
     text-align: center;
-    transition: transform ease-in-out 0.5s;
+
+    transition: all ease-in-out 0.5s;
     /* backdrop-filter: blur; */
 }
 
 .hideNotification {
     position: absolute;
-    transform: translateY(-120rem);
+    /* transform: translateY(-120rem); */
+    top: -50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     background-color: var(--color-white);
     padding: 1rem;
+    z-index: 10;
     width: 40rem;
     border: 0.2rem solid var(--color-primary);
     border-radius: var(--border-radius-medium);
     text-align: center;
-    transition: transform ease-in-out 0.5s;
+
+    transition: all ease-in-out 0.5s;
 }
 
 .errorTitle {
     font-size: var(--font-size-medium);
     text-decoration-line: underline;
     padding-bottom: 1rem;
+    color: var(--color-primary);
 
 }
 
@@ -34,4 +45,5 @@
     font-size: var(--font-size-normal);
     font-weight: var(--font-weight-normal);
     letter-spacing: 0.07rem;
+    color: var(--color-primary);
 }

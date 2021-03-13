@@ -68,7 +68,7 @@ const ProductList = (props) => {
                     <h2 className={styles.productTitle}>Top 6 Products</h2>
                     <hr className={styles.horizontalLine} />
                     <div className={styles.productContainer}>
-                        {isLoading ? (<Activity2 />) : products.map((product, index) => ((Math.floor(Number(product.discount)) < 10 && index < 7)&&
+                        {isLoading ? (<Activity2 />) : products.map((product, index) => ((Math.floor(Number(product.discount)) < 10 && index < 6)&&
                         <ItemCard item={product} onClick={() => showDetails(product)} key={product.id} />))}
                     </div>
                 </>
