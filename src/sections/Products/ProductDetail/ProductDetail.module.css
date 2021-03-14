@@ -41,6 +41,25 @@
     border: 0.3rem solid var(--color-primary)
 }
 
+@media only screen and (max-width: 56.25em) {
+    .clientImage {
+        border-width: 0;
+        border-radius: var(--border-radius-small);
+        width: 80%;
+        height: 40rem;
+        margin: 0 0 1.5rem 0;
+    }
+}
+
+@media only screen and (max-width: 37.5em) {
+    .clientImage {
+        border-width: 0;
+        border-radius: var(--border-radius-small);
+        width: 100%;
+        height: 30rem;
+    }
+}
+
 .productIni {
     height: 18rem;
     width: 18rem;

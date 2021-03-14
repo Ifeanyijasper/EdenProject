@@ -11,7 +11,7 @@ const AddService = (props) => {
     const [name, setName] = useState('');
     const [about, setAbout] = useState('');
     const [discount, setDiscount] = useState('');
-    const [image, setImage] = useState('');
+    const [image, setImage] = useState(null);
     const [priceError, setPriceError] = useState(false);
     const [nameError, setNameError] = useState(false);
     const [aboutError, setAboutError] = useState(false);
@@ -35,11 +35,6 @@ const AddService = (props) => {
           setPriceError(true);
         }
 
-        if(discount.length < 1) {
-          hasError = true;
-          setDiscountError(true);
-        }
-
         if(about.length < 10) {
           hasError = true;
           setAboutError(true);
@@ -50,19 +45,18 @@ const AddService = (props) => {
             return false;
         }
 
-         const body =  {
-          name,
-          price,
-          discount: discount || 0,
-          description: about
+        const formData = new FormData();
+        formData.append('name', name);
+        formData.append('price', price);
+        formData.append('discount', discount || 0);
+        formData.append('description', about);
+        if (image) {
+          formData.append('img', image[0]);
         }
 
         fetch(`${BASE_URL}/service/`, {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(body),
+          body: formData,
         })
         .then(res => {
           const response = res.json();
@@ -84,6 +78,7 @@ const AddService = (props) => {
           setName('');
           setDiscount('');
           setAbout('');
+          setImage(null);
         })
         .catch(err => {
           setIsLoading(false);
@@ -126,14 +121,14 @@ const AddService = (props) => {
                   setValue={(event) => setPrice(event.target.value)}
                   error={priceError}
                   setError={() => setPriceError} />
-                {/* <Input 
+                <Input 
                   label="Image"
                   secureText={false}
                   type="file"
                   // value={image}
                   setValue={(event) => setImage(event.target.files)}
                   error={imageError}
-                  setError={() => setImageError} /> */}
+                  setError={() => setImageError} />
                 <TextArea
                 placeholder="Write about the product you are adding" 
                 label="About"

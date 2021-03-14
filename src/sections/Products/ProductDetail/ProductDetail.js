@@ -9,6 +9,7 @@ import extractInitials from '../../../utils/extractIni';
 import { BASE_URL } from '../../../utils/globalVariable';
 import styles from './ProductDetail.module.css';
 import {setRefresh} from '../../../redux/Actions/Refresh.actions';
+import { IMG_URL } from '../../../utils/imageVariable';
 
 const ProductDetail = (props) => {
     const {
@@ -42,7 +43,7 @@ const authenticate = (id) => {
             <div className={styles.imgsContainer}>
                 {
                     detail.img ?
-                    <img src={detail.img} alt="Name" className={styles.clientImage} /> :
+                    <img src={`${IMG_URL}${detail.img}`} alt="Name" className={styles.clientImage} /> :
                     <h3 className={styles.productIni}>{extractInitials(detail.name)}</h3>
                 }
             </div>

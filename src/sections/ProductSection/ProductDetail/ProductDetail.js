@@ -2,6 +2,7 @@ import React from 'react';
 import { IoClose } from 'react-icons/io5';
 import { Button } from '../../../components';
 import extractInitials from '../../../utils/extractIni';
+import { IMG_URL } from '../../../utils/imageVariable';
 
 import styles from './ProductDetail.module.css';
 
@@ -13,7 +14,7 @@ const ProductDetail = (props) => {
             <div className={styles.imgsContainer}>
                {
                     detail.img ?
-                    <img src={detail.img} alt="Name" className={styles.clientImage} /> :
+                    <img src={`${IMG_URL}${detail.img}`} alt="Name" className={styles.clientImage} /> :
                     <h3 className={styles.productIni}>{extractInitials(detail.name)}</h3>
                 }
             </div>

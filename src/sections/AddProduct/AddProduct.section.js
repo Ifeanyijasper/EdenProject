@@ -11,7 +11,7 @@ const AddProduct = (props) => {
     const [name, setName] = useState('');
     const [discount, setDiscount] = useState('');
     const [about, setAbout] = useState('');
-    const [image, setImage] = useState({});
+    const [image, setImage] = useState(null)
     const [priceError, setPriceError] = useState(false);
     const [nameError, setNameError] = useState(false);
     const [discountError, setDiscountError] = useState(false);
@@ -35,20 +35,9 @@ const AddProduct = (props) => {
           setPriceError(true);
         }
 
-        if(discount.length < 1) {
-          hasError = true;
-          setDiscountError(true);
-        }
-
         if(about.length < 10) {
           hasError = true;
           setAboutError(true);
-        }
-
-        if (!image) {
-            hasError = true;
-            console.log(image, 'this is the file')
-            setImageError(true);
         }
 
         if (hasError) {
@@ -61,7 +50,9 @@ const AddProduct = (props) => {
         formData.append('price', price);
         formData.append('discount', discount || 0);
         formData.append('description', about);
-        formData.append('img', image[0]);
+        if (image) {
+          formData.append('img', image[0]);
+        }
 
         fetch(`${BASE_URL}/product/`, {
           method: 'POST',
@@ -72,12 +63,26 @@ const AddProduct = (props) => {
           return response;
         })
         .then(res => {
+          console.log(res, 'res');
           setIsLoading(false);
           setNotify(true);
           setMsg({
             title: 'Successful',
             message: 'Product has been added to store.'
           })
+          // if (res.name === name) {
+          //   setNotify(true);
+          //   setMsg({
+          //     title: 'Successful',
+          //     message: 'Product has been added to store.'
+          //   })
+          // } else {
+          //   setNotify(true);
+          //   setMsg({
+          //     title: 'UnSuccessful',
+          //     message: 'Product was not added to store. Try again later.'
+          //   })
+          // }
         })
         .then(res => {
           setTimeout(() => {   
@@ -87,6 +92,7 @@ const AddProduct = (props) => {
           setName('');
           setDiscount('');
           setAbout('');
+          setImage(null);
         })
         .catch(err => {
           setIsLoading(false);
@@ -133,7 +139,7 @@ const AddProduct = (props) => {
                   error={priceError}
                   setError={() => setPriceError} 
                 />
-                {/* <Input 
+                <Input 
                   placeholder="5"
                   type="file"
                   label="Image"
@@ -142,7 +148,7 @@ const AddProduct = (props) => {
                   setValue={(event) => setImage(event.target.files)}
                   error={imageError}
                   setError={() => setImageError} 
-                /> */}
+                />
                 <TextArea
                   placeholder="Write about the product you are adding" 
                   label="About"

@@ -25,9 +25,9 @@ const EditService = (props) => {
 
     const [price, setPrice] = useState('');
     const [name, setName] = useState('');
-    const [discount, setDiscount] = useState('');
+    const [discount, setDiscount] = useState('0');
     const [about, setAbout] = useState('');
-    const [image, setImage] = useState('');
+    const [image, setImage] = useState(null);
     const [priceError, setPriceError] = useState(false);
     const [nameError, setNameError] = useState(false);
     const [discountError, setDiscountError] = useState(false);
@@ -42,6 +42,7 @@ const EditService = (props) => {
       setDiscount(detail.discount)
       setPrice(detail.price);
       setAbout(detail.description);
+      setImage(detail.img);
     }, [detail]);
 
     useEffect(() => {
@@ -49,41 +50,20 @@ const EditService = (props) => {
     }, [isOpen]);
 
     const authenticate = () => {
-      let hasError;
         setIsLoading(true);
 
-        if(name.length < 6) {
-            setNameError(true);
-            hasError = true;
-        }
-
-        if (price.length < 3) {
-          hasError = true;
-          setPriceError(true);
-        }
-
-        if(discount.length < 1) {
-          hasError = true;
-          setDiscountError(true);
-        }
-
-        if (hasError) {
-            setIsLoading(false);
-            return false;
-        }
-
-        const body = {
-          name,
-          price,
-          discount,
+        const formData = new FormData();
+        formData.append('name', name);
+        formData.append('price', price);
+        formData.append('discount', discount || 0);
+        formData.append('description', about);
+        if (image) {
+          formData.append('img', image[0]);
         }
 
         fetch(`${BASE_URL}/service/${detail.id}/`, {
           method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(body),
+          body: formData,
         })
         .then(res => {
           setIsLoading(false);
@@ -141,14 +121,14 @@ const EditService = (props) => {
                 setValue={(event) => setPrice(event.target.value)}
                 error={priceError}
                 setError={() => setPriceError} />
-                {/* <Input 
+                <Input 
                   label="Image"
                   secureText={false}
                   type="file"
                   // value={image}
                   setValue={(event) => setImage(event.target.files)}
                   error={imageError}
-                  setError={() => setImageError} /> */}
+                  setError={() => setImageError} />
                 <TextArea
                 placeholder="Write about the product you are adding" 
                 label="About"
