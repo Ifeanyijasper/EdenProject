@@ -201,7 +201,7 @@ const NewPurchase = (props) => {
           let data = fetchMyBonus(friendId);
           data
             .then(res => {
-              let myBonus = Number(res[0]) + (total * 0.15);
+              let myBonus = Number(res[2]) + (total * 0.15);
               updateReferBonus(friendId, myBonus);
             })
             .then(res => {
