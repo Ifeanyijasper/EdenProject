@@ -101,7 +101,7 @@ const Dashboard = (props) => {
                 <h2 className={styles.tempo}>This month</h2>
             </div>
             <div className={styles.cardsContainer}>
-                {isLoading ? (<Activity2 />) : workers.map((worker, index) => (
+                {isLoading ? (<Activity2 />) : workers.map((worker, index) => ((index < 8) &&
                     <AdminCard worker={worker} key={index} />
                 ))}
             </div>
@@ -110,9 +110,9 @@ const Dashboard = (props) => {
                 <h2 className={styles.tempo}>This month</h2>
             </div>
             <div className={styles.cardsContainer}>
-                {isLoading ? (<Activity2 />) : clients.map((client, index) => 
+                {isLoading ? (<Activity2 />) : clients.map((client, index) => ((index < 8) &&
                     <ClientCard client={client} key={index} setDetail={() => nothing()} setIsDetail={() => nothing()} />
-                )}
+                ))}
             </div>
         </section>
     )
