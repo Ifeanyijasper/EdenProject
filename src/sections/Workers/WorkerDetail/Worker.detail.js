@@ -51,7 +51,7 @@ const WorkerDetail = (props) => {
                     <h3 className={styles.workerIni}>{detail.fullname ? extractInitials(detail.fullname) : extractInitials(detail.username)}</h3>
                 }
                 <h2 className={styles.workerContact}>{detail.fullname || detail.username} | {detail.phone}</h2>
-                <h2 className={styles.workerContact}>Served: {detail.numberOfClients}</h2>
+                <h2 className={styles.workerContact}>Served: {detail.served}</h2>
             </div>
             <div className={styles.detailActions}>
                 <Button title="Delete" type="danger" onClick={() => authenticate(detail.id)} />
