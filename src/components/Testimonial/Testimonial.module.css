@@ -1,0 +1,122 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 0 1.5rem;
+    margin-bottom: 3rem;
+    border-bottom: 0.2rem solid var(--color-primary);
+
+    width: 40rem;
+    height: 16rem;
+    /* box-shadow: var(--box-shadow-light); */
+}
+
+@media only screen and (max-width: 56.25em) {
+    .container {
+        width: 36rem;
+    }
+}
+
+@media only screen and (max-width: 37.5em) {
+    .container {
+        width: 47rem;
+        margin: 2rem 1.5rem;
+    }
+}
+
+.userInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.imageContainer {
+    height: 7.5rem;
+    width: 7.5rem;
+
+    border-radius: var(--border-radius-small);
+}
+
+@media only screen and (max-width: 56.25em) {
+    .imageContainer {
+        height: 10rem;
+        width: 10rem;
+    }
+}
+
+.userIni {
+    height: 12rem;
+    width: 12rem;
+    font-size: 5rem;
+    letter-spacing: 0.4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--color-primary);
+    border: 0.2rem solid var(--color-primary);
+    border-radius: var(--border-radius-small);
+}
+
+.userName {
+    color: var(--color-primary);
+    margin: 0.3rem 0;
+    font-weight: var(--font-weight-medium);
+    font-size: 1.3rem;
+}
+
+@media only screen and (max-width: 56.25em) {
+    .userName {
+        font-size: 1.5rem;
+        padding: 0.8rem 0;
+    }
+}
+
+.testimonyContainer {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    /* border: 0.2rem solid red; */
+    /* align-content: center; */
+    /* align-items: ; */
+}
+
+.testimony {
+    color: var(--color-primary);
+    font-size: var(--font-size-normal);
+    text-align: justify;
+    padding: 0.7rem 1rem;
+}
+
+@media only screen and (max-width: 56.25em) {
+    .testimony {
+        padding: 0;
+        padding-left: 1rem;
+        font-size: 1.5rem;
+    }
+}
+
+@media only screen and (max-width: 37.5em) {
+    .testimony {
+        width: 100%;
+        max-height: 10rem;
+        overflow-y: hidden;
+        font-size: 1.6rem;
+    }
+}
+
+.testimonyDate {
+    text-align: right;
+    color: var(--color-grey-dark-1);
+    margin-top: auto;
+    font-size: var(--font-size-small);
+}
+
+@media only screen and (max-width: 37.5em) {
+    .testimonyDate {
+        font-size: 1.4rem;
+    }
+}

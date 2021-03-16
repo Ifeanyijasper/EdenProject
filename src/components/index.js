@@ -17,6 +17,7 @@ import Notification from './Notification/Notification.component';
 import Activity2 from './ActivityIndicatorLarger/ActivityIndicator.component';
 import Notify from './Notify/Notification.component';
 import TextArea from './TextArea/TextArea.component';
+import Testimonial from './Testimonial/Testimonial.component';
 
 export {
     AdminCard, 
@@ -38,4 +39,5 @@ export {
     Activity2,
     Notify,
     TextArea,
+    Testimonial,
 };

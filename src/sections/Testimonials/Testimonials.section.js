@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { Search } from '../../components';
+import { Activity2, Search, Testimonial } from '../../components';
 import { BASE_URL } from '../../utils/globalVariable';
 import {setData} from '../../redux/Actions/Data.actions';
 import styles from './Testimonials.module.css';
@@ -13,12 +13,14 @@ const Testimonials = (props) => {
 
     const [filter, setFilter] = useState('');
     const [text, setText] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
     const [testimonials, setTestimonials] = useState([]);
     const [filters] = useState([
         'Client Name',
     ]);
 
     useEffect(() => {
+        setIsLoading(true);
         fetch(`${BASE_URL}/testimonial/`)
             .then(res => {
                 const response = res.json();
@@ -26,10 +28,11 @@ const Testimonials = (props) => {
             })
             .then(res => {
                 setTestimonials(res);
+                setIsLoading(false);
                 props.setData(res);
             })
             .catch(err => {
-                // setIsLoading()
+                setIsLoading(false);
                 console.log(true);
             })
     }, []);
@@ -42,7 +45,7 @@ const Testimonials = (props) => {
         <section className={styles.testimonial}>
             <Search placeholder="Search" newButton={false} title={'Service'} filters={filters} filter={filter} setFilter={setFilter} text={text} setText={setText} />
             <div className={styles.testimonialContainer}>
-                hello
+                {isLoading ? <Activity2 /> : testimonials.map((testimonial, index) => <Testimonial testimonial={testimonial} />)}
             </div>
         </section>
     )

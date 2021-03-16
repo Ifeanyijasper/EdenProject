@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { Activity2, Button, ItemCard, TestimonialCard } from '../../components';
-import { beauty, eden, logo, img_1, img_2, img_3, img_4, img_5, img_6, service } from '../../res/images';
+import { beauty, eden, logo, service } from '../../res/images';
 import {setWelcome} from '../../redux/Actions/Welcome.actions';
 import styles from './Home.module.css';
 import { NavLink } from 'react-router-dom';
@@ -108,7 +108,7 @@ const HomeSection = (props) => {
                 <div className={styles.testiCard}>
                     {isLoading ? (<Activity2 />) : testimonies.map((testimony, index) => <TestimonialCard testimony={testimony} />)}
                 </div>
-                <Button title="READ MORE" />
+                <Button title="READ MORE" onClick={() => props.history.push({pathname: '/testimonials'})} />
             </div>
             <h1 className={styles.title} id="products">Products</h1>
             <h3 className={styles.subTitle}>At Company we offer the best of</h3>
