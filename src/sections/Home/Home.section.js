@@ -104,6 +104,8 @@ const HomeSection = (props) => {
                 <ItemCard item={service} onClick={() => active()} key={service.id} />
                 ))}
             </div>
+            <h1 className={styles.title} id="services">Testimonials</h1>
+            <h3 className={styles.subTitle}>What our Clients are saying...</h3>
             <div className={styles.testiCardCon}>
                 <div className={styles.testiCard}>
                     {isLoading ? (<Activity2 />) : testimonies.map((testimony, index) => <TestimonialCard testimony={testimony} />)}
