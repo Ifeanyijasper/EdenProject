@@ -74,7 +74,7 @@ class TestimonialViewSet(viewsets.ModelViewSet):
     """
     queryset = Testimonial.objects.all()
     serializer_class = TestimonialSerializer
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (AllowAny,)
 
     def list(self, request, *args, **kwargs):
         testimonial = Testimonial.objects.all()
