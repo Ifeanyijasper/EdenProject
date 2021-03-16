@@ -54,7 +54,7 @@ const HomeSection = (props) => {
                 return response;
             })
             .then(res => {
-                console.log(res);
+                console.log(res, 'I just responded');
                 setTestimonies(res);
                 setIsLoading(false);
             })
@@ -115,12 +115,6 @@ const HomeSection = (props) => {
             <div className={styles.container} style={{backgroundImage: "linear-gradient(to right, #00c8ff50, #92fe9d79), url(" + beauty + ")"}}>
                 {isLoading ? (<Activity2 />) : products.map((product, index) => ((Math.floor(Number(product.discount)) < 10 && index < 6)&&
                 <ItemCard item={product} onClick={() => active()} key={product.id} />))}
-            </div>
-            <div className={styles.testiCardCon}>
-                <div className={styles.testiCard}>
-                    {isLoading ? (<Activity2 />) : testimonies.map((testimony, index) => <TestimonialCard testimony={testimony} />)}
-                </div>
-                <Button title="READ MORE" />
             </div>
             <Modal 
                 isOpen={!welcome}

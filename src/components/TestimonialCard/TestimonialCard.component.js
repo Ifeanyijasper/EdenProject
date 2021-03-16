@@ -1,5 +1,6 @@
 import React from 'react';
 import { img_2 } from '../../res/images';
+import extractInitials from '../../utils/extractIni';
 
 import styles from './TestimonialCard.module.css';
 
@@ -8,12 +9,11 @@ const TestimonialCard = (props) => {
     return (
         <div className={styles.container}>
             <div className={styles.userInfo}>
-                <img src={testimony.img} className={styles.imageContainer} alt="User image" />
-                <p className={styles.userName}>{testimony.name.substr(0, 10)}</p>
+                <h2 className={styles.userIni}>{extractInitials(testimony.client_name)}</h2>
+                <p className={styles.userName}>{testimony.client_name.substr(0, 10)}</p>
             </div>
             <p className={styles.testimony}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                sed do eiusmod tempor incididunt ut
+                {testimony.testimonial.substr(0, 130)}
             </p>
         </div>
     )

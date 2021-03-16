@@ -56,7 +56,7 @@ const ProductList = (props) => {
     return (
         <div className={isDetail ? styles.listContainerDetail : styles.listContainer}>
             <h1 className={styles.Title}>Products</h1>
-            <Search placeholder="Search by: " isOpen={isOpenAdd} setIsOpen={setIsOpenAdd} newButton={false} title={'Product'} filters={filters} filter={filter} setFilter={setFilter} text={text} setText={setText} />
+            <Search placeholder="Search" isOpen={isOpenAdd} setIsOpen={setIsOpenAdd} newButton={false} title={'Product'} filters={filters} filter={filter} setFilter={setFilter} text={text} setText={setText} />
             { text.length <= 0 &&   <>
                     <h2 className={styles.productTitle}>Top 6 Products</h2>
                     <hr className={styles.horizontalLine} />
