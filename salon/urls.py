@@ -41,6 +41,7 @@ urlpatterns = [
     path('api/change-password/', views.ChangePasswordView.as_view(), name='change-password'),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     re_path('.*', TemplateView.as_view(template_name='index.html'))
-] += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += [re_path('.*', TemplateView.as_view(template_name='index.html'))]
