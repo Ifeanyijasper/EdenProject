@@ -29,6 +29,8 @@ import EditProduct from './EditProduct/EditProduct.section';
 import Profile from './Profile/Profile.section';
 import EditPassword from './EditPassword/EditPassword.section';
 import Checkout from './Checkout/Checkout.section';
+import ClientCheckout from './ClientCheckout/Checkout.section';
+import AddTestimonial from './AddTestimonial/AddTestimonial.section';
 
 export {
     SideNav, 
@@ -62,4 +64,6 @@ export {
     Profile,
     EditPassword,
     Checkout,
+    ClientCheckout,
+    AddTestimonial,
 }

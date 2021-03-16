@@ -4,7 +4,7 @@
     border-top-right-radius: var(--border-radius-medium);
     border-bottom-right-radius: var(--border-radius-medium);
     padding: 1.5rem 1.02rem;
-    color: var(--color-grey-dark-2);
+    color: var(--color-primary);
 }
 
 .clientName {
@@ -49,6 +49,7 @@
 
 .navItem {
     list-style: none;
+    /* min-width: 10rem; */
 }
 
 .navLink,
@@ -64,7 +65,7 @@
     align-items: center;
     margin: 0.2rem 0.8rem;
     padding: 0.8rem 0;
-    min-width: 7.8rem;
+    min-width: 10rem;
     color: var(--color-grey-dark-3);
     border-bottom: 0.3rem solid transparent;
 
@@ -88,10 +89,27 @@
     justify-content: space-between;
 }
 
-@media only screen and (min-width: 56.25em) {
-    .clientButton {
-        display: none;
-    }
+.clientButtons {
+    display: flex;
+    justify-content: space-around;
+}
+
+.clientButton {
+    margin: 0 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    outline: none;
+    border: 0.25rem solid transparent;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    min-width: 7rem;
+    padding: 0.8rem;
+    border-radius: var(--border-radius-small);
+    transition: all ease-in-out 0.4s;
+
+    cursor: pointer;
 }
 
 @media only screen and (max-width: 56.25em) {
