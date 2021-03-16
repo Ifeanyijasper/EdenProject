@@ -28,7 +28,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '(zquwuy*x8csw*f@yn(ogfcj^natc@ge(sagxd8q1(nyl-syc@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['https://inspireafrica-edenbeauty.herokuapp.com']
 
@@ -163,5 +163,6 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'build/static'),
 )
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 django_heroku.settings(locals())
