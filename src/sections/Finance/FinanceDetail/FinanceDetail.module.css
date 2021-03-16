@@ -19,6 +19,11 @@
     display: none;
 }
 
+.detailActions {
+    display: flex;
+    justify-content: center;
+}
+
 .imgsContainer {
     display: flex;
     justify-content: center;

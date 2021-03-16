@@ -1,13 +1,35 @@
 import React from "react";
 import { IoClose } from "react-icons/io5";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
-import { Button, MiniProgressBar } from "../../../components";
+import { Button } from "../../../components";
 import { img_1, img_3 } from "../../../res/images";
 import extractInitials from "../../../utils/extractIni";
+import { BASE_URL } from "../../../utils/globalVariable";
+import {setRefresh} from '../../../redux/Actions/Refresh.actions';
 import styles from './FinanceDetail.module.css';
 
 const FinanceDetail = (props) => {
-    const {isDetail, setIsDetail, detail} = props;
+    const {isDetail, setIsDetail, detail, user, password} = props;
+
+    const authenticate = (id) => {
+        fetch(`${BASE_URL}/purchase/${id}/`, {
+            method: 'DELETE',
+            headers: {
+                Authorization: 'Basic ' + Buffer.from(user.username + ':' + password).toString('base64'),
+            }
+        })
+        .then(res => {
+            props.setRefresh(true);
+            setIsDetail(false);
+            console.log(res);
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    }
+
     return (
         <div className={isDetail ? styles.detailContainer : styles.detailHide}>
             <div className={styles.imgsContainer}>
@@ -37,9 +59,23 @@ const FinanceDetail = (props) => {
                 </ol>
                 <h2 className={styles.subTitle}>Total = {detail.total} XAF</h2>
             </div>
-            <Button title={"Close"} onClick={() => setIsDetail(false)} />
+            <div className={styles.detailActions}>
+                {user.is_superuser && <Button title="Delete" type="danger" onClick={() => authenticate(detail.id)} />}
+                <Button title={"Close"} onClick={() => setIsDetail(false)} />
+            </div>
         </div>
     )
 }
 
-export default FinanceDetail;
+const mapStateToProps = ({auth}) => {
+    return {
+        user: auth.user,
+        password: auth.password,
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({setRefresh}, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(FinanceDetail);

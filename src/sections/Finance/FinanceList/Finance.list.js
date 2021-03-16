@@ -17,6 +17,7 @@ const FinanceList = (props) => {
         password, 
         setDetail,
         data,
+        refresh,
     } = props;
     const [isOpen, setIsOpen] = useState(false);
     const [text, setText] = useState('');
@@ -56,7 +57,7 @@ const FinanceList = (props) => {
                 setIsLoading(false);
             })
         
-    }, [isOpen]);
+    }, [isOpen, refresh]);
 
     const showDetail = (purchase) => {
         setIsDetail(!isDetail);
@@ -105,11 +106,12 @@ const FinanceList = (props) => {
     )
 }
 
-const mapStateToProps = ({auth, data}) => {
+const mapStateToProps = ({auth, data, refresh}) => {
     return {
         username: auth.username,
         password: auth.password,
         data: data.data,
+        refresh: refresh.refresh,
     }
 }
 
