@@ -41,6 +41,9 @@ const Testimonials = (props) => {
     return (
         <section className={styles.testimonial}>
             <Search placeholder="Search" newButton={false} title={'Service'} filters={filters} filter={filter} setFilter={setFilter} text={text} setText={setText} />
+            <div className={styles.testimonialContainer}>
+                hello
+            </div>
         </section>
     )
 }
