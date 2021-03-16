@@ -16,6 +16,7 @@ const HomeSection = (props) => {
     const [isLoading, setIsLoading] = useState(false);
     const [products, setProducts] = useState([]);
     const [services, setServices] = useState([]);
+    const [testimonies, setTestimonies] = useState([]);
 
     useEffect(() => {
         if(!welcome) {
@@ -38,6 +39,23 @@ const HomeSection = (props) => {
             })
             .then(res => {
                 setProducts(res);
+                setIsLoading(false);
+            })
+            .catch(err => {
+                setIsLoading(false);
+            });
+    }, [])
+
+    useEffect(() => {
+        setIsLoading(true);
+        fetch(`${BASE_URL}/testimonial/`)
+            .then(res => {
+                const response = res.json();
+                return response;
+            })
+            .then(res => {
+                console.log(res);
+                setTestimonies(res);
                 setIsLoading(false);
             })
             .catch(err => {
@@ -88,7 +106,7 @@ const HomeSection = (props) => {
             </div>
             <div className={styles.testiCardCon}>
                 <div className={styles.testiCard}>
-                    {testimonies.map((testimony, index) => <TestimonialCard testimony={testimony} />)}
+                    {isLoading ? (<Activity2 />) : testimonies.map((testimony, index) => <TestimonialCard testimony={testimony} />)}
                 </div>
                 <Button title="READ MORE" />
             </div>
@@ -100,7 +118,7 @@ const HomeSection = (props) => {
             </div>
             <div className={styles.testiCardCon}>
                 <div className={styles.testiCard}>
-                    {testimonies.map((testimony, index) => <TestimonialCard testimony={testimony} />)}
+                    {isLoading ? (<Activity2 />) : testimonies.map((testimony, index) => <TestimonialCard testimony={testimony} />)}
                 </div>
                 <Button title="READ MORE" />
             </div>
@@ -132,12 +150,3 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeSection);
-
-const testimonies = [
-    {id: 1, name: 'James Arthur', discount: 0, img: img_5},
-    {id: 2, name: 'Jane Price', discount: 0, img: img_2},
-    {id: 3, name: 'Michael Angelo', discount: 0, img: img_1},
-    {id: 4, name: 'Jessica Arnold', discount: 0, img: img_3},
-    {id: 5, name: 'Jume Brice', discount: 0, img: img_6},
-    {id: 6, name: 'Njah Larissa', discount: 0, img: img_4},
-]

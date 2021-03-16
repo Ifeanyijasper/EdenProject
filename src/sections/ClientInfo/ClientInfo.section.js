@@ -1,10 +1,10 @@
 import React,{useState} from 'react';
-import { IoBody, IoBriefcase, IoPencil, IoPeople, IoStatsChart } from 'react-icons/io5';
+import {  IoCash, IoPeople, IoStatsChart } from 'react-icons/io5';
 import { connect } from 'react-redux';
 import { NavLink, Route } from 'react-router-dom';
 
-import { ClientFinance, Products, Referal, Services, TimeLine, Profile } from '..';
-import { RankRate, Search } from '../../components';
+import { ClientFinance, Products, Referal, Services, Profile, ClientCheckout, AddTestimonial } from '..';
+import { RankRate } from '../../components';
 import styles from './ClientInfo.module.css';
 
 const ClientInfo = (props) => {
@@ -17,13 +17,17 @@ const ClientInfo = (props) => {
         'Name',
         'Worker'
     ])
-    const [showDets, setShowDets] = useState(true);
+    const [showDets, setShowDets] = useState(false);
+    const [add, setAdd] = useState(false);
 
     return (
         <div className={styles.clientInfo}>
             <div className={styles.clientContainer}>
                 <h1 className={styles.clientName}>{user.fullname || user.username}</h1>
-                <button className={styles.clientButton} onClick={() => setShowDets(!showDets)}>{showDets ? 'Hide Bonuses' : 'Show Bonuses'}</button>
+                <div className={styles.clientButtons}>
+                    <button className={styles.clientButton} onClick={() => setShowDets(!showDets)}>{showDets ? 'Hide Bonuses' : 'Show Bonuses'}</button>
+                    <button className={styles.clientButton} onClick={() => setAdd(!add)}>Add Testimonial</button>
+                </div>
             </div>
             {/* <p className={styles.lastVisit}>Last Visit: Mon, 22<sup>nd</sup> Dec, 2020</p> */}
             {/* <p className={styles.lastVisit}>Last Visit: 22/12/2020</p> */}
@@ -43,6 +47,7 @@ const ClientInfo = (props) => {
                 <ul className={styles.navList}>
                     <li className={styles.navItem}><NavLink to="/client" exact className={styles.navLink} activeClassName={styles.navActive}><IoStatsChart /> TimeLine</NavLink></li>
                     <li className={styles.navItem}><NavLink to="/client/referrals" className={styles.navLink} activeClassName={styles.navActive}><IoPeople /> Referred</NavLink></li>
+                    <li className={styles.navItem}><NavLink to="/client/checkout" className={styles.navLink} activeClassName={styles.navActive}><IoCash /> Checkouts</NavLink></li>
                     <li className={styles.navItem}><NavLink to="/client/profile" className={styles.navLink} activeClassName={styles.navActive}><IoPeople /> Profile</NavLink></li>
                 </ul>
                 <hr className={styles.navLine}/>
@@ -50,8 +55,10 @@ const ClientInfo = (props) => {
             <Route path="/client" exact component={ClientFinance} />
             <Route path="/client/referrals" component={Referal} />
             <Route path="/client/profile" component={Profile} />
+            <Route path="/client/checkout" component={ClientCheckout} />
             <Route path="/client/services" component={Services} />
             <Route path="/client/products" component={Products} />
+            <AddTestimonial isOpen={add} setIsOpen={setAdd} />
         </div>
     )
 }

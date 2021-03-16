@@ -1,0 +1,4 @@
+.checkoutSection {
+    display: flex;
+    flex-direction: row;
+}
