@@ -20,14 +20,13 @@
     font-size: var(--font-size-extra-large);
     color: var(--color-grey-dark-2);
     letter-spacing: 0.1rem;
+    margin-top: 2rem;
 }
 
 .tableContainer {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin-top: 4rem;
-    /* padding-right: 3rem; */
 }
 
 .table {
@@ -84,4 +83,32 @@
     .tableButton {
         font-size: 1.4rem;
     }
+}
+
+.actCenter {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 7rem;
+}
+
+.excelButton {
+    outline: none;
+    border: none;
+    font-size: var(--font-size-normal);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem 0;
+    min-width: 8rem;
+    padding: 1rem;
+    background-color: var(--color-primary);
+    border-radius: var(--border-radius-small);
+    color: var(--color-white);
+
+    cursor: pointer;
+}
+
+.icon {
+    margin-right: 0.6rem;
 }

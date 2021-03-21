@@ -13,4 +13,5 @@ export const CLEAR_POINTS = 'clear_points';
 export const SET_USERNAME = 'set_username';
 export const SET_PASSWORD = 'set_password';
 export const RESET_USER = 'reset_user';
+export const SET_OBJDATA = 'set_objdata';
 

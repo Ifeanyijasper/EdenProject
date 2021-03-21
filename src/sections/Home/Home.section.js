@@ -54,7 +54,6 @@ const HomeSection = (props) => {
                 return response;
             })
             .then(res => {
-                console.log(res, 'I just responded');
                 setTestimonies(res);
                 setIsLoading(false);
             })
