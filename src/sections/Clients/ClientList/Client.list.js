@@ -38,6 +38,7 @@ const ClientList = (props) => {
     const [purchases, setPurchases] = useState([])
     const [filters] = useState([
         'Username',
+        'Fullname'
     ]);
     const [clients, setClients] = useState([]);
 

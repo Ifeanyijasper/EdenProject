@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "../../../components";
 import { img_1, img_3 } from "../../../res/images";
+import { DateString } from "../../../utils/date";
 import extractInitials from "../../../utils/extractIni";
 
 import styles from './FinanceDetail.module.css';
@@ -22,7 +23,7 @@ const FinanceDetail = (props) => {
             <div className={styles.infoContainer}>
                 <h3 className={styles.clientName}>Client's Name: {detail.client}</h3>
                 <h3 className={styles.workerName}>Server's Name: {detail.worker}</h3>
-                <h3 className={styles.workerName}>Served: {new Date(detail.date).toLocaleDateString()} at {new Date(detail.date).toLocaleTimeString('en-US')}</h3>
+                <h3 className={styles.workerName}>Served: {DateString(new Date(detail.date).toLocaleDateString())} at {new Date(detail.date).toLocaleTimeString('en-US')}</h3>
                 <h2 className={styles.subTitle}>Items</h2>
                 <ol className={styles.list}>
                 {detail.item !== null && detail.item !== undefined && detail.item.map((item, index) => (

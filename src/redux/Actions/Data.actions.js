@@ -1,4 +1,4 @@
-import { SET_DATA } from '../types';
+import { SET_DATA, SET_OBJDATA } from '../types';
 
 export const setData = (data) => {
     return {
@@ -7,3 +7,9 @@ export const setData = (data) => {
     }
 };
 
+export const setObjData = (data) => {
+    return {
+        type: SET_OBJDATA,
+        payload: data,
+    }
+}
