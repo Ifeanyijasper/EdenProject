@@ -112,3 +112,7 @@
 .icon {
     margin-right: 0.6rem;
 }
+
+.items {
+    font-weight: var(--font-weight-normal);
+}

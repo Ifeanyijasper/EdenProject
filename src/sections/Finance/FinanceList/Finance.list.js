@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import { IoDownload } from "react-icons/io5";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import ReactHTMLToExcel from 'react-html-table-to-excel';
 
 import { NewPurchase } from "../..";
 import { Activity2, RouteIndicator, Search } from "../../../components";
@@ -97,11 +98,12 @@ const FinanceList = (props) => {
             <>
                 <h2 className={styles.durationTitle}>{DateString(Object.keys(purchases)[index])}</h2>
                 <div className={styles.tableContainer}>
-                    <table className={styles.table}>
+                    <table className={styles.table} id={DateString(Object.keys(purchases)[index])}>
                         <thead className={styles.tableHead}>
                             <td className={styles.tableHeadData}>Client Name</td>
                             <td className={styles.tableHeadData}>Time</td>
                             <td className={styles.tableHeadData}>Worker</td>
+                            <td className={styles.tableHeadData}>Items</td>
                             <td className={styles.tableHeadData}>Total</td>
                             <td className={styles.tableHeadData}>Details</td>
                         </thead>
@@ -110,13 +112,22 @@ const FinanceList = (props) => {
                                 <td className={styles.tableData}>{finance.client}</td>
                                 <td className={styles.tableData}>{new Date(finance.date).toLocaleTimeString('en-US')}</td>
                                 <td className={styles.tableData}>{finance.worker}</td>
+                                <td className={styles.tableData}>
+                                    {finance.item.map((item, index) => <b className={styles.items}>{item.name} &times; {item.count}</b>)}
+                                </td>
                                 <td className={styles.tableData}>{finance.total}</td>
                                 <td className={styles.tableData}><button className={styles.tableButton} onClick={() => showDetail(finance)}>Details</button></td>
                             </tr>)
                         )}
                     </table>
                 </div>
-                <button className={styles.excelButton}><IoDownload className={styles.icon} /> Download Excel</button>
+                <ReactHTMLToExcel 
+                    table={DateString(Object.keys(purchases)[index])} 
+                    filename={`${DateString(Object.keys(purchases)[index])}finances`} 
+                    sheet="Sheet"
+                    className={styles.excelButton}
+                    buttonText={"Export Excel"}
+                />
             </>)}
             <NewPurchase isOpen={isOpen} setIsOpen={setIsOpen} />
         </div>
