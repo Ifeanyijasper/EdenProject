@@ -34,7 +34,7 @@ const WorkerList = (props) => {
     const [filter, setFilter] = useState('');
     const [filters] = useState([
         'Username',
-        'Invited',
+        'Fullname',
     ])
     const [workers, setWorkers] = useState([]);
 
