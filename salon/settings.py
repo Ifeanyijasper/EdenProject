@@ -156,8 +156,8 @@ USE_TZ = True
 
 BASE_DIR     = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-STATIC_URL = '/static/'
-MEDIA_URL =  '/media/'
+STATIC_URL = '/build/static/'
+MEDIA_URL =  '/build/static/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "build/static/media")
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'build/static'),
