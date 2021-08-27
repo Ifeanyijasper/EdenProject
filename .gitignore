@@ -2,3 +2,8 @@ eden
 **/*.pyc
 node_modules/
 .vscode
+
+build/
+
+media/
+media/favicon_io

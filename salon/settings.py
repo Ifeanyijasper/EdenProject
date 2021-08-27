@@ -75,6 +75,10 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
 ]
 
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT = True
+
 CORS_ORIGIN_ALLOW_ALL =True
 
 ROOT_URLCONF = 'salon.urls'
@@ -156,12 +160,13 @@ USE_TZ = True
 
 BASE_DIR     = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-STATIC_URL = '/static/'
+STATIC_URL = '/build/static/'
 MEDIA_URL =  '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, "build/static/media")
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'build/static'),
 )
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 django_heroku.settings(locals())
