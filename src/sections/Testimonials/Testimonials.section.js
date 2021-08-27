@@ -42,7 +42,8 @@ const Testimonials = (props) => {
     }, [text])
 
     return (
-        <section className={styles.testimonial}>
+        <section className={`w-full min-h-full bg-white p-4 lg:p-6`}>
+            <h1 className={`text-gray-800 text-left text-xl lg:text-2xl pb-1`}>Testimonials</h1>
             <Search placeholder="Search" newButton={false} title={'Service'} filters={filters} filter={filter} setFilter={setFilter} text={text} setText={setText} />
             <div className={styles.testimonialContainer}>
                 {isLoading ? <Activity2 /> : testimonials.map((testimonial, index) => <Testimonial testimonial={testimonial} />)}

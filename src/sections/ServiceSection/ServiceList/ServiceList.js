@@ -9,7 +9,6 @@ import {
 } from '../../../components';
 import { BASE_URL } from '../../../utils/globalVariable';
 import search from '../../../utils/search';
-import styles from './ServiceList.module.css';
 import {setData} from '../../../redux/Actions/Data.actions';
 
 const ServiceList = (props) => {
@@ -59,23 +58,23 @@ const ServiceList = (props) => {
     }, [isOpenAdd]);
 
     return (
-        <div className={isDetail ? styles.listContainerDetail : styles.listContainer}>
-            <h1 className={styles.Title}>Services</h1>
+        <div className={`w-full min-h-full`}>
+            <h1 className={`text-gray-800 text-left text-xl lg:text-2xl pb-1`}>Services</h1>
             <Search placeholder="Search" isOpen={isOpenAdd} setIsOpen={setIsOpenAdd} newButton={false} title={'Service'} filters={filters} filter={filter} setFilter={setFilter} text={text} setText={setText} />
             { text.length <= 0 &&   <>
-                    <h2 className={styles.serviceTitle}>Top 6 Services</h2>
-                    <hr className={styles.horizontalLine} />
-                    <div className={styles.serviceContainer}>
+                    <h2 className={`text-gray-600 text-left md:text-center text-lg md:text-xl lg:text-xl pb-1 font-semibold`}>Top 6 Services</h2>
+                    <hr className={`w-4/5 mx-auto`} />
+                    <div className={`grid grid-cols-3 gap-4`}>
                         {isLoading ? (<Activity2 />) : services.map((service, index) => ((Math.floor(Number(service.discount)) < 10 && index < 6)&&
                         <ItemCard item={service} onClick={() => showDetails(service)} key={service.id} />
                         ))}
                     </div>
                 </>
             }
-            <hr className={styles.horizontalLine} />
-            <h2 className={styles.serviceTitle}>{services.length} Service{services.length !== 1 && 's'}</h2>
-            <hr className={styles.horizontalLine} />
-            <div className={styles.serviceContainer}>
+            <hr className={`w-4/5 mx-auto`} />
+            <h2 className={`text-gray-600 text-left md:text-center text-lg md:text-xl lg:text-xl pb-1 font-semibold`}>{services.length} Service{services.length !== 1 && 's'}</h2>
+            <hr className={`w-4/5 mx-auto`} />
+            <div className={`grid grid-cols-3 gap-4`}>
                 {isLoading ? (<Activity2 />) :services.map((service, index) => <ItemCard item={service} onClick={() => showDetails(service)} />)}
             </div>
         </div>
