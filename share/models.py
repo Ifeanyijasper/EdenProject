@@ -21,37 +21,23 @@ class Products(models.Model):
     price       = models.DecimalField(max_digits=7, decimal_places=2)
     discount    = models.DecimalField(max_digits=5, decimal_places=2)
     description = models.CharField(max_length = 500)
-    img       = models.ImageField(null=True, blank=True)
+    img         = models.FileField(null=True, blank=True)
 
     def __str__(self):
         return self.name
     
-    @property
-    def imageURL(self):
-        try:
-            url = self.image.url
-        except:
-            url = ''
-        return url
 
 class Services(models.Model):
     name        = models.CharField(max_length = 200, null=True)
     price       = models.DecimalField(max_digits=7, decimal_places=2)
     discount    = models.DecimalField(max_digits=5, decimal_places=2)
     description = models.CharField(max_length = 500)
-    img       = models.ImageField(null=True, blank=True)
+    img         = models.FileField(null=True, blank=True)
     
     def __str__(self):
         return self.name
 
-    @property
-    def imageURL(self):
-        try:
-            url = self.image.url
-        except:
-            url = ''
-        return url
-        
+  
 class Purchases(models.Model):
     client_id   = models.IntegerField()
     worker_id   = models.IntegerField()
