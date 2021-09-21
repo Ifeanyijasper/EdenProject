@@ -3,7 +3,9 @@ eden
 node_modules/
 .vscode
 
-build/
+/build
 
 media/
 media/favicon_io
+
+.eslintcache
