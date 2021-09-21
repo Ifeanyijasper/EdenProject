@@ -126,4 +126,3 @@ const mapStateToProps = ({auth}) => {
 }
 
 export default connect(mapStateToProps)(Dashboard);
-

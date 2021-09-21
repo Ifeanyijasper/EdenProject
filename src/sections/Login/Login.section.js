@@ -84,6 +84,7 @@ const Login = (props) => {
             },
         })
             .then(res => {
+                console.log(res)
                 const response = res.json();
                 return response;
             })
@@ -106,7 +107,6 @@ const Login = (props) => {
                     .then(res => {
                         let _list = res[1].filter(data => userName === data.username);
                         setIsLoading(false);
-                        console.log(_list[0].is_client);
                         props.setUser(_list[0], userName, password);
                         if(_list[0].is_client) {
                             props.history.push({pathname: '/client'});
