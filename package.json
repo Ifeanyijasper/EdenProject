@@ -22,7 +22,7 @@
   },
   "scripts": {
     "start": "craco start",
-    "build": "craco build",
+    "build": "craco build && cp build/favicon.ico build/static/favicon.ico",
     "test": "craco test",
     "eject": "react-scripts eject",
     "postinstall": "npm run build"
