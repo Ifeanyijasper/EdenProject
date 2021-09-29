@@ -24,35 +24,35 @@ const AddClient = (props) => {
     const [options, setOptions] = useState([]);
     const [msg, setMsg] = useState({});
 
-  useEffect(() => {
-    let _referals = [];
-    fetch(`${BASE_URL}/register/`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Basic ' + Buffer.from(username + ':' + password).toString('base64'),
-      },
-    })
-      .then(response => {
-        const res = response.json();
-        return res;
-      })
-      .then(res => {
-        if (res.length >= 1) {
-          let _res = res.filter((data) => data.is_client || data.is_superuser);
-          if (_res.length > 0) {
-            _res.map((re, index) => (
-              _referals.push({ value: re.id, label: re.username })
-            ));
-          }
-          setOptions([..._referals]);
-        }
-      })
-      .catch(err => {
-        console.log(err);
-      })
+    useEffect(() => {
+      let _referals = [];
+       fetch(`${BASE_URL}/register/`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Basic ' + Buffer.from(username + ':' + password).toString('base64'),
+            },
+        })
+            .then(response => {
+                const res = response.json();
+                return res;
+            })
+            .then(res => {
+              if(res.length >= 1) {
+                let _res = res.filter((data) => data.is_client || data.is_superuser);
+                if(_res.length > 0) {
+                  _res.map((re, index) => (
+                      _referals.push({value:re.id, label: re.username})
+                  ));
+                }
+                setOptions([..._referals]);
+              }
+            })
+            .catch(err => {
+              console.log(err);
+            })
 
-  }, []);
+    }, []);
 
 
     const authenticate = () => {
