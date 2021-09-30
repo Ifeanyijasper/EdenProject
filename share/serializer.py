@@ -38,6 +38,11 @@ class PurchasesSerializer(serializers.ModelSerializer):
         model = Purchases
         fields = ('id','client_id','worker_id','client','worker','item','date','total','point')
 
+class GallerySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Gallery
+        fields = ('id','img')
+
 class TestimonialSerializer(serializers.ModelSerializer):
     class Meta:
         model = Testimonial

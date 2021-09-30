@@ -73,3 +73,6 @@ class Checkout(models.Model):
 
     def __str__(self):
         return self.status
+
+class Gallery(models.Model):
+    img      = models.FileField(null=True, blank=True)
