@@ -23,7 +23,7 @@ const Testimonials = (props) => {
         setIsLoading(true);
         fetch(`${BASE_URL}/testimonial/`)
             .then(res => {
-                const response = res.json().reverse();
+                const response = res.json();
                 return response;
             })
             .then(res => {
