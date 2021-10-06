@@ -22,7 +22,7 @@ const Nav = () => {
             </div>
             <div onClick={() => setProfile(!profile)} className="relative flex md:hidden text-white">
                 <IoMenu className="text-xl" />
-                <div className={`absolute z-20 h-screen -top-4 bg-sec rounded py-1 shadow-lg transition-all duration-500 ease-in-out ${profile ? 'w-56 -right-3 opacity-100 visible' : 'w-10 opacity-0 -right-20 invisible'}`}>
+                <div className={`absolute z-50 h-screen -top-4 bg-sec rounded py-1 shadow-lg transition-all duration-500 ease-in-out ${profile ? 'w-56 -right-3 opacity-100 visible' : 'w-10 opacity-0 -right-20 invisible'}`}>
                     <div onClick={() => setProfile(!profile)}  className="py-5 px-3">
                         <NavLink to="/" exact className={`flex items-center p-2 rounded text-sm text-gray-500 font-semibold my-1.5 transition-all duration-500 hover:bg-green-200 hover:bg-opacity-10 hover:text-gray-300`} activeClassName={`text-green-50 ${styles.sideNavActive}`}><IoHome className="mr-2.5 font-semibold" /> Home</NavLink>
                         <NavLink to='/services' exact className={`flex items-center p-2 rounded text-sm text-gray-500 font-semibold my-1.5 transition-all duration-500 hover:bg-green-200 hover:bg-opacity-10 hover:text-gray-300`} activeClassName={`text-green-50 ${styles.sideNavActive}`}><IoBody className="mr-2.5 font-semibold" /> Services</NavLink>
