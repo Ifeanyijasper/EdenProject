@@ -30,6 +30,7 @@ router.register('service', views.ServicesViewSet)
 router.register('purchase', views.PurchasesViewSet)
 router.register('testimonial', views.TestimonialViewSet)
 router.register('Checkout', views.CheckoutViewSet)
+router.register('Gallery', views.GalleryViewSet)
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API
 

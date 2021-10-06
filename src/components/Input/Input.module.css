@@ -1,3 +1,33 @@
+.inputContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.inputContainer:not(:last-child) {
+    margin-bottom: 1.5rem;
+}
+
+.inputLabel {
+    font-size: var(--font-size-normal);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-primary);
+    margin-bottom: 0.3rem;
+
+}
+
+@media only screen and (max-width: 56.25em) {
+    .inputLabel {
+        font-size: 1.65rem;
+    }
+}
+
+@media only screen and (max-width: 37.5em) {
+    .inputLabel {
+        font-size: 2rem;
+    }
+}
+
+
 .inputField {
     outline: none;
     border: none;
@@ -5,7 +35,7 @@
     padding: 0.3rem 0;
     color: var(--color-primary);
     font-size: var(--font-size-normal);
-    flex: 0 0 100%;
+    flex:0 0 100%;
 }
 
 @media only screen and (max-width: 56.25em) {

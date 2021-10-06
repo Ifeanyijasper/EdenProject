@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+import styles from './Service.module.css';
 import ServiceDetail from './ServiceDetail/ServiceDetail';
 import ServiceList from './ServiceList/ServiceList';
 
@@ -8,7 +9,7 @@ const Service = () => {
     const [detail, setDetail] = useState({});
 
     return (
-        <section className={`w-full min-h-full bg-white p-4 lg:p-6`}>
+        <section className={styles.serviceSection}>
             <ServiceList isDetail={isDetail} setIsDetail={setIsDetail} setDetail={setDetail} />
             <ServiceDetail isDetail={isDetail} setIsDetail={setIsDetail} detail={detail} />
         </section>
