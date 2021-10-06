@@ -84,7 +84,7 @@ const Login = (props) => {
             },
         })
             .then(res => {
-                const response = res.json();
+                const response = JSON.parse(res);
                 return response;
             })
             .then(res => {

@@ -14,7 +14,6 @@ const ProductList = (props) => {
         isDetail, 
         setIsDetail, 
         setDetail,
-        data,
         _products
     } = props;
 

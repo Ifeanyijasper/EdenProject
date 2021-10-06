@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Route, Switch } from 'react-router';
-import { HomeSection, Login, Nav, Products, Services, Testimonials } from '../../sections';
+import { Gallery, HomeSection, Login, Nav, Products, Services, Testimonials } from '../../sections';
+
 
 const Home = (props) => {
     const [show, setShow] = useState(false);
