@@ -32,7 +32,6 @@ import Checkout from './Checkout/Checkout.section';
 import ClientCheckout from './ClientCheckout/Checkout.section';
 import AddTestimonial from './AddTestimonial/AddTestimonial.section';
 import Testimonials from './Testimonials/Testimonials.section';
-import Gallery from './Gallery/gallery.section';
 
 export {
     SideNav, 
@@ -69,5 +68,4 @@ export {
     ClientCheckout,
     AddTestimonial,
     Testimonials,
-    Gallery,
 }

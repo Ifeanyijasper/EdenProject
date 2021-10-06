@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+import styles from './Product.module.css';
 import ProductDetail from './ProductDetail/ProductDetail';
 import ProductList from './ProductList/ProductList';
 
@@ -8,7 +9,7 @@ const Product = () => {
     const [detail, setDetail] = useState({});
 
     return (
-        <section className={`w-full min-h-full bg-white p-4 lg:p-6`}>
+        <section className={styles.productSection}>
             <ProductList isDetail={isDetail} setIsDetail={setIsDetail} setDetail={setDetail} />
             <ProductDetail isDetail={isDetail} setIsDetail={setIsDetail} detail={detail} />
         </section>

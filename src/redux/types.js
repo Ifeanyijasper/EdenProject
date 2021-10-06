@@ -18,3 +18,4 @@ export const SET_PRODUCTS = 'set_products';
 export const SET_SERVICES = 'set_services';
 export const SET_GALLERY = 'set_gallery';
 export const SET_TEST = 'set_test';
+

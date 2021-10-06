@@ -1,9 +1,10 @@
 eden
+beauty
 **/*.pyc
 node_modules/
 .vscode
 
-build/
+/build
 
-media/
-media/favicon_io
+
+.eslintcache
