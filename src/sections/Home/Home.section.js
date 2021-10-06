@@ -76,6 +76,22 @@ const HomeSection = (props) => {
             })
     }, []);
 
+    useEffect(() => {
+        setIsLoading(true);
+        fetch(`${BASE_URL}/gallery/`)
+            .then(res => {
+                const response = res.json();
+                return response;
+            })
+            .then(res => {
+                props.setGallery(res);
+                setIsLoading(false);
+            })
+            .catch(err => {
+                setIsLoading(false);
+            })
+    }, []);
+
     return (
         <div className={styles.home}>
             <div className={styles.homeHeader}>
@@ -96,7 +112,7 @@ const HomeSection = (props) => {
             </div>
             <h1 className={`text-gray-800 bg-white text-center text-xl lg:text-2xl pt-7 pb-1`} id="services">Services</h1>
             <h3 className={`bg-white text-gray-500 text-xs lg:text-sm font-semibold text-center pb-6`}>At Company we offer the best of</h3>
-            <div className={'flex bg-cover bg-fixed bg-center py-10 px-12 grid grid-cols-3 gap-7 justify-center'} style={{backgroundImage: "linear-gradient(to right, #92fe9d79, #00c8ff50), url(" + eden + ")"}}>
+            <div className={'flex bg-cover bg-fixed bg-center py-10 px-4 lg:px-12 grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-7 justify-center'} style={{backgroundImage: "linear-gradient(to right, #92fe9d79, #00c8ff50), url(" + eden + ")"}}>
                 {isLoading ? (<Activity2 />) : services.map((service, index) => ((Math.floor(Number(service.discount)) < 10 && index < 6)&&
                 <ItemCard item={service} onClick={() => active()} key={service.id} />
                 ))}
@@ -111,7 +127,7 @@ const HomeSection = (props) => {
             </div>
             <h1 className={`text-gray-800 bg-white text-center text-xl lg:text-2xl pt-7 pb-1`} id="products">Products</h1>
             <h3 className={`bg-white text-gray-500 text-xs lg:text-sm font-semibold text-center pb-6`}>At Company we offer the best of</h3>
-            <div className={'flex bg-cover bg-fixed bg-center py-10 px-12 grid grid-cols-3 gap-7 justify-center'} style={{backgroundImage: "linear-gradient(to right, #00c8ff50, #92fe9d79), url(" + beauty + ")"}}>
+            <div className={'flex bg-cover bg-fixed bg-center py-10 px-4 lg:px-12 grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-7 justify-center'} style={{backgroundImage: "linear-gradient(to right, #00c8ff50, #92fe9d79), url(" + beauty + ")"}}>
                 {isLoading ? (<Activity2 />) : products.map((product, index) => ((Math.floor(Number(product.discount)) < 10 && index < 6)&&
                 <ItemCard item={product} onClick={() => active()} key={product.id} />))}
             </div>

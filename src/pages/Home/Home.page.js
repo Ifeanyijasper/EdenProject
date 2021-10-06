@@ -23,13 +23,16 @@ const Home = (props) => {
                 location.pathname ==='/products') && 
                 (<Nav />)
             }
-            <Switch>
-                <Route path="/" exact component={HomeSection} />
-                <Route path="/services" component={Services} />
-                <Route path="/products" component={Products} />
-                <Route path="/testimonials" component={Testimonials} />
-                <Route path="/login"  component={Login} />
-            </Switch>
+            <div className={`sm:h-full md:h-full w-full lg:rounded-r-xl overflow-x-hidden overflowY`}>
+                <Switch>
+                    <Route path="/" exact component={HomeSection} />
+                    <Route path="/services" component={Services} />
+                    <Route path="/products" component={Products} />
+                    <Route path="/gallery" component={Gallery} />
+                    <Route path="/testimonials" component={Testimonials} />
+                    <Route path="/login"  component={Login} />
+                </Switch>
+            </div>
         </div>
     )
 }

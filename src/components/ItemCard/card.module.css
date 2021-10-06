@@ -1,0 +1,42 @@
+.imageContainer {
+    transition: all 0.5s ease-in-out;
+}
+
+.imageContainer:hover .imageOverlay {
+    cursor: pointer;
+}
+
+
+.marketName {
+    /* position: absolute; */
+    top: 1rem;
+    transition: all 0.5s ease-in-out;
+}
+
+.marketButton {
+    /* position: absolute; */
+    bottom: 1rem;
+    transition: all 0.5s ease-in-out;
+}
+
+.imageOverlay:hover .marketName {
+    top: 1rem;
+}
+
+.imageOverlay:hover .marketButton {
+    bottom: 1rem;
+}
+
+@media only screen and (min-width: 770px) {
+    .marketName {
+        position: absolute;
+        top: -6rem;
+        transition: all 0.5s ease-in-out;
+    }
+
+    .marketButton {
+        position: absolute;
+        bottom: -6rem;
+        transition: all 0.5s ease-in-out;
+    }
+}

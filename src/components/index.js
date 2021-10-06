@@ -18,6 +18,9 @@ import Activity2 from './ActivityIndicatorLarger/ActivityIndicator.component';
 import Notify from './Notify/Notification.component';
 import TextArea from './TextArea/TextArea.component';
 import Testimonial from './Testimonial/Testimonial.component';
+import LoginButton from './Button/LoginButton.component';
+import Card from './ItemCard/Card.component';
+import SqrButton from './Button/squareButton.component';
 
 export {
     AdminCard, 
@@ -40,4 +43,7 @@ export {
     Notify,
     TextArea,
     Testimonial,
+    LoginButton,
+    Card,
+    SqrButton,
 };

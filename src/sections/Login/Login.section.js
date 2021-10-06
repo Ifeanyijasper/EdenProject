@@ -117,7 +117,7 @@ const Login = (props) => {
                 }
             })
             .catch(err => {
-                console.log(err);
+                console.log(err, userName, password);
                 setIsLoading(false);
                 setNotify(true);
                 setMsg({
@@ -131,7 +131,11 @@ const Login = (props) => {
         <div className={styles.loginContainer}>
             <SummitTech title="WELCOME" />
             <div className={`rounded-lg shadow-lg ${styles.border}`}>
+<<<<<<< HEAD
+                <div className={`w-72 md:w-120 lg:w-128 m-2 py-10 px-7 md:p-10 bg-white flex rounded-lg flex-col`}>
+=======
                 <div className={`w-80 md:w-120 lg:w-128 m-2 py-10 px-7 md:p-10 bg-white flex rounded-lg flex-col`}>
+>>>>>>> master
                     <h2 className={`text-center text-lg md:text-2xl text-gray-800 mb-8`}>Eden-Beauty Complex</h2>
                     <Input 
                     label="Username" 

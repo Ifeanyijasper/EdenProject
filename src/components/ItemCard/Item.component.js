@@ -41,27 +41,28 @@ const ItemCard = (props) => {
     }
 
     return (
-        <div className={'cursor-pointer relative w-80 h-auto rounded-md overflow-hidden shadow-xl bg-white'} onClick={() => onClick()}>
+        <div className={'cursor-pointer relative md:w-48 lg:w-80 h-auto rounded-md overflow-hidden shadow-xl bg-white'} onClick={() => onClick()}>
             {
                 item.img ?
-                    <img src={`${IMG_URL}${item.img}`} alt={item.name} className={'w-full h-56 bg-center bg-cover'} /> :
+                    <img src={`${IMG_URL}${item.img}`} alt={item.name} className={'w-full h-36 lg:h-56 bg-center bg-cover'} /> :
                     <h3 className={'text-9xl text-green-700 text-center py-2 h-56 flex items-center justify-center'}>{extractInitials(item.name)}</h3>
             }
-            {/* <div className={'absolute text-sm p-1 bottom-9 flex items-center justify-between text-gray-700 px-2'}>
-                <h2 className={'flex justify-center items-center'}>
+            <div className={'absolute w-full text-sm py-1 bottom-9 flex items-center justify-end text-gray-700 px-2'} style={{backgroundImage: "linear-gradient(to right, #92fe9de6, #00c9ffcc)"}}>
+                {/* <h2 className={'flex justify-center items-center'}>
                     <IoHeart className={'mr-2'} /> 0
-                </h2>
-            </div> */}
+                </h2> */}
+                <div className="flex items-center justify-around">
+                    <h5 className={`text-xs font-bold mr-2 ${item.discount > 0 ? 'text-gray-50 line-through' : 'text-gray-100'}`}>{Thousand(Number(item.price).toFixed(0))} {+item.discount === 0 && 'FCFA'}</h5>
+                    {item.discount > 0 && <h5 className="text-xs font-bold text-gray-100">{Thousand(((100 - item.discount) / 100) * item.price)} FCFA</h5>}
+                </div>
+            </div>
             {Number(item.discount) !== 0 && <div className={'absolute top-2 left-2 text-xs bg-green-500 p-1 rounded'}>
                 <h2>Discount: {Math.floor(Number(item.discount))}%</h2>
             </div>}
             <div className={styles.properties}>
                 <div className="flex justify-between p-2">
                     <h2 className={'text-gray-700 text-sm font-bold'}>{item.name}</h2>
-                    <div className="flex items-center justify-around">
-                        <h5 className={`text-xs font-bold mr-2 ${item.discount > 0 ? 'text-gray-500 line-through' : 'text-gray-600'}`}>{Thousand(Number(item.price).toFixed(0))} {+item.discount === 0 && 'FCFA' }</h5>
-                        {item.discount > 0 && <h5 className="text-xs font-bold text-gray-600">{Thousand(((100 - item.discount) / 100) * item.price)} FCFA</h5>}
-                    </div>
+                    
                 </div>
                 {add && (
                     <>
