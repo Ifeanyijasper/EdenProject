@@ -4,38 +4,40 @@ import { img_5, img_4, img_1, img_6, img_3, img_2 } from '../../res/images';
 import { SqrButton, Card, Search } from '../../components';
 import { IoGridOutline } from 'react-icons/io5';
 
-import { setData, setTestimonials } from '../../redux/Actions/Data.actions';
+import { setData, setGallery } from '../../redux/Actions/Data.actions';
 import search from '../../utils/search';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { BASE_URL } from '../../utils/globalVariable';
 
 const Gallery = (props) => {
-    const { _testimonials } = props;
+    const { _gallery } = props;
 
     const [index, setIndex] = useState(0);
     const [grid, setGrid] = useState(2);
     const [text, setText] = useState('');
+    const [gallery, setGallery] = useState([]);
     const [_filter, setFilter] = useState('');
     const [_filters] = useState([
         'Event',
     ]);
 
     const _providers = [
-        { status: 'most rated', image: img_6, title: "Product", subtitle: "Chicken", discount: 0, quantity: 35, price: 5000 },
-        { status: 'new', image: img_4, title: "Product", subtitle: "Plantain", discount: 10, quantity: 20, price: 3500 },
-        { status: 'old', image: img_2, title: "Product", subtitle: "Sheep", discount: 0, quantity: 45, price: 50000 },
-        { status: 'new', image: img_6, title: "Product", subtitle: "Goat", discount: 0, quantity: 200, price: 25000 },
-        { status: 'new', image: img_5, title: "Product", subtitle: "Pork Loins", discount: 0, quantity: 20, price: 12000 },
-        { status: 'new', image: img_6, title: "Product", subtitle: "Beef breast", discount: 0, quantity: 0, price: 18000 },
-        { status: 'most rated', image: img_5, title: "Product", subtitle: "Chicken wings", discount: 0, quantity: 50, price: 4000 },
-        { status: 'old', image: img_2, title: "Product", subtitle: "Beans", discount: 4, quantity: 20, price: 5500 },
-        { status: 'new', image: img_4, title: "Product", subtitle: "Garri", discount: 0, quantity: 20, price: 4000 },
-        { status: 'old', image: img_3, title: "Product", subtitle: "Beans", discount: 70, quantity: 20, price: 6000 },
-        { status: 'old', image: img_3, title: "Product", subtitle: "Corn", discount: 5, quantity: 20, price: 4000 },
-        { status: 'new', image: img_1, title: "Product", subtitle: "Huckleberry", discount: 0, quantity: 30, price: 2000 },
-        { status: 'new', image: img_1, title: "Product", subtitle: "Washed bitter leaf", discount: 0, quantity: 2, price: 3000 },
-        { status: 'new', image: img_3, title: "Product", subtitle: "Yams", discount: 0, quantity: 20, price: 7500 },
-        { status: 'most rated', image: img_1, title: "Product", subtitle: "Goat hips", discount: 0, quantity: 0, price: 13000 },
+        { status: 'most rated', image: img_6, title: "Product", subtitle: "Clone", discount: 0, quantity: 35, price: 5000 },
+        { status: 'new', image: img_4, title: "Product", subtitle: "Hair", discount: 10, quantity: 20, price: 3500 },
+        { status: 'old', image: img_2, title: "Product", subtitle: "Massage", discount: 0, quantity: 45, price: 50000 },
+        { status: 'new', image: img_6, title: "Product", subtitle: "Therapy", discount: 0, quantity: 200, price: 25000 },
+        { status: 'new', image: img_5, title: "Product", subtitle: "Perfume", discount: 0, quantity: 20, price: 12000 },
+        { status: 'new', image: img_6, title: "Product", subtitle: "Comfort", discount: 0, quantity: 0, price: 18000 },
+        { status: 'most rated', image: img_5, title: "Product", subtitle: "Fun", discount: 0, quantity: 50, price: 4000 },
+        { status: 'old', image: img_2, title: "Product", subtitle: "The Best", discount: 4, quantity: 20, price: 5500 },
+        { status: 'new', image: img_4, title: "Product", subtitle: "Service", discount: 0, quantity: 20, price: 4000 },
+        { status: 'old', image: img_3, title: "Product", subtitle: "Affordable", discount: 70, quantity: 20, price: 6000 },
+        { status: 'old', image: img_3, title: "Product", subtitle: "Exquisite", discount: 5, quantity: 20, price: 4000 },
+        { status: 'new', image: img_1, title: "Product", subtitle: "Yearn", discount: 0, quantity: 30, price: 2000 },
+        { status: 'new', image: img_1, title: "Product", subtitle: "Quality", discount: 0, quantity: 2, price: 3000 },
+        { status: 'new', image: img_3, title: "Product", subtitle: "In Town", discount: 0, quantity: 20, price: 7500 },
+        { status: 'most rated', image: img_1, title: "Product", subtitle: "Classy", discount: 0, quantity: 0, price: 13000 },
     ];
 
     const [providers, setProviders] = useState(_providers);
@@ -48,7 +50,7 @@ const Gallery = (props) => {
     ];
 
     useEffect(() => {
-        search(text, _testimonials, setTestimonials, 'client_name');
+        search(text, _gallery, setGallery, 'client_name');
     }, [text]);
 
     const SetFilter = (i) => {
@@ -59,7 +61,26 @@ const Gallery = (props) => {
         if (filters[i].filter === 'All') {
             setProviders(_providers);
         }
-    }
+    };
+
+    useEffect(() => {
+        setGallery(_gallery)
+        return () => {
+            fetchGallery()
+        }
+    }, []);
+
+    const fetchGallery = async () => {
+        try {
+            const response = await fetch(`${BASE_URL}/gallery/`);
+            const gallery = await response.json();
+            props.setGallery(gallery);
+            return gallery;
+        }
+        catch (err) {
+            console.log(err, 'Received error');
+        }
+    };
 
 
     return (
@@ -70,7 +91,7 @@ const Gallery = (props) => {
                     <Search placeholder="Search" newButton={false} title={'Service'} filters={_filters} filter={_filter} setFilter={setFilter} text={text} setText={setText} />
                 </div>
                 <div className="flex justify-between px-2 pr-5">
-                    <div className="w-4/5 md:w-2/5 flex justify-around">
+                    <div className="w-full md:w-3/5 flex justify-around">
                         {filters.map((filter, i) =>
                             <div
                                 key={i}
@@ -110,12 +131,12 @@ const Gallery = (props) => {
 
 const mapStateToProps = ({data}) => {
     return {
-        _testimonials: data.testimonials,
+        _gallery: data.gallery,
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({setData, setTestimonials}, dispatch);
+    return bindActionCreators({setData, setGallery}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Gallery);

@@ -25,7 +25,7 @@ const Card = (props) => {
                 className={`
                     transition-all duration-100 ease-in-out 
                     shadow-lg overflow-hidden relative bg-center bg-cover
-                    w-72 h-72
+                    w-72 h-72  rounded-md
                     ${grid === 2 && 'md:w-64 md:h-64 lg:w-64 lg:h-64'}
                     ${grid === 1 && 'md:w-64 md:h-64 lg:w-72 lg:h-72'}
                     ${grid === 0 && 'md:w-64 md:h-64'}
@@ -37,7 +37,7 @@ const Card = (props) => {
                         <h2 className="text-sm">{provider.subtitle}</h2>
                     </div>
                     <div className={`${styles.marketButton}`}>
-                        <SqrButton title={`Shop`} onClick={() => setRedirect(true)} />
+                        <SqrButton title={`Book`} onClick={() => setRedirect(true)} />
                     </div>
                 </div>
             </div>

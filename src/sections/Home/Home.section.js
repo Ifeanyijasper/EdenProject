@@ -76,6 +76,22 @@ const HomeSection = (props) => {
             })
     }, []);
 
+    useEffect(() => {
+        setIsLoading(true);
+        fetch(`${BASE_URL}/gallery/`)
+            .then(res => {
+                const response = res.json();
+                return response;
+            })
+            .then(res => {
+                props.setGallery(res);
+                setIsLoading(false);
+            })
+            .catch(err => {
+                setIsLoading(false);
+            })
+    }, []);
+
     return (
         <div className={`flex flex-col ${styles.home}`}>
             <div className={`py-14 px-7 flex flex-col md:flex-row justify-between items-center ${styles.homeHeader}`}>
