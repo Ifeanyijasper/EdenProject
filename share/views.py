@@ -94,6 +94,19 @@ class CheckoutViewSet(viewsets.ModelViewSet):
         serializer = CheckoutSerializer(checkout, many=True)
         return Response(serializer.data)
 
+class GalleryViewSet(viewsets.ModelViewSet):
+    """ 
+    API enddpoint that allows users to be viewed or edited. 
+    """
+    queryset = Gallery.objects.all()
+    serializer_class = GallerySerializer
+    permission_classes = (IsAuthenticated,)
+
+    def list(self, request, *args, **kwargs):
+        gallery = Gallery.objects.all()
+        serializer = GallerySerializer(gallery, many=True)
+        return Response(serializer.data)
+
 class ChangePasswordView(generics.UpdateAPIView):
     """
     An endpoint for changing password.

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Route, Switch } from 'react-router';
 import { Gallery, HomeSection, Login, Nav, Products, Services, Testimonials } from '../../sections';
 
+
 const Home = (props) => {
     const [show, setShow] = useState(false);
     const {location} = props;
@@ -13,13 +14,12 @@ const Home = (props) => {
         },3000);
     },[])
     return (
-        <div className={`h-screen overflow-hidden md:p-0 lg:p-4 flex flex-col md:flex-row ${show ? 'flex' : 'opacity-0'}`}>
+        <div className={'show ? styles.home : styles.nothing'}>
             {
                 (location.pathname === '/' || 
                 location.pathname ==='/login' || 
                 location.pathname ==='/services' || 
                 location.pathname ==='/testimonials' || 
-                location.pathname ==='/gallery' || 
                 location.pathname ==='/products') && 
                 (<Nav />)
             }

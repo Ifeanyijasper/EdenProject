@@ -1,15 +1,13 @@
-import React, { useState } from 'react';
-import { IoBody, IoBriefcase, IoChatbubbleEllipses, IoHome, IoImages, IoLogIn, IoMenu } from 'react-icons/io5';
+import React from 'react';
+import { IoBody, IoBriefcase, IoHome, IoLogIn } from 'react-icons/io5';
 import { NavLink } from 'react-router-dom';
 import { logo } from '../../res/images';
 
 import styles from './Nav.module.css';
 
 const Nav = () => {
-    const [profile, setProfile] = useState(false);
-
-
     return (
+<<<<<<< HEAD
         <div className={`w-full md:w-17/100 flex md:flex-col justify-between items-center p-2 md:py-5 lg:px-3 bg-sec ${styles.nav}`}>
             <img src={logo} className={'w-10 h-10 md:w-20 md:h-20 bg-center bg-cover ml-2.5 md:mr-0'} alt="Logo" />
             <div className={`hidden md:flex flex-col mt-4 w-full`}>
@@ -35,9 +33,28 @@ const Nav = () => {
             </div>
             <div className={`mt-auto hidden md:block text-center text-white text-xs`}>
                 <p>Copyright @ <NavLink to='/summit-tech' className={styles.footerLink}>Summit Tech</NavLink></p>
+=======
+        <div className={styles.nav}>
+            <img src={logo} className={styles.logo} alt="Logo"/>
+            <ul className={styles.sideNav}>
+                <li className={styles.sideNavItem}><NavLink to="/" exact className={styles.sideNavLink} activeClassName={styles.sideNavActive}><IoHome className={styles.icons} /> Home</NavLink></li>
+                <li className={styles.sideNavItem}><NavLink to='/services' exact className={styles.sideNavLink} activeClassName={styles.sideNavActive}><IoBody className={styles.icons} /> Services</NavLink></li>
+                <li className={styles.sideNavItem}><NavLink to='/products' className={styles.sideNavLink} activeClassName={styles.sideNavActive}><IoBriefcase className={styles.icons} /> Products</NavLink></li>
+                <li className={styles.sideNavItem}><NavLink to='/testimonials' className={styles.sideNavLink} activeClassName={styles.sideNavActive}><IoBriefcase className={styles.icons} /> Testimonials</NavLink></li>
+                <li className={styles.sideNavItem}><NavLink to="/login" className={styles.sideNavLink} activeClassName={styles.sideNavActive}><IoLogIn className={styles.icons} /> Login</NavLink></li>
+            </ul>
+            <ul className={styles.topNav}>
+                <li className={styles.topNavItem}><NavLink to="/" exact className={styles.topNavLink} activeClassName={styles.topNavActive}><IoHome className={styles.icons} /> Home</NavLink></li>
+                <li className={styles.topNavItem}><NavLink to='/services' exact className={styles.topNavLink} activeClassName={styles.topNavActive}><IoBody className={styles.icons} /> Services</NavLink></li>
+                <li className={styles.topNavItem}><NavLink to='/products' className={styles.topNavLink} activeClassName={styles.topNavActive}><IoBriefcase className={styles.icons} /> Products</NavLink></li>
+                <li className={styles.topNavItem}><NavLink to="/login" className={styles.topNavLink} activeClassName={styles.topNavActive}><IoLogIn className={styles.icons} /> Login</NavLink></li>
+            </ul>
+            <div className={styles.footerContainer}>
+                <p className={styles.footerContainerText}>Copyright @ <NavLink to='/summit-tech' className={styles.footerLink}>Summit Tech</NavLink></p>
+>>>>>>> master
             </div>
         </div>
     )
-};
+}
 
 export default Nav;
