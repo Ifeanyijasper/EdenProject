@@ -1,4 +1,4 @@
-.itemCard {
+/* .itemCard {
     width: 29rem;
     max-height: 30rem;
     border-radius: var(--border-radius-medium);
@@ -9,9 +9,6 @@
     background-color: var(--color-white);
     transition: all ease-in-out 0.4s;
     position: relative;
-    /* overflow: hidden; */
-
-    /* border: 1px solid red; */
     cursor: pointer;
 }
 
@@ -202,4 +199,4 @@
     font-weight: var(--font-weight-medium);
 
     cursor: pointer;
-}
+} */

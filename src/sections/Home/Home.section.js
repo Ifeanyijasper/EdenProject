@@ -5,18 +5,16 @@ import { bindActionCreators } from 'redux';
 
 import { Activity2, Button, ItemCard, TestimonialCard } from '../../components';
 import { beauty, eden, logo, service } from '../../res/images';
-import {setWelcome} from '../../redux/Actions/Welcome.actions';
+import { setWelcome } from '../../redux/Actions/Welcome.actions';
+import { setProducts, setServices, setGallery, setTestimonials } from '../../redux/Actions/Data.actions';
 import styles from './Home.module.css';
 import { NavLink } from 'react-router-dom';
 import { IoArrowForward } from 'react-icons/io5';
 import { BASE_URL } from '../../utils/globalVariable';
 
 const HomeSection = (props) => {
-    const {welcome} = props;
+    const {welcome, products, services, testimonials} = props;
     const [isLoading, setIsLoading] = useState(false);
-    const [products, setProducts] = useState([]);
-    const [services, setServices] = useState([]);
-    const [testimonies, setTestimonies] = useState([]);
 
     useEffect(() => {
         if(!welcome) {
@@ -38,7 +36,7 @@ const HomeSection = (props) => {
                 return response;
             })
             .then(res => {
-                setProducts(res);
+                props.setProducts(res);
                 setIsLoading(false);
             })
             .catch(err => {
@@ -54,7 +52,7 @@ const HomeSection = (props) => {
                 return response;
             })
             .then(res => {
-                setTestimonies(res);
+                props.setTestimonials(res)
                 setIsLoading(false);
             })
             .catch(err => {
@@ -70,7 +68,7 @@ const HomeSection = (props) => {
                 return response;
             })
             .then(res => {
-                setServices(res);
+                props.setServices(res);
                 setIsLoading(false);
             })
             .catch(err => {
@@ -98,7 +96,7 @@ const HomeSection = (props) => {
             </div>
             <h1 className={`text-gray-800 bg-white text-center text-xl lg:text-2xl pt-7 pb-1`} id="services">Services</h1>
             <h3 className={`bg-white text-gray-500 text-xs lg:text-sm font-semibold text-center pb-6`}>At Company we offer the best of</h3>
-            <div className={'flex bg-cover bg-center py-10 px-5 grid grid-cols-3 gap-5'} style={{backgroundImage: "linear-gradient(to right, #92fe9d79, #00c8ff50), url(" + eden + ")"}}>
+            <div className={'flex bg-cover bg-fixed bg-center py-10 px-12 grid grid-cols-3 gap-7 justify-center'} style={{backgroundImage: "linear-gradient(to right, #92fe9d79, #00c8ff50), url(" + eden + ")"}}>
                 {isLoading ? (<Activity2 />) : services.map((service, index) => ((Math.floor(Number(service.discount)) < 10 && index < 6)&&
                 <ItemCard item={service} onClick={() => active()} key={service.id} />
                 ))}
@@ -107,13 +105,13 @@ const HomeSection = (props) => {
             <h3 className={`bg-white text-gray-500 text-xs lg:text-sm font-semibold text-center pb-6`}>What our Clients are saying...</h3>
             <div className={styles.testiCardCon}>
                 <div className={styles.testiCard}>
-                    {isLoading ? (<Activity2 />) : testimonies.map((testimony, index) => <TestimonialCard testimony={testimony} />)}
+                    {isLoading ? (<Activity2 />) : testimonials.map((testimony, index) => <TestimonialCard testimony={testimony} />)}
                 </div>
                 <Button title="READ MORE" onClick={() => props.history.push({pathname: '/testimonials'})} />
             </div>
             <h1 className={`text-gray-800 bg-white text-center text-xl lg:text-2xl pt-7 pb-1`} id="products">Products</h1>
             <h3 className={`bg-white text-gray-500 text-xs lg:text-sm font-semibold text-center pb-6`}>At Company we offer the best of</h3>
-            <div className={'flex bg-cover bg-center py-10 px-5 grid grid-cols-3 gap-5'} style={{backgroundImage: "linear-gradient(to right, #00c8ff50, #92fe9d79), url(" + beauty + ")"}}>
+            <div className={'flex bg-cover bg-fixed bg-center py-10 px-12 grid grid-cols-3 gap-7 justify-center'} style={{backgroundImage: "linear-gradient(to right, #00c8ff50, #92fe9d79), url(" + beauty + ")"}}>
                 {isLoading ? (<Activity2 />) : products.map((product, index) => ((Math.floor(Number(product.discount)) < 10 && index < 6)&&
                 <ItemCard item={product} onClick={() => active()} key={product.id} />))}
             </div>
@@ -134,14 +132,17 @@ const HomeSection = (props) => {
     )
 }
 
-const mapStateToProps = ({welcome}) => {
+const mapStateToProps = ({welcome, data}) => {
     return {
         welcome: welcome.entered,
+        products: data.products,
+        services: data.services,
+        testimonials: data.testimonials,
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators ({setWelcome}, dispatch);
+    return bindActionCreators ({setWelcome, setProducts, setServices, setGallery, setTestimonials}, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeSection);

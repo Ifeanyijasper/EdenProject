@@ -14,4 +14,8 @@ export const SET_USERNAME = 'set_username';
 export const SET_PASSWORD = 'set_password';
 export const RESET_USER = 'reset_user';
 export const SET_OBJDATA = 'set_objdata';
+export const SET_PRODUCTS = 'set_products';
+export const SET_SERVICES = 'set_services';
+export const SET_GALLERY = 'set_gallery';
+export const SET_TEST = 'set_test';
 

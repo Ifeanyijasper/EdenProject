@@ -2,9 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Route, Switch } from 'react-router';
 import { Gallery, HomeSection, Login, Nav, Products, Services, Testimonials } from '../../sections';
 
-// import styles from './Home.module.css';
-
-
 const Home = (props) => {
     const [show, setShow] = useState(false);
     const {location} = props;

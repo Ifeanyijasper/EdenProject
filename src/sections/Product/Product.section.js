@@ -60,7 +60,7 @@ const Product = (props) => {
             <hr className={styles.horizontalLine} />
                 <h2 className={styles.productTitle}>{products.length || 0} Product{products.length !== 1 && 's'}</h2>
             <hr className={styles.horizontalLine} />
-            <div className={styles.productContainer}>
+            <div className={'py-10 px-12 grid grid-cols-3 gap-7'}>
                 {products.map((product, index) => <ItemCard item={product} add={true} onClick={() => active()} />)}
             </div>
         </div>

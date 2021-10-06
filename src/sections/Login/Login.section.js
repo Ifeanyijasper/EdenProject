@@ -131,7 +131,7 @@ const Login = (props) => {
         <div className={`w-full flex flex-col items-center justify-center p-8 md:py-6 lg:p-8 h-screen md:min-h-full ${styles.loginContainer}`}>
             <SummitTech title="WELCOME" />
             <div className={`rounded-lg shadow-lg ${styles.border}`}>
-                <div className={`w-80 md:w-140 lg:w-150 m-2 py-10 px-7 md:p-10 bg-white flex rounded-lg flex-col`}>
+                <div className={`w-80 md:w-120 lg:w-128 m-2 py-10 px-7 md:p-10 bg-white flex rounded-lg flex-col`}>
                     <h2 className={`text-center text-lg md:text-2xl text-gray-800 mb-8`}>Eden-Beauty Complex</h2>
                     <Input 
                     label="Username" 
