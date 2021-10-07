@@ -1,0 +1,13 @@
+.home {
+    display: flex;
+}
+
+@media only screen and (max-width: 56.25em) {
+    .home {
+        flex-direction: column;
+    }
+}
+
+.nothing {
+    opacity: 0;
+}

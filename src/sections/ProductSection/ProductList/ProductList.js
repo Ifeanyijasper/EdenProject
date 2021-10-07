@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { bindActionCreators } from 'redux';
 
 import { Search, ItemCard, Activity2 } from '../../../components';
-import styles from './ProductList.module.css';
 import search from '../../../utils/search';
 import { setData } from '../../../redux/Actions/Data.actions';
 import { setProducts } from '../../../redux/Actions/Data.actions';

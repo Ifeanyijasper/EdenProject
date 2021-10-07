@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { 
-    Activity, 
-    Button, 
+    Activity,  
     Input, 
+    LoginButton, 
     Notification, 
     SummitTech 
 } from '../../components';
@@ -44,8 +44,8 @@ const Login = (props) => {
             setIsLoading(false);
             setNotify(true);
             setMsg({
-                    title: 'Authentication',
-                    message: 'Invalid username or password.'
+                    title: 'Wrong Credentials',
+                    message: 'Please check your input fields.'
                 });
             return false;
         }
@@ -122,20 +122,16 @@ const Login = (props) => {
                 setNotify(true);
                 setMsg({
                     title: 'Unexpected Error',
-                    message: 'Something unexpected happened'
+                    message: 'Please check your network connection.'
                 })
             })
     }
 
     return (
-        <div className={styles.loginContainer}>
+        <div className={`w-full flex flex-col items-center justify-center p-8 md:py-6 lg:p-8 h-screen md:min-h-full ${styles.loginContainer}`}>
             <SummitTech title="WELCOME" />
             <div className={`rounded-lg shadow-lg ${styles.border}`}>
-<<<<<<< HEAD
                 <div className={`w-72 md:w-120 lg:w-128 m-2 py-10 px-7 md:p-10 bg-white flex rounded-lg flex-col`}>
-=======
-                <div className={`w-80 md:w-120 lg:w-128 m-2 py-10 px-7 md:p-10 bg-white flex rounded-lg flex-col`}>
->>>>>>> master
                     <h2 className={`text-center text-lg md:text-2xl text-gray-800 mb-8`}>Eden-Beauty Complex</h2>
                     <Input 
                     label="Username" 
@@ -145,7 +141,7 @@ const Login = (props) => {
                     value={userName}
                     setValue={(event) => setUserName(event.target.value)}
                     error={userNameError}
-                    setError={() => setUserNameError} />
+                    setError={() => setUserNameError(false)} />
                     <Input 
                     label="Password" 
                     placeholder="******" 
@@ -154,13 +150,8 @@ const Login = (props) => {
                     value={password}
                     setValue={(event) => setPassword(event.target.value)}
                     error={passwordError}
-                    setError={() => setPasswordError()} />
-                    {isLoading ? 
-                        (<div className={styles.isLoading}>
-                            <Activity size={1.2} />
-                        </div>) : 
-                        (<Button title="Login" onClick={() => authenticate()} />)
-                    }
+                    setError={() => setPasswordError(false)} />
+                    <LoginButton title="Login" loading={isLoading} onClick={() => authenticate()} />
                 </div>
             </div>
             <SummitTech title="Eden Beauty" />

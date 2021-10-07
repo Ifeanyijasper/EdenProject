@@ -7,8 +7,7 @@ import img_6 from './6.jpg';
 import eden from './eden.jpg';
 import beauty from './beauty.jpg';
 import service from './service.png'
-import logo from './edentrans1.png';
-// import logo from './logo1.png';
+import logo from './logo1.png';
 
 export {
     img_1, 
