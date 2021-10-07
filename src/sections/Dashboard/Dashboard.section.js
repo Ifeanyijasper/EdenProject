@@ -93,7 +93,7 @@ const Dashboard = (props) => {
                         <p className={styles.sectionText}>Workers: {workers.length || 0}</p>
                     </div>
                     <p>Goal: {10}</p>
-                    <MiniProgressBar progress={workers ? (workers/30 * 100) : 0} />
+                    <MiniProgressBar progress={workers ? (workers.length/30 * 100) : 0} />
                 </div>
             </div>
             <div className={styles.sectionTitle}>

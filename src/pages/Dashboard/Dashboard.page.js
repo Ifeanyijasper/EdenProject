@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {Route, Switch} from 'react-router';
 
 import styles from './Dashboard.module.css';
@@ -7,6 +7,7 @@ import {
     ClientSection, 
     Dashboard, 
     FinanceSection, 
+    Nav, 
     ProductSection, 
     Profile, 
     ServiceSection, 
@@ -16,8 +17,17 @@ import {
 import {WorkArea} from '../../components';
 
 const DashBoard = () => {
+    const [show, setShow] = useState(false);
+
+    useEffect(() => {
+        setShow(false);
+        setTimeout(() => {
+            setShow(true);
+        }, 3000);
+    }, []);
+
     return (
-        <div className={styles.dashboard}>
+        <div className={`h-screen overflow-hidden md:p-0 lg:p-4 flex flex-col md:flex-row ${show ? 'flex' : 'opacity-0'}`}>
             <SideNav />
             <WorkArea>
                 <Switch>

@@ -116,3 +116,7 @@ body::-webkit-scrollbar-track {
 .bg-primary {
     background-color: var(--color-primary);
 }
+
+.text-primary {
+    color: var(--color-primary);
+}

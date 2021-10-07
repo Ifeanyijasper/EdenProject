@@ -99,6 +99,7 @@ const ClientList = (props) => {
     return (
         <div className={isDetail ? styles.listContainerDetail : styles.listContainer}>
             <RouteIndicator route="Dashboard" current="Clients" />
+            <div className="sticky top-3 z-40 pt-1">
             <Search 
                 placeholder="Search" 
                 isOpen={isOpenAdd} 
@@ -110,6 +111,7 @@ const ClientList = (props) => {
                 setFilter={setFilter}
                 text={text}
                 setText={setText} />
+            </div>
             <h2 className={styles.headerTitle}>{clients.length} Client{clients.length !== 1 &&'s'}</h2>
             <div className={styles.cardsContainer}>
                 {loading ? (<div style={{margin: 'auto'}}><Activity2 /></div>) : (clients.map((client) => 
