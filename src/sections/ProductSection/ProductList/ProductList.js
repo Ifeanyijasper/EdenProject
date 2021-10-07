@@ -38,6 +38,10 @@ const ProductList = (props) => {
 
     useEffect(() => {
         setProducts(_products)
+        if (_products?.length === 0) {
+            setIsLoading(true);
+            fetchProducts()
+        }
         return () => {
             fetchProducts()
         }
@@ -48,10 +52,12 @@ const ProductList = (props) => {
             const response = await fetch(`${BASE_URL}/product/`);
             const products = await response.json();
             props.setProducts(products);
+            setIsLoading(false)
             return products;
         }
         catch (err) {
             console.log(err, 'Received error');
+            setIsLoading(false)
         }
     };
 

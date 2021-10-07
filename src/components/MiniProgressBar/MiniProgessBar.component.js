@@ -6,10 +6,10 @@ import styles from './MiniProgressBar.module.css';
 const MiniProgressBar = (props) => {
     const {progress} = props;
     return (
-        <div className={styles.progress}>
+        <div className={'flex justify-center items-center text-gray-400 text-sm font-semibold'}>
                 <IoBarChart />
-                <div className={styles.progressContainer} style={{width: 100, overflow: 'hidden'}}><div className={styles.progressBar} style={{width: progress}}></div></div>
-                <p className={styles.progressPercentage}>{progress.toFixed(2)}%</p>
+                <div className={'h-1.5 rounded mx-2 overflow-hidden bg-green-400 bg-opacity-30'} style={{width: 100, overflow: 'hidden'}}><div className={'h-1.5 rounded bg-green-500'} style={{width: progress}}></div></div>
+                <p className={''}>{progress.toFixed(0)}%</p>
             </div>
     )
 }

@@ -14,6 +14,7 @@ const Gallery = (props) => {
     const { _gallery } = props;
 
     const [index, setIndex] = useState(0);
+    const [isLoading, setIsLoading] = useState(false);
     const [grid, setGrid] = useState(2);
     const [text, setText] = useState('');
     const [gallery, setGallery] = useState([]);
@@ -65,6 +66,10 @@ const Gallery = (props) => {
 
     useEffect(() => {
         setGallery(_gallery)
+        if (_gallery?.length === 0) {
+            setIsLoading(true);
+            fetchGallery();
+        }
         return () => {
             fetchGallery()
         }
@@ -75,10 +80,12 @@ const Gallery = (props) => {
             const response = await fetch(`${BASE_URL}/gallery/`);
             const gallery = await response.json();
             props.setGallery(gallery);
+            setIsLoading(false);
             return gallery;
         }
         catch (err) {
             console.log(err, 'Received error');
+            setIsLoading(false);
         }
     };
 

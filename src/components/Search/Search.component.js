@@ -47,9 +47,7 @@ const Search = (props) => {
                 </ul>
             </div>
             {newButton && (
-                <div className={'styles.buttonContainer'}>
-                    <button className={'flex ml-2 items-center text-sm text-primary bg-white shadow-md p-1.5 px-4 rounded-3xl text-white transition duration-500 ease-in-out hover:shadow-2xl'} onClick={() => setIsOpen(true)}><IoAddCircleOutline className="mr-1.5" /> {title}</button>
-                </div>
+                    <button className={'flex outline-none ml-2 items-center justify-center text-sm text-primary bg-white shadow-md p-1.5 md:px-4 rounded-3xl text-white transition duration-500 ease-in-out hover:shadow-2xl'} onClick={() => setIsOpen(true)}><IoAddCircleOutline className="md:mr-1.5" /> <span className="hidden md:inline-block">{title}</span></button>
             )}
         </div>
     )

@@ -81,8 +81,9 @@ const FinanceList = (props) => {
     }
 
     return (
-        <div className={isDetail ? styles.listContainerDetail : styles.listContainer}>
+        <div className={'isDetail ? styles.listContainerDetail : styles.listContainer'}>
             <RouteIndicator route="Dashboard" current="Finances" />
+            <div className="sticky -top-4 md:top-3 z-40 pt-1">
             <Search 
                 placeholder="Search" 
                 isOpen={isOpen} 
@@ -93,7 +94,8 @@ const FinanceList = (props) => {
                 filter={filter} 
                 setFilter={setFilter}
                 text={text}
-                setText={setText} />
+                    setText={setText} />
+            </div>
             {isLoading ? <div className={styles.actCenter}><Activity2 /></div> : Object.values(purchases).map((finances, index) => 
             <>
                 <h2 className={styles.durationTitle}>{DateString(Object.keys(purchases)[index])}</h2>

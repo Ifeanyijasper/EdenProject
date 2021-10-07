@@ -68,6 +68,7 @@ const CheckoutList = (props) => {
     return (
         <div className={isDetail ? styles.listContainerDetail : styles.listContainer}>
             <RouteIndicator route="Dashboard" current="Checkouts" />
+            <div className="sticky -top-4 md:top-3 z-40 pt-1">
             <Search 
                 placeholder="Search" 
                 isOpen={isOpen} 
@@ -77,7 +78,8 @@ const CheckoutList = (props) => {
                 filter={filter} 
                 setFilter={setFilter}
                 text={text}
-                setText={setText} />
+                    setText={setText} />
+                </div>
             {/* <h2 className={styles.durationTitle}>Today</h2> */}
             <div className={styles.tableContainer}>
                 <table className={styles.table}>

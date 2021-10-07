@@ -25,6 +25,10 @@ const Testimonials = (props) => {
 
     useEffect(() => {
         setTestimonials(_testimonials)
+        if (_testimonials?.length === 0) {
+            setIsLoading(true);
+            fetchTestimonials();
+        }
         return () => {
             fetchTestimonials()
         }
@@ -35,10 +39,12 @@ const Testimonials = (props) => {
             const response = await fetch(`${BASE_URL}/testimonial/`);
             const testimonials = await response.json();
             props.setTestimonials(testimonials);
+            setIsLoading(false);
             return testimonials;
         }
         catch (err) {
             console.log(err, 'Received error');
+            setIsLoading(false);
         }
     };
 

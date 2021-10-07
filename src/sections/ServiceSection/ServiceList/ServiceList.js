@@ -44,6 +44,10 @@ const ServiceList = (props) => {
 
     useEffect(() => {
         setServices(_services)
+        if (_services?.length === 0) {
+            setIsLoading(true);
+            fetchServices();
+        }
         return () => {
             fetchServices()
         }
@@ -54,10 +58,12 @@ const ServiceList = (props) => {
             const response = await fetch(`${BASE_URL}/service/`);
             const services = await response.json();
             props.setServices(services);
+            setIsLoading(false);
             return services;
         }
         catch (err) {
             console.log(err, 'Received error');
+            setIsLoading(false)
         }
     };
 
