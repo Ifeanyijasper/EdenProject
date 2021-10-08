@@ -82,27 +82,33 @@ const CheckoutList = (props) => {
                 </div>
             {/* <h2 className={styles.durationTitle}>Today</h2> */}
             <div className={styles.tableContainer}>
-                <table className={styles.table}>
-                    <thead className={styles.tableHead}>
-                        <td className={styles.tableHeadData}>Client Name</td>
-                        <td className={styles.tableHeadData}>Time</td>
-                        <td className={styles.tableHeadData}>Status</td>
-                        <td className={styles.tableHeadData}>Bonus</td>
-                        <td className={styles.tableHeadData}>Total</td>
-                        <td className={styles.tableHeadData}>Details</td>
+                <table className={"min-w-full rounded-xl my-3 overflow-hidden border-collapse block md:table"}>
+                    <thead className={"block md:table-header-group"}>
+                        <tr className="md:border-none block md:table-row absolute -top-full md:top-auto -left-full md:left-auto  md:relative">
+                        <td className={"bg-primary text-lg p-3.5 text-gray-100 font-semibold md:border md:border-grey-500 text-left block md:table-cell"}>Client Name</td>
+                        <td className={"bg-primary text-lg p-3.5 text-gray-100 font-semibold md:border md:border-grey-500 text-left block md:table-cell"}>Time</td>
+                        <td className={"bg-primary text-lg p-3.5 text-gray-100 font-semibold md:border md:border-grey-500 text-left block md:table-cell"}>Status</td>
+                        <td className={"bg-primary text-lg p-3.5 text-gray-100 font-semibold md:border md:border-grey-500 text-left block md:table-cell"}>Bonus</td>
+                        <td className={"bg-primary text-lg p-3.5 text-gray-100 font-semibold md:border md:border-grey-500 text-left block md:table-cell"}>Total</td>
+                        <td className={"bg-primary text-lg p-3.5 text-gray-100 font-semibold md:border md:border-grey-500 text-left block md:table-cell"}>Actions</td>
+                        </tr>
                     </thead>
+                    <tbody className="block md:table-row-group">
                     {isLoading ? (<td colSpan={5} style={{margin: 'auto', paddingTop: '10px'}}><Activity2 /></td>) : checkouts.map((checkout, index) => 
-                        (<tr className={styles.tableRow}>
-                            <td className={styles.tableData}>{checkout.client}</td>
-                            <td className={styles.tableData}>{new Date(checkout.date).toLocaleTimeString('en-US')}</td>
-                            <td className={styles.tableData}>{checkout.status}</td>
-                            <td className={styles.tableData}>{checkout.bonus}</td>
-                            <td className={styles.tableData}>{checkout.amount}</td>
-                            <td className={styles.tableData}><button className={styles.tableButton} onClick={() => showDetail(checkout)}>Details</button></td>
+                        (<tr className={"bg-white py-2 px-3 md:p-3 md:border-none block md:table-row"}>
+                            <td className={"py-2 px-3 md:p-3 md:border md:border-grey-500 text-left block md:table-cell"}><span class="inline-block w-1/3 md:hidden font-bold">Client Name</span>{checkout.client}</td>
+                            <td className={"py-2 px-3 md:p-3 md:border md:border-grey-500 text-left block md:table-cell"}><span class="inline-block w-1/3 md:hidden font-bold">Time</span>{new Date(checkout.date).toLocaleTimeString('en-US')}</td>
+                            <td className={"py-2 px-3 md:p-3 md:border md:border-grey-500 text-left block md:table-cell"}><span class="inline-block w-1/3 md:hidden font-bold">Status</span>{checkout.status}</td>
+                            <td className={"py-2 px-3 md:p-3 md:border md:border-grey-500 text-left block md:table-cell"}><span class="inline-block w-1/3 md:hidden font-bold">Bonus</span>{checkout.bonus}</td>
+                            <td className={"py-2 px-3 md:p-3 md:border md:border-grey-500 text-left block md:table-cell"}><span class="inline-block w-1/3 md:hidden font-bold">Total</span>{checkout.amount}</td>
+                        <td className={"py-2 px-3 md:p-3 md:border md:border-grey-500 text-left block md:table-cell"}>
+                            <span class="inline-block w-1/3 md:hidden font-bold">Actions</span>
+                            <button className={`outline-none text-sm text-primary font-semibold rounded tracking-wider cursor-pointer py-1.5 px-2.5 shadow-md`} onClick={() => showDetail(checkout)}>Details</button>
+                        </td>
                         </tr>)
                     )
                     }
-                    
+                    </tbody>
                 </table>
             </div>
             {/* <NewPurchase isOpen={isOpen} setIsOpen={setIsOpen} /> */}
