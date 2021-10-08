@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import {IoPeople, IoWalk } from 'react-icons/io5';
 import { connect } from 'react-redux';
-import { MiniProgressBar, ClientCard, RouteIndicator, Activity2 } from '../../components';
+import { bindActionCreators } from 'redux';
 
+import { setWorkers, setClients } from '../../redux/Actions/Data.actions';
+import { MiniProgressBar, ClientCard, RouteIndicator, Activity2 } from '../../components';
 import { BASE_URL } from '../../utils/globalVariable';
 
 const Dashboard = (props) => {
@@ -46,7 +48,9 @@ const Dashboard = (props) => {
                 });
                 console.log(_clients)
                 setWorkers(_workers.sort((a,b) => { return b.served - a.served}));
-                setClients(_clients.sort((a,b) => { return b.served - a.served}));
+                setClients(_clients.sort((a, b) => { return b.served - a.served }));
+                props.setWorkers(_workers.sort((a,b) => { return b.served - a.served}));
+                props.setClients(_clients.sort((a,b) => { return b.served - a.served}));
                 setIsLoading(false);
             })
             .catch(err => {
@@ -125,4 +129,8 @@ const mapStateToProps = ({auth}) => {
   }
 }
 
-export default connect(mapStateToProps)(Dashboard);
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({ setClients, setWorkers }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

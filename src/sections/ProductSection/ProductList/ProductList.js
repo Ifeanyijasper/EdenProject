@@ -45,7 +45,7 @@ const ProductList = (props) => {
         return () => {
             fetchProducts()
         }
-    }, []);
+    }, [_products]);
 
     const fetchProducts = async () => {
         try {

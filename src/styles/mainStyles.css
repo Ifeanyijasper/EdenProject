@@ -90,23 +90,23 @@ body::-webkit-scrollbar-track {
 }
 
 .overflowY::-webkit-scrollbar {
-    width: .0rem;
+    width: .2rem;
     background-color: transparent;
-    margin: 10rem 0;
+    margin: 4rem;
 }
 
 .overflowY::-webkit-scrollbar-thumb {
-    width: .0rem;
-    background-color: #B45309;
+    width: .2rem;
+    background-color: #10B981;
     border-radius: 2rem;
-    margin: 10rem 0;
+    margin: 4rem;
 }
 
 .overflowY::-webkit-scrollbar-track {
-    width: 0.0rem;
+    width: 0.2rem;
     border-radius: 2rem;
-    margin: 10rem 0;
-    background-color: #fde68a9d;
+    margin: 4rem;
+    background-color: #a7f3d033;
 }
 
 .bg-sec {

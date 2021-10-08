@@ -3,11 +3,11 @@ import {Route, Switch} from 'react-router';
 
 import styles from './Dashboard.module.css';
 import { 
+    AdminGallery,
     Checkout,
     ClientSection, 
     Dashboard, 
-    FinanceSection, 
-    Nav, 
+    FinanceSection,
     ProductSection, 
     Profile, 
     ServiceSection, 
@@ -39,6 +39,7 @@ const DashBoard = () => {
                     <Route path="/dashboard/products" component={ProductSection} />
                     <Route path="/dashboard/services" component={ServiceSection} />
                     <Route path="/dashboard/profile" component={Profile} />
+                    <Route path="/dashboard/gallery" component={AdminGallery} />
                 </Switch>
             </WorkArea>
         </div>

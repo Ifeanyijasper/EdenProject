@@ -51,7 +51,7 @@ const ServiceList = (props) => {
         return () => {
             fetchServices()
         }
-    }, []);
+    }, [_services]);
 
     const fetchServices = async () => {
         try {

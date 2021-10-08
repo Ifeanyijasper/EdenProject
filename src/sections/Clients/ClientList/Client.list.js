@@ -21,12 +21,10 @@ const ClientList = (props) => {
     const {
         setDetail, 
         setIsDetail, 
-        isDetail, 
         detail, 
         username, 
         password,
         _clients,
-        refresh,
     } = props;
     const [isOpenAdd, setIsOpenAdd] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -34,7 +32,7 @@ const ClientList = (props) => {
     const [text, setText] = useState('');
     const [notify, setNotify] = useState(false);
     const [filter, setFilter] = useState('');
-    const [purchases, setPurchases] = useState([])
+    // const [purchases, setPurchases] = useState([])
     const [filters] = useState([
         'Username',
         'Fullname'
@@ -51,7 +49,7 @@ const ClientList = (props) => {
                     },
                 });
                 const registered = await response.json();
-                setPurchases(registered);
+                // setPurchases(registered);
                 return registered;
             }
             catch(err) {
@@ -63,7 +61,7 @@ const ClientList = (props) => {
     useEffect(() => {
         search(text, _clients, setClients, filter.toLowerCase());
     }, [text]);
-    
+
     useEffect(() => {
         setClients(_clients)
         if (_clients?.length === 0) {
@@ -73,7 +71,7 @@ const ClientList = (props) => {
         return () => {
             fetchClients()
         }
-    }, []);
+    }, [_clients]);
 
     const fetchClients = async () => {
         try {

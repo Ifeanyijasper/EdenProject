@@ -33,6 +33,7 @@ import ClientCheckout from './ClientCheckout/Checkout.section';
 import AddTestimonial from './AddTestimonial/AddTestimonial.section';
 import Testimonials from './Testimonials/Testimonials.section';
 import Gallery from './Gallery/gallery.section';
+import AdminGallery from './Gallery/admingallery.section';
 
 export {
     SideNav, 
@@ -70,4 +71,5 @@ export {
     AddTestimonial,
     Testimonials,
     Gallery,
+    AdminGallery,
 }

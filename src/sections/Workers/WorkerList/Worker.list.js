@@ -18,12 +18,10 @@ const WorkerList = (props) => {
     const {
         setDetail,
         setIsDetail,
-        isDetail,
         detail,
         username,
         password,
         _workers,
-        refresh,
     } = props;
     const [loading, setLoading] = useState(false);
     const [isOpenAdd, setIsOpenAdd] = useState(false);
@@ -36,21 +34,6 @@ const WorkerList = (props) => {
         'Fullname',
     ])
     const [workers, setWorkers] = useState([]);
-
-    useEffect(() => {
-        search(text, _workers, setWorkers, filter.toLowerCase());
-    }, [text, setText, _workers, filter]);
-
-    useEffect(() => {
-        setWorkers(_workers)
-        if (_workers?.length === 0) {
-            setLoading(true);
-            fetchWorkers();
-        }
-        return () => {
-            fetchWorkers()
-        }
-    }, []);
 
     const fetchWorkers = async () => {
         try {
@@ -78,6 +61,21 @@ const WorkerList = (props) => {
         }
     };
 
+    useEffect(() => {
+        search(text, _workers, setWorkers, filter.toLowerCase());
+    }, [text, setText, _workers, filter]);
+
+    useEffect(() => {
+        setWorkers(_workers)
+        if (_workers?.length === 0) {
+            setLoading(true);
+            fetchWorkers();
+        }
+        return () => {
+            fetchWorkers()
+        }
+    }, [_workers]);
+
 
     return (
         <div className={'isDetail ? styles.listContainerDetail : styles.listContainer'}>
@@ -97,12 +95,11 @@ const WorkerList = (props) => {
     )
 };
 
-const mapStateToProps = ({auth, data, refresh}) => {
+const mapStateToProps = ({auth, data}) => {
     return {
         username: auth.username,
         password: auth.password,
         _workers: data.workers,
-        refresh: refresh.refresh,
     }
 }
 
