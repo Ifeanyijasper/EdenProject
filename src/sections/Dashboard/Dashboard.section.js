@@ -3,12 +3,12 @@ import {IoPeople, IoWalk } from 'react-icons/io5';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { setWorkers, setClients } from '../../redux/Actions/Data.actions';
+import { setWorkers, setClients, setFinances, setCheckouts } from '../../redux/Actions/Data.actions';
 import { MiniProgressBar, ClientCard, RouteIndicator, Activity2 } from '../../components';
 import { BASE_URL } from '../../utils/globalVariable';
 
 const Dashboard = (props) => {
-    const { username, password } = props;
+    const { username, password, _clients, _workers } = props;
     const [isSearch, setIsSearch] = useState(true);
     const [users, setUsers] = useState([]);
     const [stats, setStats] = useState({
@@ -25,6 +25,14 @@ const Dashboard = (props) => {
         'Name',
         'Invited',
     ])
+
+    useEffect(() => {
+        setClients(_clients);
+        setWorkers(_workers);
+        return () => {
+
+        }
+    }, [])
 
     useEffect(() => {
         setIsLoading(true);
@@ -46,7 +54,6 @@ const Dashboard = (props) => {
                     client: _clients.length,
                     worker: _workers.length,
                 });
-                console.log(_clients)
                 setWorkers(_workers.sort((a,b) => { return b.served - a.served}));
                 setClients(_clients.sort((a, b) => { return b.served - a.served }));
                 props.setWorkers(_workers.sort((a,b) => { return b.served - a.served}));
@@ -61,6 +68,69 @@ const Dashboard = (props) => {
                     message: 'Invalid username or password.'
                 })
             })
+    }, []);
+
+    useEffect(() => {
+        setIsLoading(true);
+        fetch(`${BASE_URL}/purchase/`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Basic ' + Buffer.from(username + ':' + password).toString('base64'),
+            },
+        })
+            .then(res => {
+                const response = res.json();
+                return response;
+            })
+            .then(res => {
+                let _res = res.reverse();
+                let obj = {};
+                const data = (finances) => {
+                    finances.map((i) => {
+                        let _date = new Date(i.date).toLocaleDateString()
+                        if (obj[_date] === undefined) {
+                            obj[_date] = [i];
+                        } else {
+                            obj[_date].push(i);
+                        }
+                    });
+                    return obj;
+                }
+                let sortedData = data(_res);
+                props.setFinances(sortedData);
+                setIsLoading(false);
+            })
+            .catch(err => {
+                console.log(err);
+                setIsLoading(false);
+            })
+        
+    }, []);
+
+    useEffect(() => {
+        setIsLoading(true);
+        fetch(`${BASE_URL}/Checkout/`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Basic ' + Buffer.from(username + ':' + password).toString('base64'),
+            },
+        })
+            .then(res => {
+                const response = res.json();
+                return response;
+            })
+            .then(res => {
+                let  _res = res.reverse();
+                props.setCheckouts(_res);
+                setIsLoading(false);
+            })
+            .catch(err => {
+                console.log(err);
+                setIsLoading(false);
+            })
+        
     }, []);
 
     const nothing = () => {
@@ -122,15 +192,17 @@ const Dashboard = (props) => {
     )
 };
 
-const mapStateToProps = ({auth}) => {
-  return {
-    username: auth.username,
-    password: auth.password,
-  }
-}
+const mapStateToProps = ({ auth, data }) => {
+    return {
+        username: auth.username,
+        password: auth.password,
+        _clients: data.clients,
+        _workers: data.workers,
+    }
+};
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ setClients, setWorkers }, dispatch);
+    return bindActionCreators({ setClients, setWorkers, setFinances, setCheckouts }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

@@ -102,7 +102,7 @@ const ClientList = (props) => {
 
 
     return (
-        <div className={'isDetail ? styles.listContainerDetail : styles.listContainer'}>
+        <div className={''}>
             <RouteIndicator route="Dashboard" current="Clients" />
             <div className="sticky -top-4 md:top-3 z-40 pt-1">
             <Search 

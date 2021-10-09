@@ -1,4 +1,4 @@
-import { SET_CLIENTS, SET_DATA, SET_GALLERY, SET_OBJDATA, SET_PRODUCTS, SET_SERVICES, SET_TEST, SET_WORKERS } from '../types';
+import { SET_CHECKOUTS, SET_CLIENTS, SET_DATA, SET_FINANCES, SET_GALLERY, SET_OBJDATA, SET_PRODUCTS, SET_SERVICES, SET_TEST, SET_WORKERS } from '../types';
 
 export const setData = (data) => {
     return {
@@ -52,6 +52,20 @@ export const setClients = (data) => {
 export const setWorkers = (data) => {
     return {
         type: SET_WORKERS,
+        payload: data,
+    }
+};
+
+export const setFinances = (data) => {
+    return {
+        type: SET_FINANCES,
+        payload: data,
+    }
+};
+
+export const setCheckouts = (data) => {
+    return {
+        type: SET_CHECKOUTS,
         payload: data,
     }
 };

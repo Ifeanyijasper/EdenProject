@@ -20,3 +20,5 @@ export const SET_GALLERY = 'set_gallery';
 export const SET_TEST = 'set_test';
 export const SET_CLIENTS = 'set_clients';
 export const SET_WORKERS = 'set_workers';
+export const SET_FINANCES = 'set_finances';
+export const SET_CHECKOUTS = 'set_checkouts';

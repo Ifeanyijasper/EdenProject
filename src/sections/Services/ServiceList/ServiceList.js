@@ -19,7 +19,7 @@ const ServiceList = (props) => {
         isDetail,
         setIsDetail,
         setDetail,
-        data,
+        _services,
         refresh,
     } = props;
 
@@ -40,25 +40,34 @@ const ServiceList = (props) => {
     }
 
     useEffect(() => {
-        search(text, data, setServices, filter.toLowerCase());
-    }, [text])
+        search(text, _services, setServices, filter.toLowerCase());
+    }, [text]);
+
 
     useEffect(() => {
-        setIsLoading(true);
-        fetch(`${BASE_URL}/service/`)
-            .then(res => {
-                const response = res.json();
-                return response;
-            })
-            .then(res => {
-                setServices(res);
-                props.setData(res);
-                setIsLoading(false);
-            })
-            .catch(err => {
-                setIsLoading(false);
-            })
-    }, [isOpenAdd, refresh]);
+        setServices(_services)
+        if (_services?.length === 0) {
+            setIsLoading(true);
+            fetchServices();
+        }
+        return () => {
+            fetchServices()
+        }
+    }, [_services]);
+
+    const fetchServices = async () => {
+        try {
+            const response = await fetch(`${BASE_URL}/service/`);
+            const services = await response.json();
+            props.setServices(services);
+            setIsLoading(false);
+            return services;
+        }
+        catch (err) {
+            console.log(err, 'Received error');
+            setIsLoading(false)
+        }
+    };
 
     return (
         <div className={'isDetail ? styles.listContainerDetail : styles.listContainer'}>
@@ -89,7 +98,7 @@ const ServiceList = (props) => {
 
 const mapStateToProps = ({data, refresh}) => {
     return {
-        data: data.data,
+        _services: data.services,
         refresh: refresh.refresh,
     }
 }

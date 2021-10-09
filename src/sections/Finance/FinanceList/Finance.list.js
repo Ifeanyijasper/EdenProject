@@ -8,7 +8,7 @@ import { NewPurchase } from "../..";
 import { Activity2, RouteIndicator, Search } from "../../../components";
 import styles from './FinanceList.module.css';
 import { BASE_URL } from "../../../utils/globalVariable";
-import { setObjData } from '../../../redux/Actions/Data.actions';
+import { setObjData, setFinances } from '../../../redux/Actions/Data.actions';
 import { DateString } from "../../../utils/date";
 import searchObj from "../../../utils/searchObj";
 
@@ -19,61 +19,74 @@ const FinanceList = (props) => {
         username,
         password,
         setDetail,
-        data,
-        refresh,
+        _finances,
     } = props;
     const [isOpen, setIsOpen] = useState(false);
     const [text, setText] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [purchases, setPurchases] = useState({});
+    const [msg, setMsg] = useState({});
+    const [notify, setNotify] = useState(false);
     const [filter, setFilter] = useState('');
     const [filters] = useState([
         'Month'
     ]);
 
-    useEffect(() => {
-        searchObj(text, data, setPurchases, filter.toLowerCase());
-    }, [text]);
+
+     useEffect(() => {
+        setPurchases(_finances)
+        if (_finances?.length === 0) {
+            setIsLoading(true);
+            fetchPurchases();
+        }
+        return () => {
+            fetchPurchases()
+        }
+     }, [_finances]);
+
+    const fetchPurchases = async () => {
+        try {
+            const response = await fetch(`${BASE_URL}/purchase/`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Basic ' + Buffer.from(username + ':' + password).toString('base64'),
+                },
+            });
+            let purchases = await response.json();
+            purchases = purchases.reverse();
+            console.log(purchases)
+            let obj = {};
+            const data = (finances) => {
+                finances.map((i) => {
+                    let _date = new Date(i.date).toLocaleDateString()
+                    if (obj[_date] === undefined) {
+                        obj[_date] = [i];
+                    } else {
+                        obj[_date].push(i);
+                    }
+                });
+                return obj;
+            }
+            purchases = data(purchases);
+            props.setFinances(purchases);
+            setIsLoading(false);
+            return purchases;
+        }
+        catch (err) {
+            console.log(err, 'Received error');
+            setIsLoading(false);
+            setNotify(true);
+            setMsg({
+                title: 'Authentication',
+                message: 'Invalid username or password.'
+            })
+        }
+    };
 
     useEffect(() => {
-        setIsLoading(true);
-        fetch(`${BASE_URL}/purchase/`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Basic ' + Buffer.from(username + ':' + password).toString('base64'),
-            },
-        })
-            .then(res => {
-                const response = res.json();
-                return response;
-            })
-            .then(res => {
-                let _res = res.reverse();
-                let obj = {};
-                const data = (finances) => {
-                    finances.map((i) => {
-                        let _date = new Date(i.date).toLocaleDateString()
-                        if (obj[_date] === undefined) {
-                            obj[_date] = [i];
-                        } else {
-                            obj[_date].push(i);
-                        }
-                    });
-                    return obj;
-                }
-                let sortedData = data(_res);
-                props.setObjData(sortedData);
-                console.log(sortedData)
-                setPurchases(sortedData);
-                setIsLoading(false);
-            })
-            .catch(err => {
-                console.log(err);
-                setIsLoading(false);
-            })
-        
-    }, [isOpen, refresh]);
+        searchObj(text, _finances, setPurchases, filter.toLowerCase());
+    }, [text]);
 
     const showDetail = (purchase) => {
         setIsDetail(!isDetail);
@@ -149,13 +162,13 @@ const mapStateToProps = ({auth, data, refresh}) => {
     return {
         username: auth.username,
         password: auth.password,
-        data: data.objdata,
+        _finances: data.finances,
         refresh: refresh.refresh,
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({setObjData}, dispatch)
+    return bindActionCreators({setObjData, setFinances}, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(FinanceList);

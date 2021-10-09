@@ -11,7 +11,7 @@ import {
 import { BASE_URL } from '../../../utils/globalVariable';
 import styles from './ProductList.module.css';
 import search from '../../../utils/search';
-import {setData} from '../../../redux/Actions/Data.actions';
+import {setData, setProducts} from '../../../redux/Actions/Data.actions';
 import { connect } from 'react-redux';
 
 const ProductList = (props) => {
@@ -19,8 +19,7 @@ const ProductList = (props) => {
         isDetail,
         setIsDetail,
         setDetail,
-        data,
-        refresh,
+        _products,
     } = props;
 
     const [isOpenAdd, setIsOpenAdd] = useState(false);
@@ -40,25 +39,33 @@ const ProductList = (props) => {
     }
 
     useEffect(() => {
-        search(text, data, setProducts, filter.toLowerCase());
+        search(text, _products, setProducts, filter.toLowerCase());
     }, [text]);
 
     useEffect(() => {
-        setIsLoading(true);
-        fetch(`${BASE_URL}/product/`)
-            .then(res => {
-                const response = res.json();
-                return response;
-            })
-            .then(res => {
-                setProducts(res);
-                props.setData(res);
-                setIsLoading(false);
-            })
-            .catch(err => {
-                setIsLoading(false);
-            })
-    }, [isOpenAdd, refresh])
+        setProducts(_products)
+        if (_products?.length === 0) {
+            setIsLoading(true);
+            fetchProducts()
+        }
+        return () => {
+            fetchProducts()
+        }
+    }, [_products]);
+
+    const fetchProducts = async () => {
+        try {
+            const response = await fetch(`${BASE_URL}/product/`);
+            const products = await response.json();
+            props.setProducts(products);
+            setIsLoading(false)
+            return products;
+        }
+        catch (err) {
+            console.log(err, 'Received error');
+            setIsLoading(false)
+        }
+    };
 
     return (
         <div className={isDetail ? styles.listContainerDetail : styles.listContainer}>
@@ -89,13 +96,13 @@ const ProductList = (props) => {
 
 const mapStateToProps = ({data, refresh}) => {
     return {
-        data: data.data,
+        _products: data.products,
         refresh: refresh.refresh,
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({setData}, dispatch)
+    return bindActionCreators({setData, setProducts}, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductList);
