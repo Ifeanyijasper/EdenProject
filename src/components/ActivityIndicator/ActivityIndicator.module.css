@@ -1,7 +1,5 @@
 .spinner {
     display: inline-block;
-    width: 3rem;
-    height: 3rem;
 }
 
 .spinner:after {

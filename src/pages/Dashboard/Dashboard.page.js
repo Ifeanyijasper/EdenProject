@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {Route, Switch} from 'react-router';
 
 import styles from './Dashboard.module.css';
 import { 
+    AdminGallery,
     Checkout,
     ClientSection, 
     Dashboard, 
-    FinanceSection, 
+    FinanceSection,
     ProductSection, 
     Profile, 
     ServiceSection, 
@@ -16,8 +17,17 @@ import {
 import {WorkArea} from '../../components';
 
 const DashBoard = () => {
+    const [show, setShow] = useState(false);
+
+    useEffect(() => {
+        setShow(false);
+        setTimeout(() => {
+            setShow(true);
+        }, 3000);
+    }, []);
+
     return (
-        <div className={styles.dashboard}>
+        <div className={`h-screen overflow-hidden md:p-0 lg:p-4 flex flex-col md:flex-row ${show ? 'flex' : 'opacity-0'}`}>
             <SideNav />
             <WorkArea>
                 <Switch>
@@ -29,6 +39,7 @@ const DashBoard = () => {
                     <Route path="/dashboard/products" component={ProductSection} />
                     <Route path="/dashboard/services" component={ServiceSection} />
                     <Route path="/dashboard/profile" component={Profile} />
+                    <Route path="/dashboard/gallery" component={AdminGallery} />
                 </Switch>
             </WorkArea>
         </div>

@@ -154,8 +154,8 @@ USE_TZ = True
 #)
 #STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 #STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-AWS_ACCESS_KEY_ID = 'W3CWL7QANDAH4SPMKH7R'
-AWS_SECRET_ACCESS_KEY = 'Vv3bAARN+uhmwK6EU0w7c/+AuEXPKGLmreLzsNv9wag'
+AWS_ACCESS_KEY_ID = '7VA6LDKPHVVPOLMVP6HJ'
+AWS_SECRET_ACCESS_KEY = 'R5ViwggvAh0gnTsiDVQ6XcFsbkJhY0p2YNsYUhNUkPw'
 AWS_STORAGE_BUCKET_NAME = 'open-eden-spaces'
 AWS_S3_ENDPOINT_URL = 'https://nyc3.digitaloceanspaces.com'
 AWS_S3_OBJECT_PARAMETERS = {

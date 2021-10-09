@@ -16,8 +16,8 @@ import {setData} from '../../../redux/Actions/Data.actions';
 
 const ServiceList = (props) => {
     const {
-        isDetail, 
-        setIsDetail, 
+        isDetail,
+        setIsDetail,
         setDetail,
         data,
         refresh,
@@ -61,29 +61,31 @@ const ServiceList = (props) => {
     }, [isOpenAdd, refresh]);
 
     return (
-        <div className={isDetail ? styles.listContainerDetail : styles.listContainer}>
+        <div className={'isDetail ? styles.listContainerDetail : styles.listContainer'}>
             <RouteIndicator route="Dashboard" current="Services" />
-            <Search placeholder="Search" isOpen={isOpenAdd} setIsOpen={setIsOpenAdd} newButton={true} title={'Service'} filters={filters} filter={filter} setFilter={setFilter} text={text} setText={setText} />
-            { text.length <= 0 &&   <>
-                    <h2 className={styles.serviceTitle}>Top 6 Services</h2>
-                    <hr className={styles.horizontalLine} />
-                    <div className={styles.serviceContainer}>
-                        {isLoading ? (<Activity2 />) : services.map((service, index) => ((Math.floor(Number(service.discount)) < 10 && index < 6)&&
+            <div className="sticky -top-4 md:top-3 z-40 pt-1">
+                <Search placeholder="Search" isOpen={isOpenAdd} setIsOpen={setIsOpenAdd} newButton={true} title={'Service'} filters={filters} filter={filter} setFilter={setFilter} text={text} setText={setText} />
+            </div>
+            {text.length <= 0 && <>
+                <h2 className={'text-gray-500 text-2xl mt-3 mx-2'}>Top 6 Services</h2>
+                <hr className={styles.horizontalLine} />
+                <div className={`py-10 lg:px-12 grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-7 flex justify-center`}>
+                    {isLoading ? (<Activity2 />) : services.map((service, index) => ((Math.floor(Number(service.discount)) < 10 && index < 6) &&
                         <ItemCard item={service} onClick={() => showDetails(service)} key={service.id} />
-                        ))}
-                    </div>
-                </>
+                    ))}
+                </div>
+            </>
             }
             <hr className={styles.horizontalLine} />
-            <h2 className={styles.serviceTitle}>{services.length || 0} Services</h2>
+            <h2 className={'text-gray-500 text-2xl mt-3 mx-2'}>{services.length || 0} Services</h2>
             <hr className={styles.horizontalLine} />
-            <div className={styles.serviceContainer}>
-                {isLoading ? (<Activity2 />) :services.map((service, index) => <ItemCard item={service} onClick={() => showDetails(service)} />)}
+            <div className={`py-10 lg:px-12 grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-7 flex justify-center`}>
+                {isLoading ? (<Activity2 />) : services.map((service, index) => <ItemCard item={service} onClick={() => showDetails(service)} />)}
             </div>
             <AddService isOpen={isOpenAdd} setIsOpen={setIsOpenAdd} />
         </div>
     )
-}
+};
 
 const mapStateToProps = ({data, refresh}) => {
     return {

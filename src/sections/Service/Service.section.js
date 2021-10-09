@@ -47,7 +47,7 @@ const Service = (props) => {
         <div className={styles.listContainer}>
             <Search placeholder="Search" newButton={false} title={'Service'} filters={filters} filter={filter} setFilter={setFilter} text={text} setText={setText} />
             <hr className={styles.horizontalLine} />
-                <h2 className={styles.productTitle}>{services.length || 0} Service{services.length !== 1 && 's'}</h2>
+                <h2 className={`text-gray-800 bg-white text-center text-xl lg:text-2xl pt-7 pb-1`}>{services.length || 0} Service{services.length !== 1 && 's'}</h2>
             <hr className={styles.horizontalLine} />
             <div className={styles.productContainer}>
                 {services.map((service, index) => <ItemCard item={service} add={true} onClick={() => active()} key={service.id} />)}

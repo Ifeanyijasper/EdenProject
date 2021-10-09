@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { MiniProgressBar } from '..';
-import extractInitials from '../../utils/extractIni';
+import React from 'react';
 
-import styles from './ClientsCard.module.css';
+import extractInitials from '../../utils/extractIni';
+import { Hyphenated } from '../../utils/number';
+
 
 const ClientsCard = (props) => {
     const {client, setDetail, setIsDetail} = props;
@@ -12,18 +12,18 @@ const ClientsCard = (props) => {
     }
 
     return (
-        <div className={styles.clientCard} onClick={() => showDetails()}>
-            <div className={styles.clientContainer}>
+        <div className={'h-auto w-48 lg:w-60 bg-primary rounded-md flex justify-between items-center py-3 px-2'} onClick={() => showDetails()}>
+            <div className={'flex justify-center flex-col items-center'}>
                 {client.img ? (
-                    <img src={client.img} alt="Admin Name" className={styles.clientImage} />
+                    <img src={client.img} alt="Admin Name" className={'h-12 lg:h-16 w-12 lg:w-16 rounded-full bg-center bg-cover'} />
                 ) : (
-                    <h3 className={styles.clientIni}>{client.fullname ? extractInitials(client.fullname) : extractInitials(client.username)}</h3>
+                    <h3 className={'h-12 lg:h-16 w-12 lg:w-16 rounded-full text-gray-50 text-lg lg:text-2xl tracking-widest border-2 border-gray-200 flex justify-center items-center'}>{client.fullname ? extractInitials(client.fullname) : extractInitials(client.username)}</h3>
                 )}
                 
             </div>
-            <div className={styles.workerDetails}>
-                <p className={styles.clientName}>{client.fullname || client.username}</p>
-                <p className={styles.workerDetailsText}>Contact: {client.phone || 0}</p>
+            <div className={'flex flex-col ml-2 lg:ml-3 mr-auto'}>
+                <p className={'text-gray-100 text-sm lg:text-base font-semibold mb-1'}>{client.fullname.substr(0, 15) || client.username}</p>
+                <p className={'text-xs text-gray-400'}>Contact: {Hyphenated(client.phone) || 0}</p>
             </div>
            {/* <MiniProgressBar progress={client.friend_name || 0} /> */}
         </div>
