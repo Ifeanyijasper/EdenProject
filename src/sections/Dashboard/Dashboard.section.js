@@ -6,11 +6,13 @@ import { bindActionCreators } from 'redux';
 import { setWorkers, setClients, setFinances, setCheckouts } from '../../redux/Actions/Data.actions';
 import { MiniProgressBar, ClientCard, RouteIndicator, Activity2 } from '../../components';
 import { BASE_URL } from '../../utils/globalVariable';
+import { ClientDetail, WorkerDetail } from '..';
 
 const Dashboard = (props) => {
     const { username, password, _clients, _workers } = props;
-    const [isSearch, setIsSearch] = useState(true);
-    const [users, setUsers] = useState([]);
+    const [worker, setWorker] = useState(false);
+    const [detail, setDetail] = useState({});
+    const [client, setClient] = useState(false);
     const [stats, setStats] = useState({
         client: 20,
         worker: 20,
@@ -176,7 +178,7 @@ const Dashboard = (props) => {
             </div>
             <div className={'grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-5 px-0 md:px-2 lg:px-10 mt-4 md:mt-6'}>
                 {isLoading ? (<Activity2 />) : workers.map((worker, index) => ((index < Number((workers.length * 0.2).toFixed(0))) &&
-                    <ClientCard client={worker} key={index} />
+                    <ClientCard client={worker} setDetail={setDetail} setIsDetail={setWorker} key={worker.id} />
                 ))}
             </div>
             <div className={''}>
@@ -185,9 +187,11 @@ const Dashboard = (props) => {
             </div>
             <div className={'grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-5 px-0 md:px-2 lg:px-10 mt-4 md:mt-6'}>
                 {isLoading ? (<Activity2 />) : clients.map((client, index) => ((index < Number((clients.length * 0.2).toFixed(0))) &&
-                    <ClientCard client={client} key={index} setDetail={() => nothing()} setIsDetail={() => nothing()} />
+                    <ClientCard client={client} setDetail={setDetail} setIsDetail={setClient} key={client.id} />
                 ))}
             </div>
+            <WorkerDetail show={worker} setShow={setWorker} detail={detail} />
+            <ClientDetail show={client} setShow={setClient} detail={detail} />
         </section>
     )
 };

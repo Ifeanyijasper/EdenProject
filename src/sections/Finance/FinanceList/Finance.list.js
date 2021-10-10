@@ -11,18 +11,18 @@ import { BASE_URL } from "../../../utils/globalVariable";
 import { setObjData, setFinances } from '../../../redux/Actions/Data.actions';
 import { DateString } from "../../../utils/date";
 import searchObj from "../../../utils/searchObj";
+import FinanceDetail from "./FinanceDetail.section";
 
 const FinanceList = (props) => {
     const {
-        isDetail,
-        setIsDetail,
         username,
         password,
-        setDetail,
         _finances,
     } = props;
     const [isOpen, setIsOpen] = useState(false);
+    const [show, setShow] = useState(false);
     const [text, setText] = useState('');
+    const [detail, setDetail] = useState({});
     const [isLoading, setIsLoading] = useState(false);
     const [purchases, setPurchases] = useState({});
     const [msg, setMsg] = useState({});
@@ -55,7 +55,6 @@ const FinanceList = (props) => {
             });
             let purchases = await response.json();
             purchases = purchases.reverse();
-            console.log(purchases)
             let obj = {};
             const data = (finances) => {
                 finances.map((i) => {
@@ -89,7 +88,7 @@ const FinanceList = (props) => {
     }, [text]);
 
     const showDetail = (purchase) => {
-        setIsDetail(!isDetail);
+        setShow(true);
         setDetail(purchase);
     }
 
@@ -110,7 +109,7 @@ const FinanceList = (props) => {
                     setText={setText} />
             </div>
             {isLoading ? <div className={styles.actCenter}><Activity2 /></div> : Object.values(purchases).map((finances, index) =>
-                <>
+                <div key={ index }>
                     <h2 className={'text-gray-500 text-2xl mt-3 mx-2'}>{DateString(Object.keys(purchases)[index])}</h2>
                     <div className={styles.tableContainer}>
                         <table className={"min-w-full rounded-xl my-3 overflow-hidden border-collapse block md:table"} id={DateString(Object.keys(purchases)[index])}>
@@ -126,7 +125,7 @@ const FinanceList = (props) => {
                             </thead>
                             <tbody className="block md:table-row-group">
                             {isLoading ? (<td colSpan={5} style={{ margin: 'auto', paddingTop: '10px' }}><Activity2 /></td>) : finances.map((finance, index) =>
-                            (<tr className={"bg-white py-2 px-3 md:p-3 md:border-none block md:table-row"}>
+                            (<tr key={ index} className={"bg-white py-2 px-3 md:p-3 md:border-none block md:table-row"}>
                                 <td className={"py-2 px-3 md:p-3 md:border md:border-grey-500 text-left block md:table-cell"}><span class="inline-block w-1/3 md:hidden font-bold">Client Name</span>{finance.client}</td>
                                 <td className={"py-2 px-3 md:p-3 md:border md:border-grey-500 text-left block md:table-cell"}><span class="inline-block w-1/3 md:hidden font-bold">Time</span>{new Date(finance.date).toLocaleTimeString('en-US')}</td>
                                 <td className={"py-2 px-3 md:p-3 md:border md:border-grey-500 text-left block md:table-cell"}><span class="inline-block w-1/3 md:hidden font-bold">Worker</span>{finance.worker}</td>
@@ -135,7 +134,7 @@ const FinanceList = (props) => {
                                         <b className={'mr-3 font-normal'}>({item.count}) {item.name} </b>
                                     )}
                                 </td>
-                                <td className={"p-3 md:border md:border-grey-500 text-left block md:table-cell"}><span class="inline-block w-1/3 md:hidden font-bold">Total</span>{finance.total}</td>
+                                <td className={"p-3 md:border md:border-grey-500 text-left block md:table-cell"}><span class="inline-block w-1/3 md:hidden font-bold">Total</span>{finance.total} XAF</td>
                                 <td className={"p-3 md:border md:border-grey-500 text-left block md:table-cell"}>
                                     <span class="inline-block w-1/3 md:hidden font-bold">Actions</span>
                                     <button className={`outline-none text-sm text-primary font-semibold rounded tracking-wider cursor-pointer py-1.5 px-2.5 shadow-md`} onClick={() => showDetail(finance)}>Details</button>
@@ -152,8 +151,9 @@ const FinanceList = (props) => {
                         className={'outline none p-2 rounded bg-primary shadow-md text-white mb-4'}
                         buttonText={"Export Excel"}
                     />
-                </>)}
+                </div>)}
             <NewPurchase isOpen={isOpen} setIsOpen={setIsOpen} />
+            <FinanceDetail show={show} setShow={setShow} detail={detail} />
         </div>
     )
 };

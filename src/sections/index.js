@@ -30,6 +30,8 @@ import AddTestimonial from './AddTestimonial/AddTestimonial.section';
 import Testimonials from './Testimonials/Testimonials.section';
 import Gallery from './Gallery/gallery.section';
 import AdminGallery from './Gallery/admingallery.section';
+import WorkerDetail from './Workers/WorkerList/WorkerDetail.section';
+import ClientDetail from './Clients/ClientList/ClientDetail.section';
 
 export {
     SideNav, 
@@ -64,4 +66,6 @@ export {
     Testimonials,
     Gallery,
     AdminGallery,
+    WorkerDetail,
+    ClientDetail,
 }
