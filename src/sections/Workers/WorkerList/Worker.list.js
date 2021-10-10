@@ -9,7 +9,7 @@ import {
     RouteIndicator, 
     Search 
 } from '../../../components';
-import { AddWorker } from '../..';
+import AddWorker from './AddWorker.section';
 import { BASE_URL } from '../../../utils/globalVariable';
 import search from '../../../utils/search';
 import { setData, setWorkers } from '../../../redux/Actions/Data.actions';
@@ -90,7 +90,7 @@ const WorkerList = (props) => {
                 ))}
             </div>
             <Notification notify={notify} setNotify={setNotify} msg={msg} />
-            <AddWorker isOpen={isOpenAdd} setIsOpen={setIsOpenAdd} />
+            <AddWorker add={isOpenAdd} setAdd={setIsOpenAdd} />
         </div>
     )
 };

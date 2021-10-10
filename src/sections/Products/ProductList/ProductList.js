@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { bindActionCreators } from 'redux';
 
-import { AddProduct } from '../..';
 import { 
     RouteIndicator, 
     Search, 
@@ -13,6 +12,7 @@ import styles from './ProductList.module.css';
 import search from '../../../utils/search';
 import {setData, setProducts} from '../../../redux/Actions/Data.actions';
 import { connect } from 'react-redux';
+import AddProduct from './AddProduct.section';
 
 const ProductList = (props) => {
     const {
@@ -88,7 +88,7 @@ const ProductList = (props) => {
             <div className={`py-10 lg:px-12 grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-7 flex justify-center`}>
                 {isLoading ? (<Activity2 />) : products.map((product, index) => <ItemCard item={product} onClick={() => showDetails(product)} key={product.id} />)}
             </div>
-            <AddProduct isOpen={isOpenAdd} setIsOpen={setIsOpenAdd} />
+            <AddProduct add={isOpenAdd} setAdd={setIsOpenAdd} />
         </div>
     )
 };

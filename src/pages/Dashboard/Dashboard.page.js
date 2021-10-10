@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {Route, Switch} from 'react-router';
 
-import styles from './Dashboard.module.css';
 import { 
     AdminGallery,
     Checkout,

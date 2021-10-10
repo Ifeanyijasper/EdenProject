@@ -11,7 +11,7 @@ import {
     Search 
 } from '../../../components';
 import { BASE_URL } from '../../../utils/globalVariable';
-import { AddClient } from '../..';
+import AddClient from './AddClient.section';
 import search from '../../../utils/search';
 import {setData, setClients} from '../../../redux/Actions/Data.actions';
 import {setPoint, clearPoint} from '../../../redux/Actions/Points.actions';
@@ -124,7 +124,7 @@ const ClientList = (props) => {
                 ))}
             </div>
             <Notification notify={notify} setNotify={setNotify} msg={msg} />
-            <AddClient isOpen={isOpenAdd} setIsOpen={setIsOpenAdd} />
+            <AddClient add={isOpenAdd} setAdd={setIsOpenAdd} />
         </div>
     )
 }

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { AddService } from '../..';
+import AddService from './AddService.section';
 import { 
     Activity2, 
     ItemCard, 
@@ -70,7 +70,7 @@ const ServiceList = (props) => {
     };
 
     return (
-        <div className={'isDetail ? styles.listContainerDetail : styles.listContainer'}>
+        <div className={''}>
             <RouteIndicator route="Dashboard" current="Services" />
             <div className="sticky -top-4 md:top-3 z-40 pt-1">
                 <Search placeholder="Search" isOpen={isOpenAdd} setIsOpen={setIsOpenAdd} newButton={true} title={'Service'} filters={filters} filter={filter} setFilter={setFilter} text={text} setText={setText} />
@@ -91,7 +91,7 @@ const ServiceList = (props) => {
             <div className={`py-10 lg:px-12 grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-7 flex justify-center`}>
                 {isLoading ? (<Activity2 />) : services.map((service, index) => <ItemCard item={service} onClick={() => showDetails(service)} />)}
             </div>
-            <AddService isOpen={isOpenAdd} setIsOpen={setIsOpenAdd} />
+            <AddService add={isOpenAdd} setAdd={setIsOpenAdd} />
         </div>
     )
 };

@@ -56,7 +56,7 @@ const ItemCard = (props) => {
                     {item.discount > 0 && <h5 className="text-xs font-bold text-gray-100">{Thousand(((100 - item.discount) / 100) * item.price)} FCFA</h5>}
                 </div>
             </div>
-            {Number(item.discount) !== 0 && <div className={'absolute top-2 left-2 text-xs bg-green-500 p-1 rounded'}>
+            {Number(item.discount) !== 0 && <div className={'absolute top-2 left-2 text-xs bg-green-500 p-1 text-white rounded'}>
                 <h2>Discount: {Math.floor(Number(item.discount))}%</h2>
             </div>}
             <div className={styles.properties}>

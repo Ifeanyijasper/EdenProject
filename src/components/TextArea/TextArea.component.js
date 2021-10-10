@@ -8,23 +8,24 @@ const TextArea = (props) => {
     const [_secureText, setSecureText] = useState(secureText);
 
     return (
-        <div className={styles.inputContainer}>
-            <label for="name" className={styles.inputLabel}>{label}</label>
-            <div className={error ? styles.inputFieldError : styles.inputFieldContainer}>
+        <div className={`flex flex-col mb-4`}>
+            <label for="name" className={`text-base font-semibold text-gray-800`}>{label}</label>
+            <div className={`flex items-center justify-between border-b-2 ${error ? 'border-red-600' : 'border-gray-800'}`}>
                 <textarea 
                     placeholder={secureText ? (_secureText ? placeholder : 'dix134$5ive') : placeholder} 
-                    className={styles.inputField}
+                    className={`outline-none pt-1 pb-0.5 bg-transparent text-base text-gray-700 w-full`}
                     onFocus={() => setError(false)}
                     onChange={setValue}
-                    value={value} 
-                ></textarea>
+                    value={value}
+                    rows={4}
+                />
 
                 {secureText && (
                 <div onClick={() => setSecureText(!_secureText)}>
                     {_secureText ? 
-                    <IoEyeOff className={styles.inputFieldIcon} /> 
+                    <IoEyeOff className={`text-lg mr-3`} /> 
                     : 
-                    <IoEye className={styles.inputFieldIcon} />}
+                    <IoEye className={`text-lg mr-3`} />}
                 </div>
                 )}
                 

@@ -9,7 +9,6 @@ import Referal from './Referal/Referal.section';
 import Nav from './Nav/Nav.section';
 import HomeSection from './Home/Home.section';
 import Login from './Login/Login.section';
-import AddWorker from './AddWorker/AddWorker.section';
 import WorkerSection from './Workers/Worker.section';
 import FinanceSection from './Finance/Finance.section';
 import ProductSection from './Products/Product.section';
@@ -17,8 +16,6 @@ import ServiceSection from './Services/Service.section';
 import NewPurchase from './NewPurchase/NewPurchase.section';
 import Service from './Service/Service.section';
 import Product from './Product/Product.section';
-import AddService from './AddService/AddService.section';
-import AddProduct from "./AddProduct/AddProduct.section";
 import Services from './ServiceSection/Service.section';
 import Products from './ProductSection/Product.section';
 import ClientFinance from './ClientFinance/Finance.section';
@@ -41,7 +38,6 @@ export {
     ClientSection,
     AddClient,
     WorkerSection,
-    AddWorker,
     ClientSide,
     ClientInfo,
     Nav,
@@ -55,8 +51,6 @@ export {
     NewPurchase,
     Service,
     Product,
-    AddProduct,
-    AddService,
     Services,
     Products,
     ClientFinance,
