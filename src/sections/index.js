@@ -1,7 +1,6 @@
 import SideNav from './SideNav/SideNav.section';
 import Dashboard from './Dashboard/Dashboard.section';
 import ClientSection from './Clients/Client.section';
-import AddClient from './AddClient/AddClient.section';
 import ClientSide from './ClientSide/ClientSide.section';
 import ClientInfo from './ClientInfo/ClientInfo.section';
 import TimeLine from './TimeLine/TimeLine.section';
@@ -36,7 +35,6 @@ export {
     SideNav, 
     Dashboard, 
     ClientSection,
-    AddClient,
     WorkerSection,
     ClientSide,
     ClientInfo,

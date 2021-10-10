@@ -12,7 +12,7 @@ const ClientsCard = (props) => {
     }
 
     return (
-        <div className={'h-auto w-48 lg:w-60 bg-primary rounded-md flex justify-between items-center py-3 px-2'} onClick={() => showDetails()}>
+        <div className={'cursor-pointer h-auto w-48 lg:w-60 bg-primary rounded-md flex justify-between items-center py-3 px-2'} onClick={() => showDetails()}>
             <div className={'flex justify-center flex-col items-center'}>
                 {client.img ? (
                     <img src={client.img} alt="Admin Name" className={'h-12 lg:h-16 w-12 lg:w-16 rounded-full bg-center bg-cover'} />

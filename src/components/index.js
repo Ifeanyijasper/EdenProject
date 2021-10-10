@@ -22,6 +22,7 @@ import LoginButton from './Button/LoginButton.component';
 import Card from './ItemCard/Card.component';
 import SqrButton from './Button/squareButton.component';
 import DisplayCard from './ItemCard/DisplayCard.component';
+import Progress from './MiniProgressBar/Progress.component';
 
 export {
     AdminCard, 
@@ -48,4 +49,5 @@ export {
     Card,
     SqrButton,
     DisplayCard,
+    Progress
 };

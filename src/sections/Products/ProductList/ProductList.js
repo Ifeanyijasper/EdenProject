@@ -13,19 +13,19 @@ import search from '../../../utils/search';
 import {setData, setProducts} from '../../../redux/Actions/Data.actions';
 import { connect } from 'react-redux';
 import AddProduct from './AddProduct.section';
+import ProductDetail from './ProductDetail.section';
 
 const ProductList = (props) => {
     const {
-        isDetail,
-        setIsDetail,
-        setDetail,
         _products,
     } = props;
 
     const [isOpenAdd, setIsOpenAdd] = useState(false);
     const [filter, setFilter] = useState('');
+    const [show, setShow] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [text, setText] = useState('');
+    const [detail, setDetail] = useState({})
     const [products, setProducts] = useState([]);
     const [filters] = useState([
         'Name',
@@ -34,7 +34,7 @@ const ProductList = (props) => {
     ])
 
     const showDetails = (item) => {
-        setIsDetail(true);
+        setShow(true);
         setDetail(item)
     }
 
@@ -68,7 +68,7 @@ const ProductList = (props) => {
     };
 
     return (
-        <div className={isDetail ? styles.listContainerDetail : styles.listContainer}>
+        <div className={'isDetail ? styles.listContainerDetail : styles.listContainer'}>
             <RouteIndicator route="Dashboard" current="Products" />
             <div className="sticky -top-4 md:top-3 z-40 pt-1">
                 <Search placeholder="Search" isOpen={isOpenAdd} setIsOpen={setIsOpenAdd} newButton={true} title={'Product'} filters={filters} filter={filter} setFilter={setFilter} text={text} setText={setText} />
@@ -89,6 +89,7 @@ const ProductList = (props) => {
                 {isLoading ? (<Activity2 />) : products.map((product, index) => <ItemCard item={product} onClick={() => showDetails(product)} key={product.id} />)}
             </div>
             <AddProduct add={isOpenAdd} setAdd={setIsOpenAdd} />
+            <ProductDetail setShow={setShow} show={show} detail={detail}  />
         </div>
     )
 };

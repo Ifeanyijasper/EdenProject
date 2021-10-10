@@ -12,26 +12,26 @@ import {
 } from '../../../components';
 import { BASE_URL } from '../../../utils/globalVariable';
 import AddClient from './AddClient.section';
+import ClientDetail from './ClientDetail.section';
 import search from '../../../utils/search';
 import {setData, setClients} from '../../../redux/Actions/Data.actions';
 import {setPoint, clearPoint} from '../../../redux/Actions/Points.actions';
 
 
 const ClientList = (props) => {
-    const {
-        setDetail, 
-        setIsDetail, 
-        detail, 
+    const { 
         username, 
         password,
         _clients,
     } = props;
     const [isOpenAdd, setIsOpenAdd] = useState(false);
+    const [show, setShow] = useState(false);
     const [loading, setLoading] = useState(false);
     const [msg, setMsg] = useState({});
     const [text, setText] = useState('');
     const [notify, setNotify] = useState(false);
     const [filter, setFilter] = useState('');
+    const [detail, setDetail] = useState({})
     // const [purchases, setPurchases] = useState([])
     const [filters] = useState([
         'Username',
@@ -120,11 +120,12 @@ const ClientList = (props) => {
             <h2 className={'text-gray-500 text-2xl mt-3 mx-2'}>{clients.length} Client{clients.length !== 1 &&'s'}</h2>
             <div className={'grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-5 px-0 md:px-2 lg:px-10 mt-4 md:mt-6'}>
                 {loading ? (<div style={{margin: 'auto'}}><Activity2 /></div>) : (clients.map((client) => 
-                    <ClientCard client={client} detail={detail} setDetail={setDetail} setIsDetail={setIsDetail} key={client.id} />
+                    <ClientCard client={client} setDetail={setDetail} setIsDetail={setShow} key={client.id} />
                 ))}
             </div>
             <Notification notify={notify} setNotify={setNotify} msg={msg} />
             <AddClient add={isOpenAdd} setAdd={setIsOpenAdd} />
+            <ClientDetail show={show} setShow={setShow} detail={detail} />
         </div>
     )
 }

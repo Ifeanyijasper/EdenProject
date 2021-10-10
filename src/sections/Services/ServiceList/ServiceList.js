@@ -13,20 +13,19 @@ import { BASE_URL } from '../../../utils/globalVariable';
 import styles from './ServiceList.module.css';
 import search from '../../../utils/search';
 import {setData} from '../../../redux/Actions/Data.actions';
+import ServiceDetail from './ServiceDetail.section';
 
 const ServiceList = (props) => {
     const {
-        isDetail,
-        setIsDetail,
-        setDetail,
         _services,
-        refresh,
     } = props;
 
     const [isOpenAdd, setIsOpenAdd] = useState(false);
     const [filter, setFilter] = useState('');
     const [services, setServices] = useState([]);
     const [text, setText] = useState('');
+    const [show, setShow] = useState(false);
+    const [detail, setDetail] = useState({})
     const [isLoading, setIsLoading] = useState(false);
     const [filters] = useState([
         'Name',
@@ -35,7 +34,7 @@ const ServiceList = (props) => {
     ])
 
     const showDetails = (service) => {
-        setIsDetail(true);
+        setShow(true);
         setDetail(service);
     }
 
@@ -92,6 +91,7 @@ const ServiceList = (props) => {
                 {isLoading ? (<Activity2 />) : services.map((service, index) => <ItemCard item={service} onClick={() => showDetails(service)} />)}
             </div>
             <AddService add={isOpenAdd} setAdd={setIsOpenAdd} />
+            <ServiceDetail show={show} setShow={setShow} detail={detail} />
         </div>
     )
 };

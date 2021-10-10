@@ -52,7 +52,8 @@ const AddClient = (props) => {
             })
             .then(res => {
                 if (res.length >= 1) {
-                    let _res = res.filter((data) => data.is_client || data.is_superuser);
+                    console.log(res);
+                    let _res = res.filter((data) => data.is_client || data.is_superuser || data.is_worker );
                     if (_res.length > 0) {
                         _res.map((re, index) => (
                             _referals.push({ value: re.id, label: re.username })
@@ -149,7 +150,7 @@ const AddClient = (props) => {
     return (
         <>
             <div onClick={() => setAdd(false)} className={`h-full bg-gray-50 bg-opacity-10 fixed z-50 top-0 backdrop-filter backdrop-blur-sm transition-all duration-500 ease-in-out ${add ? 'right-0 w-full opacity-100' : '-right-16 opacity-0 w-0'} `}>
-                <div onClick={(e) => stop(e)} className={`fixed shadow-xl h-screen overflow-y-auto overflowY -top-0 z-30 bg-white text-gray-700 p-8 transition-all delay-100 ease-in-out ${add ? 'right-0 w-full md:w-9/10 lg:w-120 opacity-100' : '-right-16 opacity-0 w-0'}`}>
+                <div onClick={(e) => stop(e)} className={`fixed shadow-xl h-screen overflow-y-auto overflowY -top-0 z-30 bg-white text-gray-700 p-8 transition-all delay-100 ease-in-out ${add ? 'right-0 w-full md:w-96 lg:w-120 opacity-100' : '-right-16 opacity-0 w-0'}`}>
                     <div className="flex justify-between items-end md:mt-8 text-xl font-semibold text-green-700">
                         <h2>Add Client</h2>
                         <button onClick={() => setAdd(!add)} className="flex items-center rounded-full outline-none text-base py-1 px-2 text-gray-900 bg-white shadow-md mx-1.5 transition duration-500 ease-in-out hover:shadow-xl"><IoClose /></button>
@@ -238,12 +239,12 @@ const customStyles = {
     // This line disable the blue border
     boxShadow: 'none',
     borderRadius: 0,
-    borderBottom: '1.4px',
+    borderBottom: '2px',
     borderBottomStyle: 'solid',
     borderBottomColor: '#010f24',
     '&:hover': {
        border: isFocused ? 0 : 0,
-       borderBottom: '1.4px',
+       borderBottom: '2px',
        borderBottomStyle: 'solid',
        borderBottomColor: '#010f24',
     }
