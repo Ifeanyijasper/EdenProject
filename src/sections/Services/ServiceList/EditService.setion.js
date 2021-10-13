@@ -77,7 +77,7 @@ const EditService = (props) => {
         }
 
         fetch(`${BASE_URL}/service/${detail.id}/`, {
-            method: 'POST',
+            method: 'PATCH',
             body: formData,
         })
             .then(res => {
@@ -113,7 +113,7 @@ const EditService = (props) => {
             <div onClick={() => setEdit(false)} className={`h-full bg-gray-50 bg-opacity-10 fixed z-50 top-0 backdrop-filter backdrop-blur-sm transition-all duration-500 ease-in-out ${edit ? 'right-0 w-full opacity-100' : '-right-16 opacity-0 w-0'} `}>
                 <div onClick={(e) => stop(e)} className={`fixed shadow-xl h-screen overflow-y-auto overflowY-white -top-0 z-30 bg-white text-gray-700 p-8 transition-all delay-100 ease-in-out ${edit ? 'right-0 w-full md:w-9/10 lg:w-3/5 opacity-100' : '-right-16 opacity-0 w-0'}`}>
                     <div className="flex justify-between items-end md:mt-8 text-xl font-semibold text-green-700">
-                        <h2>Add Service</h2>
+                        <h2>Edit Service</h2>
                         <button onClick={() => setEdit(!edit)} className="flex items-center rounded-full outline-none text-base py-1 px-2 text-gray-900 bg-white shadow-md mx-1.5 transition duration-500 ease-in-out hover:shadow-xl"><IoClose /></button>
                     </div>
                     <hr className="my-2 mb-12" />
@@ -169,10 +169,11 @@ const EditService = (props) => {
                                     price={price}
                                     discount={discount}
                                     image={image}
+                                    urlImage={true}
                                 />
                             </div>
                             <div className="flex justify-center md:justify-end mt-20">
-                                {isLoading ? <Activity /> : <Button title="Add Service" invert={false} onClick={() => authenticate()} />}
+                                {isLoading ? <Activity /> : <Button title="Edit Service" invert={false} onClick={() => authenticate()} />}
                                 <div className="mx-2" />
                                 <Button title="Close" invert={true} onClick={() => setEdit(!edit)} />
                             </div>

@@ -36,6 +36,7 @@ const AddClient = (props) => {
             setName('');
             setEmail('');
             setUserName('');
+            setRefer({});
         }
     }, []);
 
@@ -54,7 +55,6 @@ const AddClient = (props) => {
             })
             .then(res => {
                 if (res.length >= 1) {
-                    console.log(res);
                     let _res = res.filter((data) => data.is_client || data.is_superuser || data.is_worker );
                     if (_res.length > 0) {
                         _res.map((re, index) => (
@@ -134,11 +134,6 @@ const AddClient = (props) => {
                 setTimeout(() => {
                     setAdd(false);
                 }, 3000);
-                setTel('');
-                setName('');
-                setUserName('');
-                setRefer('');
-                setEmail('');
             })
             .catch(err => {
                 setIsLoading(false);

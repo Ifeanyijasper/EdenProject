@@ -12,15 +12,14 @@ import { Thousand } from '../../utils/number';
 
 
 const DisplayCard = (props) => {
-    const { name, price, discount, image, product, total, points } = props;
-    const counter = useRef(0);
+    const { name, price, discount, image, urlImage } = props;
     // let counter = 0;
 
     return (
         <div className={'cursor-pointer relative w-72 md:w-60 lg:w-80 h-auto rounded-md overflow-hidden shadow-xl bg-white'}>
             {
                 image ?
-                    <img src={`${image && image.length >= 1 && URL.createObjectURL(image[0])}`} alt={name} className={'w-full h-36 lg:h-56 bg-center bg-cover'} /> :
+                    <img src={`${urlImage ? image && image.length >= 1 && `${image}` :image && image.length >= 1 && URL.createObjectURL(image[0])}`} alt={name} className={'w-full h-36 lg:h-56 bg-center bg-cover'} /> :
                     <h3 className={'text-9xl text-green-700 text-center py-2 h-56 flex items-center justify-center'}>{extractInitials(name)}</h3>
             }
             <div className={'absolute w-full text-sm py-1 bottom-9 flex items-center justify-end text-gray-700 px-2'} style={{backgroundImage: "linear-gradient(to right, #92fe9de6, #00c9ffcc)"}}>

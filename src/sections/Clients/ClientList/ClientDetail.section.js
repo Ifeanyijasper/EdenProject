@@ -15,7 +15,7 @@ const ClientDetail = (props) => {
     const { show, setShow, setEdit, detail, clients, user, username, password } = props;
 
     const [confirm, setConfirm] = useState(false);
-    const [data, setData] = useState('');
+    const [data, setData] = useState({});
     const [loading, setLoading] = useState(false);
 
     const stop = (e) => {
@@ -35,23 +35,32 @@ const ClientDetail = (props) => {
     }, [detail]);
 
     const authenticate = (id) => {
+        setLoading(true);
         fetch(`${BASE_URL}/register/${id}/`, {
             method: 'DELETE',
             headers: {
                 'Authorization': 'Basic ' + Buffer.from(username + ':' + password).toString('base64'),
             }
         })
-        .then(res => {
-            props.deleteClient(id);
-            setTimeout(() => {
+            .then(res => {
+                props.deleteClient(id);
+                setConfirm(false);
+            })
+            .then(res => {
+                setTimeout(() => {
+                    setLoading(false)
+                    setShow(false);
+                }, 3000);
+            })
+            .catch(err => {
                 setLoading(false)
-                setShow(false);
-            }, 3000);
-        })
-        .catch(err => {
-            setLoading(false)
-            console.log(err);
-        })
+                console.log(err);
+            })
+    };
+
+    const Edit = () => {
+        setEdit(true);
+        setShow(!show)
     }
 
     return (
@@ -87,7 +96,6 @@ const ClientDetail = (props) => {
                             <Progress progress={detail.refer_bonus / 100 || 0} />
                             <p className="mt-2 text-center">{detail.refer_bonus || 0} / 10,000 XAF</p>
                         </div>
-                        <h4 className="flex items-center text-gray-600 text-sm mt-1.5">Molyko</h4>
                     </div>
                     <hr className="my-3" />
                     <h2 className="text-left font-semibold">Invited</h2>
@@ -97,7 +105,7 @@ const ClientDetail = (props) => {
                         </div>
                     </div>
                     <div className="flex justify-end">
-                        {user.is_superuser && <Button title="Edit" invert={false} onClick={() => setEdit(true)} />}
+                        {user.is_superuser && <Button title="Edit" invert={false} onClick={() => Edit()} />}
                         <Button title="Delete" invert={true} type='danger' onClick={() => Confirm(detail)} />
                         <div className="mx-2" />
                         <Button title="Close" invert={true} onClick={() => setShow(!show)} />

@@ -42,17 +42,23 @@ const WorkerDetail = (props) => {
                 'Authorization': 'Basic ' + Buffer.from(username + ':' + password).toString('base64'),
             }
         })
-        .then(res => {
-            props.deleteWorker(id);
-            setTimeout(() => {
+            .then(res => {
+                props.deleteWorker(id);
+                setConfirm(false);
+                setTimeout(() => {
+                    setLoading(false)
+                    setShow(false);
+                }, 3000);
+            })
+            .catch(err => {
                 setLoading(false)
-                setShow(false);
-            }, 3000);
-        })
-        .catch(err => {
-            setLoading(false)
-            console.log(err);
-        })
+                console.log(err);
+            })
+    };
+
+    const Edit = () => {
+        setEdit(true);
+        setShow(!show)
     }
 
     return (
@@ -99,7 +105,7 @@ const WorkerDetail = (props) => {
                         </div>
                     </div>
                     <div className="flex justify-end">
-                        {user.is_superuser && <Button title="Edit" invert={false} onClick={() => setEdit(true)} />}
+                        {user.is_superuser && <Button title="Edit" invert={false} onClick={() => Edit()} />}
                         <div className="mx-2" />
                         <Button title="Delete" invert={true} type='danger' onClick={() => Confirm(detail)} />
                         <div className="mx-2" />

@@ -10,7 +10,7 @@ import { IMG_URL } from '../../../utils/imageVariable';
 import { deleteService } from '../../../redux/Actions/Data.actions';
 
 const ServiceDetail = (props) => {
-    const { show, setShow, detail } = props;
+    const { show, setShow, detail, setEdit } = props;
 
     const [confirm, setConfirm] = useState(false);
     const [data, setData] = useState('');
@@ -26,11 +26,14 @@ const ServiceDetail = (props) => {
     };
 
     const authenticate = (id) => {
+        setLoading(true)
         fetch(`${BASE_URL}/service/${id}/`, {
             method: 'DELETE'
         })
             .then(res => {
                 props.deleteService(id);
+                setConfirm(false)
+                setLoading(false);
             })
             .then(res => {
                 setTimeout(() => {
@@ -38,9 +41,15 @@ const ServiceDetail = (props) => {
                 }, 3000);
             })
             .catch(err => {
+                setLoading(false);
                 console.log(err);
             })
     };
+
+    const Edit = () => {
+        setEdit(true);
+        setShow(!show)
+    }
 
     return (
         <>
@@ -70,7 +79,7 @@ const ServiceDetail = (props) => {
                     </div>
                     <hr className="my-3" />
                     <div className="flex justify-end">
-                        <Button title={"Edit"} onClick={() => setShow(!show)} />
+                        <Button title={"Edit"} onClick={() => Edit()} />
                         <div className="mx-2" />
                         <Button title="Close" invert={true} onClick={() => setShow(!show)} />
                         <div className="mx-2" />

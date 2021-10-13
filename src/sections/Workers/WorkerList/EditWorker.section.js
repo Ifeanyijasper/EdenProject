@@ -78,7 +78,7 @@ const EditWorker = (props) => {
 
 
         fetch(`${BASE_URL}/register/${detail.id}/`, {
-            method: 'POST',
+            method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Basic ' + Buffer.from(username + ':' + password).toString('base64'),
@@ -86,6 +86,7 @@ const EditWorker = (props) => {
             body: JSON.stringify(body),
         })
             .then(res => {
+                console.log(res)
                 setNotify(true);
                 setIsLoading(false);
                 setMsg({
@@ -100,6 +101,7 @@ const EditWorker = (props) => {
                 }, 3000);
             })
             .catch(err => {
+                console.log(err)
                 setIsLoading(false);
                 setNotify(true);
                 setMsg({

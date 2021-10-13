@@ -41,8 +41,9 @@ const DataReducer = (state = INITIAL_STATE, action) => {
             return { ...state, products: [...products] };
         case EDIT_PRODUCT:
             data = action.payload;
+            console.log(data)
             index = state.products.findIndex(productIndex => {
-                return productIndex.id.toString() === data?.id.toString();
+                return productIndex?.id.toString() === data?.id.toString();
             });
             products = [...state.products];
             if (index >= 0) {
@@ -51,8 +52,9 @@ const DataReducer = (state = INITIAL_STATE, action) => {
             return { ...state, products: [...products] };
         case DELETE_PRODUCT:
             id = action.payload;
+            console.log(id)
             index = state.products.findIndex(productIndex => {
-                return productIndex.id.toString() === id.toString();
+                return productIndex?.id.toString() === id.toString();
             });
             products = [...state.products];
             if (index >= 0) {
@@ -70,7 +72,7 @@ const DataReducer = (state = INITIAL_STATE, action) => {
         case EDIT_SERVICE:
             data = action.payload;
             index = state.services.findIndex(serviceIndex => {
-                return serviceIndex.id.toString() === data?.id.toString();
+                return serviceIndex?.id.toString() === data?.id.toString();
             });
             services = [...state.services];
             if (index >= 0) {
@@ -80,7 +82,7 @@ const DataReducer = (state = INITIAL_STATE, action) => {
         case DELETE_SERVICE:
             id = action.payload;
             index = state.services.findIndex(serviceIndex => {
-                return serviceIndex.id.toString() === id.toString();
+                return serviceIndex?.id.toString() === id.toString();
             });
             services = [...state.services];
             if (index >= 0) {
@@ -164,7 +166,7 @@ const DataReducer = (state = INITIAL_STATE, action) => {
         case DELETE_CLIENT:
             id = action.payload;
             index = state.clients.findIndex(clientIndex => {
-                return clientIndex.id.toString() === id.toString();
+                return clientIndex?.id.toString() === id.toString();
             });
             clients = [...state.clients];
             if (index >= 0) {
@@ -181,8 +183,9 @@ const DataReducer = (state = INITIAL_STATE, action) => {
             return { ...state, workers: [...workers] };
         case EDIT_WORKER:
             data = action.payload;
+            console.log(data);
             index = state.workers.findIndex(workerIndex => {
-                return workerIndex.id.toString() === data?.id.toString();
+                return workerIndex?.id.toString() === data?.id.toString();
             });
             workers = [...state.workers];
             if (index >= 0) {

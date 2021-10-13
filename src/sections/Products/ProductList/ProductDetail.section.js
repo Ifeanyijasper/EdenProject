@@ -10,7 +10,7 @@ import { deleteProduct } from '../../../redux/Actions/Data.actions';
 import { connect } from 'react-redux';
 
 const ProductDetail = (props) => {
-    const { show, setShow, detail } = props;
+    const { show, setShow, setEdit, detail } = props;
 
     const [confirm, setConfirm] = useState(false);
     const [data, setData] = useState('');
@@ -31,7 +31,7 @@ const ProductDetail = (props) => {
             method: 'DELETE'
         })
             .then(res => {
-                console.log(res);
+                setConfirm(false)
                 setLoading(false);
                 props.deleteProduct(id);
             })
@@ -44,6 +44,11 @@ const ProductDetail = (props) => {
                 console.log(err);
             })
     };
+
+    const Edit = () => {
+        setEdit(true);
+        setShow(!show)
+    }
 
     return (
         <>
@@ -73,7 +78,7 @@ const ProductDetail = (props) => {
                     </div>
                     <hr className="my-3" />
                     <div className="flex justify-end">
-                        <Button title={"Edit"} onClick={() => setShow(!show)} />
+                        <Button title={"Edit"} onClick={() => Edit()} />
                         <div className="mx-2" />
                         <Button title="Close" invert={true} onClick={() => setShow(!show)} />
                         <div className="mx-2" />

@@ -14,6 +14,7 @@ import {setData, setProducts} from '../../../redux/Actions/Data.actions';
 import { connect } from 'react-redux';
 import AddProduct from './AddProduct.section';
 import ProductDetail from './ProductDetail.section';
+import EditProduct from './EditProduct.section';
 
 const ProductList = (props) => {
     const {
@@ -22,6 +23,7 @@ const ProductList = (props) => {
 
     const [isOpenAdd, setIsOpenAdd] = useState(false);
     const [filter, setFilter] = useState('');
+    const [edit, setEdit] = useState(false);
     const [show, setShow] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [text, setText] = useState('');
@@ -89,7 +91,8 @@ const ProductList = (props) => {
                 {isLoading ? (<Activity2 />) : products.map((product, index) => <ItemCard item={product} onClick={() => showDetails(product)} key={product.id} />)}
             </div>
             <AddProduct add={isOpenAdd} setAdd={setIsOpenAdd} />
-            <ProductDetail setShow={setShow} show={show} detail={detail}  />
+            <EditProduct edit={edit} setEdit={setEdit} detail={detail} />
+            <ProductDetail setShow={setShow} show={show} setEdit={setEdit} detail={detail}  />
         </div>
     )
 };
