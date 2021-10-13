@@ -5,10 +5,10 @@ import { bindActionCreators } from 'redux';
 
 import { Activity, Button, DisplayCard, Input,  Notification, TextArea } from '../../../components';
 import { BASE_URL } from '../../../utils/globalVariable';
-import { addService } from '../../../redux/Actions/Data.actions';
+import { editService } from '../../../redux/Actions/Data.actions';
 
-const AddService = (props) => {
-    const { add, setAdd, username, password } = props;
+const EditService = (props) => {
+    const { edit, setEdit, user, detail } = props;
 
     const [price, setPrice] = useState('');
     const [name, setName] = useState('');
@@ -29,6 +29,11 @@ const AddService = (props) => {
     }
 
     useEffect(() => {
+        setName(detail.name)
+        setDiscount(detail.discount)
+        setPrice(detail.price);
+        setAbout(detail.description);
+        setImage(detail.img);
         return () => {
             setPrice('');
             setName('');
@@ -36,7 +41,7 @@ const AddService = (props) => {
             setAbout('');
             setImage(null);
         }
-    }, []);
+    }, [detail]);
 
     const authenticate = () => {
         let hasError;
@@ -71,7 +76,7 @@ const AddService = (props) => {
             formData.append('img', image[0]);
         }
 
-        fetch(`${BASE_URL}/service/`, {
+        fetch(`${BASE_URL}/service/${detail.id}/`, {
             method: 'POST',
             body: formData,
         })
@@ -84,13 +89,13 @@ const AddService = (props) => {
                 setNotify(true);
                 setMsg({
                     title: 'Successful',
-                    message: 'We have a new service for our clients'
+                    message: 'Service information updated'
                 });
-                props.addService(res);
+                props.editService(res);
             })
             .then(err => {
                 setTimeout(() => {
-                    setAdd(false);
+                    setEdit(false);
                 }, 3000);
             })
             .catch(err => {
@@ -105,11 +110,11 @@ const AddService = (props) => {
 
     return (
         <>
-            <div onClick={() => setAdd(false)} className={`h-full bg-gray-50 bg-opacity-10 fixed z-50 top-0 backdrop-filter backdrop-blur-sm transition-all duration-500 ease-in-out ${add ? 'right-0 w-full opacity-100' : '-right-16 opacity-0 w-0'} `}>
-                <div onClick={(e) => stop(e)} className={`fixed shadow-xl h-screen overflow-y-auto overflowY-white -top-0 z-30 bg-white text-gray-700 p-8 transition-all delay-100 ease-in-out ${add ? 'right-0 w-full md:w-9/10 lg:w-3/5 opacity-100' : '-right-16 opacity-0 w-0'}`}>
+            <div onClick={() => setEdit(false)} className={`h-full bg-gray-50 bg-opacity-10 fixed z-50 top-0 backdrop-filter backdrop-blur-sm transition-all duration-500 ease-in-out ${edit ? 'right-0 w-full opacity-100' : '-right-16 opacity-0 w-0'} `}>
+                <div onClick={(e) => stop(e)} className={`fixed shadow-xl h-screen overflow-y-auto overflowY-white -top-0 z-30 bg-white text-gray-700 p-8 transition-all delay-100 ease-in-out ${edit ? 'right-0 w-full md:w-9/10 lg:w-3/5 opacity-100' : '-right-16 opacity-0 w-0'}`}>
                     <div className="flex justify-between items-end md:mt-8 text-xl font-semibold text-green-700">
                         <h2>Add Service</h2>
-                        <button onClick={() => setAdd(!add)} className="flex items-center rounded-full outline-none text-base py-1 px-2 text-gray-900 bg-white shadow-md mx-1.5 transition duration-500 ease-in-out hover:shadow-xl"><IoClose /></button>
+                        <button onClick={() => setEdit(!edit)} className="flex items-center rounded-full outline-none text-base py-1 px-2 text-gray-900 bg-white shadow-md mx-1.5 transition duration-500 ease-in-out hover:shadow-xl"><IoClose /></button>
                     </div>
                     <hr className="my-2 mb-12" />
                     <div className="flex py-2 flex-col md:flex-row">
@@ -169,7 +174,7 @@ const AddService = (props) => {
                             <div className="flex justify-center md:justify-end mt-20">
                                 {isLoading ? <Activity /> : <Button title="Add Service" invert={false} onClick={() => authenticate()} />}
                                 <div className="mx-2" />
-                                <Button title="Close" invert={true} onClick={() => setAdd(!add)} />
+                                <Button title="Close" invert={true} onClick={() => setEdit(!edit)} />
                             </div>
                         </div>
                     </div>
@@ -180,15 +185,8 @@ const AddService = (props) => {
     )
 };
 
-const mapStateToProps = ({auth}) => {
-  return {
-    username: auth.username,
-    password: auth.password,
-  }
-}
-
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ addService }, dispatch);
+    return bindActionCreators({ editService }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddService);
+export default connect(null, mapDispatchToProps)(EditService);

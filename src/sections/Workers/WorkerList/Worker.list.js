@@ -10,6 +10,7 @@ import {
     Search 
 } from '../../../components';
 import AddWorker from './AddWorker.section';
+import EditWorker from './EditWorker.section';
 import { BASE_URL } from '../../../utils/globalVariable';
 import search from '../../../utils/search';
 import WorkerDetail from './WorkerDetail.section';
@@ -23,6 +24,7 @@ const WorkerList = (props) => {
     } = props;
     const [loading, setLoading] = useState(false);
     const [show, setShow] = useState(false);
+    const [edit, setEdit] = useState(false);
     const [isOpenAdd, setIsOpenAdd] = useState(false);
     const [notify, setNotify] = useState(false);
     const [msg, setMsg] = useState({});
@@ -91,7 +93,8 @@ const WorkerList = (props) => {
             </div>
             <Notification notify={notify} setNotify={setNotify} msg={msg} />
             <AddWorker add={isOpenAdd} setAdd={setIsOpenAdd} />
-            <WorkerDetail show={show} setShow={setShow} detail={detail} />
+            <EditWorker edit={edit} setEdit={setEdit} detail={detail} />
+            <WorkerDetail show={show} setShow={setShow} setEdit={setEdit} detail={detail} />
         </div>
     )
 };

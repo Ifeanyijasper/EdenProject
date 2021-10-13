@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { IoClose } from 'react-icons/io5';
 import Select from 'react-select';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import { Activity, Button, Input,  Notification } from '../../../components';
 import { BASE_URL } from '../../../utils/globalVariable';
+import { addClient } from '../../../redux/Actions/Data.actions';
 
 const AddClient = (props) => {
     const { add, setAdd, username, password } = props;
@@ -125,7 +127,8 @@ const AddClient = (props) => {
                 setMsg({
                     title: 'Successful',
                     message: 'We have a new Client.'
-                })
+                });
+                props.addClient(res);
             })
             .then(res => {
                 setTimeout(() => {
@@ -221,7 +224,11 @@ const mapStateToProps = ({auth}) => {
   }
 }
 
-export default connect(mapStateToProps)(AddClient);
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({ addClient }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddClient);
 
 
 const customStyles = {

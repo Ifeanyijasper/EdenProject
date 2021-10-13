@@ -1,18 +1,31 @@
 import React, { useEffect, useState } from 'react';
-import { IoClose, IoLogoFacebook, IoLogoTwitter, IoMail } from 'react-icons/io5';
+import { IoClose, IoMail } from 'react-icons/io5';
 import { FaPhone } from 'react-icons/fa';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-import { Button, Progress, ReferCard } from '../../../components';
+import { Button, Confirmation, Progress, ReferCard } from '../../../components';
 import { img_1 } from '../../../res/images';
 import { Hyphenated } from '../../../utils/number';
 import extractInitials from '../../../utils/extractIni';
-import { connect } from 'react-redux';
+import { deleteClient } from '../../../redux/Actions/Data.actions';
+import { BASE_URL } from '../../../utils/globalVariable';
 
 const ClientDetail = (props) => {
-    const { show, setShow, detail, clients } = props;
+    const { show, setShow, setEdit, detail, clients, user, username, password } = props;
+
+    const [confirm, setConfirm] = useState(false);
+    const [data, setData] = useState('');
+    const [loading, setLoading] = useState(false);
+
     const stop = (e) => {
         e.stopPropagation()
     }
+
+    const Confirm = (data) => {
+        setConfirm(true);
+        setData({ data, msg: 'Are you sure you want to delete: '});
+    };
     const [referers, setReferers] = useState([]);
 
 
@@ -20,6 +33,26 @@ const ClientDetail = (props) => {
         let _referers = clients.filter(data => data.friend === detail.id);
         setReferers(_referers);
     }, [detail]);
+
+    const authenticate = (id) => {
+        fetch(`${BASE_URL}/register/${id}/`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': 'Basic ' + Buffer.from(username + ':' + password).toString('base64'),
+            }
+        })
+        .then(res => {
+            props.deleteClient(id);
+            setTimeout(() => {
+                setLoading(false)
+                setShow(false);
+            }, 3000);
+        })
+        .catch(err => {
+            setLoading(false)
+            console.log(err);
+        })
+    }
 
     return (
         <>
@@ -64,10 +97,14 @@ const ClientDetail = (props) => {
                         </div>
                     </div>
                     <div className="flex justify-end">
-                        <Button title="Close" invert={false} onClick={() => setShow(!show)} />
+                        {user.is_superuser && <Button title="Edit" invert={false} onClick={() => setEdit(true)} />}
+                        <Button title="Delete" invert={true} type='danger' onClick={() => Confirm(detail)} />
+                        <div className="mx-2" />
+                        <Button title="Close" invert={true} onClick={() => setShow(!show)} />
                     </div>
                 </div>
             </div>
+            <Confirmation confirm={confirm} setConfirm={setConfirm} data={data} loading={loading} onClick={id => authenticate(id)} />
         </>
     )
 };
@@ -82,4 +119,8 @@ const mapStateToProps = ({auth, data, points}) => {
     }
 }
 
-export default connect(mapStateToProps)(ClientDetail);
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({ deleteClient }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ClientDetail);

@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { IoClose } from 'react-icons/io5';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import { Activity, Button, DisplayCard, Input,  Notification, TextArea } from '../../../components';
 import { BASE_URL } from '../../../utils/globalVariable';
+import { addProduct } from '../../../redux/Actions/Data.actions';
 
 const AddProduct = (props) => {
     const { add, setAdd, user } = props;
@@ -83,6 +86,7 @@ const AddProduct = (props) => {
                     title: 'Successful',
                     message: 'We have a new product for our clients.'
                 })
+                props.addProduct(res);
             })
             .then(res => {
                 setTimeout(() => {
@@ -182,4 +186,15 @@ const AddProduct = (props) => {
     )
 };
 
-export default AddProduct;
+const mapStateToProps = ({auth}) => {
+  return {
+    username: auth.username,
+    password: auth.password,
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({ addProduct }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddProduct);

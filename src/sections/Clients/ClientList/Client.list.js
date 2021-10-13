@@ -16,6 +16,7 @@ import ClientDetail from './ClientDetail.section';
 import search from '../../../utils/search';
 import {setData, setClients} from '../../../redux/Actions/Data.actions';
 import {setPoint, clearPoint} from '../../../redux/Actions/Points.actions';
+import EditClient from './EditClient.section';
 
 
 const ClientList = (props) => {
@@ -25,6 +26,7 @@ const ClientList = (props) => {
         _clients,
     } = props;
     const [isOpenAdd, setIsOpenAdd] = useState(false);
+    const [edit, setEdit] = useState(false);
     const [show, setShow] = useState(false);
     const [loading, setLoading] = useState(false);
     const [msg, setMsg] = useState({});
@@ -125,7 +127,8 @@ const ClientList = (props) => {
             </div>
             <Notification notify={notify} setNotify={setNotify} msg={msg} />
             <AddClient add={isOpenAdd} setAdd={setIsOpenAdd} />
-            <ClientDetail show={show} setShow={setShow} detail={detail} />
+            <EditClient edit={edit} setEdit={setEdit} detail={detail} />
+            <ClientDetail show={show} setShow={setShow} setEdit={setEdit} detail={detail} />
         </div>
     )
 }

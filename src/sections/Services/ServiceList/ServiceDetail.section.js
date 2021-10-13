@@ -1,24 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { IoBarChart, IoCash, IoClose } from 'react-icons/io5';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-import { Button} from '../../../components';
+import { Button, Confirmation} from '../../../components';
 import extractInitials from '../../../utils/extractIni';
 import { BASE_URL } from '../../../utils/globalVariable';
 import { IMG_URL } from '../../../utils/imageVariable';
+import { deleteService } from '../../../redux/Actions/Data.actions';
 
 const ServiceDetail = (props) => {
     const { show, setShow, detail } = props;
+
+    const [confirm, setConfirm] = useState(false);
+    const [data, setData] = useState('');
+    const [loading, setLoading] = useState(false);
+
     const stop = (e) => {
         e.stopPropagation()
     }
+
+    const Confirm = (data) => {
+        setConfirm(true);
+        setData({ data, msg: 'Are you sure you want to delete: '});
+    };
 
     const authenticate = (id) => {
         fetch(`${BASE_URL}/service/${id}/`, {
             method: 'DELETE'
         })
             .then(res => {
-                props.setRefresh(true);
-                setShow(false);
+                props.deleteService(id);
+            })
+            .then(res => {
+                setTimeout(() => {
+                    setShow(false);
+                }, 3000);
             })
             .catch(err => {
                 console.log(err);
@@ -57,13 +74,17 @@ const ServiceDetail = (props) => {
                         <div className="mx-2" />
                         <Button title="Close" invert={true} onClick={() => setShow(!show)} />
                         <div className="mx-2" />
-                        <Button title={"Delete"} invert={true} type="danger" onClick={() => authenticate(detail.id)} />
+                        <Button title={"Delete"} invert={true} type="danger" onClick={() => Confirm(detail)} />
                     </div>
                 </div>
             </div>
+            <Confirmation confirm={confirm} setConfirm={setConfirm} data={data} loading={loading} onClick={id => authenticate(id)} />
         </>
     )
 };
 
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({ deleteService }, dispatch);
+}
 
-export default ServiceDetail;
+export default connect(null, mapDispatchToProps)(ServiceDetail);

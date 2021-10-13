@@ -5,10 +5,10 @@ import { bindActionCreators } from 'redux';
 
 import { Activity, Button, Input,  Notification } from '../../../components';
 import { BASE_URL } from '../../../utils/globalVariable';
-import { addWorker } from '../../../redux/Actions/Data.actions';
+import { editWorker } from '../../../redux/Actions/Data.actions';
 
-const AddWorker = (props) => {
-    const { add, setAdd, username, password } = props;
+const EditWorker = (props) => {
+    const { edit, setEdit, username, password, detail } = props;
 
     const [name, setName] = useState('');
     const [userName, setUserName] = useState('');
@@ -27,13 +27,17 @@ const AddWorker = (props) => {
     }
 
     useEffect(() => {
+        setName(detail.fullname);
+        setUserName(detail.username)
+        setEmail(detail.email);
+        setTel(detail.phone);
         return () => {
             setTel('');
             setName('');
             setEmail('');
             setUserName('');
         }
-    }, []);
+    }, [detail]);
 
     const authenticate = () => {
         let hasError;
@@ -70,13 +74,10 @@ const AddWorker = (props) => {
             username: userName,
             phone: tel,
             email: email,
-            is_worker: true,
-            password: 'Eden-Beauty'
         }
 
-        console.log(body);
 
-        fetch(`${BASE_URL}/register/`, {
+        fetch(`${BASE_URL}/register/${detail.id}/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -89,13 +90,13 @@ const AddWorker = (props) => {
                 setIsLoading(false);
                 setMsg({
                     title: 'Succesful',
-                    message: 'We have a new team mate'
+                    message: 'Worker information updated'
                 });
-                props.addWorker(res);
+                props.editWorker(res);
             })
             .then(res => {
                 setTimeout(() => {
-                    setAdd(false);
+                    setEdit(false);
                 }, 3000);
             })
             .catch(err => {
@@ -110,17 +111,17 @@ const AddWorker = (props) => {
 
     return (
         <>
-            <div onClick={() => setAdd(false)} className={`h-full bg-gray-50 bg-opacity-10 fixed z-50 top-0 backdrop-filter backdrop-blur-sm transition-all duration-500 ease-in-out ${add ? 'right-0 w-full opacity-100' : '-right-16 opacity-0 w-0'} `}>
-                <div onClick={(e) => stop(e)} className={`fixed shadow-xl h-screen overflow-y-auto overflowY -top-0 z-30 bg-white text-gray-700 p-8 transition-all delay-100 ease-in-out ${add ? 'right-0 w-full md:w-96 lg:w-120 opacity-100' : '-right-16 opacity-0 w-0'}`}>
+            <div onClick={() => setEdit(false)} className={`h-full bg-gray-50 bg-opacity-10 fixed z-50 top-0 backdrop-filter backdrop-blur-sm transition-all duration-500 ease-in-out ${edit ? 'right-0 w-full opacity-100' : '-right-16 opacity-0 w-0'} `}>
+                <div onClick={(e) => stop(e)} className={`fixed shadow-xl h-screen overflow-y-auto overflowY -top-0 z-30 bg-white text-gray-700 p-8 transition-all delay-100 ease-in-out ${edit ? 'right-0 w-full md:w-96 lg:w-120 opacity-100' : '-right-16 opacity-0 w-0'}`}>
                     <div className="flex justify-between items-end md:mt-8 text-xl font-semibold text-green-700">
-                        <h2>Add Worker</h2>
-                        <button onClick={() => setAdd(!add)} className="flex items-center rounded-full outline-none text-base py-1 px-2 text-gray-900 bg-white shadow-md mx-1.5 transition duration-500 ease-in-out hover:shadow-xl"><IoClose /></button>
+                        <h2>Edit Worker</h2>
+                        <button onClick={() => setEdit(!edit)} className="flex items-center rounded-full outline-none text-base py-1 px-2 text-gray-900 bg-white shadow-md mx-1.5 transition duration-500 ease-in-out hover:shadow-xl"><IoClose /></button>
                     </div>
                     <hr className="my-2 mb-12" />
                     <div className="flex py-2 flex-col md:flex-row">
                         <div className="w-full pr-2 lg:pr-6">
                             <Input
-                                placeholder="Shalot Price"
+                                placeholder={detail.fullname}
                                 label="Name"
                                 secureText={false}
                                 type="text"
@@ -129,7 +130,7 @@ const AddWorker = (props) => {
                                 error={nameError}
                                 setError={() => setNameError} />
                             <Input
-                                placeholder="shalot-price"
+                                placeholder={detail.username}
                                 label="Username"
                                 secureText={false}
                                 type="text"
@@ -138,7 +139,7 @@ const AddWorker = (props) => {
                                 error={userNameError}
                                 setError={() => setUserNameError} />
                             <Input
-                                placeholder="681726633"
+                                placeholder={detail.phone}
                                 label="Tel"
                                 secureText={false}
                                 type="number"
@@ -147,7 +148,7 @@ const AddWorker = (props) => {
                                 error={telError}
                                 setError={() => setTelError} />
                             <Input
-                                placeholder="bricejume@gmail.com"
+                                placeholder={detail.email}
                                 label="Email"
                                 secureText={false}
                                 type="email"
@@ -155,11 +156,10 @@ const AddWorker = (props) => {
                                 setValue={(event) => setEmail(event.target.value)}
                                 error={emailError}
                                 setError={() => setEmailError} />
-
                             <div className="flex justify-center md:justify-end mt-14">
-                                {isLoading ? <Activity /> : <Button title="Add Worker" invert={false} onClick={() => authenticate()} />}
+                                {isLoading ? <Activity /> : <Button title="Edit Worker" invert={false} onClick={() => authenticate()} />}
                                 <div className="mx-2" />
-                                <Button title="Close" invert={true} onClick={() => setAdd(!add)} />
+                                <Button title="Close" invert={true} onClick={() => setEdit(!edit)} />
                             </div>
                         </div>
                     </div>
@@ -170,15 +170,15 @@ const AddWorker = (props) => {
     )
 };
 
-const mapStateToProps = ({auth}) => {
-  return {
-    username: auth.username,
-    password: auth.password,
-  }
-}
+const mapStateToProps = ({ auth }) => {
+    return {
+        username: auth.username,
+        password: auth.password,
+    }
+};
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ addWorker }, dispatch);
+    return bindActionCreators({ editWorker }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddWorker);
+export default connect(mapStateToProps, mapDispatchToProps)(EditWorker);
