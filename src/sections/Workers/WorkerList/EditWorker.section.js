@@ -86,7 +86,10 @@ const EditWorker = (props) => {
             body: JSON.stringify(body),
         })
             .then(res => {
-                console.log(res)
+                const response = res.json();
+                return response;
+            })
+            .then(res => {
                 setNotify(true);
                 setIsLoading(false);
                 setMsg({
@@ -109,7 +112,7 @@ const EditWorker = (props) => {
                     message: 'An error occured, check you internet connection'
                 })
             })
-    }
+    };
 
     return (
         <>

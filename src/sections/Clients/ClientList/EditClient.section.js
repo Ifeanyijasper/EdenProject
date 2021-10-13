@@ -84,6 +84,10 @@ const EditClient = (props) => {
                 return response;
             })
             .then(res => {
+                const response = res.json();
+                return response;
+            })
+            .then(res => {
                 setIsLoading(false);
                 setNotify(true);
                 setMsg({
@@ -111,7 +115,7 @@ const EditClient = (props) => {
                     message: 'An error occured, check you internet connection'
                 })
             })
-    }
+    };
 
     return (
         <>

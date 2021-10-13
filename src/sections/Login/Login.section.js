@@ -112,7 +112,7 @@ const Login = (props) => {
                         if(_list[0].is_client) {
                             props.history.push({pathname: '/client'});
                         } else {
-                            props.history.push({pathname: '/dashboard'});
+                            props.history.push({pathname: '/dashboard', exact: true});
                         }
                     })
                 }
