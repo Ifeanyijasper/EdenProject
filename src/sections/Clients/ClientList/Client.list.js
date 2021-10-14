@@ -104,7 +104,7 @@ const ClientList = (props) => {
 
 
     return (
-        <div className={''}>
+        <div className={'w-full'}>
             <RouteIndicator route="Dashboard" current="Clients" />
             <div className="sticky -top-4 md:top-3 z-40 pt-1">
             <Search 

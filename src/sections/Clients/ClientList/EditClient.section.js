@@ -72,17 +72,13 @@ const EditClient = (props) => {
         };
 
         fetch(`${BASE_URL}/register/${detail.id}/`, {
-            method: 'POST',
+            method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Basic ' + Buffer.from(username + ':' + password).toString('base64'),
             },
             body: JSON.stringify(body),
         })
-            .then(res => {
-                const response = res.json();
-                return response;
-            })
             .then(res => {
                 const response = res.json();
                 return response;
@@ -108,7 +104,6 @@ const EditClient = (props) => {
             })
             .catch(err => {
                 setIsLoading(false);
-                console.log(err)
                 setNotify(true);
                 setMsg({
                     title: 'Unexpected Error',

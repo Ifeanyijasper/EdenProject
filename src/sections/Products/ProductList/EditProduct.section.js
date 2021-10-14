@@ -85,7 +85,6 @@ const EditProduct = (props) => {
             body: formData,
         })
             .then(res => {
-                console.log(res)
                 const response = res.json();
                 return response;
             })

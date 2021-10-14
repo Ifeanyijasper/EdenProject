@@ -80,7 +80,7 @@ const WorkerList = (props) => {
 
 
     return (
-        <div className={'isDetail ? styles.listContainerDetail : styles.listContainer'}>
+        <div className={'w-full'}>
             <RouteIndicator route="Dashboard" current="Workers" />
             <div className="sticky -top-4 md:top-3 z-40 pt-1">
                 <Search placeholder="Search" isOpen={isOpenAdd} setIsOpen={setIsOpenAdd} newButton={true} title={'Worker'} filters={filters} filter={filter} setFilter={setFilter} text={text} setText={setText} />

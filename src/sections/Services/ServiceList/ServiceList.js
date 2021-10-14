@@ -12,7 +12,7 @@ import {
 import { BASE_URL } from '../../../utils/globalVariable';
 import styles from './ServiceList.module.css';
 import search from '../../../utils/search';
-import {setData} from '../../../redux/Actions/Data.actions';
+import {setData, setServices} from '../../../redux/Actions/Data.actions';
 import ServiceDetail from './ServiceDetail.section';
 import EditService from './EditService.setion';
 
@@ -71,7 +71,7 @@ const ServiceList = (props) => {
     };
 
     return (
-        <div className={''}>
+        <div className={'w-full'}>
             <RouteIndicator route="Dashboard" current="Services" />
             <div className="sticky -top-4 md:top-3 z-40 pt-1">
                 <Search placeholder="Search" isOpen={isOpenAdd} setIsOpen={setIsOpenAdd} newButton={true} title={'Service'} filters={filters} filter={filter} setFilter={setFilter} text={text} setText={setText} />
@@ -107,7 +107,7 @@ const mapStateToProps = ({data, refresh}) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({setData}, dispatch)
+    return bindActionCreators({setData, setServices}, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ServiceList);

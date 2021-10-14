@@ -1,7 +1,5 @@
 import React from 'react';
 
-import styles from './WorkArea.module.css';
-
 const WorkArea = (props) => {
     const {children} = props;
     return (

@@ -156,7 +156,7 @@ const DataReducer = (state = INITIAL_STATE, action) => {
         case EDIT_CLIENT:
             data = action.payload;
             index = state.clients.findIndex(clientIndex => {
-                return clientIndex.id.toString() === data?.id.toString();
+                return clientIndex?.id.toString() === data?.id.toString();
             });
             clients = [...state.clients];
             if (index >= 0) {
