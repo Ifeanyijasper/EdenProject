@@ -18,10 +18,6 @@ import Product from './Product/Product.section';
 import Services from './ServiceSection/Service.section';
 import Products from './ProductSection/Product.section';
 import ClientFinance from './ClientFinance/Finance.section';
-import EditClient from './EditClient /EditClient.section';
-import EditWorker from './EditWorker/EditWorker.section';
-import EditService from './EditService/EditService.section';
-import EditProduct from './EditProduct/EditProduct.section';
 import Profile from './Profile/Profile.section';
 import EditPassword from './EditPassword/EditPassword.section';
 import Checkout from './Checkout/Checkout.section';
@@ -31,7 +27,9 @@ import Testimonials from './Testimonials/Testimonials.section';
 import Gallery from './Gallery/gallery.section';
 import AdminGallery from './Gallery/admingallery.section';
 import WorkerDetail from './Workers/WorkerList/WorkerDetail.section';
+import EditWorker from './Workers/WorkerList/EditWorker.section';
 import ClientDetail from './Clients/ClientList/ClientDetail.section';
+import EditClient from './Clients/ClientList/EditClient.section';
 
 export {
     SideNav, 
@@ -55,8 +53,6 @@ export {
     Products,
     ClientFinance,
     EditClient,
-    EditProduct,
-    EditService,
     EditWorker,
     Profile,
     EditPassword,

@@ -8,7 +8,7 @@ import { BASE_URL } from '../../../utils/globalVariable';
 import { editService } from '../../../redux/Actions/Data.actions';
 
 const EditService = (props) => {
-    const { edit, setEdit, user, detail } = props;
+    const { edit, setEdit, username, password, detail } = props;
 
     const [price, setPrice] = useState('');
     const [name, setName] = useState('');
@@ -33,7 +33,6 @@ const EditService = (props) => {
         setDiscount(detail.discount)
         setPrice(detail.price);
         setAbout(detail.description);
-        setImage(detail.img);
         return () => {
             setPrice('');
             setName('');
@@ -78,9 +77,13 @@ const EditService = (props) => {
 
         fetch(`${BASE_URL}/service/${detail.id}/`, {
             method: 'PATCH',
+            headers: {
+                'Authorization': 'Basic ' + Buffer.from(username + ':' + password).toString('base64'),
+            },
             body: formData,
         })
             .then(res => {
+                console.log(res)
                 const response = res.json();
                 return response;
             })
@@ -169,7 +172,7 @@ const EditService = (props) => {
                                     price={price}
                                     discount={discount}
                                     image={image}
-                                    urlImage={true}
+                                    urlImage={detail.img}
                                 />
                             </div>
                             <div className="flex justify-center md:justify-end mt-20">
@@ -186,8 +189,15 @@ const EditService = (props) => {
     )
 };
 
+const mapStateToProps = ({ auth }) => {
+    return {
+        username: auth.username,
+        password: auth.password,
+    }
+};
+
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({ editService }, dispatch);
 }
 
-export default connect(null, mapDispatchToProps)(EditService);
+export default connect(mapStateToProps, mapDispatchToProps)(EditService);

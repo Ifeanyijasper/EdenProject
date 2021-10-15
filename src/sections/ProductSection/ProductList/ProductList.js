@@ -70,7 +70,7 @@ const ProductList = (props) => {
             { text.length <= 0 &&   <>
                     <h2 className={`text-gray-600 text-left md:text-center text-lg md:text-xl lg:text-xl pb-1 font-semibold`}>Top 6 Products</h2>
                     <hr className={`w-4/5 mx-auto`} />
-                    <div className={`py-10 lg:px-12 grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-7 flex justify-center`}>
+                    <div className={`py-6 mb-6 lg:px-12 grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-7 flex justify-center`}>
                         {isLoading ? (<Activity2 />) : products.map((product, index) => ((Math.floor(Number(product.discount)) < 10 && index < 6)&&
                         <ItemCard item={product} onClick={() => showDetails(product)} key={product.id} />))}
                     </div>
@@ -79,7 +79,7 @@ const ProductList = (props) => {
             <hr className={`w-4/5 mx-auto mt-2`} />
                 <h2 className={`py-4 text-gray-600 text-left md:text-center text-lg md:text-xl lg:text-xl font-semibold`}>{products.length} Product{products.length !== 1 && 's'}</h2>
             <hr className={`w-4/5 mx-auto mb-2`} />
-            <div className={`py-10 lg:px-12 grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-7 flex justify-center`}>
+            <div className={`py-6 lg:px-12 grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-7 flex justify-center`}>
                 {isLoading ? (<Activity2 />) : products.map((product, index) => <ItemCard item={product} onClick={() => showDetails(product)} key={product.id} />)}
             </div>
         </div>

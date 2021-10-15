@@ -10,7 +10,6 @@ import {
     Search 
 } from '../../../components';
 import { BASE_URL } from '../../../utils/globalVariable';
-import styles from './ServiceList.module.css';
 import search from '../../../utils/search';
 import {setData, setServices} from '../../../redux/Actions/Data.actions';
 import ServiceDetail from './ServiceDetail.section';
@@ -78,18 +77,18 @@ const ServiceList = (props) => {
             </div>
             {text.length <= 0 && <>
                 <h2 className={'text-gray-500 text-2xl mt-3 mx-2'}>Top 6 Services</h2>
-                <hr className={styles.horizontalLine} />
-                <div className={`py-10 lg:px-12 grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-7 flex justify-center`}>
+                <hr className={'my-4 mx-2'} />
+                <div className={`py-6 mb-6 lg:px-12 grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-7 flex justify-center`}>
                     {isLoading ? (<Activity2 />) : services.map((service, index) => ((Math.floor(Number(service.discount)) < 10 && index < 6) &&
                         <ItemCard item={service} onClick={() => showDetails(service)} key={service.id} />
                     ))}
                 </div>
             </>
             }
-            <hr className={styles.horizontalLine} />
+            <hr className={'my-4 mx-2'} />
             <h2 className={'text-gray-500 text-2xl mt-3 mx-2'}>{services.length || 0} Services</h2>
-            <hr className={styles.horizontalLine} />
-            <div className={`py-10 lg:px-12 grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-7 flex justify-center`}>
+            <hr className={'my-4 mx-2'} />
+            <div className={`py-6 lg:px-12 grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-7 flex justify-center`}>
                 {isLoading ? (<Activity2 />) : services.map((service, index) => <ItemCard item={service} onClick={() => showDetails(service)} />)}
             </div>
             <AddService add={isOpenAdd} setAdd={setIsOpenAdd} />

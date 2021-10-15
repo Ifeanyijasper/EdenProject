@@ -33,7 +33,6 @@ const EditProduct = (props) => {
         setDiscount(detail.discount)
         setPrice(detail.price);
         setAbout(detail.description);
-        setImage(detail.img);
         return () => {
             setPrice('');
             setName('');
@@ -79,7 +78,6 @@ const EditProduct = (props) => {
         fetch(`${BASE_URL}/product/${detail.id}/`, {
             method: 'PATCH',
             headers: {
-                'Content-Type': 'application/json',
                 'Authorization': 'Basic ' + Buffer.from(username + ':' + password).toString('base64'),
             },
             body: formData,
@@ -181,7 +179,7 @@ const EditProduct = (props) => {
                                     price={price}
                                     discount={discount}
                                     image={image}
-                                    urlImage={true}
+                                    urlImage={detail.img}
                                 />
                             </div>
                             <div className="flex justify-center md:justify-end mt-20">

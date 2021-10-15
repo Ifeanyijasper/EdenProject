@@ -77,17 +77,17 @@ const ProductList = (props) => {
             </div>
             {text.length <= 0 && <>
                 <h2 className={'text-gray-500 text-2xl mt-3 mx-2'}>Top 6 Products</h2>
-                <hr className={styles.horizontalLine} />
-                <div className={`py-10 lg:px-12 grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-7 flex justify-center`}>
+                <hr className={'my-4 mx-2'} />
+                <div className={`py-6 mb-6 lg:px-12 grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-7 flex justify-center`}>
                     {isLoading ? (<Activity2 />) : products.map((product, index) => ((Math.floor(Number(product.discount)) < 10 && index < 6) &&
                         <ItemCard item={product} onClick={() => showDetails(product)} key={product.id} />))}
                 </div>
             </>
             }
-            <hr className={styles.horizontalLine} />
+            <hr className={'my-4 mx-2'} />
             <h2 className={'text-gray-500 text-2xl mt-3 mx-2'}>{products.length || 0} Product{products.length !== 1 && 's'}</h2>
-            <hr className={styles.horizontalLine} />
-            <div className={`py-10 lg:px-12 grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-7 flex justify-center`}>
+            <hr className={'my-4 mx-2'} />
+            <div className={`py-6 lg:px-12 grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-7 flex justify-center`}>
                 {isLoading ? (<Activity2 />) : products.map((product, index) => <ItemCard item={product} onClick={() => showDetails(product)} key={product.id} />)}
             </div>
             <AddProduct add={isOpenAdd} setAdd={setIsOpenAdd} />

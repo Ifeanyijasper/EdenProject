@@ -80,13 +80,13 @@ const WorkerList = (props) => {
 
 
     return (
-        <div className={'w-full'}>
+        <div className={'w-full h-full'}>
             <RouteIndicator route="Dashboard" current="Workers" />
             <div className="sticky -top-4 md:top-3 z-40 pt-1">
                 <Search placeholder="Search" isOpen={isOpenAdd} setIsOpen={setIsOpenAdd} newButton={true} title={'Worker'} filters={filters} filter={filter} setFilter={setFilter} text={text} setText={setText} />
             </div>
             <h2 className={'text-gray-500 text-2xl mt-3 mx-2'}>{workers.length || 0} Worker{workers.length !== 1 && 's'}</h2>
-            <div className={'grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-5 px-0 md:px-2 lg:px-10 mt-4 md:mt-6'}>
+            <div className={'grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 lg:gap-7 px-0 md:px-2 lg:px-8 mt-4 md:mt-6'}>
                 {loading ? (<div style={{ margin: 'auto' }}><Activity2 /></div>) : (workers.map((worker) =>
                     <ClientCard client={worker} detail={detail} setDetail={setDetail} setIsDetail={setShow} key={worker.id} />
                 ))}

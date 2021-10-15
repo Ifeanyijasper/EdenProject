@@ -6,12 +6,14 @@ import { bindActionCreators } from 'redux';
 import { setWorkers, setClients, setFinances, setCheckouts } from '../../redux/Actions/Data.actions';
 import { MiniProgressBar, ClientCard, RouteIndicator, Activity2 } from '../../components';
 import { BASE_URL } from '../../utils/globalVariable';
-import { ClientDetail, WorkerDetail } from '..';
+import { ClientDetail, EditClient, EditWorker, WorkerDetail } from '..';
 
 const Dashboard = (props) => {
     const { username, password, _clients, _workers } = props;
     const [worker, setWorker] = useState(false);
     const [detail, setDetail] = useState({});
+    const [editClient, setEditClient] = useState(false);
+    const [editWorker, setEditWorker] = useState(false);
     const [client, setClient] = useState(false);
     const [stats, setStats] = useState({
         client: 20,
@@ -70,7 +72,7 @@ const Dashboard = (props) => {
                     message: 'Invalid username or password.'
                 })
             })
-    }, []);
+    }, [_clients, _workers]);
 
     useEffect(() => {
         setIsLoading(true);
@@ -144,8 +146,8 @@ const Dashboard = (props) => {
             <RouteIndicator route="Dashboard" current="" />
             {/* <Search placeholder="Search" isSearch={isSearch} setIsSearch={setIsSearch} newButton={false} filters={filters} filter={filter} setFilter={setFilter} /> */}
             <h2 className={'text-gray-500 text-2xl mt-3 mx-2'}>Section</h2>
-            <div className={'flex items-start my-1 mt-4'}>
-                <div className={'w-56 h-auto px-1.5 py-4 rounded-md bg-primary flex justify-center items-center flex-col mr-3 ml-1.5'}>
+            <div className={'flex items-start my-1 mt-4 px-8 mb-10'}>
+                <div className={'w-56 h-auto px-1.5 py-4 rounded-md bg-primary flex justify-center items-center flex-col mr-5 shadow'}>
                     <div className={'flex justify-start w-full items-center text-lg text-gray-300 px-2 mb-1.5'}>
                         <IoPeople className={'mr-2'} />
                         <p className={''}>Clients</p>
@@ -163,7 +165,7 @@ const Dashboard = (props) => {
                     <MiniProgressBar progress={100/stats[1].goal * 100} />
                 </div> */}
 
-                <div className={'w-56 h-auto px-1.5 py-4 rounded-md bg-primary flex justify-center items-center flex-col mx-1'}>
+                <div className={'w-56 h-auto px-1.5 py-4 rounded-md bg-primary flex justify-center items-center flex-col mx-1 shadow'}>
                     <div className={'flex justify-start w-full items-center text-lg text-gray-300 px-2 mb-1.5'}>
                         <IoWalk className={'mr-2'} />
                         <p className={''}>Workers: {workers.length || 0}</p>
@@ -176,7 +178,7 @@ const Dashboard = (props) => {
                 <h2 className={'text-gray-500 text-2xl mt-3 mx-2'}>Top {(workers.length * 0.2).toFixed(0)} Worker{Number((workers.length * 0.2).toFixed(0)) <= 1 ? '' : 's'}</h2>
                 {/* <h2 className={styles.tempo}>This month</h2> */}
             </div>
-            <div className={'grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-5 px-0 md:px-2 lg:px-10 mt-4 md:mt-6'}>
+            <div className={'grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-5 lg:gap-6 px-0 md:px-2 lg:px-8 mt-4 md:mt-6 mb-10'}>
                 {isLoading ? (<Activity2 />) : workers.map((worker, index) => ((index < Number((workers.length * 0.2).toFixed(0))) &&
                     <ClientCard client={worker} setDetail={setDetail} setIsDetail={setWorker} key={worker.id} />
                 ))}
@@ -185,13 +187,15 @@ const Dashboard = (props) => {
                 <h2 className={'text-gray-500 text-2xl mt-3 mx-2'}>Top {(clients.length * 0.2).toFixed(0)} Client{Number((clients.length * 0.2).toFixed(0)) <= 1 ? '' : 's'}</h2>
                 {/* <h2 className={styles.tempo}>This month</h2> */}
             </div>
-            <div className={'grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-5 px-0 md:px-2 lg:px-10 mt-4 md:mt-6'}>
+            <div className={'grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-5 lg:gap-6 px-0 md:px-2 lg:px-8 mt-4 md:mt-6'}>
                 {isLoading ? (<Activity2 />) : clients.map((client, index) => ((index < Number((clients.length * 0.2).toFixed(0))) &&
                     <ClientCard client={client} setDetail={setDetail} setIsDetail={setClient} key={client.id} />
                 ))}
             </div>
-            <WorkerDetail show={worker} setShow={setWorker} detail={detail} />
-            <ClientDetail show={client} setShow={setClient} detail={detail} />
+            <WorkerDetail show={worker} setShow={setWorker} setEdit={setEditWorker} detail={detail} />
+            <ClientDetail show={client} setShow={setClient} setEdit={setEditClient} detail={detail} />
+            <EditClient edit={editClient} setEdit={setEditClient} detail={detail} />
+            <EditWorker edit={editWorker} setEdit={setEditWorker} detail={detail} />
         </section>
     )
 };
