@@ -108,12 +108,9 @@ const Login = (props) => {
                             return [res, users];
                         })
                         .then(res => {
-                            console.log(res)
                             let _list = res[1].filter(data => userName === data.username);
                             setIsLoading(false);
-                            console.log(_list[0].is_client);
                             props.setUser(_list[0], userName, password);
-                            console.log(_list)
                             if (_list[0].is_client) {
                                 // props.history.push({ pathname: '/client' });
                                 setRedirect({

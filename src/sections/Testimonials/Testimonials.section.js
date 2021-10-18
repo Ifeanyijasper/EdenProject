@@ -55,7 +55,7 @@ const Testimonials = (props) => {
                 <Search placeholder="Search" newButton={false} title={'Service'} filters={filters} filter={filter} setFilter={setFilter} text={text} setText={setText} />
             </div>
             <div className={styles.testimonialContainer}>
-                {isLoading ? <Activity2 /> : testimonials.map((testimonial, index) => <Testimonial testimonial={testimonial} />)}
+                {isLoading ? <Activity2 /> : testimonials.map((testimonial, index) => <Testimonial testimonial={testimonial} key={index} />)}
             </div>
         </section>
     )

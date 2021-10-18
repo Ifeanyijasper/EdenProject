@@ -3,7 +3,7 @@ import {IoPeople, IoWalk } from 'react-icons/io5';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { setWorkers, setClients, setFinances, setCheckouts } from '../../redux/Actions/Data.actions';
+import { setWorkers, setClients, setFinances, setCheckouts, setGallery } from '../../redux/Actions/Data.actions';
 import { MiniProgressBar, ClientCard, RouteIndicator, Activity2 } from '../../components';
 import { BASE_URL } from '../../utils/globalVariable';
 import { ClientDetail, EditClient, EditWorker, WorkerDetail } from '..';
@@ -137,6 +137,28 @@ const Dashboard = (props) => {
         
     }, []);
 
+    useEffect(() => {
+        setIsLoading(true);
+        fetch(`${BASE_URL}/Gallery/`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Basic ' + Buffer.from(username + ':' + password).toString('base64'),
+            },
+        })
+            .then(res => {
+                const response = res.json();
+                return response;
+            })
+            .then(res => {
+                props.setGallery(res);
+                setIsLoading(false);
+            })
+            .catch(err => {
+                setIsLoading(false);
+            })
+    }, []);
+
     const nothing = () => {
         return 1;
     }
@@ -210,7 +232,7 @@ const mapStateToProps = ({ auth, data }) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ setClients, setWorkers, setFinances, setCheckouts }, dispatch);
+    return bindActionCreators({ setClients, setWorkers, setFinances, setCheckouts, setGallery }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

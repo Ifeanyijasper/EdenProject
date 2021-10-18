@@ -25,7 +25,6 @@ const FinanceDetail = (props) => {
         .then(res => {
             props.setRefresh(true);
             setShow(false);
-            console.log(res);
         })
         .catch(err => {
             console.log(err);

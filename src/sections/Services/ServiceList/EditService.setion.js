@@ -77,13 +77,9 @@ const EditService = (props) => {
 
         fetch(`${BASE_URL}/service/${detail.id}/`, {
             method: 'PATCH',
-            headers: {
-                'Authorization': 'Basic ' + Buffer.from(username + ':' + password).toString('base64'),
-            },
             body: formData,
         })
             .then(res => {
-                console.log(res)
                 const response = res.json();
                 return response;
             })

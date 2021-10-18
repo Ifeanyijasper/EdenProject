@@ -77,9 +77,6 @@ const EditProduct = (props) => {
 
         fetch(`${BASE_URL}/product/${detail.id}/`, {
             method: 'PATCH',
-            headers: {
-                'Authorization': 'Basic ' + Buffer.from(username + ':' + password).toString('base64'),
-            },
             body: formData,
         })
             .then(res => {
@@ -93,7 +90,6 @@ const EditProduct = (props) => {
                     title: 'Successful',
                     message: 'Product information updated.'
                 })
-                console.log(res)
                 props.editProduct(res);
             })
             .then(res => {

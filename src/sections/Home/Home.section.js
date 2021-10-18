@@ -78,7 +78,7 @@ const HomeSection = (props) => {
 
     useEffect(() => {
         setIsLoading(true);
-        fetch(`${BASE_URL}/gallery/`)
+        fetch(`${BASE_URL}/Gallery/`)
             .then(res => {
                 const response = res.json();
                 return response;
