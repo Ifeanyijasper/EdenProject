@@ -66,7 +66,7 @@ const EditGallery = (props) => {
             formData.append('img', image[0]);
         }
 
-        fetch(`${BASE_URL}/Gallery/${detail.id}`, {
+        fetch(`${BASE_URL}/Gallery/${detail.id}/`, {
             method: 'PATCH',
             body: formData,
         })
@@ -79,9 +79,9 @@ const EditGallery = (props) => {
                 setNotify(true);
                 setMsg({
                     title: 'Successful',
-                    message: 'Product information updated.'
+                    message: 'Memory updated.'
                 })
-                props.editProduct(res);
+                props.editGallery(res);
             })
             .then(res => {
                 setTimeout(() => {

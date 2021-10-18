@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import { IoBarChart, IoCash, IoClose } from 'react-icons/io5';
+import { IoClose } from 'react-icons/io5';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import { Button, Confirmation} from '../../components';
 import extractInitials from '../../utils/extractIni';
 import { BASE_URL } from '../../utils/globalVariable';
-import { IMG_URL } from '../../utils/imageVariable';
-import { deleteProduct } from '../../redux/Actions/Data.actions';
+import { deleteGallery } from '../../redux/Actions/Data.actions';
 
 const GalleryDetail = (props) => {
     const { show, setShow, setEdit, detail } = props;
@@ -27,13 +26,13 @@ const GalleryDetail = (props) => {
 
     const authenticate = (id) => {
         setLoading(true);
-        fetch(`${BASE_URL}/product/${id}/`, {
+        fetch(`${BASE_URL}/Gallery/${id}/`, {
             method: 'DELETE'
         })
             .then(res => {
                 setConfirm(false)
                 setLoading(false);
-                props.deleteProduct(id);
+                props.deleteGallery(id);
             })
             .then(res => {
                 setTimeout(() => {
@@ -93,7 +92,7 @@ const GalleryDetail = (props) => {
 
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ deleteProduct }, dispatch);
+    return bindActionCreators({ deleteGallery }, dispatch);
 }
 
 export default connect(null, mapDispatchToProps)(GalleryDetail);

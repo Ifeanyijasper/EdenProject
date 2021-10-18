@@ -100,7 +100,7 @@ const DataReducer = (state = INITIAL_STATE, action) => {
         case EDIT_GALLERY:
             data = action.payload;
             index = state.gallery.findIndex(galleryIndex => {
-                return galleryIndex.id.toString() === data?.id.toString();
+                return galleryIndex?.id.toString() === data?.id.toString();
             });
             gallery = [...state.gallery];
             if (index >= 0) {

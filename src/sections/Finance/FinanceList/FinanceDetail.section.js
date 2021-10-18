@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { IoClose, IoHandRight, IoMail } from 'react-icons/io5';
-import { FaPhone } from 'react-icons/fa';
+import { IoClose } from 'react-icons/io5';
 import { connect } from 'react-redux';
 
-import { Button } from '../../../components';
+import { Button, Confirmation } from '../../../components';
 import { img_1 } from '../../../res/images';
 import extractInitials from '../../../utils/extractIni';
 import { BASE_URL } from '../../../utils/globalVariable';
@@ -14,21 +13,31 @@ const FinanceDetail = (props) => {
         e.stopPropagation()
     }
     const [referers, setReferers] = useState([]);
+    const [confirm, setConfirm] = useState(false);
+    const [data, setData] = useState('');
+    const [loading, setLoading] = useState(false);
+
+    const Confirm = (data) => {
+        setConfirm(true);
+        setData({ data, msg: 'Are you sure you want to delete: '});
+    };
 
     const authenticate = (id) => {
+        setLoading(true);
         fetch(`${BASE_URL}/purchase/${id}/`, {
             method: 'DELETE',
             headers: {
                 Authorization: 'Basic ' + Buffer.from(username + ':' + password).toString('base64'),
             }
         })
-        .then(res => {
-            props.setRefresh(true);
-            setShow(false);
-        })
-        .catch(err => {
-            console.log(err);
-        })
+            .then(res => {
+                setConfirm(false);
+                setLoading(false);
+                setShow(false);
+            })
+            .catch(err => {
+                console.log(err);
+            })
     }
 
     useEffect(() => {
@@ -58,17 +67,21 @@ const FinanceDetail = (props) => {
                     <div className="md:mt-1.5 text-base mb-1">
                         <h2 className="text-left font-semibold">Items</h2>
                         {detail.item !== null && detail.item !== undefined && detail.item.map((item, index) => (
-                        <b className={'mr-3 font-normal'}>({item.count}) {item.name} : {item.price * item.count} XAF</b>
+                            <>
+                                <b className={'mr-3 font-normal'}>({item.count}) {item.name} : {item.price * item.count} XAF</b>
+                                <br />
+                            </>
                         ))}
                         <h2 className={'mr-3 text-sm font-bold text-primary text-right mt-7'}>Total = {detail.total} XAF</h2>
                     </div>
                     <div className="flex justify-end mt-5">
                         <Button title="Close" invert={false} onClick={() => setShow(!show)} />
                         <div className="mx-2" />
-                        {user.is_superuser && <Button title="Delete" invert={true} type="danger" onClick={() => authenticate(detail.id)} />}
+                        {user.is_superuser && <Button title="Delete" invert={true} type="danger" onClick={() => Confirm(detail)} />}
                     </div>
                 </div>
             </div>
+            <Confirmation confirm={confirm} setConfirm={setConfirm} data={data} loading={loading} onClick={id => authenticate(id)} />
         </>
     )
 };

@@ -9,7 +9,7 @@ import search from '../../utils/search';
 import { BASE_URL } from '../../utils/globalVariable';
 import AddGallery from './AddGallery.section';
 import EditGallery from './EditGallery.section';
-import GalleryDetailSection from './GalleryDetail.section';
+import GalleryDetail from './GalleryDetail.section';
 
 const AdminGallery = (props) => {
     const { _gallery, username, password } = props;
@@ -140,7 +140,7 @@ const AdminGallery = (props) => {
             </div>
             <AddGallery add={isOpenAdd} setAdd={setIsOpenAdd} />
             <EditGallery edit={edit} setEdit={setEdit} detail={detail} />
-            <GalleryDetailSection show={show} setShow={setShow} setEdit={setEdit} detail={detail} />
+            <GalleryDetail show={show} setShow={setShow} setEdit={setEdit} detail={detail} />
         </>
     )
 };
