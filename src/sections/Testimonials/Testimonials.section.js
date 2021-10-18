@@ -20,27 +20,8 @@ const Testimonials = (props) => {
     ]);
 
     useEffect(() => {
-<<<<<<< HEAD
-        setIsLoading(true);
-        fetch(`${BASE_URL}/testimonial/`)
-            .then(res => {
-                const response = res.json();
-                return response;
-            })
-            .then(res => {
-                setTestimonials(res);
-                setIsLoading(false);
-                props.setData(res);
-            })
-            .catch(err => {
-                setIsLoading(false);
-                console.log(true);
-            })
-    }, []);
-=======
         search(text, _testimonials, setTestimonials, 'client_name');
     }, [text]);
->>>>>>> 0ced31eb8f3c4dec3de009d4ed042ac4280362a9
 
     useEffect(() => {
         setTestimonials(_testimonials)
