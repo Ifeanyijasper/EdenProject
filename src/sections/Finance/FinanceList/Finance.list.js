@@ -93,7 +93,7 @@ const FinanceList = (props) => {
     }
 
     return (
-        <div className={'isDetail ? styles.listContainerDetail : styles.listContainer'}>
+        <div className={'w-full'}>
             <RouteIndicator route="Dashboard" current="Finances" />
             <div className="sticky -top-4 md:top-3 z-40 pt-1">
                 <Search
