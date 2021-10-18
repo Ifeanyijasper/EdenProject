@@ -8,7 +8,7 @@ import { Hyphenated } from '../../utils/number';
 const AdminCard = (props) => {
     const {worker} = props;
     return (
-        <div className={'h-auto w-60 bg-primary rounded-md flex justify-between items-center py-3 px-2'}>
+        <div className={'cursor-pointer h-auto w-60 bg-primary rounded-md flex justify-between items-center py-3 px-2'}>
             <div className={'flex justify-center flex-col items-center'}>
                 {worker.img ? (
                      <img src={worker.img} alt="Admin Name" className={'h-16 w-16 rounded-full bg-center bg-cover'} />

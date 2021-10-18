@@ -105,23 +105,23 @@ const Profile = (props) => {
     return (
         <div>
             {(user.is_worker || user.is_superuser) && <RouteIndicator route="Dashboard" current="Profile" /> }
-            <div className={styles.profileContainer}>
-                <div className={styles.profileUser}>
-                    <div className={styles.profileImgContainer}>
-                        {/* <img src={img_2} alt="Name" className={styles.profileImg} /> */}
-                        <h2 className={styles.profileIni}>{name ? extractInitials(name) : extractInitials(userName)}</h2>
-                        <button className={styles.profileEdit}><IoPencil className={styles.profileEditIcon} /></button>
+            <div className={'py-8 px-10'}>
+                <div className={'flex items-center flex-col md:flex-row mt-10'}>
+                    <div className={'flex mr-10 items-baseline'}>
+                        {/* <img src={img_2} alt="Name" className={'h-40 w-40 bg-center bg-cover rounded-full shadow-md'} /> */}
+                        <h2 className={'h-40 w-40 flex items-center justify-center rounded-full text-5xl tracking-wider shadow-md'}>{name ? extractInitials(name) : extractInitials(userName)}</h2>
+                        <button className={'cursor-pointer relative outline-none h-10 w-10 bg-primary text-white rounded-full flex items-center justify-center top-9 -ml-11 shadow-md'}><IoPencil className={styles.profileEditIcon} /></button>
                     </div>
-                    <div className={styles.profileCredentials}>
-                        <h2 className={styles.profileName}>{name  || "'Empty'"} | {userName}</h2>
-                        <h4 className={styles.profileLocation}>{location || "'Null'"}</h4>
-                        <h4 className={styles.profileLocation}>Served: {served || '0'} {(user.is_worker || user.is_superuser) ? 'Clients' : 'Times'}</h4>
-                        {(user.is_worker || user.is_superuser) && <h4 className={styles.profileLocation}>Refer Bonuses: {referBonus || '0'} XAF</h4>}
+                    <div className={'mt-5 md:mt-0'}>
+                        <h2 className={'text-xl text-gray-700'}>{name  || "'Empty'"} | {userName}</h2>
+                        <h4 className={'text-base tracking-wide'}>{location || "'Null'"}</h4>
+                        <h4 className={'text-base tracking-wide'}>Served: {served || '0'} {(user.is_worker || user.is_superuser) ? 'Clients' : 'Times'}</h4>
+                        {(user.is_worker || user.is_superuser) && <h4 className={'text-base tracking-wide'}>Refer Bonuses: {referBonus || '0'} XAF</h4>}
                     </div>
                 </div>
-                <div className={styles.border}>
-                    <div className={styles.profileForm}>
-                        <div className={styles.profileFormSection}>
+                <div className={`w-full lg:w-4/5 mx-auto my-6 ${styles.border}`}>
+                    <div className={'flex flex-wrap justify-around bg-white rounded py-8 px-4'}>
+                        <div className={'w-full md:w-1/2 px-2'}>
                             <Input 
                                 placeholder={name || "'empty'"}
                                 label="Name"
@@ -150,7 +150,7 @@ const Profile = (props) => {
                                 error={phoneError}
                                 setError={() => setPhoneError} />
                         </div>
-                        <div className={styles.profileFormSection}>
+                        <div className={'w-full md:w-1/2 px-2'}>
                             <Input 
                                 placeholder={email}
                                 label="Email"
@@ -179,9 +179,9 @@ const Profile = (props) => {
                                 error={phoneError}
                                 setError={() => setPhoneError} /> */}
                         </div>
-                        <div className={styles.profileActions}>
+                        <div className={'w-72 mx-auto flex justify-around mt-7'}>
                             {isLoading ? 
-                            (<div className={styles.isLoading}>
+                            (<div className={'m-4'}>
                                 <Activity size={1.2} />
                             </div>) : 
                             (<>

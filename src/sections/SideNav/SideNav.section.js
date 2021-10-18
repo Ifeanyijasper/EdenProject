@@ -69,7 +69,7 @@ const SideNav = (props) => {
             )}
             {user.is_worker && (
                 <>
-                    <div className={`hidden md:flex flex-col mt-4 w-full`}>
+                    <div className={`hidden md:flex flex-col mt-4 w-full h-80 overflow-y-scroll overflowY`}>
                         <h4 className={'mt-4 mb-2 mx-1.5 text-sm font-semibold text-white'}>Tools</h4>
                         <NavLink to="/dashboard" exact className={`flex items-center md:p-2 lg:p-2.5 rounded text-xs text-gray-500 font-semibold mb-1 transition-all duration-500 hover:bg-green-200 hover:bg-opacity-10 hover:text-gray-300`} activeClassName={`text-green-50 ${styles.sideNavActive}`}><IoGrid className="mr-2.5 font-semibold" /> Dashboard</NavLink>
                         <NavLink to='/dashboard/clients' exact className={`flex items-center md:p-2 lg:p-2.5 rounded text-xs text-gray-500 font-semibold mb-1 transition-all duration-500 hover:bg-green-200 hover:bg-opacity-10 hover:text-gray-300`} activeClassName={`text-green-50 ${styles.sideNavActive}`}><IoPeople className="mr-2.5 font-semibold" /> Clients</NavLink>

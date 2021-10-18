@@ -7,7 +7,7 @@ import search from '../../../utils/search';
 import { BASE_URL } from "../../../utils/globalVariable";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { setData } from '../../../redux/Actions/Data.actions';
+import { setData, setCheckouts } from '../../../redux/Actions/Data.actions';
 
 const CheckoutList = (props) => {
     const {
@@ -16,12 +16,13 @@ const CheckoutList = (props) => {
         username, 
         password, 
         setDetail,
-        data,
-        refresh,
+        _checkouts,
     } = props;
     const [isOpen, setIsOpen] = useState(false);
     const [text, setText] = useState('');
+    const [notify, setNotify] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [msg, setMsg] = useState({});
     const [checkouts, setCheckouts] = useState([]);
     const [filter, setFilter] = useState('');
     const [filters] = useState([
@@ -31,34 +32,45 @@ const CheckoutList = (props) => {
     ]);
 
     useEffect(() => {
-        search(text, data, setCheckouts, filter.toLowerCase());
+        search(text, _checkouts, setCheckouts, filter.toLowerCase());
     }, [text]);
 
     useEffect(() => {
-        setIsLoading(true);
-        fetch(`${BASE_URL}/Checkout/`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Basic ' + Buffer.from(username + ':' + password).toString('base64'),
-            },
-        })
-            .then(res => {
-                const response = res.json();
-                return response;
+        setCheckouts(_checkouts)
+        if (_checkouts?.length === 0) {
+            setIsLoading(true);
+            fetchCheckouts();
+        }
+        return () => {
+            fetchCheckouts()
+        }
+    }, [_checkouts]);
+
+    const fetchCheckouts = async () => {
+        try {
+            const response = await fetch(`${BASE_URL}/Checkout/`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Basic ' + Buffer.from(username + ':' + password).toString('base64'),
+                },
+            });
+            let checkouts = await response.json();
+            checkouts = checkouts.filter(data => data.is_client)
+            props.setCheckouts(checkouts.sort((a, b) => { return b.served - a.served }));
+            setIsLoading(false);
+            return checkouts;
+        }
+        catch (err) {
+            console.log(err, 'Received error');
+            setIsLoading(false);
+            setNotify(true);
+            setMsg({
+                title: 'Authentication',
+                message: 'Invalid username or password.'
             })
-            .then(res => {
-                let  _res = res.reverse();
-                props.setData(_res);
-                setCheckouts(_res);
-                setIsLoading(false);
-            })
-            .catch(err => {
-                console.log(err);
-                setIsLoading(false);
-            })
-        
-    }, [isOpen, refresh]);
+        }
+    };
 
     const showDetail = (purchase) => {
         setIsDetail(!isDetail);
@@ -120,13 +132,13 @@ const mapStateToProps = ({auth, data, refresh}) => {
     return {
         username: auth.username,
         password: auth.password,
-        data: data.data,
+        _checkouts: data.checkouts,
         refresh: refresh.refresh,
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({setData}, dispatch)
+    return bindActionCreators({setData, setCheckouts}, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CheckoutList);

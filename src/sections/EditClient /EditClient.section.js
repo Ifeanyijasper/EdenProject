@@ -17,12 +17,6 @@ const EditClient = (props) => {
       password,
       setIsDetail,
     } = props;
-    const [options] = useState([
-        {value:"$Jume123", label:"$Jume123"},
-        {value:"Henry64$", label:"Henry64$"},
-        {value:"Dollar£", label:"Dollar£"},
-        {value:"Euro$", label:"Euro$"},
-    ])
 
      useEffect(()=> {
       setName(detail.fullname);

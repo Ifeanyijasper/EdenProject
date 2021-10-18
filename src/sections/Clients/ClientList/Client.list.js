@@ -11,27 +11,29 @@ import {
     Search 
 } from '../../../components';
 import { BASE_URL } from '../../../utils/globalVariable';
-import { AddClient } from '../..';
+import AddClient from './AddClient.section';
+import ClientDetail from './ClientDetail.section';
 import search from '../../../utils/search';
 import {setData, setClients} from '../../../redux/Actions/Data.actions';
 import {setPoint, clearPoint} from '../../../redux/Actions/Points.actions';
+import EditClient from './EditClient.section';
 
 
 const ClientList = (props) => {
-    const {
-        setDetail, 
-        setIsDetail, 
-        detail, 
+    const { 
         username, 
         password,
         _clients,
     } = props;
     const [isOpenAdd, setIsOpenAdd] = useState(false);
+    const [edit, setEdit] = useState(false);
+    const [show, setShow] = useState(false);
     const [loading, setLoading] = useState(false);
     const [msg, setMsg] = useState({});
     const [text, setText] = useState('');
     const [notify, setNotify] = useState(false);
     const [filter, setFilter] = useState('');
+    const [detail, setDetail] = useState({})
     // const [purchases, setPurchases] = useState([])
     const [filters] = useState([
         'Username',
@@ -102,7 +104,7 @@ const ClientList = (props) => {
 
 
     return (
-        <div className={'isDetail ? styles.listContainerDetail : styles.listContainer'}>
+        <div className={'w-full mid-h-full'}>
             <RouteIndicator route="Dashboard" current="Clients" />
             <div className="sticky -top-4 md:top-3 z-40 pt-1">
             <Search 
@@ -118,13 +120,15 @@ const ClientList = (props) => {
                 setText={setText} />
             </div>
             <h2 className={'text-gray-500 text-2xl mt-3 mx-2'}>{clients.length} Client{clients.length !== 1 &&'s'}</h2>
-            <div className={'grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-5 px-0 md:px-2 lg:px-10 mt-4 md:mt-6'}>
+            <div className={'grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 lg:gap-7 px-0 md:px-2 lg:px-8 mt-4 md:mt-6'}>
                 {loading ? (<div style={{margin: 'auto'}}><Activity2 /></div>) : (clients.map((client) => 
-                    <ClientCard client={client} detail={detail} setDetail={setDetail} setIsDetail={setIsDetail} key={client.id} />
+                    <ClientCard client={client} setDetail={setDetail} setIsDetail={setShow} key={client.id} />
                 ))}
             </div>
             <Notification notify={notify} setNotify={setNotify} msg={msg} />
-            <AddClient isOpen={isOpenAdd} setIsOpen={setIsOpenAdd} />
+            <AddClient add={isOpenAdd} setAdd={setIsOpenAdd} />
+            <EditClient edit={edit} setEdit={setEdit} detail={detail} />
+            <ClientDetail show={show} setShow={setShow} setEdit={setEdit} detail={detail} />
         </div>
     )
 }

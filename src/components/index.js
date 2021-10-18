@@ -21,6 +21,9 @@ import Testimonial from './Testimonial/Testimonial.component';
 import LoginButton from './Button/LoginButton.component';
 import Card from './ItemCard/Card.component';
 import SqrButton from './Button/squareButton.component';
+import DisplayCard from './ItemCard/DisplayCard.component';
+import Progress from './MiniProgressBar/Progress.component';
+import Confirmation from './Notification/Confirmation.component';
 
 export {
     AdminCard, 
@@ -46,4 +49,7 @@ export {
     LoginButton,
     Card,
     SqrButton,
+    DisplayCard,
+    Progress,
+    Confirmation,
 };
