@@ -107,9 +107,9 @@ const WorkerDetail = (props) => {
                     <div className="flex justify-end">
                         {user.is_superuser && <Button title="Edit" invert={false} onClick={() => Edit()} />}
                         <div className="mx-2" />
-                        <Button title="Delete" invert={true} type='danger' onClick={() => Confirm(detail)} />
-                        <div className="mx-2" />
                         <Button title="Close" invert={true} onClick={() => setShow(!show)} />
+                        <div className="mx-2" />
+                        <Button title="Delete" invert={true} type='danger' onClick={() => Confirm(detail)} />
                     </div>
                 </div>
             </div>

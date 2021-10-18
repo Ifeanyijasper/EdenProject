@@ -6,6 +6,7 @@ import { Button, Confirmation } from '../../../components';
 import { img_1 } from '../../../res/images';
 import extractInitials from '../../../utils/extractIni';
 import { BASE_URL } from '../../../utils/globalVariable';
+import { Thousand } from '../../../utils/number';
 
 const FinanceDetail = (props) => {
     const { show, setShow, detail, clients, username, password, user } = props;
@@ -68,11 +69,11 @@ const FinanceDetail = (props) => {
                         <h2 className="text-left font-semibold">Items</h2>
                         {detail.item !== null && detail.item !== undefined && detail.item.map((item, index) => (
                             <>
-                                <b className={'mr-3 font-normal'}>({item.count}) {item.name} : {item.price * item.count} XAF</b>
+                                <b className={'mr-3 font-normal'}>({item.count}) {item.name} : {Thousand(item.price * item.count)} XAF</b>
                                 <br />
                             </>
                         ))}
-                        <h2 className={'mr-3 text-sm font-bold text-primary text-right mt-7'}>Total = {detail.total} XAF</h2>
+                        <h2 className={'mr-3 text-sm font-bold text-primary text-right mt-7'}>Total = {Thousand(detail?.total)} XAF</h2>
                     </div>
                     <div className="flex justify-end mt-5">
                         <Button title="Close" invert={false} onClick={() => setShow(!show)} />

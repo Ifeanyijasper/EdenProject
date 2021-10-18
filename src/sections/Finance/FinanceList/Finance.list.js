@@ -12,6 +12,7 @@ import { setObjData, setFinances } from '../../../redux/Actions/Data.actions';
 import { DateString } from "../../../utils/date";
 import searchObj from "../../../utils/searchObj";
 import FinanceDetail from "./FinanceDetail.section";
+import { Thousand } from "../../../utils/number";
 
 const FinanceList = (props) => {
     const {
@@ -134,7 +135,7 @@ const FinanceList = (props) => {
                                         <b className={'mr-3 font-normal'}>({item.count}) {item.name} </b>
                                     )}
                                 </td>
-                                <td className={"p-3 md:border md:border-grey-500 text-left block md:table-cell"}><span class="inline-block w-1/3 md:hidden font-bold">Total</span>{finance.total} XAF</td>
+                                <td className={"p-3 md:border md:border-grey-500 text-left block md:table-cell"}><span class="inline-block w-1/3 md:hidden font-bold">Total</span>{Thousand(finance.total)} XAF</td>
                                 <td className={"p-3 md:border md:border-grey-500 text-left block md:table-cell"}>
                                     <span class="inline-block w-1/3 md:hidden font-bold">Actions</span>
                                     <button className={`outline-none text-sm text-primary font-semibold rounded tracking-wider cursor-pointer py-1.5 px-2.5 shadow-md`} onClick={() => showDetail(finance)}>Details</button>
