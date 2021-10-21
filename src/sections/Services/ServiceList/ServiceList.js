@@ -24,10 +24,10 @@ const ServiceList = (props) => {
     const [filter, setFilter] = useState('');
     const [edit, setEdit] = useState(false);
     const [services, setServices] = useState([]);
+    const [isLoading, setIsLoading] = useState()
     const [text, setText] = useState('');
     const [show, setShow] = useState(false);
     const [detail, setDetail] = useState({})
-    const [isLoading, setIsLoading] = useState(false);
     const [filters] = useState([
         'Name',
         'Price',

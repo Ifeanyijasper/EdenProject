@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { IoBody, IoBriefcase, IoClose, IoHandLeft, IoLeaf } from 'react-icons/io5';
+import { IoAddCircleOutline, IoBody, IoBriefcase, IoClose, IoHandLeft, IoLeaf } from 'react-icons/io5';
 import Select from 'react-select';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -12,7 +12,7 @@ import { setPoint } from '../../../redux/Actions/Points.actions';
 import { Product, Service } from '../..';
 
 const AddPurchase = (props) => {
-    const { add, setAdd, username, password, user, product, total } = props;
+    const { add, setAdd, username, password, user, product, total, _services, _products } = props;
 
     const [options, setOptions] = useState([]);
     const [client, setClient] = useState('');
@@ -262,7 +262,7 @@ const AddPurchase = (props) => {
     return (
         <>
             <div onClick={() => setAdd(false)} className={`h-full bg-gray-50 bg-opacity-10 fixed z-50 top-0 backdrop-filter backdrop-blur-sm transition-all duration-500 ease-in-out ${add ? 'right-0 w-full opacity-100' : '-right-16 opacity-0 w-0'} `}>
-                <div onClick={(e) => stop(e)} className={`fixed shadow-xl h-screen overflow-y-auto overflowY-white -top-0 z-30 bg-white text-gray-700 p-5 transition-all delay-100 ease-in-out ${add ? 'right-0 w-full opacity-100' : '-right-16 opacity-0 w-0'}`}>
+                <div onClick={(e) => stop(e)} className={`fixed shadow-xl h-screen overflow-y-auto overflowY -top-0 z-30 bg-white text-gray-700 p-5 transition-all delay-100 ease-in-out ${add ? 'right-0 w-full opacity-100' : '-right-16 opacity-0 w-0'}`}>
                     <div className="flex justify-between items-center md:mt-2 text-xl font-semibold text-green-700 bg-white bg-opacity-30 backdrop-filter backdrop-blur-md sticky -top-4 md:top-0 z-40 pt-1">
                         <h2>New Purchase</h2>
                         <Select
@@ -271,29 +271,29 @@ const AddPurchase = (props) => {
                             className={'ml-auto mr-7 w-60 text-sm p-0 mb-2 border-b-2 border-gray-700 cursor-pointer'}
                             onChange={(value) => setClient(value)}
                         />
-                        <button onClick={() => setAdd(!add)} className="flex items-center rounded-full outline-none text-base py-1 px-2 text-gray-900 bg-white shadow-md mx-1.5 transition duration-500 ease-in-out hover:shadow-xl"><IoClose /></button>
+                        <button onClick={() => exit()} className="flex items-center rounded-full outline-none text-base py-1 px-2 text-gray-900 bg-white shadow-md mx-1.5 transition duration-500 ease-in-out hover:shadow-xl"><IoClose /></button>
                     </div>
                     <hr className="my-5" />
                     <nav className={''}>
-                        <ul className={'flex justify-start'}>
-                            <li className={'cursor-pointer'} onClick={() => setPurchase('Products')}><i className={['text-sm my-1 mx-3 flex', purchase === 'Products' && 'styles.navActive'].join(' ')}><IoLeaf /> Products</i></li>
-                            <li className={'cursor-pointer'} onClick={() => setPurchase('Services')}><i className={['text-sm my-1 mx-3 flex', purchase === 'Services' && 'styles.navActive'].join(' ')}><IoHandLeft /> Services</i></li>
+                        <ul className={'flex justify-start items-center'}>
+                            <li className={'cursor-pointer'} onClick={() => setPurchase('Products')}><i className={['text-sm my-0.5 mr-3 p-1 px-2 flex items-center text-green-700 bg-white border-b-2 border-white', purchase === 'Products' && 'border-green-700'].join(' ')}><IoLeaf className="mr-1.5" /> Products</i></li>
+                            <li className={'cursor-pointer'} onClick={() => setPurchase('Services')}><i className={['text-sm my-0.5 ml-3 p-1 px-2 flex items-center text-green-700 bg-white border-b-2 border-white', purchase === 'Services' && 'border-green-700'].join(' ')}><IoHandLeft className="mr-1.5" /> Services</i></li>
                         </ul>
                         <hr className={'my-4 mx-2'} />
                     </nav>
                     <div className="mb-10">
                         {purchase === "Products" ? (
-                            <Product />
+                            <Product onClick={() => purchased()} loading={isLoading} />
                         ) : (
                             <div>
-                                <Service />
+                                    <Service onClick={() => purchased()} loading={isLoading} />
                             </div>
                         )}
                         <div className="w-full">
                             <div className="fixed bottom-9 right-9 justify-center md:justify-end mt-20">
                                 {/* {isLoading ? <Activity /> : <Button title="Add Product" invert={false} onClick={() => authenticate()} />} */}
                                 <div className="mx-2" />
-                                <Button title="Close" onClick={() => setAdd(!add)} />
+                                <Button title="Close" onClick={() => exit()} />
                             </div>
                         </div>
                     </div>
@@ -304,12 +304,14 @@ const AddPurchase = (props) => {
     )
 };
 
-const mapStateToProps = ({ auth, purchase }) => {
+const mapStateToProps = ({ auth, purchase, data }) => {
     return {
         username: auth.username,
         password: auth.password,
         user: auth.user,
         product: purchase.product,
+        _products: data.products,
+        _services: data.services,
         total: purchase.total,
     }
 };
@@ -335,6 +337,7 @@ const customStyles = {
         boxShadow: 'none',
         border: 'none',
         padding: '0px',
+        margin: '0px',
         '&:hover': {
             border: 'none',
         }
