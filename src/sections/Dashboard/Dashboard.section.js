@@ -85,12 +85,13 @@ const Dashboard = (props) => {
         })
             .then(res => {
                 const response = res.json();
-                console.log(response)
                 return response;
             })
             .then(res => {
-                let _res = res.reverse();
-                // console.log(_res);
+                let _res = res.sort(function (a, b) {
+                    return new Date(b.date) - new Date(a.date);
+                });
+                console.log(_res);
                 let obj = {};
                 const data = (finances) => {
                     finances.map((i) => {
@@ -129,7 +130,7 @@ const Dashboard = (props) => {
                 return response;
             })
             .then(res => {
-                let  _res = res.reverse();
+                let _res = res.reverse();
                 props.setCheckouts(_res);
                 setIsLoading(false);
             })

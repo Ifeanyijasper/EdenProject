@@ -56,7 +56,9 @@ const FinanceList = (props) => {
                 },
             });
             let purchases = await response.json();
-            purchases = purchases.reverse();
+            purchases = purchases.sort(function (a, b) {
+                    return new Date(b.date) - new Date(a.date);
+                });
             let obj = {};
             const data = (finances) => {
                 finances.map((i) => {

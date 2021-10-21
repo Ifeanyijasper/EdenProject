@@ -38,7 +38,7 @@ const DataReducer = (state = INITIAL_STATE, action) => {
         case ADD_PRODUCT:
             data = action.payload;
             products = [...state.products];
-            products.push(data);
+            products.unshift(data);
             return { ...state, products: [...products] };
         case EDIT_PRODUCT:
             data = action.payload;
@@ -68,7 +68,7 @@ const DataReducer = (state = INITIAL_STATE, action) => {
         case ADD_SERVICE:
             data = action.payload;
             services = [...state.services];
-            services.push(data);
+            services.unshift(data);
             return { ...state, services: [...services] };
         case EDIT_SERVICE:
             data = action.payload;
@@ -96,7 +96,7 @@ const DataReducer = (state = INITIAL_STATE, action) => {
         case ADD_GALLERY:
             data = action.payload;
             gallery = [...state.gallery];
-            gallery.push(data);
+            gallery.unshift(data);
             return { ...state, gallery: [...gallery] };
         case EDIT_GALLERY:
             data = action.payload;
@@ -124,7 +124,7 @@ const DataReducer = (state = INITIAL_STATE, action) => {
         case ADD_TEST:
             data = action.payload;
             testimonials = [...state.testimonials];
-            testimonials.push(data);
+            testimonials.unshift(data);
             return { ...state, testimonials: [...testimonials] };
         case EDIT_TEST:
             data = action.payload;
@@ -152,7 +152,7 @@ const DataReducer = (state = INITIAL_STATE, action) => {
         case ADD_CLIENT:
             data = action.payload;
             clients = [...state.clients];
-            clients.push(data);
+            clients.unshift(data);
             return { ...state, clients: [...clients] };
         case EDIT_CLIENT:
             data = action.payload;
@@ -180,7 +180,7 @@ const DataReducer = (state = INITIAL_STATE, action) => {
         case ADD_WORKER:
             data = action.payload;
             workers = [...state.workers];
-            workers.push(data);
+            workers.unshift(data);
             return { ...state, workers: [...workers] };
         case EDIT_WORKER:
             data = action.payload;
@@ -210,7 +210,7 @@ const DataReducer = (state = INITIAL_STATE, action) => {
             data = action.payload;
             finances = { ...state.finances };
             _date = new Date(data.date).toLocaleDateString();
-            finances[_date].push(data);
+            finances[_date].unshift(data);
             return { ...state, finances: { ...finances } }
         case DELETE_FINANCE:
             data = action.payload;
@@ -229,7 +229,7 @@ const DataReducer = (state = INITIAL_STATE, action) => {
         case ADD_CHECKOUT:
             data = action.payload;
             checkouts = [...state.checkouts];
-            checkouts.push(data);
+            checkouts.unshift(data);
             return { ...state, checkouts: [...checkouts] };
         case EDIT_CHECKOUT:
             data = action.payload;
