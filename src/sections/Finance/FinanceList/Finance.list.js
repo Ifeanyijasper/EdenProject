@@ -120,7 +120,7 @@ const FinanceList = (props) => {
                             <thead className={"block md:table-header-group"}>
                                 <tr className="md:border-none block md:table-row absolute -top-full md:top-auto -left-full md:left-auto  md:relative">
                                     <td className={"bg-primary text-lg p-3.5 text-gray-100 font-semibold md:border md:border-grey-500 text-left block md:table-cell"}>Client Name</td>
-                                    <td className={"bg-primary text-lg p-3.5 text-gray-100 font-semibold md:border md:border-grey-500 text-left block md:table-cell"}>Time</td>
+                                    <td className={"bg-primary text-lg p-3.5 text-gray-100 w-32 font-semibold md:border md:border-grey-500 text-left block md:table-cell"}>Time</td>
                                     <td className={"bg-primary text-lg p-3.5 text-gray-100 font-semibold md:border md:border-grey-500 text-left block md:table-cell"}>Worker</td>
                                     <td className={"bg-primary text-lg p-3.5 text-gray-100 font-semibold md:border md:border-grey-500 text-left block md:table-cell"}>Items</td>
                                     <td className={"bg-primary text-lg p-3.5 text-gray-100 font-semibold md:border md:border-grey-500 text-left block md:table-cell"}>Total</td>
@@ -131,7 +131,8 @@ const FinanceList = (props) => {
                             {isLoading ? (<td colSpan={5} style={{ margin: 'auto', paddingTop: '10px' }}><Activity2 /></td>) : finances.map((finance, index) =>
                             (<tr key={ index} className={"bg-white py-2 px-3 md:p-3 md:border-none block md:table-row"}>
                                 <td className={"py-2 px-3 md:p-3 md:border md:border-grey-500 text-left block md:table-cell"}><span class="inline-block w-1/3 md:hidden font-bold">Client Name</span>{finance.client}</td>
-                                <td className={"py-2 px-3 md:p-3 md:border md:border-grey-500 text-left block md:table-cell"}><span class="inline-block w-1/3 md:hidden font-bold">Time</span>{new Date(finance.date).toLocaleTimeString('en-US')}</td>
+                                <td className={"py-2 px-3 md:p-3 md:border md:border-grey-500 text-left block md:table-cell"}><span class="inline-block w-1/3 md:hidden font-bold">Time</span>{new Date(finance.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</td>
+                                {/* date.toLocaleTimeString([], {timeStyle: 'short'}); */}
                                 <td className={"py-2 px-3 md:p-3 md:border md:border-grey-500 text-left block md:table-cell"}><span class="inline-block w-1/3 md:hidden font-bold">Worker</span>{finance.worker}</td>
                                 <td className={"py-2 px-3 md:p-3 md:border md:border-grey-500 text-left block md:table-cell"}><span class="inline-block w-1/3 md:hidden font-bold">Items</span>
                                     {finance.item.map((item, index) =>
