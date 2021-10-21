@@ -73,7 +73,7 @@ const FinanceDetail = (props) => {
                                 <br />
                             </>
                         ))}
-                        <h2 className={'mr-3 text-sm font-bold text-primary text-right mt-7'}>Total = {Thousand(detail?.total)} XAF</h2>
+                        {detail && detail.total && <h2 className={'mr-3 text-sm font-bold text-primary text-right mt-7'}>Total = {Thousand(detail?.total)} XAF</h2>}
                     </div>
                     <div className="flex justify-end mt-5">
                         <Button title="Close" invert={false} onClick={() => setShow(!show)} />

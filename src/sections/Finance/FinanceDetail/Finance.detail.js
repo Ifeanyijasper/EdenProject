@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { IoClose } from "react-icons/io5";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -30,6 +30,10 @@ const FinanceDetail = (props) => {
         })
     }
 
+    useEffect(() => {
+        console.log(detail)
+    },[])
+
     return (
         <div className={isDetail ? styles.detailContainer : styles.detailHide}>
             <div className={styles.imgsContainer}>
@@ -52,7 +56,7 @@ const FinanceDetail = (props) => {
                         <li>{item.name} &times; {item.count} = {item.price * item.count} XAF</li>
                         ))}
                 </ol>
-                <h2 className={styles.subTitle}>Total = {detail.total} XAF</h2>
+                {/* {detail && detail?.total && <h2 className={styles.subTitle}>Total = {detail.total} XAF</h2>} */}
             </div>
             <div className={styles.detailActions}>
                 {user.is_superuser && <Button title="Delete" type="danger" onClick={() => authenticate(detail.id)} />}
