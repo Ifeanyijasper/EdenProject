@@ -100,7 +100,7 @@ class GalleryViewSet(viewsets.ModelViewSet):
     """
     queryset = Gallery.objects.all()
     serializer_class = GallerySerializer
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (AllowAny,)
 
     def list(self, request, *args, **kwargs):
         gallery = Gallery.objects.all()
