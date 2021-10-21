@@ -100,7 +100,7 @@ const Profile = (props) => {
         .catch(err => {
             console.log(err);
         })
-    }, []);
+    }, [password, user]);
 
     return (
         <div>

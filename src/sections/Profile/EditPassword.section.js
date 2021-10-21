@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { IoClose } from 'react-icons/io5';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -18,7 +18,6 @@ const EditPassword = (props) => {
     const [conPwError, setConPwError] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [notify, setNotify] = useState(false);
-    const [options, setOptions] = useState([]);
     const [msg, setMsg] = useState({});
 
     const stop = (e) => {
