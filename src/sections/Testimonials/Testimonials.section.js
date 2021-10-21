@@ -54,7 +54,7 @@ const Testimonials = (props) => {
             <div className="sticky top-3 z-40 pt-1">
                 <Search placeholder="Search" newButton={false} title={'Service'} filters={filters} filter={filter} setFilter={setFilter} text={text} setText={setText} />
             </div>
-            <div className={styles.testimonialContainer}>
+            <div className={'w-full grid grid-cols-1 md:grid-cols-2 gap-7'}>
                 {isLoading ? <Activity2 /> : testimonials.map((testimonial, index) => <Testimonial testimonial={testimonial} key={index} />)}
             </div>
         </section>

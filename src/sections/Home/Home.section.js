@@ -119,9 +119,9 @@ const HomeSection = (props) => {
             </div>
             <h1 className={`text-gray-800 bg-white text-center text-xl lg:text-2xl pt-7 pb-1`} id="services">Testimonials</h1>
             <h3 className={`bg-white text-gray-500 text-xs lg:text-sm font-semibold text-center pb-6`}>What our Clients are saying...</h3>
-            <div className={styles.testiCardCon}>
-                <div className={styles.testiCard}>
-                    {isLoading ? (<Activity2 />) : testimonials.map((testimony, index) => <TestimonialCard testimony={testimony} />)}
+            <div className={'bg-gray-300 flex flex-col py-6 px-4 flex-wrap justify-evenly items-center mt-4 mr-2'}>
+                <div className={`w-full grid grid-cols-1 md:grid-cols-2 gap-5 px-5 mb-5`}>
+                    {isLoading ? (<Activity2 />) : testimonials.map((testimony, index) => <TestimonialCard testimony={testimony} key={index} />)}
                 </div>
                 <Button title="READ MORE" onClick={() => props.history.push({pathname: '/testimonials'})} />
             </div>

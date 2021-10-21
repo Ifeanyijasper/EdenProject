@@ -119,7 +119,7 @@ const EditGallery = (props) => {
                                 error={eventError}
                                 setError={() => setEventError} />
                             <Input
-                                placeholder="Shalot Price"
+                                placeholder="Name"
                                 label="Name"
                                 secureText={false}
                                 type="text"
