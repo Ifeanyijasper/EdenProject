@@ -58,24 +58,26 @@ const Product = (props) => {
 
     return (
         <div className={'w-full'}>
-            <div className="flex justify-between items-center bg-white bg-opacity-30 backdrop-filter backdrop-blur-md sticky -top-4 md:top-14 z-30">
-                <h2 className={'text-gray-800 text-left text-xl lg:text-2xl'}>{products.length || 0} Product{products.length !== 1 && 's'}</h2>
+            <div className="flex justify-between items-center bg-white bg-opacity-30 backdrop-filter backdrop-blur-md sticky top-10 md:top-14 z-30">
+                <h2 className={'text-gray-800 text-left text-lg md:text-xl lg:text-xl'}>{products.length || 0} Product{products.length !== 1 && 's'}</h2>
                 {loading && <i className="text-base px-2 py-0.5 rounded animate-pulse bg-green-200 text-green-700">Purchasing ...</i>}
-                <Search
-                    placeholder="Search"
-                    newButton={false}
-                    title={'Purchase'}
-                    filters={filters}
-                    filter={filter}
-                    setFilter={setFilter}
-                    text={text}
-                    purchase={true}
-                    setText={setText}
-                    onClick={() => onClick()}
-                />
+                <div className="mt-2">
+                    <Search
+                        placeholder="Search"
+                        newButton={false}
+                        title={'Purchase'}
+                        filters={filters}
+                        filter={filter}
+                        setFilter={setFilter}
+                        text={text}
+                        purchase={true}
+                        setText={setText}
+                        onClick={() => onClick()}
+                    />
+                </div>
             </div>
             <hr className={'my-4 mx-2'} />
-            <div className={'py-10 grid grid-cols-4 gap-7'}>
+            <div className={'py-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-7'}>
                 {products.map((product, index) => <ItemCard item={product} add={true} key={index} onClick={() => active()} />)}
             </div>
         </div>

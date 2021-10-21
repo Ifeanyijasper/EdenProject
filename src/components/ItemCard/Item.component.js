@@ -39,7 +39,7 @@ const ItemCard = (props) => {
     }
 
     return (
-        <div className={'cursor-pointer relative md:w-48 lg:w-80 h-auto rounded-md overflow-hidden shadow-xl bg-white'} onClick={() => onClick()}>
+        <div className={'cursor-pointer relative md:w-52 lg:w-80 h-auto rounded-md overflow-hidden shadow-xl bg-white'} onClick={() => onClick()}>
             {
                 item.img ?
                     <img src={`${item.img}`} alt={item.name} className={'w-full h-36 lg:h-56 bg-center bg-cover'} /> :
@@ -65,12 +65,12 @@ const ItemCard = (props) => {
                     <>
                         {counter.current > 0 && (
                             <div className={`flex items-center font-sm transition-all delay-1000 duration-1000 ease-in-out ${counter.current > 0 ? 'justify-around' : 'justify-center' }`}>
-                                <button className={`outline-none cursor-pointer shadow-md flex items-center justify-center border-2 border-gray-700 w-8 h-8 rounded-full transition-all delay-1000 duration-1000 ease-in-out ${counter.current > 0 ? 'm-0' : 'ml-20'}`} onClick={(event) => decrement(event, item)}><IoRemove /></button>
+                                <button className={`outline-none cursor-pointer shadow-md flex items-center justify-center border-2 border-gray-700 text-sm lg:text-base w-6 h-6 lg:w-8 lg:h-8 rounded-full transition-all delay-1000 duration-1000 ease-in-out ${counter.current > 0 ? 'm-0' : 'ml-20'}`} onClick={(event) => decrement(event, item)}><IoRemove /></button>
                                 <p>{counter.current}</p>
-                                <button className={`outline-none cursor-pointer shadow-md flex items-center justify-center border-2 border-gray-700 w-8 h-8 rounded-full transition-all delay-1000 duration-1000 ease-in-out ${counter.current > 0 ? 'm-0' : 'mr-20'}`} onClick={(event) => increment(event, item)}><IoAdd /></button>
+                                <button className={`outline-none cursor-pointer shadow-md flex items-center justify-center border-2 border-gray-700 text-sm lg:text-base w-6 h-6 lg:w-8 lg:h-8 rounded-full transition-all delay-1000 duration-1000 ease-in-out ${counter.current > 0 ? 'm-0' : 'mr-20'}`} onClick={(event) => increment(event, item)}><IoAdd /></button>
                             </div>)}
                         {counter.current === 0 && (
-                            <button className={`mx-auto text-center outline-none text-sm text-white bg-primary shadow-md p-1.5 md:px-4 rounded-3xl text-white transition-all delay-1000 duration-1000 ease-in-out hover:shadow-2xl ${counter.current === 0 ? 'w-44 opacity-100' : 'w-0 opacity-0'}`} onClick={(event) => increment(event, item)}>Add to purchase</button>
+                            <button className={`mx-auto text-center outline-none text-xs lg:text-sm text-white bg-primary shadow-md p-1.5 md:px-4 rounded-3xl text-white transition-all delay-1000 duration-1000 ease-in-out hover:shadow-2xl ${counter.current === 0 ? 'w-36 md:w-40 lg:w-44 opacity-100' : 'w-0 opacity-0'}`} onClick={(event) => increment(event, item)}>Add to purchase</button>
                         )}
                     </>
                 )}

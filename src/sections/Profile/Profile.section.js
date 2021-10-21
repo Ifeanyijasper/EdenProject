@@ -4,11 +4,11 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import { Activity, Button, Input, RouteIndicator } from '../../components';
-import { EditPassword } from '..';
 import styles from './Profile.module.css';
 import { BASE_URL } from '../../utils/globalVariable';
 import { setUserName } from '../../redux/Actions/Auth.actions';
 import extractInitials from '../../utils/extractIni';
+import EditPassword from './EditPassword.section';
 
 const Profile = (props) => {
     const {user, password} = props;
@@ -193,7 +193,8 @@ const Profile = (props) => {
                     </div>
                 </div>
             </div>
-            <EditPassword isOpen={isOpen} setIsOpen={setIsOpen} />
+            <EditPassword edit={isOpen} setEdit={setIsOpen} />
+            {/* <EditPassword isOpen={isOpen} setIsOpen={setIsOpen} /> */}
         </div>
     )
 }

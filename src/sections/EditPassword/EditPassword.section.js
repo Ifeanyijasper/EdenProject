@@ -19,7 +19,6 @@ const EditPassword = (props) => {
     const [conPwError, setConPwError] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [notify, setNotify] = useState(false);
-    const [options, setOptions] = useState([]);
     const [msg, setMsg] = useState({});
 
     const authenticate = () => {

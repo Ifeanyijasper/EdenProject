@@ -265,11 +265,11 @@ const AddPurchase = (props) => {
             <div onClick={() => setAdd(false)} className={`h-full bg-gray-50 bg-opacity-10 fixed z-50 top-0 backdrop-filter backdrop-blur-sm transition-all duration-500 ease-in-out ${add ? 'right-0 w-full opacity-100' : '-right-16 opacity-0 w-0'} `}>
                 <div onClick={(e) => stop(e)} className={`fixed shadow-xl h-screen overflow-y-auto overflowY -top-0 z-30 bg-white text-gray-700 p-5 transition-all delay-100 ease-in-out ${add ? 'right-0 w-full opacity-100' : '-right-16 opacity-0 w-0'}`}>
                     <div className="flex justify-between items-center md:mt-2 text-xl font-semibold text-green-700 bg-white bg-opacity-30 backdrop-filter backdrop-blur-md sticky -top-4 md:top-0 z-40 pt-1">
-                        <h2>New Purchase</h2>
+                        <h2 className="text-sm md:text-base lg:text-xl">New Purchase</h2>
                         <Select
                             options={options}
                             styles={customStyles}
-                            className={'ml-auto mr-7 w-60 text-sm p-0 mb-2 border-b-2 border-gray-700 cursor-pointer'}
+                            className={'ml-auto mr-4 md:mr-7 w-44 md:w-52 lg:w-60 text-xs md:text-sm p-0 mb-2 border-b-2 border-gray-700 cursor-pointer'}
                             onChange={(value) => setClient(value)}
                         />
                         <button onClick={() => exit()} className="flex items-center rounded-full outline-none text-base py-1 px-2 text-gray-900 bg-white shadow-md mx-1.5 transition duration-500 ease-in-out hover:shadow-xl"><IoClose /></button>
