@@ -1,8 +1,5 @@
 import React from 'react';
-import { img_2 } from '../../res/images';
 import extractInitials from '../../utils/extractIni';
-
-import styles from './TestimonialCard.module.css';
 
 const TestimonialCard = (props) => {
     const { testimony } = props;

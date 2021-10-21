@@ -5,7 +5,6 @@ import { bindActionCreators } from 'redux';
 import { Activity2, Search, Testimonial } from '../../components';
 import { BASE_URL } from '../../utils/globalVariable';
 import { setData, setTestimonials } from '../../redux/Actions/Data.actions';
-import styles from './Testimonials.module.css';
 import search from '../../utils/search';
 
 const Testimonials = (props) => {
@@ -21,7 +20,7 @@ const Testimonials = (props) => {
 
     useEffect(() => {
         search(text, _testimonials, setTestimonials, 'client_name');
-    }, [text]);
+    }, [text, _testimonials]);
 
     useEffect(() => {
         setTestimonials(_testimonials)
@@ -32,7 +31,7 @@ const Testimonials = (props) => {
         return () => {
             fetchTestimonials()
         }
-    }, []);
+    }, [_testimonials]);
 
     const fetchTestimonials = async () => {
         try {
