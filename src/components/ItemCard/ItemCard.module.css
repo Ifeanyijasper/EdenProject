@@ -1,4 +1,4 @@
-.itemCard {
+/* .itemCard {
     width: 29rem;
     max-height: 30rem;
     border-radius: var(--border-radius-medium);
@@ -9,9 +9,6 @@
     background-color: var(--color-white);
     transition: all ease-in-out 0.4s;
     position: relative;
-    /* overflow: hidden; */
-
-    /* border: 1px solid red; */
     cursor: pointer;
 }
 
@@ -20,7 +17,6 @@
         max-width: 25rem;
     }
 }
-
 
 @media only screen and (max-width: 20em) {
     .itemCard {
@@ -41,7 +37,6 @@
     padding: 0 0.5rem;
     background-image: var(--linear-gradient-3);
     color: var(--color-white);
-
     min-width: 10rem;
 }
 
@@ -58,7 +53,6 @@
 .image {
     height: 20rem;
     width: 100%;
-
     border-top-right-radius: var(--border-radius-medium);
     border-top-left-radius: var(--border-radius-medium);
 }
@@ -98,9 +92,8 @@
     color: var(--color-white);
 }
 
-
 .itemName {
-    color: var(--color-primary); 
+    color: var(--color-primary);
     font-size: var(--font-size-normal);
     margin-top: 0.5rem;
 }
@@ -180,7 +173,6 @@
     border-radius: var(--border-radius-small);
     margin: 0.2rem 6.7rem;
     transition: all ease-in-out 0.5s;
-
     cursor: pointer;
 }
 
@@ -200,6 +192,5 @@
     align-items: center;
     justify-content: center;
     font-weight: var(--font-weight-medium);
-
     cursor: pointer;
-}
+} */

@@ -1,5 +1,4 @@
 import React from "react";
-import { IoClose } from "react-icons/io5";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
@@ -24,7 +23,6 @@ const FinanceDetail = (props) => {
         .then(res => {
             props.setRefresh(true);
             setIsDetail(false);
-            console.log(res);
         })
         .catch(err => {
             console.log(err);
@@ -53,7 +51,7 @@ const FinanceDetail = (props) => {
                         <li>{item.name} &times; {item.count} = {item.price * item.count} XAF</li>
                         ))}
                 </ol>
-                <h2 className={styles.subTitle}>Total = {detail.total} XAF</h2>
+                {/* {detail && detail?.total && <h2 className={styles.subTitle}>Total = {detail.total} XAF</h2>} */}
             </div>
             <div className={styles.detailActions}>
                 {user.is_superuser && <Button title="Delete" type="danger" onClick={() => authenticate(detail.id)} />}

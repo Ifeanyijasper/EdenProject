@@ -66,17 +66,7 @@
 }
 
 .tableButton {
-    outline: none;
-    border: none;
-    background-image: var(--linear-gradient-2);
-    padding: 1rem 2.5rem;
-    border-radius: var(--border-radius-small);
-    color: var(--color-primary);
-    font-weight: var(--font-weight-medium);
-    letter-spacing: 0.1rem;
-    font-size: var(--font-size-normal);
-
-    cursor: pointer;
+    background-image: var(--linear-gradient-2) !important;
 }
 
 @media only screen and (max-width: 56.25em) {

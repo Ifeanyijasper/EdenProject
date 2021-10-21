@@ -50,7 +50,7 @@ const RankRate = (props) => {
                 body: JSON.stringify(body),
             })
             .then(res => {
-                console.log(res);
+                // console.log(res);
             })
             .then(res => {
     

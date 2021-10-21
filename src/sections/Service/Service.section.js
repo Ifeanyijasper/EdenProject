@@ -3,20 +3,20 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import { Search, ItemCard } from '../../components';
-import styles from './Service.module.css';
 import search from '../../utils/search';
-import {setData} from '../../redux/Actions/Data.actions';
+import { setServices } from '../../redux/Actions/Data.actions';
 import { BASE_URL } from '../../utils/globalVariable';
 
 const Service = (props) => {
-    const {data} = props;
+    const { _services, onClick, loading } = props;
     const [filter, setFilter] = useState('');
+    const [isLoading, setIsLoading] = useState()
     const [text, setText] = useState('');
     const [services, setServices] = useState([]);
     const [filters] = useState([
+        'Name',
         'Price',
         'Discount',
-        'Name',
         'Likes',
     ])
     const active = () => {
@@ -24,46 +24,70 @@ const Service = (props) => {
     }
 
     useEffect(() => {
-        fetch(`${BASE_URL}/service/`)
-            .then(res => {
-                const response = res.json();
-                return response;
-            })
-            .then(res => {
-                setServices(res);
-                props.setData(res);
-            })
-            .catch(err => {
-                // setIsLoading()
-                console.log(true);
-            })
-    }, []);
+        if (_services?.length === 0) {
+            setIsLoading(true);
+            fetchServices();
+        }
+        setServices(_services);
+        return () => {
+            fetchServices()
+        }
+    }, [_services]);
+
+    const fetchServices = async () => {
+        try {
+            const response = await fetch(`${BASE_URL}/service/`);
+            const services = await response.json();
+            props.setServices(services);
+            setIsLoading(false);
+            return services;
+        }
+        catch (err) {
+            console.log(err, 'Received error');
+            setIsLoading(false)
+        }
+    };
 
     useEffect(() => {
-        search(text, data, setServices, filter.toLocaleLowerCase());
-    }, [text])
+        search(text, _services, setServices, filter.toLocaleLowerCase());
+    }, [text, _services, filter])
 
     return (
-        <div className={styles.listContainer}>
-            <Search placeholder="Search" newButton={false} title={'Service'} filters={filters} filter={filter} setFilter={setFilter} text={text} setText={setText} />
-            <hr className={styles.horizontalLine} />
-                <h2 className={styles.productTitle}>{services.length || 0} Service{services.length !== 1 && 's'}</h2>
-            <hr className={styles.horizontalLine} />
-            <div className={styles.productContainer}>
-                {services.map((service, index) => <ItemCard item={service} add={true} onClick={() => active()} key={service.id} />)}
+        <div className={'w-full'}>
+            <div className="flex justify-between items-center bg-white bg-opacity-30 backdrop-filter backdrop-blur-md sticky top-10 md:top-14 z-30">
+                <h2 className={'text-gray-800 text-left text-lg md:text-xl lg:text-xl'}>{services.length || 0} Service{services.length !== 1 && 's'}</h2>
+                {loading && <i className="text-base px-2 py-0.5 rounded animate-pulse bg-green-200 text-green-700 ">Purchasing ...</i>}
+                <div className="mt-2">
+                    <Search
+                        placeholder="Search"
+                        purchase={true}
+                        title={'Purchase'}
+                        filters={filters}
+                        filter={filter}
+                        setFilter={setFilter}
+                        text={text}
+                        setText={setText}
+                        onClick={() => onClick()}
+                    />
+                </div>
+            </div>
+            <hr className={'my-4 mx-2'} />
+            <div className={'py-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-7'}>
+                {/* <h1>kskjdklf</h1> */}
+                {services.map((service, index) => <ItemCard item={service} add={true} onClick={() => active()} key={index} />)}
             </div>
         </div>
     )
-}
+};
 
 const mapStateToProps = ({data}) => {
     return {
-        data: data.data,
+        _services: data.services,
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({setData}, dispatch);
+    return bindActionCreators({ setServices }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Service);

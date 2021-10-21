@@ -6,12 +6,11 @@ import Select from 'react-select';
 import { bindActionCreators } from 'redux';
 
 import { Product, Service } from '..';
-import { Activity, Button, Notification, Notify } from '../../components';
+import { Activity, Button, Notification } from '../../components';
 import { BASE_URL } from '../../utils/globalVariable';
 import styles from './NewPurchase.module.css';
 import {setClearPurchase} from '../../redux/Actions/Purchase.actions';
 import {setPoint} from '../../redux/Actions/Points.actions';
-import extractInitials from '../../utils/extractIni';
 
 const NewPurchase = (props) => {
     const {

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { IoEye, IoEyeOff } from 'react-icons/io5';
+import { IoCheckmarkOutline, IoCloseOutline, IoEye, IoEyeOff } from 'react-icons/io5';
 
-import styles from './Input.module.css';
 
 const Input = (props) => {
     const {
@@ -18,25 +17,27 @@ const Input = (props) => {
     const [_secureText, setSecureText] = useState(secureText);
 
     return (
-        <div className={styles.inputContainer}>
-            <label for="name" className={styles.inputLabel}>{label}</label>
-            <div className={error ? styles.inputFieldError : styles.inputFieldContainer}>
+        <div className={`flex flex-col mb-4`}>
+            <label htmlFor="name" className={`text-base font-semibold text-gray-800`}>{label}</label>
+            <div className={`flex items-center justify-between border-b-2 ${error ? 'border-red-600' : 'border-gray-800'}`}>
                 <input 
                     type={_secureText ? 'password' : type} 
                     placeholder={secureText ? (_secureText ? placeholder : 'dix134$5ive') : placeholder} 
-                    className={styles.inputField}
+                    className={`outline-none pt-1 pb-0.5 bg-transparent text-base text-gray-700 w-full`}
                     name={name}
-                    // onFocus={() => setError(false)}
+                    onFocus={setError}
                     onChange={setValue}
                     value={value} 
                 />
-
+                {(type === 'text' || type === 'email') && value?.length >= 6 && <IoCheckmarkOutline className="ml-auto text-lg font-bold text-green-500 cursor-pointer mr-2" />}
+                {(type === 'number') && value?.length >= 1 && <IoCheckmarkOutline className="ml-auto text-lg font-bold text-green-500 cursor-pointer mr-2" />}
+                {(type === 'text' || type === 'email') && value?.length >= 1 && value?.length < 6 && <IoCloseOutline className="ml-auto text-lg font-bold text-red-500 cursor-pointer mr-2" />}
                 {secureText && (
                 <div onClick={() => setSecureText(!_secureText)}>
                     {_secureText ? 
-                    <IoEyeOff className={styles.inputFieldIcon} /> 
+                    <IoEyeOff className={`text-lg mr-3`} /> 
                     : 
-                    <IoEye className={styles.inputFieldIcon} />}
+                    <IoEye className={`text-lg mr-3`} />}
                 </div>
                 )}
             </div>

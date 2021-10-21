@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router';
 import { bindActionCreators } from 'redux';
 
-import { 
-    Activity, 
-    Button, 
+import {
     Input, 
+    LoginButton, 
     Notification, 
     SummitTech 
 } from '../../components';
@@ -22,12 +22,16 @@ const Login = (props) => {
     const [notify, setNotify] = useState(false);
     const [msg, setMsg] = useState({});
     const [users, setUsers] = useState([]);
+    const [redirect, setRedirect] = useState({
+        path: "/",
+        active: false,
+    })
 
     const authenticate = () => {
         let hasError;
         setIsLoading(true);
 
-        if(userName.length < 3) {
+        if (userName.length < 3) {
             setUserNameError(true);
             hasError = true;
             setIsLoading(false);
@@ -40,13 +44,13 @@ const Login = (props) => {
             setNotify(true);
         }
 
-        if(hasError) {
+        if (hasError) {
             setIsLoading(false);
             setNotify(true);
             setMsg({
-                    title: 'Authentication',
-                    message: 'Invalid username or password.'
-                });
+                title: 'Wrong Credentials',
+                message: 'Please check your input fields.'
+            });
             return false;
         }
 
@@ -66,17 +70,17 @@ const Login = (props) => {
                         'Authorization': 'Basic ' + Buffer.from(userName + ':' + password).toString('base64'),
                     },
                 });
-            const registered = await response.json();
-            setUsers(registered);
-            return registered;
+                const registered = await response.json();
+                setUsers(registered);
+                return registered;
             }
-            catch(err) {
+            catch (err) {
                 console.log(err, 'Received error');
             }
             
         }
 
-        fetch(url+'/', {
+        fetch(url + '/', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -100,70 +104,74 @@ const Login = (props) => {
                 if (res.register) {
                     const list = fetchUsers();
                     list
-                    .then(users => {
-                        return [res, users];
-                    })
-                    .then(res => {
-                        let _list = res[1].filter(data => userName === data.username);
-                        setIsLoading(false);
-                        console.log(_list[0].is_client);
-                        props.setUser(_list[0], userName, password);
-                        if(_list[0].is_client) {
-                            props.history.push({pathname: '/client'});
-                        } else {
-                            props.history.push({pathname: '/dashboard'});
-                        }
-                    })
+                        .then(users => {
+                            return [res, users];
+                        })
+                        .then(res => {
+                            let _list = res[1].filter(data => userName === data.username);
+                            setIsLoading(false);
+                            props.setUser(_list[0], userName, password);
+                            if (_list[0].is_client) {
+                                // props.history.push({ pathname: '/client' });
+                                setRedirect({
+                                    path: '/client',
+                                    active: true,
+                                })
+                            } else {
+                                // props.history.push({ pathname: '/dashboard', exact: true });
+                                setRedirect({
+                                    path: '/dashboard',
+                                    active: true,
+                                })
+                            }
+                        })
                 }
             })
             .catch(err => {
-                console.log(err);
                 setIsLoading(false);
                 setNotify(true);
                 setMsg({
                     title: 'Unexpected Error',
-                    message: 'Something unexpected happened'
+                    message: 'Please check your network connection.'
                 })
             })
     }
 
     return (
-        <div className={styles.loginContainer}>
-            <SummitTech title="WELCOME" />
-            <div className={styles.border}>
-                <div className={styles.loginForm}>
-                    <h2 className={styles.formName}>Eden-Beauty Complex</h2>
-                    <Input 
-                    label="Username" 
-                    placeholder="Eden-Beauty" 
-                    secureText={false}
-                    type="text"
-                    value={userName}
-                    setValue={(event) => setUserName(event.target.value)}
-                    error={userNameError}
-                    setError={() => setUserNameError} />
-                    <Input 
-                    label="Password" 
-                    placeholder="******" 
-                    secureText={true}
-                    type="text"
-                    value={password}
-                    setValue={(event) => setPassword(event.target.value)}
-                    error={passwordError}
-                    setError={() => setPasswordError()} />
-                    {isLoading ? 
-                        (<div className={styles.isLoading}>
-                            <Activity size={1.2} />
-                        </div>) : 
-                        (<Button title="Login" onClick={() => authenticate()} />)
-                    }
+        <>
+            {redirect.active ? <Redirect to={redirect.path} exact /> :
+                <div className={`w-full flex flex-col items-center justify-center p-8 md:py-6 lg:p-8 h-screen md:min-h-full ${styles.loginContainer}`}>
+                <SummitTech title="WELCOME" />
+                <div className={`rounded-lg shadow-lg ${styles.border}`}>
+                    <div className={`w-72 md:w-120 lg:w-128 m-2 py-10 px-7 md:p-10 bg-white flex rounded-lg flex-col`}>
+                        <h2 className={`text-center text-lg md:text-2xl text-gray-800 mb-8`}>Eden-Beauty Complex</h2>
+                        <Input
+                            label="Username"
+                            placeholder="Eden-Beauty"
+                            secureText={false}
+                            type="text"
+                            value={userName}
+                            setValue={(event) => setUserName(event.target.value)}
+                            error={userNameError}
+                            setError={() => setUserNameError(false)} />
+                        <Input
+                            label="Password"
+                            placeholder="******"
+                            secureText={true}
+                            type="text"
+                            value={password}
+                            setValue={(event) => setPassword(event.target.value)}
+                            error={passwordError}
+                            setError={() => setPasswordError(false)} />
+                        <LoginButton title="Login" loading={isLoading} onClick={() => authenticate()} />
+                    </div>
                 </div>
-            </div>
-            <SummitTech title="Eden Beauty" />
-            <Notification notify={notify} setNotify={setNotify} msg={msg} />
-        </div>
+                <SummitTech title="Eden Beauty" />
+                <Notification notify={notify} setNotify={setNotify} msg={msg} />
+            </div>}
+        </>
     )
-}
+};
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({setUser}, dispatch);

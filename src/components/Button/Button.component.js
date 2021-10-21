@@ -1,14 +1,19 @@
 import React from 'react';
 
-import styles from './Button.module.css';
 
 const Button = (props) => {
-    const {title, onClick, type} = props;
+    const { title, onClick, type, invert } = props;
     return (
-        <button className={[styles.buttonContainer, type === 'danger' ? styles.dangerColor : styles.generalColor].join(' ')} onClick={() => onClick()}>
-            <p className={styles.buttonText}>{title}</p>
+        <button className={`
+        outline-none flex items-center
+        rounded-md p-2 px-5 text-sm md:text-sm
+        font-semibold transition duration-500 ease-in-out
+        hover:shadow-xl
+        ${invert ? `bg-white ${type === 'danger' ? 'text-red-500 bg-white' : 'text-primary'}` : `text-white bg-primary`}
+        `} onClick={() => onClick()}>
+            <p>{title}</p>
         </button>
     )
-}
+};
 
 export default Button;

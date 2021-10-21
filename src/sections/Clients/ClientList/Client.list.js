@@ -11,31 +11,30 @@ import {
     Search 
 } from '../../../components';
 import { BASE_URL } from '../../../utils/globalVariable';
-import styles from './ClientList.module.css';
-import { AddClient } from '../..';
+import AddClient from './AddClient.section';
+import ClientDetail from './ClientDetail.section';
 import search from '../../../utils/search';
-import {setData} from '../../../redux/Actions/Data.actions';
+import {setData, setClients} from '../../../redux/Actions/Data.actions';
 import {setPoint, clearPoint} from '../../../redux/Actions/Points.actions';
+import EditClient from './EditClient.section';
 
 
 const ClientList = (props) => {
-    const {
-        setDetail, 
-        setIsDetail, 
-        isDetail, 
-        detail, 
+    const { 
         username, 
         password,
-        data,
-        refresh,
+        _clients,
     } = props;
     const [isOpenAdd, setIsOpenAdd] = useState(false);
+    const [edit, setEdit] = useState(false);
+    const [show, setShow] = useState(false);
     const [loading, setLoading] = useState(false);
     const [msg, setMsg] = useState({});
     const [text, setText] = useState('');
     const [notify, setNotify] = useState(false);
     const [filter, setFilter] = useState('');
-    const [purchases, setPurchases] = useState([])
+    const [detail, setDetail] = useState({})
+    // const [purchases, setPurchases] = useState([])
     const [filters] = useState([
         'Username',
         'Fullname'
@@ -52,7 +51,7 @@ const ClientList = (props) => {
                     },
                 });
                 const registered = await response.json();
-                setPurchases(registered);
+                // setPurchases(registered);
                 return registered;
             }
             catch(err) {
@@ -62,43 +61,52 @@ const ClientList = (props) => {
         }
 
     useEffect(() => {
-        setLoading(true);
-                props.clearPoint();
-        fetch(`${BASE_URL}/register/`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Basic ' + Buffer.from(username + ':' + password).toString('base64'),
-            },
-        })
-            .then(response => {
-                const res = response.json();
-                return res;
-            })
-            .then(res => {
-                let _clients = res.filter(data => data.is_client);
-                setClients(_clients);
-                props.setData(_clients);
-                setLoading(false);
-            })
-            .catch(err => {
-                setLoading(false);
-                setNotify(true);
-                setMsg({
-                    title: 'Authentication',
-                    message: 'Invalid username or password.'
-                })
-            })
-    }, [isOpenAdd, refresh]);
+        search(text, _clients, setClients, filter.toLowerCase());
+    }, [text]);
 
     useEffect(() => {
-        search(text, data, setClients, filter.toLowerCase());
-    }, [text]);
+        setClients(_clients)
+        if (_clients?.length === 0) {
+            setLoading(true);
+            fetchClients();
+        }
+        return () => {
+            fetchClients()
+        }
+    }, [_clients]);
+
+    const fetchClients = async () => {
+        try {
+            const response = await fetch(`${BASE_URL}/register/`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Basic ' + Buffer.from(username + ':' + password).toString('base64'),
+                },
+            });
+            let clients = await response.json();
+            clients = clients.filter(data => data.is_client)
+            props.setClients(clients.sort((a, b) => { return b.served - a.served }));
+            setLoading(false);
+            return clients;
+        }
+        catch (err) {
+            console.log(err, 'Received error');
+            setLoading(false);
+            setNotify(true);
+            setMsg({
+                title: 'Authentication',
+                message: 'Invalid username or password.'
+            })
+        }
+    };
+
 
 
     return (
-        <div className={isDetail ? styles.listContainerDetail : styles.listContainer}>
+        <div className={'w-full mid-h-full'}>
             <RouteIndicator route="Dashboard" current="Clients" />
+            <div className="sticky -top-4 md:top-3 z-40 pt-1">
             <Search 
                 placeholder="Search" 
                 isOpen={isOpenAdd} 
@@ -110,14 +118,17 @@ const ClientList = (props) => {
                 setFilter={setFilter}
                 text={text}
                 setText={setText} />
-            <h2 className={styles.headerTitle}>{clients.length} Client{clients.length !== 1 &&'s'}</h2>
-            <div className={styles.cardsContainer}>
+            </div>
+            <h2 className={'text-gray-500 text-2xl mt-3 mx-2'}>{clients.length} Client{clients.length !== 1 &&'s'}</h2>
+            <div className={'grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 lg:gap-7 px-0 md:px-2 lg:px-8 mt-4 md:mt-6'}>
                 {loading ? (<div style={{margin: 'auto'}}><Activity2 /></div>) : (clients.map((client) => 
-                    <ClientCard client={client} detail={detail} setDetail={setDetail} setIsDetail={setIsDetail} key={client.id} />
+                    <ClientCard client={client} setDetail={setDetail} setIsDetail={setShow} key={client.id} />
                 ))}
             </div>
             <Notification notify={notify} setNotify={setNotify} msg={msg} />
-            <AddClient isOpen={isOpenAdd} setIsOpen={setIsOpenAdd} />
+            <AddClient add={isOpenAdd} setAdd={setIsOpenAdd} />
+            <EditClient edit={edit} setEdit={setEdit} detail={detail} />
+            <ClientDetail show={show} setShow={setShow} setEdit={setEdit} detail={detail} />
         </div>
     )
 }
@@ -126,13 +137,13 @@ const mapStateToProps = ({auth, data, refresh}) => {
     return {
         username: auth.username,
         password: auth.password,
-        data: data.data,
+        _clients: data.clients,
         refresh: refresh.refresh,
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({setData, setPoint, clearPoint}, dispatch);
+    return bindActionCreators({setData, setClients, setPoint, clearPoint}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ClientList);

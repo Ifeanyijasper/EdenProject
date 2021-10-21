@@ -18,6 +18,13 @@ import Activity2 from './ActivityIndicatorLarger/ActivityIndicator.component';
 import Notify from './Notify/Notification.component';
 import TextArea from './TextArea/TextArea.component';
 import Testimonial from './Testimonial/Testimonial.component';
+import LoginButton from './Button/LoginButton.component';
+import Card from './ItemCard/Card.component';
+import SqrButton from './Button/squareButton.component';
+import DisplayCard from './ItemCard/DisplayCard.component';
+import Progress from './MiniProgressBar/Progress.component';
+import Confirmation from './Notification/Confirmation.component';
+import GalleryCard from './ItemCard/GalleryCard.component';
 
 export {
     AdminCard, 
@@ -40,4 +47,11 @@ export {
     Notify,
     TextArea,
     Testimonial,
+    LoginButton,
+    Card,
+    SqrButton,
+    DisplayCard,
+    Progress,
+    Confirmation,
+    GalleryCard,
 };

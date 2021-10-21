@@ -6,13 +6,13 @@ import { Dashboard, Client, Home } from '../pages';
 const Navigation = () => {
     return (
         <>
-            <Route path="/" component={Home} />
             <Switch>
                 <Route path="/dashboard" component={Dashboard} />
                 <Route path="/client" component={Client} />
+                <Route path="/" component={Home} />
             </Switch>
         </>
     )
-}
+};
 
 export default Navigation;
