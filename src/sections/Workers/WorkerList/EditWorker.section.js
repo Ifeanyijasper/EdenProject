@@ -65,7 +65,7 @@ const EditWorker = (props) => {
 
         if (hasError) {
             setIsLoading(false);
-            console.log('Have error');
+            // console.log('Have error');
             return false;
         }
 

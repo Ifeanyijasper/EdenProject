@@ -42,7 +42,7 @@ const DataReducer = (state = INITIAL_STATE, action) => {
             return { ...state, products: [...products] };
         case EDIT_PRODUCT:
             data = action.payload;
-            console.log(data)
+            // console.log(data)
             index = state.products.findIndex(productIndex => {
                 return productIndex?.id.toString() === data?.id.toString();
             });
@@ -53,7 +53,7 @@ const DataReducer = (state = INITIAL_STATE, action) => {
             return { ...state, products: [...products] };
         case DELETE_PRODUCT:
             id = action.payload;
-            console.log(id)
+            // console.log(id)
             index = state.products.findIndex(productIndex => {
                 return productIndex?.id.toString() === id.toString();
             });
@@ -184,7 +184,7 @@ const DataReducer = (state = INITIAL_STATE, action) => {
             return { ...state, workers: [...workers] };
         case EDIT_WORKER:
             data = action.payload;
-            console.log(data);
+            // console.log(data);
             index = state.workers.findIndex(workerIndex => {
                 return workerIndex?.id.toString() === data?.id.toString();
             });

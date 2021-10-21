@@ -61,7 +61,7 @@ const AddWorker = (props) => {
 
         if (hasError) {
             setIsLoading(false);
-            console.log('Have error');
+            // console.log('Have error');
             return false;
         }
 
@@ -73,8 +73,6 @@ const AddWorker = (props) => {
             is_worker: true,
             password: 'Eden-Beauty'
         }
-
-        console.log(body);
 
         fetch(`${BASE_URL}/register/`, {
             method: 'POST',

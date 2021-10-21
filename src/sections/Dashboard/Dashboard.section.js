@@ -91,7 +91,6 @@ const Dashboard = (props) => {
                 let _res = res.sort(function (a, b) {
                     return new Date(b.date) - new Date(a.date);
                 });
-                console.log(_res);
                 let obj = {};
                 const data = (finances) => {
                     finances.map((i) => {
@@ -105,7 +104,6 @@ const Dashboard = (props) => {
                     return obj;
                 }
                 let sortedData = data(_res);
-                console.log(sortedData)
                 props.setFinances(sortedData);
                 setIsLoading(false);
             })

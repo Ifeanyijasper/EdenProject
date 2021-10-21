@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { IoClose } from "react-icons/io5";
+import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
@@ -29,10 +28,6 @@ const FinanceDetail = (props) => {
             console.log(err);
         })
     }
-
-    useEffect(() => {
-        console.log(detail)
-    },[])
 
     return (
         <div className={isDetail ? styles.detailContainer : styles.detailHide}>

@@ -32,7 +32,7 @@ const CheckoutDetail = (props) => {
             return response;
         })
         .then(res => {
-            console.log(res);
+            // console.log(res);
         })
         .catch(err => {
             console.log(err);
@@ -61,7 +61,7 @@ const CheckoutDetail = (props) => {
             return response;
         })
         .then(res => {
-            console.log(res);
+            // console.log(res);
         })
         .catch(err => {
             console.log(err);
@@ -86,7 +86,7 @@ const CheckoutDetail = (props) => {
             body: JSON.stringify(body),
         })
         .then(res => {
-            console.log(res);
+            // console.log(res);
             const response = res.json();
             return Promise.all([response]);
         })

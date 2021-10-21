@@ -55,7 +55,6 @@ const EditGallery = (props) => {
 
         if (hasError) {
             setIsLoading(false);
-            console.log('Have error');
             return false;
         }
 

@@ -53,7 +53,6 @@ const AddGallery = (props) => {
 
         if (hasError) {
             setIsLoading(false);
-            console.log('Have error');
             return false;
         }
 
@@ -83,7 +82,7 @@ const AddGallery = (props) => {
                     message: 'We have a new memory'
                 });
                 props.addGallery(res);
-                console.log(res)
+                // console.log(res)
             })
             .then(res => {
                 setTimeout(() => {
