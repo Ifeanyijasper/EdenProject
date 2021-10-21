@@ -1,5 +1,5 @@
 .listContainer {
-    flex: 0 0 100%;
+    /* flex: 0 0 100%; */
 }
 
 @media only screen and (max-width: 56.25em) {

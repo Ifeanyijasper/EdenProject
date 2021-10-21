@@ -3,7 +3,7 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
-       width: {
+      width: {
         '17/100': '17%',
         '55': '55%',
         '132': "45rem",
@@ -18,6 +18,9 @@ module.exports = {
         '120': "32rem",
         '128': "40rem",
       },
+      transitionProperty: {
+        'spacing': 'margin, padding',
+      }
     },
   },
   variants: {

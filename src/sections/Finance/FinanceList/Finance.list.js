@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from "react";
-import { IoDownload } from "react-icons/io5";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import ReactHTMLToExcel from 'react-html-table-to-excel';
@@ -13,6 +12,7 @@ import { DateString } from "../../../utils/date";
 import searchObj from "../../../utils/searchObj";
 import FinanceDetail from "./FinanceDetail.section";
 import { Thousand } from "../../../utils/number";
+import AddPurchase from "./AddPurchase.section";
 
 const FinanceList = (props) => {
     const {
@@ -22,6 +22,7 @@ const FinanceList = (props) => {
     } = props;
     const [isOpen, setIsOpen] = useState(false);
     const [show, setShow] = useState(false);
+    const [add, setAdd] = useState(false);
     const [text, setText] = useState('');
     const [detail, setDetail] = useState({});
     const [isLoading, setIsLoading] = useState(false);
@@ -153,8 +154,9 @@ const FinanceList = (props) => {
                         buttonText={"Export Excel"}
                     />
                 </div>)}
-            <NewPurchase isOpen={isOpen} setIsOpen={setIsOpen} />
+            {/* <NewPurchase isOpen={isOpen} setIsOpen={setIsOpen} /> */}
             <FinanceDetail show={show} setShow={setShow} detail={detail} />
+            <AddPurchase add={isOpen} setAdd={setIsOpen} />
         </div>
     )
 };
