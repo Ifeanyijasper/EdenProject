@@ -85,10 +85,12 @@ const Dashboard = (props) => {
         })
             .then(res => {
                 const response = res.json();
+                console.log(response)
                 return response;
             })
             .then(res => {
                 let _res = res.reverse();
+                // console.log(_res);
                 let obj = {};
                 const data = (finances) => {
                     finances.map((i) => {
@@ -102,6 +104,7 @@ const Dashboard = (props) => {
                     return obj;
                 }
                 let sortedData = data(_res);
+                console.log(sortedData)
                 props.setFinances(sortedData);
                 setIsLoading(false);
             })

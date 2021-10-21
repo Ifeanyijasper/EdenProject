@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { IoClose } from 'react-icons/io5';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import { Button, Confirmation } from '../../../components';
 import { img_1 } from '../../../res/images';
 import extractInitials from '../../../utils/extractIni';
 import { BASE_URL } from '../../../utils/globalVariable';
 import { Thousand } from '../../../utils/number';
+import { deleteFinance } from '../../../redux/Actions/Data.actions';
 
 const FinanceDetail = (props) => {
     const { show, setShow, detail, clients, username, password, user } = props;
@@ -34,6 +36,8 @@ const FinanceDetail = (props) => {
             .then(res => {
                 setConfirm(false);
                 setLoading(false);
+                // console.log(res)
+                props.deleteFinance(detail);
                 setShow(false);
             })
             .catch(err => {
@@ -97,4 +101,8 @@ const mapStateToProps = ({auth, data, points}) => {
     }
 }
 
-export default connect(mapStateToProps)(FinanceDetail);
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({ deleteFinance }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(FinanceDetail);

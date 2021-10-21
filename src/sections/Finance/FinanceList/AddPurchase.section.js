@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 
 import { Activity, Button, Notification } from '../../../components';
 import { BASE_URL } from '../../../utils/globalVariable';
-import { addProduct } from '../../../redux/Actions/Data.actions';
+import { addFinance } from '../../../redux/Actions/Data.actions';
 import { setClearPurchase } from '../../../redux/Actions/Purchase.actions';
 import { setPoint } from '../../../redux/Actions/Points.actions';
 import { Product, Service } from '../..';
@@ -185,6 +185,7 @@ const AddPurchase = (props) => {
             .then(res => {
                 setIsLoading(false);
                 props.setClearPurchase();
+                props.addFinance(res)
                 props.setPoint(client.value, total / 2000, friend[0].friend);
                 setNotify(true);
                 setMsg({
@@ -317,7 +318,7 @@ const mapStateToProps = ({ auth, purchase, data }) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ addProduct, setClearPurchase, setPoint }, dispatch);
+    return bindActionCreators({ addFinance, setClearPurchase, setPoint }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddPurchase);

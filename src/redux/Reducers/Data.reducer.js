@@ -1,4 +1,4 @@
-import { ADD_CHECKOUT, ADD_CLIENT, ADD_GALLERY, ADD_PRODUCT, ADD_SERVICE, ADD_TEST, ADD_WORKER, DELETE_CHECKOUT, DELETE_CLIENT, DELETE_GALLERY, DELETE_PRODUCT, DELETE_SERVICE, DELETE_TEST, DELETE_WORKER, EDIT_CHECKOUT, EDIT_CLIENT, EDIT_GALLERY, EDIT_PRODUCT, EDIT_SERVICE, EDIT_TEST, EDIT_WORKER, SET_CHECKOUTS, SET_CLIENTS, SET_DATA, SET_FINANCES, SET_GALLERY, SET_OBJDATA, SET_PRODUCTS, SET_SERVICES, SET_TEST, SET_WORKERS } from '../types';
+import { ADD_CHECKOUT, ADD_CLIENT, ADD_FINANCE, ADD_GALLERY, ADD_PRODUCT, ADD_SERVICE, ADD_TEST, ADD_WORKER, DELETE_CHECKOUT, DELETE_CLIENT, DELETE_FINANCE, DELETE_GALLERY, DELETE_PRODUCT, DELETE_SERVICE, DELETE_TEST, DELETE_WORKER, EDIT_CHECKOUT, EDIT_CLIENT, EDIT_GALLERY, EDIT_PRODUCT, EDIT_SERVICE, EDIT_TEST, EDIT_WORKER, SET_CHECKOUTS, SET_CLIENTS, SET_DATA, SET_FINANCES, SET_GALLERY, SET_OBJDATA, SET_PRODUCTS, SET_SERVICES, SET_TEST, SET_WORKERS } from '../types';
 
 const INITIAL_STATE = {
     data: [],
@@ -25,7 +25,8 @@ const DataReducer = (state = INITIAL_STATE, action) => {
         checkouts,
         data,
         id,
-        index;
+        index,
+        _date;
     
     switch (action.type) {
         case SET_DATA:
@@ -205,6 +206,23 @@ const DataReducer = (state = INITIAL_STATE, action) => {
         case SET_FINANCES:
             finances = action.payload;
             return { ...state, finances };
+        case ADD_FINANCE:
+            data = action.payload;
+            finances = { ...state.finances };
+            _date = new Date(data.date).toLocaleDateString();
+            finances[_date].push(data);
+            return { ...state, finances: { ...finances } }
+        case DELETE_FINANCE:
+            data = action.payload;
+            _date = new Date(data.date).toLocaleDateString();
+            index = state.finances[_date].findIndex(financeIndex => {
+                return financeIndex.id.toString() === data?.id.toString();
+            });
+            finances = { ...state.finances };
+            if (index >= 0) {
+                finances[_date].splice(index, 1);
+            }
+            return { ...state, finances: { ...finances } };
         case SET_CHECKOUTS:
             checkouts = action.payload;
             return { ...state, checkouts };
@@ -235,10 +253,10 @@ const DataReducer = (state = INITIAL_STATE, action) => {
             return { ...state, checkouts: [...checkouts] };
         case SET_OBJDATA:
             const objdata = action.payload;
-            return {...state, objdata};  
+            return { ...state, objdata };
         default:
             return state;
     }
-}
+};
 
 export default DataReducer;
