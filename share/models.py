@@ -75,4 +75,6 @@ class Checkout(models.Model):
         return self.status
 
 class Gallery(models.Model):
+    name     = models.CharField(max_length=100)
     img      = models.FileField(null=True, blank=True)
+    event    = models.CharField(max_length=150)

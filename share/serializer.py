@@ -41,7 +41,7 @@ class PurchasesSerializer(serializers.ModelSerializer):
 class GallerySerializer(serializers.ModelSerializer):
     class Meta:
         model = Gallery
-        fields = ('id','img')
+        fields = ('id','name','img','event')
 
 class TestimonialSerializer(serializers.ModelSerializer):
     class Meta:
