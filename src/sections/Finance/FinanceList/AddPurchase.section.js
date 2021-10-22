@@ -12,7 +12,7 @@ import { setPoint } from '../../../redux/Actions/Points.actions';
 import { Product, Service } from '../..';
 
 const AddPurchase = (props) => {
-    const { add, setAdd, username, password, user, product, total, _services, _products } = props;
+    const { add, setAdd, username, password, user, product, total, _clients, _workers} = props;
 
     const [options, setOptions] = useState([]);
     const [client, setClient] = useState('');
@@ -121,34 +121,17 @@ const AddPurchase = (props) => {
 
     useEffect(() => {
         let _referals = [];
-        fetch(`${BASE_URL}/register/`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Basic ' + Buffer.from(username + ':' + password).toString('base64'),
-            },
-        })
-            .then(response => {
-                const res = response.json();
-                return res;
-            })
-            .then(res => {
-                if (res.length > 1) {
-                    let _res = res.filter((data) => data.is_client || data.is_worker);
-                    setList(_res);
-                    if (_res.length > 0) {
-                        _res.map((re, index) => (
-                            _referals.push({ value: re.id, label: re.username })
-                        ));
-                    }
-                    setOptions([..._referals]);
-                }
-            })
-            .catch(err => {
-                console.log(err);
-            })
-
-    }, [add]);
+        let data = _clients.concat(_workers);
+        setList(data);
+        if (data.length > 0) {
+            data.map((re, index) => (
+                _referals.push({ value: re.id, label: re.username })
+            ));
+        }
+        setOptions([..._referals]);
+        return () => {
+        }
+    }, [add, _clients, _workers]);
 
     const exit = () => {
         setAdd(false);
@@ -312,6 +295,8 @@ const mapStateToProps = ({ auth, purchase, data }) => {
         username: auth.username,
         password: auth.password,
         user: auth.user,
+        _clients: data.clients,
+        _workers: data.workers,
         product: purchase.product,
         _products: data.products,
         _services: data.services,
