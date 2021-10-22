@@ -45,7 +45,7 @@ const ItemCard = (props) => {
                     <img src={`${item.img}`} alt={item.name} className={'w-full h-36 lg:h-56 bg-center bg-cover'} /> :
                     <h3 className={'text-9xl text-green-700 text-center py-2 h-56 flex items-center justify-center'}>{extractInitials(item.name)}</h3>
             }
-            <div className={`absolute w-full text-sm py-1 flex items-center justify-end text-gray-700 px-2 ${add ? 'bottom-20' : 'bottom-9'}`} style={{backgroundImage: "linear-gradient(to right, #92fe9de6, #00c9ffcc)"}}>
+            <div className={`absolute w-full text-sm py-1 flex items-center justify-end text-gray-700 px-2 ${add ? 'bottom-20' : 'bottom-9'}`} style={{ backgroundImage: "linear-gradient(to right, #92fe9de6, #00c9ffcc)" }}>
                 {/* <h2 className={'flex justify-center items-center'}>
                     <IoHeart className={'mr-2'} /> 0
                 </h2> */}
@@ -59,20 +59,17 @@ const ItemCard = (props) => {
             </div>}
             <div className={'flex flex-col pb-2'}>
                 <div className="flex justify-between p-2">
-                    <h2 className={'text-gray-700 text-sm font-bold'}>{item.name}</h2> 
+                    <h2 className={'text-gray-700 text-sm font-bold'}>{item.name}</h2>
                 </div>
                 {add && (
-                    <>
-                        {counter.current > 0 && (
-                            <div className={`flex items-center font-sm transition-all delay-1000 duration-1000 ease-in-out ${counter.current > 0 ? 'justify-around' : 'justify-center' }`}>
-                                <button className={`outline-none cursor-pointer shadow-md flex items-center justify-center border-2 border-gray-700 text-sm lg:text-base w-6 h-6 lg:w-8 lg:h-8 rounded-full transition-all delay-1000 duration-1000 ease-in-out ${counter.current > 0 ? 'm-0' : 'ml-20'}`} onClick={(event) => decrement(event, item)}><IoRemove /></button>
-                                <p>{counter.current}</p>
-                                <button className={`outline-none cursor-pointer shadow-md flex items-center justify-center border-2 border-gray-700 text-sm lg:text-base w-6 h-6 lg:w-8 lg:h-8 rounded-full transition-all delay-1000 duration-1000 ease-in-out ${counter.current > 0 ? 'm-0' : 'mr-20'}`} onClick={(event) => increment(event, item)}><IoAdd /></button>
-                            </div>)}
-                        {counter.current === 0 && (
-                            <button className={`mx-auto text-center outline-none text-xs lg:text-sm text-white bg-primary shadow-md p-1.5 md:px-4 rounded-3xl text-white transition-all delay-1000 duration-1000 ease-in-out hover:shadow-2xl ${counter.current === 0 ? 'w-36 md:w-40 lg:w-44 opacity-100' : 'w-0 opacity-0'}`} onClick={(event) => increment(event, item)}>Add to purchase</button>
-                        )}
-                    </>
+                    <div className="relative">
+                        <div className={`flex items-center font-sm transition-all delay-100 duration-500 ease-in-out ${counter.current > 0 ? 'justify-around' : 'justify-center'}`}>
+                            <button className={`outline-none cursor-pointer shadow-md flex items-center justify-center border-2 border-gray-700 text-sm lg:text-base w-6 h-6 lg:w-8 lg:h-8 rounded-full transition-all duration-500 ease-in-out ${counter.current > 0 ? 'm-0 opacity-100' : 'ml-20 opacity-0'}`} onClick={(event) => decrement(event, item)}><IoRemove /></button>
+                            <p>{counter.current}</p>
+                            <button className={`outline-none cursor-pointer shadow-md flex items-center justify-center border-2 border-gray-700 text-sm lg:text-base w-6 h-6 lg:w-8 lg:h-8 rounded-full transition-all duration-500 ease-in-out ${counter.current > 0 ? 'm-0 opacity-100' : 'mr-20 opacity-0'}`} onClick={(event) => increment(event, item)}><IoAdd /></button>
+                        </div>
+                        <button className={`absolute top-0 left-1/2 top-1/2 transform -translate-y-1/2 -translate-x-1/2 mx-auto text-center outline-none overflow-hidden whitespace-nowrap text-xs lg:text-sm text-white bg-primary shadow-md p-1.5 md:px-4 rounded-3xl text-white transition-all delay-100 duration-500 ease-in-out hover:shadow-2xl ${counter.current === 0 ? 'w-36 md:w-40 lg:w-44 opacity-100' : 'w-0 opacity-0'}`} onClick={(event) => increment(event, item)}>Add to purchase</button>
+                    </div>
                 )}
             </div>
         </div>
