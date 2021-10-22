@@ -210,7 +210,11 @@ const DataReducer = (state = INITIAL_STATE, action) => {
             data = action.payload;
             finances = { ...state.finances };
             _date = new Date(data.date).toLocaleDateString();
-            finances[_date].unshift(data);
+            if (finances[_date] === undefined) {
+                finances[_date] = [data]
+            } else {
+                finances[_date].push(data);
+            }
             return { ...state, finances: { ...finances } }
         case DELETE_FINANCE:
             data = action.payload;

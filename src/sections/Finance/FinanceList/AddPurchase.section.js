@@ -184,8 +184,9 @@ const AddPurchase = (props) => {
             })
             .then(res => {
                 setIsLoading(false);
-                props.setClearPurchase();
                 props.addFinance(res)
+                props.setClearPurchase();
+                console.log(res)
                 props.setPoint(client.value, total / 2000, friend[0].friend);
                 setNotify(true);
                 setMsg({
@@ -251,6 +252,7 @@ const AddPurchase = (props) => {
                 }, 3000);
             })
             .catch(err => {
+                console.log(err)
                 setIsLoading(false);
                 setNotify(true);
                 setMsg({
