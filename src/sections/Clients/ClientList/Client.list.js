@@ -77,13 +77,7 @@ const ClientList = (props) => {
 
     const fetchClients = async () => {
         try {
-            const response = await fetch(`${BASE_URL}/register/`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Basic ' + Buffer.from(username + ':' + password).toString('base64'),
-                },
-            });
+            const response = await fetch(`${BASE_URL}/register/`);
             let clients = await response.json();
             clients = clients.filter(data => data.is_client)
             props.setClients(clients.sort((a, b) => { return b.served - a.served }));

@@ -39,13 +39,7 @@ const WorkerList = (props) => {
 
     const fetchWorkers = async () => {
         try {
-            const response = await fetch(`${BASE_URL}/register/`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Basic ' + Buffer.from(username + ':' + password).toString('base64'),
-                },
-            });
+            const response = await fetch(`${BASE_URL}/register/`);
             let workers = await response.json();
             workers = workers.filter(data => data.is_worker)
             props.setWorkers(workers.sort((a, b) => { return b.served - a.served }));

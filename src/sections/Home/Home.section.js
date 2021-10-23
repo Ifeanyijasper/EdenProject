@@ -13,7 +13,7 @@ import { IoArrowForward } from 'react-icons/io5';
 import { BASE_URL } from '../../utils/globalVariable';
 
 const HomeSection = (props) => {
-    const {welcome, products, services, testimonials} = props;
+    const {welcome, products, services, testimonials, gallery} = props;
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
@@ -22,75 +22,111 @@ const HomeSection = (props) => {
                 props.setWelcome();
             }, 3600);
         }
-    }, []);
+    }, [welcome]);
 
     const active = () => {
         return 1;
     }
 
     useEffect(() => {
-        setIsLoading(true);
-        fetch(`${BASE_URL}/product/`)
-            .then(res => {
-                const response = res.json();
-                return response;
-            })
-            .then(res => {
-                props.setProducts(res);
-                setIsLoading(false);
-            })
-            .catch(err => {
-                setIsLoading(false);
-            });
-    }, [])
+        if (services?.length === 0) {
+            setIsLoading(true);
+            fetchServices();
+        }
+        setServices(services);
+        return () => {
+            fetchServices()
+        }
+    }, [services]);
+
+    const fetchServices = async () => {
+        try {
+            const response = await fetch(`${BASE_URL}/service/`);
+            const services = await response.json();
+            props.setServices(services);
+            setIsLoading(false);
+            return services;
+        }
+        catch (err) {
+            console.log(err, 'Received error');
+            setIsLoading(false)
+        }
+    };
 
     useEffect(() => {
-        setIsLoading(true);
-        fetch(`${BASE_URL}/testimonial/`)
-            .then(res => {
-                const response = res.json();
-                return response;
-            })
-            .then(res => {
-                props.setTestimonials(res)
-                setIsLoading(false);
-            })
-            .catch(err => {
-                setIsLoading(false);
-            })
-    }, [])
+        if (products?.length === 0) {
+            setIsLoading(true);
+            fetchProducts()
+        }
+        setProducts(products);
+        return () => {
+            fetchProducts()
+        }
+    }, [products]);
+    
+    const fetchProducts = async () => {
+        try {
+            const response = await fetch(`${BASE_URL}/product/`);
+            const products = await response.json();
+            props.setProducts(products);
+            setIsLoading(false)
+            return products;
+        }
+        catch (err) {
+            console.log(err, 'Received error');
+            setIsLoading(false)
+        }
+    };
 
     useEffect(() => {
-        setIsLoading(true);
-        fetch(`${BASE_URL}/service/`)
-            .then(res => {
-                const response = res.json();
-                return response;
-            })
-            .then(res => {
-                props.setServices(res);
-                setIsLoading(false);
-            })
-            .catch(err => {
-                setIsLoading(false);
-            })
+        setTestimonials(testimonials)
+        if (testimonials?.length === 0) {
+            setIsLoading(true);
+            fetchTestimonials();
+        }
+        return () => {
+            fetchTestimonials()
+        }
+    }, [testimonials]);
+
+    const fetchTestimonials = async () => {
+        try {
+            const response = await fetch(`${BASE_URL}/testimonial/`);
+            const testimonials = await response.json();
+            props.setTestimonials(testimonials);
+            setIsLoading(false);
+            return testimonials;
+        }
+        catch (err) {
+            console.log(err, 'Received error');
+            setIsLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        setGallery(gallery)
+        if (gallery?.length === 0) {
+            setIsLoading(true);
+            fetchGallery();
+        }
+        return () => {
+            fetchGallery()
+        }
     }, []);
 
-    useEffect(() => {
-        setIsLoading(true);
-        fetch(`${BASE_URL}/Gallery/`)
-            .then(res => {
-                const response = res.json();
-                return response;
-            })
-            .then(res => {
-                props.setGallery(res);
-                setIsLoading(false);
-            })
-            .catch(err => {
-                setIsLoading(false);
-            })
-    }, []);
+    const fetchGallery = async () => {
+        try {
+            const response = await fetch(`${BASE_URL}/Gallery/`);
+            const gallery = await response.json();
+            props.setGallery(gallery);
+            setIsLoading(false);
+            return gallery;
+        }
+        catch (err) {
+            console.log(err, 'Received error');
+            setIsLoading(false);
+        }
+    };
 
     return (
         <div className={`flex flex-col ${styles.home}`}>
@@ -154,6 +190,7 @@ const mapStateToProps = ({welcome, data}) => {
         products: data.products,
         services: data.services,
         testimonials: data.testimonials,
+        gallery: data.gallery,
     }
 }
 
