@@ -21,8 +21,6 @@ import EditClient from './EditClient.section';
 
 const ClientList = (props) => {
     const { 
-        username, 
-        password,
         _clients,
     } = props;
     const [isOpenAdd, setIsOpenAdd] = useState(false);
@@ -40,25 +38,6 @@ const ClientList = (props) => {
         'Fullname'
     ]);
     const [clients, setClients] = useState([]);
-
-    const fetchPurchases = async () => {
-            try {
-                const response = await fetch(`${BASE_URL}/purchase/`, {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Basic ' + Buffer.from(username + ':' + password).toString('base64'),
-                    },
-                });
-                const registered = await response.json();
-                // setPurchases(registered);
-                return registered;
-            }
-            catch(err) {
-                console.log(err, 'Received error');
-            }
-            
-        }
 
     useEffect(() => {
         search(text, _clients, setClients, filter.toLowerCase());
@@ -129,8 +108,6 @@ const ClientList = (props) => {
 
 const mapStateToProps = ({auth, data, refresh}) => {
     return {
-        username: auth.username,
-        password: auth.password,
         _clients: data.clients,
         refresh: refresh.refresh,
     }
