@@ -115,13 +115,13 @@ const Login = (props) => {
                                 // props.history.push({ pathname: '/client' });
                                 setRedirect({
                                     path: '/client',
-                                    active: true,
+                                    exact: true,
                                 })
                             } else {
                                 // props.history.push({ pathname: '/dashboard', exact: true });
                                 setRedirect({
                                     path: '/dashboard',
-                                    active: true,
+                                    exact: true,
                                 })
                             }
                         })
