@@ -22,7 +22,7 @@ const HomeSection = (props) => {
                 props.setWelcome();
             }, 3600);
         }
-    }, [welcome]);
+    }, []);
 
     const active = () => {
         return 1;
@@ -112,7 +112,7 @@ const HomeSection = (props) => {
         return () => {
             fetchGallery()
         }
-    }, []);
+    }, [gallery]);
 
     const fetchGallery = async () => {
         try {

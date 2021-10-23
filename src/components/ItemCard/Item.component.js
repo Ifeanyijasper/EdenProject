@@ -57,7 +57,7 @@ const ItemCard = (props) => {
             {Number(item.discount) !== 0 && <div className={'absolute top-2 left-2 text-xs bg-green-500 p-1 text-white rounded'}>
                 <h2>Discount: {Math.floor(Number(item.discount))}%</h2>
             </div>}
-            <div className={'flex flex-col pb-2'}>
+            <div className={`flex flex-col ${add && 'pb-2' }`}>
                 <div className="flex justify-between p-2">
                     <h2 className={'text-gray-700 text-sm font-bold'}>{item.name}</h2>
                 </div>
