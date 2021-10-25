@@ -59,7 +59,7 @@ const ItemCard = (props) => {
             </div>}
             <div className={`flex flex-col ${add && 'pb-2' }`}>
                 <div className="flex justify-between p-2">
-                    <h2 className={'text-gray-700 text-sm font-bold'}>{item?.name.substr(0, 18)}{item?.name.length > 18 && '...'}</h2>
+                    <h2 className={'text-gray-700 text-sm font-bold'}>{item.name.length > 18 ? item?.name.substr(0, 18) : item.name}{item?.name.length > 18 && '...'}</h2>
                 </div>
                 {add && (
                     <div className="relative">
