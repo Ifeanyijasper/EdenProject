@@ -39,7 +39,7 @@ const ItemCard = (props) => {
     }
 
     return (
-        <div className={'cursor-pointer relative w-44 md:w-52 lg:w-80 h-auto rounded-md overflow-hidden shadow-xl bg-white'} onClick={() => onClick()}>
+        <div className={'cursor-pointer relative w-48 md:w-52 lg:w-80 h-auto rounded-md overflow-hidden shadow-xl bg-white'} onClick={() => onClick()}>
             {
                 item.img ?
                     <img src={`${item.img}`} alt={item.name} className={'w-full h-36 lg:h-56 bg-center bg-cover'} /> :
