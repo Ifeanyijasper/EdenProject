@@ -2,7 +2,6 @@ import React, {useEffect, useState} from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import { NewPurchase } from "../..";
 import { Activity2, Search } from "../../../components";
 import styles from './FinanceList.module.css';
 import search from '../../../utils/search';
@@ -99,7 +98,6 @@ const FinanceList = (props) => {
                     
                 </table>
             </div>
-            <NewPurchase isOpen={isOpen} setIsOpen={setIsOpen} />
         </div>
     )
 }

@@ -60,7 +60,7 @@ const SideNav = (props) => {
                                 <NavLink to="/" exact onClick={() => props.resetUser()} className={`flex items-center p-2 rounded text-sm text-gray-500 font-semibold my-1.5 transition-all duration-500 hover:bg-green-200 hover:bg-opacity-10 hover:text-gray-300`} activeClassName={`text-green-50 ${styles.sideNavActive}`}><IoLogOut className="mr-2.5 font-semibold" /> Logout</NavLink>
                             </div>
                             <div className={`text-center text-white text-xs mt-36`}>
-                                <p>Copyright @ <NavLink to='/summit-tech' className={styles.footerLink}>Summit Tech</NavLink></p>
+                                <p>Copyright @ <a href='https://summittech-eng.org/' target="_blank" rel="noreferrer"  className={styles.footerLink}>Summit Tech</a></p>
                             </div>
                         </div>
                     </div>
@@ -100,7 +100,7 @@ const SideNav = (props) => {
                                 <NavLink to="/dashboard/profile" className={`flex items-center p-2 rounded text-sm text-gray-500 font-semibold my-1.5 transition-all duration-500 hover:bg-green-200 hover:bg-opacity-10 hover:text-gray-300`} activeClassName={`text-green-50 ${styles.sideNavActive}`}><IoCreate className="mr-2.5 font-semibold" /> Profile</NavLink>
                             </div>
                             <div className={`text-center text-white text-xs mt-auto`}>
-                                <p>Copyright @ <NavLink to='/summit-tech' className={styles.footerLink}>Summit Tech</NavLink></p>
+                                <p>Copyright @ <a href='https://summittech-eng.org/' target="_blank" rel="noreferrer"  className={styles.footerLink}>Summit Tech</a></p>
                             </div>
                         </div>
                     </div>
@@ -113,7 +113,7 @@ const SideNav = (props) => {
             {/* <li className={styles.linksItem}><NavLink className={styles.linksLink} activeClassName={styles.linksActive} to='/language'><IoLanguage className={styles.icons} />Language</NavLink></li> */}
             {/* <li className={styles.linksItem}><NavLink to='/support' className={styles.linksLink} activeClassName={styles.linksActive}><IoHelp className={styles.icons} />Support</NavLink></li> */}
             <div className={`mt-auto hidden md:block text-center text-white text-xs`}>
-                <p>Copyright @ <NavLink to='/summit-tech' className={styles.footerLink}>Summit Tech</NavLink></p>
+                <p>Copyright @ <a href='https://summittech-eng.org/' target="_blank" className={styles.footerLink}>Summit Tech</a></p>
             </div>
         </div>
     )

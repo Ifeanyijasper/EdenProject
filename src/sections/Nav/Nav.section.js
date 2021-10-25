@@ -34,7 +34,7 @@ const Nav = () => {
                 </div>
             </div>
             <div className={`mt-auto hidden md:block text-center text-white text-xs`}>
-                <p>Copyright @ <NavLink to='/summit-tech' className={styles.footerLink}>Summit Tech</NavLink></p>
+                <p>Copyright @ <a href='https://summittech-eng.org/' target="_blank" rel="noreferrer"  className={styles.footerLink}>Summit Tech</a></p>
             </div>
         </div>
     )
