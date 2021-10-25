@@ -59,10 +59,13 @@ const SideNav = (props) => {
                                 <h4 className={'mt-5 mx-1.5 text-sm font-semibold text-white'}>Other</h4>
                                 <NavLink to="/" exact onClick={() => props.resetUser()} className={`flex items-center p-2 rounded text-sm text-gray-500 font-semibold my-1.5 transition-all duration-500 hover:bg-green-200 hover:bg-opacity-10 hover:text-gray-300`} activeClassName={`text-green-50 ${styles.sideNavActive}`}><IoLogOut className="mr-2.5 font-semibold" /> Logout</NavLink>
                             </div>
+                            <div className={`text-center text-white text-xs mt-36`}>
+                                <p>Copyright @ <NavLink to='/summit-tech' className={styles.footerLink}>Summit Tech</NavLink></p>
+                            </div>
                         </div>
                     </div>
                     <div className={`hidden md:flex flex-col mt-4 w-full`}>
-                    <h4 className={'mt-5 mx-1.5 text-sm font-semibold text-white'}>Other</h4>
+                        <h4 className={'mt-5 mx-1.5 text-sm font-semibold text-white'}>Other</h4>
                         <NavLink to="/" exact onClick={() => props.resetUser()} className={`flex items-center p-2 rounded text-sm text-gray-500 font-semibold my-1.5 transition-all duration-500 hover:bg-green-200 hover:bg-opacity-10 hover:text-gray-300`} activeClassName={`text-green-50 ${styles.sideNavActive}`}><IoLogOut className="mr-2.5 font-semibold" /> Logout</NavLink>
                     </div>
                 </>
@@ -96,10 +99,13 @@ const SideNav = (props) => {
                                 <NavLink to="/dashboard/gallery" className={`flex items-center p-2 rounded text-sm text-gray-500 font-semibold my-1.5 transition-all duration-500 hover:bg-green-200 hover:bg-opacity-10 hover:text-gray-300`} activeClassName={`text-green-50 ${styles.sideNavActive}`}><IoImages className="mr-2.5 font-semibold" /> Gallery</NavLink>
                                 <NavLink to="/dashboard/profile" className={`flex items-center p-2 rounded text-sm text-gray-500 font-semibold my-1.5 transition-all duration-500 hover:bg-green-200 hover:bg-opacity-10 hover:text-gray-300`} activeClassName={`text-green-50 ${styles.sideNavActive}`}><IoCreate className="mr-2.5 font-semibold" /> Profile</NavLink>
                             </div>
+                            <div className={`text-center text-white text-xs mt-auto`}>
+                                <p>Copyright @ <NavLink to='/summit-tech' className={styles.footerLink}>Summit Tech</NavLink></p>
+                            </div>
                         </div>
                     </div>
-                    <div className={`hidden md:flex flex-col mt-4 w-full`}>
-                    <h4 className={'mt-5 mx-1.5 text-sm font-semibold text-white'}>Other</h4>
+                    <div className={`hidden md:flex flex-col mt-4 w-full mt-36`}>
+                        <h4 className={'mt-5 mx-1.5 text-sm font-semibold text-white'}>Other</h4>
                         <NavLink to="/" exact onClick={() => props.resetUser()} className={`flex items-center p-2 rounded text-sm text-gray-500 font-semibold my-1.5 transition-all duration-500 hover:bg-green-200 hover:bg-opacity-10 hover:text-gray-300`} activeClassName={`text-green-50 ${styles.sideNavActive}`}><IoLogOut className="mr-2.5 font-semibold" /> Logout</NavLink>
                     </div>
                 </>
