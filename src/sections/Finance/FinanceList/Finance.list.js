@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import ReactHTMLToExcel from 'react-html-table-to-excel';
 
-import { NewPurchase } from "../..";
 import { Activity2, RouteIndicator, Search } from "../../../components";
 import styles from './FinanceList.module.css';
 import { BASE_URL } from "../../../utils/globalVariable";
@@ -22,7 +21,6 @@ const FinanceList = (props) => {
     } = props;
     const [isOpen, setIsOpen] = useState(false);
     const [show, setShow] = useState(false);
-    const [add, setAdd] = useState(false);
     const [text, setText] = useState('');
     const [detail, setDetail] = useState({});
     const [isLoading, setIsLoading] = useState(false);
