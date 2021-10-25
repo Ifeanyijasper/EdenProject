@@ -112,17 +112,17 @@ const Login = (props) => {
                             setIsLoading(false);
                             props.setUser(_list[0], userName, password);
                             if (_list[0].is_client) {
-                                props.history.push({ pathname: '/client' });
-                                // setRedirect({
-                                //     path: '/client',
-                                //     active: true,
-                                // })
+                                // props.history.push({ pathname: '/client' });
+                                setRedirect({
+                                    path: '/client',
+                                    active: true,
+                                })
                             } else {
-                                props.history.push({ pathname: '/dashboard', exact: true });
-                                // setRedirect({
-                                //     path: '/dashboard',
-                                //     active: true,
-                                // })
+                                // props.history.push({ pathname: '/dashboard', exact: true });
+                                setRedirect({
+                                    path: '/dashboard',
+                                    active: true,
+                                })
                             }
                         })
                 }
@@ -138,8 +138,8 @@ const Login = (props) => {
     }
 
     return (
-        // <>
-            // {/* {redirect.active ? <Redirect to={redirect.path} exact /> : */}
+        <>
+            {redirect.active ? <Redirect to={redirect.path} exact /> :
                 <div className={`w-full flex flex-col items-center justify-center p-8 md:py-6 lg:p-8 h-screen md:min-h-full ${styles.loginContainer}`}>
                 <SummitTech title="WELCOME" />
                 <div className={`rounded-lg shadow-lg ${styles.border}`}>
@@ -168,9 +168,8 @@ const Login = (props) => {
                 </div>
                 <SummitTech title="Eden Beauty" />
                 <Notification notify={notify} setNotify={setNotify} msg={msg} />
-            </div >
-            // }
-        // </>
+            </div>}
+        </>
     )
 };
 

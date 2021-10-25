@@ -83,10 +83,6 @@ const AddWorker = (props) => {
             body: JSON.stringify(body),
         })
             .then(res => {
-                const response = res.json();
-                return response;
-            })
-            .then(res => {
                 setNotify(true);
                 setIsLoading(false);
                 setMsg({
