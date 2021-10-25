@@ -125,26 +125,35 @@ const FinanceList = (props) => {
                                     <td className={"bg-primary text-lg p-3.5 text-gray-100 font-semibold md:border md:border-grey-500 text-left block md:table-cell"}>Actions</td>
                                 </tr>
                             </thead>
-                            <tbody className="block md:table-row-group">
-                                {isLoading ? (<td colSpan={5} style={{ margin: 'auto', paddingTop: '10px' }}><Activity2 /></td>) : finances.map((finance, index) =>
-                                (<tr key={index} className={"bg-white py-2 px-3 md:p-3 md:border-none block md:table-row"}>
-                                    <td className={"py-2 px-3 md:p-3 md:border md:border-grey-500 text-left block md:table-cell"}><span className="inline-block w-1/3 md:hidden font-bold">Client Name</span>{finance.client}</td>
-                                    <td className={"py-2 px-3 md:p-3 md:border md:border-grey-500 text-left block md:table-cell"}><span className="inline-block w-1/3 md:hidden font-bold">Time</span>{new Date(finance.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</td>
-                                    {/* date.toLocaleTimeString([], {timeStyle: 'short'}); */}
-                                    <td className={"py-2 px-3 md:p-3 md:border md:border-grey-500 text-left block md:table-cell"}><span className="inline-block w-1/3 md:hidden font-bold">Worker</span>{finance.worker}</td>
-                                    <td className={"py-2 px-3 md:p-3 md:border md:border-grey-500 text-left block md:table-cell"}><span className="inline-block w-1/3 md:hidden font-bold">Items</span>
-                                        {finance.item.map((item, index) =>
-                                            <b className={'mr-3 font-normal'}>({item.count}) {item.name} </b>
-                                        )}
-                                    </td>
-                                    <td className={"p-3 md:border md:border-grey-500 text-left block md:table-cell"}><span className="inline-block w-1/3 md:hidden font-bold">Total</span>{Thousand(finance?.total)} XAF</td>
-                                    <td className={"p-3 md:border md:border-grey-500 text-left block md:table-cell"}>
-                                        <span className="inline-block w-1/3 md:hidden font-bold">Actions</span>
-                                        <button className={`outline-none text-sm text-primary font-semibold rounded tracking-wider cursor-pointer py-1.5 px-2.5 shadow-md`} onClick={() => showDetail(finance)}>Details</button>
-                                    </td>
-                                </tr>)
-                                )}
-                            </tbody>
+                            {isLoading ?
+                                <tbody>
+                                    <tr>
+                                        <td colSpan={6}>
+                                            <div className="flex justify-center"><Activity2 /></div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                :
+                                <tbody className="block md:table-row-group">
+                                    {finances.map((finance, index) =>
+                                        <tr key={index} className={"bg-white py-2 px-3 md:p-3 md:border-none block md:table-row"}>
+                                            <td className={"py-2 px-3 md:p-3 md:border md:border-grey-500 text-left block md:table-cell"}><span className="inline-block w-1/3 md:hidden font-bold">Client Name</span>{finance.client}</td>
+                                            <td className={"py-2 px-3 md:p-3 md:border md:border-grey-500 text-left block md:table-cell"}><span className="inline-block w-1/3 md:hidden font-bold">Time</span>{new Date(finance.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</td>
+                                            {/* date.toLocaleTimeString([], {timeStyle: 'short'}); */}
+                                            <td className={"py-2 px-3 md:p-3 md:border md:border-grey-500 text-left block md:table-cell"}><span className="inline-block w-1/3 md:hidden font-bold">Worker</span>{finance.worker}</td>
+                                            <td className={"py-2 px-3 md:p-3 md:border md:border-grey-500 text-left block md:table-cell"}><span className="inline-block w-1/3 md:hidden font-bold">Items</span>
+                                                {finance.item.map((item, index) =>
+                                                    <b className={'mr-3 font-normal'}>({item.count}) {item.name} </b>
+                                                )}
+                                            </td>
+                                            <td className={"p-3 md:border md:border-grey-500 text-left block md:table-cell"}><span className="inline-block w-1/3 md:hidden font-bold">Total</span>{Thousand(finance?.total)} XAF</td>
+                                            <td className={"p-3 md:border md:border-grey-500 text-left block md:table-cell"}>
+                                                <span className="inline-block w-1/3 md:hidden font-bold">Actions</span>
+                                                <button className={`outline-none text-sm text-primary font-semibold rounded tracking-wider cursor-pointer py-1.5 px-2.5 shadow-md`} onClick={() => showDetail(finance)}>Details</button>
+                                            </td>
+                                        </tr>
+                                    )}
+                                </tbody>}
                         </table>
                     </div>
                     <ReactHTMLToExcel
