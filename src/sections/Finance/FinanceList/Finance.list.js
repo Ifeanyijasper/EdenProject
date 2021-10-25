@@ -35,7 +35,7 @@ const FinanceList = (props) => {
     ]);
 
 
-     useEffect(() => {
+    useEffect(() => {
         setPurchases(_finances)
         if (_finances?.length === 0) {
             setIsLoading(true);
@@ -44,7 +44,7 @@ const FinanceList = (props) => {
         return () => {
             fetchPurchases()
         }
-     }, [_finances]);
+    }, [_finances]);
 
     const fetchPurchases = async () => {
         try {
@@ -57,8 +57,8 @@ const FinanceList = (props) => {
             });
             let purchases = await response.json();
             purchases = purchases.sort(function (a, b) {
-                    return new Date(b.date) - new Date(a.date);
-                });
+                return new Date(b.date) - new Date(a.date);
+            });
             let obj = {};
             const data = (finances) => {
                 finances.map((i) => {
@@ -81,15 +81,15 @@ const FinanceList = (props) => {
             setIsLoading(false);
             setNotify(true);
             setMsg({
-                title: 'Authentication',
-                message: 'Invalid username or password.'
+                title: 'Connection Error',
+                message: 'Unable to fetch checkouts.'
             })
         }
     };
 
     useEffect(() => {
         searchObj(text, _finances, setPurchases, filter.toLowerCase());
-    }, [text]);
+    }, [text, _finances, filter]);
 
     const showDetail = (purchase) => {
         setShow(true);
@@ -113,7 +113,7 @@ const FinanceList = (props) => {
                     setText={setText} />
             </div>
             {isLoading ? <div className={styles.actCenter}><Activity2 /></div> : Object.values(purchases).map((finances, index) =>
-                <div key={ index }>
+                <div key={index}>
                     <h2 className={'text-gray-500 text-2xl mt-3 mx-2'}>{DateString(Object.keys(purchases)[index])}</h2>
                     <div className={styles.tableContainer}>
                         <table className={"min-w-full rounded-xl my-3 overflow-hidden border-collapse block md:table"} id={DateString(Object.keys(purchases)[index])}>
@@ -128,24 +128,24 @@ const FinanceList = (props) => {
                                 </tr>
                             </thead>
                             <tbody className="block md:table-row-group">
-                            {isLoading ? (<td colSpan={5} style={{ margin: 'auto', paddingTop: '10px' }}><Activity2 /></td>) : finances.map((finance, index) =>
-                            (<tr key={ index} className={"bg-white py-2 px-3 md:p-3 md:border-none block md:table-row"}>
-                                <td className={"py-2 px-3 md:p-3 md:border md:border-grey-500 text-left block md:table-cell"}><span class="inline-block w-1/3 md:hidden font-bold">Client Name</span>{finance.client}</td>
-                                <td className={"py-2 px-3 md:p-3 md:border md:border-grey-500 text-left block md:table-cell"}><span class="inline-block w-1/3 md:hidden font-bold">Time</span>{new Date(finance.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</td>
-                                {/* date.toLocaleTimeString([], {timeStyle: 'short'}); */}
-                                <td className={"py-2 px-3 md:p-3 md:border md:border-grey-500 text-left block md:table-cell"}><span class="inline-block w-1/3 md:hidden font-bold">Worker</span>{finance.worker}</td>
-                                <td className={"py-2 px-3 md:p-3 md:border md:border-grey-500 text-left block md:table-cell"}><span class="inline-block w-1/3 md:hidden font-bold">Items</span>
-                                    {finance.item.map((item, index) =>
-                                        <b className={'mr-3 font-normal'}>({item.count}) {item.name} </b>
-                                    )}
-                                </td>
-                                <td className={"p-3 md:border md:border-grey-500 text-left block md:table-cell"}><span class="inline-block w-1/3 md:hidden font-bold">Total</span>{Thousand(finance?.total)} XAF</td>
-                                <td className={"p-3 md:border md:border-grey-500 text-left block md:table-cell"}>
-                                    <span class="inline-block w-1/3 md:hidden font-bold">Actions</span>
-                                    <button className={`outline-none text-sm text-primary font-semibold rounded tracking-wider cursor-pointer py-1.5 px-2.5 shadow-md`} onClick={() => showDetail(finance)}>Details</button>
-                                </td>
-                            </tr>)
-                            )}
+                                {isLoading ? (<td colSpan={5} style={{ margin: 'auto', paddingTop: '10px' }}><Activity2 /></td>) : finances.map((finance, index) =>
+                                (<tr key={index} className={"bg-white py-2 px-3 md:p-3 md:border-none block md:table-row"}>
+                                    <td className={"py-2 px-3 md:p-3 md:border md:border-grey-500 text-left block md:table-cell"}><span className="inline-block w-1/3 md:hidden font-bold">Client Name</span>{finance.client}</td>
+                                    <td className={"py-2 px-3 md:p-3 md:border md:border-grey-500 text-left block md:table-cell"}><span className="inline-block w-1/3 md:hidden font-bold">Time</span>{new Date(finance.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</td>
+                                    {/* date.toLocaleTimeString([], {timeStyle: 'short'}); */}
+                                    <td className={"py-2 px-3 md:p-3 md:border md:border-grey-500 text-left block md:table-cell"}><span className="inline-block w-1/3 md:hidden font-bold">Worker</span>{finance.worker}</td>
+                                    <td className={"py-2 px-3 md:p-3 md:border md:border-grey-500 text-left block md:table-cell"}><span className="inline-block w-1/3 md:hidden font-bold">Items</span>
+                                        {finance.item.map((item, index) =>
+                                            <b className={'mr-3 font-normal'}>({item.count}) {item.name} </b>
+                                        )}
+                                    </td>
+                                    <td className={"p-3 md:border md:border-grey-500 text-left block md:table-cell"}><span className="inline-block w-1/3 md:hidden font-bold">Total</span>{Thousand(finance?.total)} XAF</td>
+                                    <td className={"p-3 md:border md:border-grey-500 text-left block md:table-cell"}>
+                                        <span className="inline-block w-1/3 md:hidden font-bold">Actions</span>
+                                        <button className={`outline-none text-sm text-primary font-semibold rounded tracking-wider cursor-pointer py-1.5 px-2.5 shadow-md`} onClick={() => showDetail(finance)}>Details</button>
+                                    </td>
+                                </tr>)
+                                )}
                             </tbody>
                         </table>
                     </div>
@@ -157,7 +157,6 @@ const FinanceList = (props) => {
                         buttonText={"Export Excel"}
                     />
                 </div>)}
-            {/* <NewPurchase isOpen={isOpen} setIsOpen={setIsOpen} /> */}
             <FinanceDetail show={show} setShow={setShow} detail={detail} />
             <AddPurchase add={isOpen} setAdd={setIsOpen} />
         </div>

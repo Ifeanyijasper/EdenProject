@@ -39,9 +39,15 @@ const WorkerList = (props) => {
 
     const fetchWorkers = async () => {
         try {
-            const response = await fetch(`${BASE_URL}/register/`);
+            const response = await fetch(`${BASE_URL}/register/`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Basic ' + Buffer.from(username + ':' + password).toString('base64'),
+                },
+            });
             let workers = await response.json();
-            workers = workers.filter(data => data.is_worker)
+            workers = workers?.filter(data => data.is_worker)
             props.setWorkers(workers.sort((a, b) => { return b.served - a.served }));
             setLoading(false);
             return workers;
@@ -51,15 +57,15 @@ const WorkerList = (props) => {
             setLoading(false);
             setNotify(true);
             setMsg({
-                title: 'Authentication',
-                message: 'Invalid username or password.'
+                title: 'Connection Error',
+                message: 'Unable to fetch workers.'
             })
         }
     };
 
     useEffect(() => {
         search(text, _workers, setWorkers, filter.toLowerCase());
-    }, [text, setText, _workers, filter]);
+    }, [text, _workers, filter]);
 
     useEffect(() => {
         setWorkers(_workers)

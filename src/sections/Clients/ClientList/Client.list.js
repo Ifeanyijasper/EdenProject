@@ -22,6 +22,8 @@ import EditClient from './EditClient.section';
 const ClientList = (props) => {
     const { 
         _clients,
+        username,
+        password,
     } = props;
     const [isOpenAdd, setIsOpenAdd] = useState(false);
     const [edit, setEdit] = useState(false);
@@ -31,8 +33,7 @@ const ClientList = (props) => {
     const [text, setText] = useState('');
     const [notify, setNotify] = useState(false);
     const [filter, setFilter] = useState('');
-    const [detail, setDetail] = useState({})
-    // const [purchases, setPurchases] = useState([])
+    const [detail, setDetail] = useState({});
     const [filters] = useState([
         'Username',
         'Fullname'
@@ -41,7 +42,7 @@ const ClientList = (props) => {
 
     useEffect(() => {
         search(text, _clients, setClients, filter.toLowerCase());
-    }, [text]);
+    }, [text, _clients, filter]);
 
     useEffect(() => {
         setClients(_clients)
@@ -56,9 +57,15 @@ const ClientList = (props) => {
 
     const fetchClients = async () => {
         try {
-            const response = await fetch(`${BASE_URL}/register/`);
+            const response = await fetch(`${BASE_URL}/register/`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Basic ' + Buffer.from(username + ':' + password).toString('base64'),
+                },
+            });
             let clients = await response.json();
-            clients = clients.filter(data => data.is_client)
+            clients = clients?.filter(data => data.is_client)
             props.setClients(clients.sort((a, b) => { return b.served - a.served }));
             setLoading(false);
             return clients;
@@ -68,8 +75,8 @@ const ClientList = (props) => {
             setLoading(false);
             setNotify(true);
             setMsg({
-                title: 'Authentication',
-                message: 'Invalid username or password.'
+                title: 'Connection Error',
+                message: 'Unable to fetch clients.'
             })
         }
     };
@@ -110,6 +117,8 @@ const mapStateToProps = ({auth, data, refresh}) => {
     return {
         _clients: data.clients,
         refresh: refresh.refresh,
+        username: auth.username,
+        password: auth.password,
     }
 }
 

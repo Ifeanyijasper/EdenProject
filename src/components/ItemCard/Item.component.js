@@ -39,11 +39,11 @@ const ItemCard = (props) => {
     }
 
     return (
-        <div className={'cursor-pointer relative md:w-52 lg:w-80 h-auto rounded-md overflow-hidden shadow-xl bg-white'} onClick={() => onClick()}>
+        <div className={'cursor-pointer relative w-44 md:w-52 lg:w-80 h-auto rounded-md overflow-hidden shadow-xl bg-white'} onClick={() => onClick()}>
             {
                 item.img ?
                     <img src={`${item.img}`} alt={item.name} className={'w-full h-36 lg:h-56 bg-center bg-cover'} /> :
-                    <h3 className={'text-9xl text-green-700 text-center py-2 h-56 flex items-center justify-center'}>{extractInitials(item.name)}</h3>
+                    <h3 className={'text-6xl md:text-8xl lg:text-9xl text-green-700 text-center py-2 h-36 lg:h-56 flex items-center justify-center'}>{extractInitials(item.name)}</h3>
             }
             <div className={`absolute w-full text-sm py-1 flex items-center justify-end text-gray-700 px-2 ${add ? 'bottom-20' : 'bottom-9'}`} style={{ backgroundImage: "linear-gradient(to right, #92fe9de6, #00c9ffcc)" }}>
                 {/* <h2 className={'flex justify-center items-center'}>
@@ -59,7 +59,7 @@ const ItemCard = (props) => {
             </div>}
             <div className={`flex flex-col ${add && 'pb-2' }`}>
                 <div className="flex justify-between p-2">
-                    <h2 className={'text-gray-700 text-sm font-bold'}>{item.name}</h2>
+                    <h2 className={'text-gray-700 text-sm font-bold'}>{item?.name.substr(0, 18)}{item?.name.length > 18 && '...'}</h2>
                 </div>
                 {add && (
                     <div className="relative">

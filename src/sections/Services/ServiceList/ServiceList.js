@@ -89,7 +89,7 @@ const ServiceList = (props) => {
             <h2 className={'text-gray-500 text-2xl mt-3 mx-2'}>{services.length || 0} Services</h2>
             <hr className={'my-4 mx-2'} />
             <div className={`py-6 lg:px-12 grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-7 flex justify-center`}>
-                {isLoading ? (<Activity2 />) : services.map((service, index) => <ItemCard item={service} onClick={() => showDetails(service)} />)}
+                {isLoading ? (<Activity2 />) : services.map((service, index) => <ItemCard item={service} onClick={() => showDetails(service)} key={index} />)}
             </div>
             <AddService add={isOpenAdd} setAdd={setIsOpenAdd} />
             <EditService edit={edit} setEdit={setEdit} detail={detail} />

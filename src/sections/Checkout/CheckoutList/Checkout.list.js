@@ -33,7 +33,7 @@ const CheckoutList = (props) => {
 
     useEffect(() => {
         search(text, _checkouts, setCheckouts, filter.toLowerCase());
-    }, [text]);
+    }, [text, _checkouts, filter]);
 
     useEffect(() => {
         setCheckouts(_checkouts)
@@ -66,8 +66,8 @@ const CheckoutList = (props) => {
             setIsLoading(false);
             setNotify(true);
             setMsg({
-                title: 'Authentication',
-                message: 'Invalid username or password.'
+                title: 'Connection Error',
+                message: 'Unable to fetch checkouts.'
             })
         }
     };
@@ -106,7 +106,7 @@ const CheckoutList = (props) => {
                         </tr>
                     </thead>
                     <tbody className="block md:table-row-group">
-                    {isLoading ? (<td colSpan={5} style={{margin: 'auto', paddingTop: '10px'}}><Activity2 /></td>) : checkouts.map((checkout, index) => 
+                    {isLoading ? (<tr><td colSpan={5} style={{margin: 'auto', paddingTop: '10px'}}><Activity2 /></td></tr>) : checkouts.map((checkout, index) => 
                         (<tr className={"bg-white py-2 px-3 md:p-3 md:border-none block md:table-row"}>
                             <td className={"py-2 px-3 md:p-3 md:border md:border-grey-500 text-left block md:table-cell"}><span class="inline-block w-1/3 md:hidden font-bold">Client Name</span>{checkout.client}</td>
                             <td className={"py-2 px-3 md:p-3 md:border md:border-grey-500 text-left block md:table-cell"}><span class="inline-block w-1/3 md:hidden font-bold">Time</span>{new Date(checkout.date).toLocaleTimeString('en-US')}</td>
