@@ -20,4 +20,5 @@
     outline: none;
     text-decoration: none;
     color: var(--color-success-2);
+    cursor: pointer;
 }
