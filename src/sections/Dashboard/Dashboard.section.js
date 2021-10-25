@@ -106,7 +106,6 @@ const Dashboard = (props) => {
 
     useEffect(() => {
         if (services?.length === 0) {
-            setIsLoading(true);
             fetchServices();
         }
         setServices(services);
@@ -136,7 +135,6 @@ const Dashboard = (props) => {
 
     useEffect(() => {
         if (products?.length === 0) {
-            setIsLoading(true);
             fetchProducts()
         }
         setProducts(products);
@@ -147,7 +145,6 @@ const Dashboard = (props) => {
 
     useEffect(() => {
         if (gallery?.length === 0) {
-            setIsLoading(true);
             fetchGallery();
         }
         return () => {
@@ -195,7 +192,6 @@ const Dashboard = (props) => {
 
     useEffect(() => {
         if (finances?.length === 0) {
-            setIsLoading(true);
             fetchPurchases();
         }
         return () => {
@@ -246,7 +242,6 @@ const Dashboard = (props) => {
 
     useEffect(() => {
         if (checkouts?.length === 0) {
-            setIsLoading(true);
             fetchCheckouts();
         }
         return () => {
