@@ -313,7 +313,7 @@ const Dashboard = (props) => {
                 {/* <h2 className={styles.tempo}>This month</h2> */}
             </div>
             <div className={'grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-5 lg:gap-6 px-0 md:px-2 lg:px-8 mt-4 md:mt-6 mb-10'}>
-                {isLoading ? (<Activity2 />) : workers.map((worker, index) => ((index < Number((workers.length * 0.2).toFixed(0))) &&
+                {isLoading ? (<div className="flex justify-center col-span-2 md:col-span-3 lg:col-span-4"><Activity2 /></div>) : workers.map((worker, index) => ((index < Number((workers.length * 0.2).toFixed(0))) &&
                     <ClientCard client={worker} setDetail={setDetail} setIsDetail={setWorker} key={worker.id} />
                 ))}
             </div>
@@ -322,7 +322,7 @@ const Dashboard = (props) => {
                 {/* <h2 className={styles.tempo}>This month</h2> */}
             </div>
             <div className={'grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-5 lg:gap-6 px-0 md:px-2 lg:px-8 mt-4 md:mt-6'}>
-                {isLoading ? (<Activity2 />) : clients.map((client, index) => ((index < Number((clients.length * 0.2).toFixed(0))) &&
+                {isLoading ? (<div className="flex justify-center col-span-2 md:col-span-3 lg:col-span-4"><Activity2 /></div>) : clients.map((client, index) => ((index < Number((clients.length * 0.2).toFixed(0))) &&
                     <ClientCard client={client} setDetail={setDetail} setIsDetail={setClient} key={client.id} />
                 ))}
             </div>

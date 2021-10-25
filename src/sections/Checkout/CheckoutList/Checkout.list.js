@@ -104,14 +104,17 @@ const CheckoutList = (props) => {
                             <td className={"bg-primary text-lg p-3.5 text-gray-100 font-semibold md:border md:border-grey-500 text-left block md:table-cell"}>Actions</td>
                         </tr>
                     </thead>
-                    <tbody className="block md:table-row-group">
-                        {isLoading ?
+                    
+                    {isLoading ?
+                        <tbody>
                             <tr>
-                                <td colSpan={6} className="whitespace-nowrap flex justify-center items-center">
+                                <td colSpan={6}>
                                     <div className="flex justify-center"><Activity2 /></div>
                                 </td>
-                            </tr> :
-                            checkouts.map((checkout, index) =>
+                            </tr>
+                        </tbody> :
+                        <tbody className="block md:table-row-group">
+                            {checkouts.map((checkout, index) =>
                                 <tr className={"bg-white py-2 px-3 md:p-3 md:border-none block md:table-row"} key={index}>
                                     <td className={"py-2 px-3 md:p-3 md:border md:border-grey-500 text-left block md:table-cell"}><span class="inline-block w-1/3 md:hidden font-bold">Client Name</span>{checkout.client}</td>
                                     <td className={"py-2 px-3 md:p-3 md:border md:border-grey-500 text-left block md:table-cell"}><span class="inline-block w-1/3 md:hidden font-bold">Time</span>{new Date(checkout.date).toLocaleTimeString('en-US')}</td>
@@ -123,9 +126,8 @@ const CheckoutList = (props) => {
                                         <button className={`outline-none text-sm text-primary font-semibold rounded tracking-wider cursor-pointer py-1.5 px-2.5 shadow-md`} onClick={() => showDetail(checkout)}>Details</button>
                                     </td>
                                 </tr>
-                            )
-                        }
-                    </tbody>
+                            )}
+                        </tbody>}
                 </table>
             </div>
         </div>
