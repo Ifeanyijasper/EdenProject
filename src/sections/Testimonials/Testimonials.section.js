@@ -54,7 +54,7 @@ const Testimonials = (props) => {
                 <Search placeholder="Search" newButton={false} title={'Service'} filters={filters} filter={filter} setFilter={setFilter} text={text} setText={setText} />
             </div>
             <div className={'w-full grid grid-cols-1 md:grid-cols-2 gap-7'}>
-                {isLoading ? <Activity2 /> : testimonials.map((testimonial, index) => <Testimonial testimonial={testimonial} key={index} />)}
+                {isLoading ? <div className="flex justify-center my-30 col-span-1 md:col-span-2 md:row-span-5"><Activity2 /></div> : testimonials.map((testimonial, index) => <Testimonial testimonial={testimonial} key={index} />)}
             </div>
         </section>
     )

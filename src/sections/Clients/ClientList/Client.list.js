@@ -101,7 +101,7 @@ const ClientList = (props) => {
             </div>
             <h2 className={'text-gray-500 text-2xl mt-3 mx-2'}>{clients.length} Client{clients.length !== 1 &&'s'}</h2>
             <div className={'grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 lg:gap-7 px-0 md:px-2 lg:px-8 mt-4 md:mt-6'}>
-                {loading ? (<div style={{margin: 'auto'}}><Activity2 /></div>) : (clients.map((client) => 
+                {loading ? (<div className="flex justify-center col-span-2 md:col-span-3 lg:col-span-4"><Activity2 /></div>) : (clients.map((client) => 
                     <ClientCard client={client} setDetail={setDetail} setIsDetail={setShow} key={client.id} />
                 ))}
             </div>

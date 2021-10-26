@@ -143,7 +143,9 @@ const FinanceList = (props) => {
                                             <td className={"py-2 px-3 md:p-3 md:border md:border-grey-500 text-left block md:table-cell"}><span className="inline-block w-1/3 md:hidden font-bold">Worker</span>{finance.worker}</td>
                                             <td className={"py-2 px-3 md:p-3 md:border md:border-grey-500 text-left block md:table-cell"}><span className="inline-block w-1/3 md:hidden font-bold">Items</span>
                                                 {finance.item.map((item, index) =>
-                                                    <b className={'mr-3 font-normal'}>({item.count}) {item.name} </b>
+                                                    <b className={`mr-3 font-normal ${index > 1 && 'hidden'}`}>({item.count}) {item.name}
+                                                        {finance.item.length > 2 && index === 1 && <h2 className="ml-3 inline-block text-xs p-0.5 px-1 rounded transform -rotate-6 bg-green-600 text-white font-semibold">More ...</h2> }
+                                                    </b>
                                                 )}
                                             </td>
                                             <td className={"p-3 md:border md:border-grey-500 text-left block md:table-cell"}><span className="inline-block w-1/3 md:hidden font-bold">Total</span>{Thousand(finance?.total)} XAF</td>
