@@ -4,6 +4,6 @@ beauty
 node_modules/
 .vscode
 
-
+/build
 
 .eslintcache
