@@ -13,6 +13,7 @@ const Gallery = (props) => {
 
     const [index, setIndex] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
+    const [load, setLoad] = useState(12);
     const [grid, setGrid] = useState(2);
     const [text, setText] = useState('');
     const [gallery, setGallery] = useState([]);
@@ -105,10 +106,10 @@ const Gallery = (props) => {
                     </div>
                 </div>
                 <div className={`transition-all delay-200 duration-500 ease-in-out my-4 w-72 flex items-center justify-center mx-auto grid gap-5 ${grid === 0 ? 'md:grid-cols-2 md:gap-7 md:px-3 md:w-9/10 md:mx-auto' : grid === 1 ? 'md:grid-cols-2 md:gap-7 md:px-3 md:w-9/10 md:mx-auto lg:grid-cols-3 lg:gap-7 lg:container lg:px-16' : 'md:grid-cols-2 md:gap-7 md:px-3 md:w-9/10 md:mx-auto lg:grid-cols-4 lg:gap-7 lg:px-2 lg:w-full' }`}>
-                    {gallery.map((gal, index) => <Card key={index} gallery={gal} grid={grid} />)}
+                    {gallery.map((gal, index) => index < load &&  <Card key={index} gallery={gal} grid={grid} />)}
                 </div>
                 <div className="text-center my-8">
-                    <SqrButton title="Load More" invert={true} />
+                    <SqrButton title="Load More" invert={true} onClick={() => setLoad(load + 12)} />
                 </div>
             </div>
         </>
