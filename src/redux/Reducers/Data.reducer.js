@@ -1,4 +1,4 @@
-import { ADD_CHECKOUT, ADD_CLIENT, ADD_GALLERY, ADD_PRODUCT, ADD_SERVICE, ADD_TEST, ADD_WORKER, DELETE_CHECKOUT, DELETE_CLIENT, DELETE_GALLERY, DELETE_PRODUCT, DELETE_SERVICE, DELETE_TEST, DELETE_WORKER, EDIT_CHECKOUT, EDIT_CLIENT, EDIT_GALLERY, EDIT_PRODUCT, EDIT_SERVICE, EDIT_TEST, EDIT_WORKER, SET_CHECKOUTS, SET_CLIENTS, SET_DATA, SET_FINANCES, SET_GALLERY, SET_OBJDATA, SET_PRODUCTS, SET_SERVICES, SET_TEST, SET_WORKERS } from '../types';
+import { ADD_CHECKOUT, ADD_CLIENT, ADD_FINANCE, ADD_GALLERY, ADD_PRODUCT, ADD_SERVICE, ADD_TEST, ADD_WORKER, DELETE_CHECKOUT, DELETE_CLIENT, DELETE_FINANCE, DELETE_GALLERY, DELETE_PRODUCT, DELETE_SERVICE, DELETE_TEST, DELETE_WORKER, EDIT_CHECKOUT, EDIT_CLIENT, EDIT_GALLERY, EDIT_PRODUCT, EDIT_SERVICE, EDIT_TEST, EDIT_WORKER, SET_CHECKOUTS, SET_CLIENTS, SET_DATA, SET_FINANCES, SET_GALLERY, SET_OBJDATA, SET_PRODUCTS, SET_SERVICES, SET_TEST, SET_WORKERS } from '../types';
 
 const INITIAL_STATE = {
     data: [],
@@ -25,7 +25,8 @@ const DataReducer = (state = INITIAL_STATE, action) => {
         checkouts,
         data,
         id,
-        index;
+        index,
+        _date;
     
     switch (action.type) {
         case SET_DATA:
@@ -37,11 +38,11 @@ const DataReducer = (state = INITIAL_STATE, action) => {
         case ADD_PRODUCT:
             data = action.payload;
             products = [...state.products];
-            products.push(data);
+            products.unshift(data);
             return { ...state, products: [...products] };
         case EDIT_PRODUCT:
             data = action.payload;
-            console.log(data)
+            // console.log(data)
             index = state.products.findIndex(productIndex => {
                 return productIndex?.id.toString() === data?.id.toString();
             });
@@ -52,7 +53,7 @@ const DataReducer = (state = INITIAL_STATE, action) => {
             return { ...state, products: [...products] };
         case DELETE_PRODUCT:
             id = action.payload;
-            console.log(id)
+            // console.log(id)
             index = state.products.findIndex(productIndex => {
                 return productIndex?.id.toString() === id.toString();
             });
@@ -67,7 +68,7 @@ const DataReducer = (state = INITIAL_STATE, action) => {
         case ADD_SERVICE:
             data = action.payload;
             services = [...state.services];
-            services.push(data);
+            services.unshift(data);
             return { ...state, services: [...services] };
         case EDIT_SERVICE:
             data = action.payload;
@@ -95,12 +96,12 @@ const DataReducer = (state = INITIAL_STATE, action) => {
         case ADD_GALLERY:
             data = action.payload;
             gallery = [...state.gallery];
-            gallery.push(data);
+            gallery.unshift(data);
             return { ...state, gallery: [...gallery] };
         case EDIT_GALLERY:
             data = action.payload;
             index = state.gallery.findIndex(galleryIndex => {
-                return galleryIndex.id.toString() === data?.id.toString();
+                return galleryIndex?.id.toString() === data?.id.toString();
             });
             gallery = [...state.gallery];
             if (index >= 0) {
@@ -123,7 +124,7 @@ const DataReducer = (state = INITIAL_STATE, action) => {
         case ADD_TEST:
             data = action.payload;
             testimonials = [...state.testimonials];
-            testimonials.push(data);
+            testimonials.unshift(data);
             return { ...state, testimonials: [...testimonials] };
         case EDIT_TEST:
             data = action.payload;
@@ -151,7 +152,7 @@ const DataReducer = (state = INITIAL_STATE, action) => {
         case ADD_CLIENT:
             data = action.payload;
             clients = [...state.clients];
-            clients.push(data);
+            clients.unshift(data);
             return { ...state, clients: [...clients] };
         case EDIT_CLIENT:
             data = action.payload;
@@ -179,11 +180,11 @@ const DataReducer = (state = INITIAL_STATE, action) => {
         case ADD_WORKER:
             data = action.payload;
             workers = [...state.workers];
-            workers.push(data);
+            workers.unshift(data);
             return { ...state, workers: [...workers] };
         case EDIT_WORKER:
             data = action.payload;
-            console.log(data);
+            // console.log(data);
             index = state.workers.findIndex(workerIndex => {
                 return workerIndex?.id.toString() === data?.id.toString();
             });
@@ -205,13 +206,34 @@ const DataReducer = (state = INITIAL_STATE, action) => {
         case SET_FINANCES:
             finances = action.payload;
             return { ...state, finances };
+        case ADD_FINANCE:
+            data = action.payload;
+            finances = { ...state.finances };
+            _date = new Date(data.date).toLocaleDateString();
+            if (finances[_date] === undefined) {
+                finances[_date] = [data]
+            } else {
+                finances[_date].push(data);
+            }
+            return { ...state, finances: { ...finances } }
+        case DELETE_FINANCE:
+            data = action.payload;
+            _date = new Date(data.date).toLocaleDateString();
+            index = state.finances[_date].findIndex(financeIndex => {
+                return financeIndex.id.toString() === data?.id.toString();
+            });
+            finances = { ...state.finances };
+            if (index >= 0) {
+                finances[_date].splice(index, 1);
+            }
+            return { ...state, finances: { ...finances } };
         case SET_CHECKOUTS:
             checkouts = action.payload;
             return { ...state, checkouts };
         case ADD_CHECKOUT:
             data = action.payload;
             checkouts = [...state.checkouts];
-            checkouts.push(data);
+            checkouts.unshift(data);
             return { ...state, checkouts: [...checkouts] };
         case EDIT_CHECKOUT:
             data = action.payload;
@@ -235,10 +257,10 @@ const DataReducer = (state = INITIAL_STATE, action) => {
             return { ...state, checkouts: [...checkouts] };
         case SET_OBJDATA:
             const objdata = action.payload;
-            return {...state, objdata};  
+            return { ...state, objdata };
         default:
             return state;
     }
-}
+};
 
 export default DataReducer;

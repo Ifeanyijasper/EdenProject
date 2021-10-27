@@ -13,7 +13,6 @@ const EditClient = (props) => {
     const [name, setName] = useState('');
     const [userName, setUserName] = useState('');
     const [tel, setTel] = useState('');
-    const [refer, setRefer] = useState('');
     const [email, setEmail] = useState('');
     const [nameError, setNameError] = useState(false);
     const [userNameError, setUserNameError] = useState(false);
@@ -96,13 +95,9 @@ const EditClient = (props) => {
                 setTimeout(() => {
                     setEdit(false);
                 }, 3000);
-                setTel('');
-                setName('');
-                setUserName('');
-                setRefer('');
-                setEmail('');
             })
             .catch(err => {
+                console.log(err)
                 setIsLoading(false);
                 setNotify(true);
                 setMsg({

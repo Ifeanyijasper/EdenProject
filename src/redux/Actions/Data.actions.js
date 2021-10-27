@@ -238,10 +238,10 @@ export const editFinance = (data) => {
     }
 };
 
-export const deleteFinance = (id) => {
+export const deleteFinance = (data) => {
     return {
         type: DELETE_FINANCE,
-        payload: id,
+        payload: data,
     }
 };
 

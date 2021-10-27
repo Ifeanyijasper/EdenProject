@@ -47,7 +47,7 @@ const WorkerList = (props) => {
                 },
             });
             let workers = await response.json();
-            workers = workers.filter(data => data.is_worker)
+            workers = workers?.filter(data => data.is_worker)
             props.setWorkers(workers.sort((a, b) => { return b.served - a.served }));
             setLoading(false);
             return workers;
@@ -57,15 +57,15 @@ const WorkerList = (props) => {
             setLoading(false);
             setNotify(true);
             setMsg({
-                title: 'Authentication',
-                message: 'Invalid username or password.'
+                title: 'Connection Error',
+                message: 'Unable to fetch workers.'
             })
         }
     };
 
     useEffect(() => {
         search(text, _workers, setWorkers, filter.toLowerCase());
-    }, [text, setText, _workers, filter]);
+    }, [text, _workers, filter]);
 
     useEffect(() => {
         setWorkers(_workers)
@@ -87,9 +87,9 @@ const WorkerList = (props) => {
             </div>
             <h2 className={'text-gray-500 text-2xl mt-3 mx-2'}>{workers.length || 0} Worker{workers.length !== 1 && 's'}</h2>
             <div className={'grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 lg:gap-7 px-0 md:px-2 lg:px-8 mt-4 md:mt-6'}>
-                {loading ? (<div style={{ margin: 'auto' }}><Activity2 /></div>) : (workers.map((worker) =>
+                {loading ? <div className="flex justify-center col-span-2 md:col-span-3 lg:col-span-4"><Activity2 /></div> : workers.map((worker) =>
                     <ClientCard client={worker} detail={detail} setDetail={setDetail} setIsDetail={setShow} key={worker.id} />
-                ))}
+                )}
             </div>
             <Notification notify={notify} setNotify={setNotify} msg={msg} />
             <AddWorker add={isOpenAdd} setAdd={setIsOpenAdd} />

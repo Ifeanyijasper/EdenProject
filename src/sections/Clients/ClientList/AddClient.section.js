@@ -9,7 +9,7 @@ import { BASE_URL } from '../../../utils/globalVariable';
 import { addClient } from '../../../redux/Actions/Data.actions';
 
 const AddClient = (props) => {
-    const { add, setAdd, username, password } = props;
+    const { add, setAdd, username, password, _clients, _workers } = props;
 
     const [name, setName] = useState('');
     const [userName, setUserName] = useState('');
@@ -42,33 +42,16 @@ const AddClient = (props) => {
 
     useEffect(() => {
         let _referals = [];
-        fetch(`${BASE_URL}/register/`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Basic ' + Buffer.from(username + ':' + password).toString('base64'),
-            },
-        })
-            .then(response => {
-                const res = response.json();
-                return res;
-            })
-            .then(res => {
-                if (res.length >= 1) {
-                    let _res = res.filter((data) => data.is_client || data.is_superuser || data.is_worker );
-                    if (_res.length > 0) {
-                        _res.map((re, index) => (
-                            _referals.push({ value: re.id, label: re.username })
-                        ));
-                    }
-                    setOptions([..._referals]);
-                }
-            })
-            .catch(err => {
-                console.log(err);
-            })
-
-    }, []);
+        let data = _clients.concat(_workers);
+        if (data.length > 0) {
+            data.map((re, index) => (
+                _referals.push({ value: re.id, label: re.username })
+            ));
+        }
+        setOptions([..._referals]);
+        return () => {
+        }
+    }, [add, _clients, _workers]);
 
     const authenticate = () => {
         let hasError;
@@ -212,12 +195,14 @@ const AddClient = (props) => {
     )
 };
 
-const mapStateToProps = ({auth}) => {
-  return {
-    username: auth.username,
-    password: auth.password,
-  }
-}
+const mapStateToProps = ({ auth, data }) => {
+    return {
+        username: auth.username,
+        password: auth.password,
+        _clients: data.clients,
+        _workers: data.workers,
+    }
+};
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({ addClient }, dispatch);

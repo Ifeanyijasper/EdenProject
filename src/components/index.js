@@ -24,6 +24,7 @@ import SqrButton from './Button/squareButton.component';
 import DisplayCard from './ItemCard/DisplayCard.component';
 import Progress from './MiniProgressBar/Progress.component';
 import Confirmation from './Notification/Confirmation.component';
+import GalleryCard from './ItemCard/GalleryCard.component';
 
 export {
     AdminCard, 
@@ -52,4 +53,5 @@ export {
     DisplayCard,
     Progress,
     Confirmation,
+    GalleryCard,
 };

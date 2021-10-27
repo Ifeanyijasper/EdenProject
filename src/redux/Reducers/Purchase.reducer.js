@@ -38,7 +38,6 @@ const PurchaseReducer = (state = INITIAL_STATE, action) => {
                     }
                     _product[_index].count -= 1;
                     total -= _product[_index].price;
-                    console.log(total)
             }
             return {...state, product: _product, total: total};
         case SET_CLEARPURCHASE:

@@ -13,7 +13,9 @@ const Search = (props) => {
         filters,
         filter,
         setFilter,
-        setText
+        setText,
+        purchase,
+        onClick,
     } = props;
     const [showList, setShowList] = useState(false);
     const [search, setSearch] = useState(false);
@@ -48,6 +50,9 @@ const Search = (props) => {
             </div>
             {newButton && (
                     <button className={'flex outline-none ml-2 items-center justify-center text-sm text-primary bg-white shadow-md p-1.5 md:px-4 rounded-3xl text-white transition duration-500 ease-in-out hover:shadow-2xl'} onClick={() => setIsOpen(true)}><IoAddCircleOutline className="md:mr-1.5" /> <span className="hidden md:inline-block">{title}</span></button>
+            )}
+            {purchase && (
+                    <button className={'flex outline-none ml-2 items-center justify-center text-sm text-primary bg-white shadow-md p-1.5 md:px-4 rounded-3xl text-white transition duration-500 ease-in-out hover:shadow-2xl'} onClick={() => onClick()}><IoAddCircleOutline className="md:mr-1.5" /> <span className="hidden md:inline-block">{title}</span></button>
             )}
         </div>
     )

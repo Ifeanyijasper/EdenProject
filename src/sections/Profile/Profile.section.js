@@ -4,11 +4,11 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import { Activity, Button, Input, RouteIndicator } from '../../components';
-import { EditPassword } from '..';
 import styles from './Profile.module.css';
 import { BASE_URL } from '../../utils/globalVariable';
 import { setUserName } from '../../redux/Actions/Auth.actions';
 import extractInitials from '../../utils/extractIni';
+import EditPassword from './EditPassword.section';
 
 const Profile = (props) => {
     const {user, password} = props;
@@ -100,12 +100,12 @@ const Profile = (props) => {
         .catch(err => {
             console.log(err);
         })
-    }, []);
+    }, [password, user]);
 
     return (
         <div>
             {(user.is_worker || user.is_superuser) && <RouteIndicator route="Dashboard" current="Profile" /> }
-            <div className={'py-8 px-10'}>
+            <div className={'py-6 md:py-8 px-10'}>
                 <div className={'flex items-center flex-col md:flex-row mt-10'}>
                     <div className={'flex mr-10 items-baseline'}>
                         {/* <img src={img_2} alt="Name" className={'h-40 w-40 bg-center bg-cover rounded-full shadow-md'} /> */}
@@ -193,7 +193,8 @@ const Profile = (props) => {
                     </div>
                 </div>
             </div>
-            <EditPassword isOpen={isOpen} setIsOpen={setIsOpen} />
+            <EditPassword edit={isOpen} setEdit={setIsOpen} />
+            {/* <EditPassword isOpen={isOpen} setIsOpen={setIsOpen} /> */}
         </div>
     )
 }

@@ -18,7 +18,7 @@ const Input = (props) => {
 
     return (
         <div className={`flex flex-col mb-4`}>
-            <label for="name" className={`text-base font-semibold text-gray-800`}>{label}</label>
+            <label htmlFor="name" className={`text-base font-semibold text-gray-800`}>{label}</label>
             <div className={`flex items-center justify-between border-b-2 ${error ? 'border-red-600' : 'border-gray-800'}`}>
                 <input 
                     type={_secureText ? 'password' : type} 

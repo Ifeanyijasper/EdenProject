@@ -5,7 +5,6 @@ import { bindActionCreators } from 'redux';
 import { Activity2, Search, Testimonial } from '../../components';
 import { BASE_URL } from '../../utils/globalVariable';
 import { setData, setTestimonials } from '../../redux/Actions/Data.actions';
-import styles from './Testimonials.module.css';
 import search from '../../utils/search';
 
 const Testimonials = (props) => {
@@ -21,7 +20,7 @@ const Testimonials = (props) => {
 
     useEffect(() => {
         search(text, _testimonials, setTestimonials, 'client_name');
-    }, [text]);
+    }, [text, _testimonials]);
 
     useEffect(() => {
         setTestimonials(_testimonials)
@@ -32,7 +31,7 @@ const Testimonials = (props) => {
         return () => {
             fetchTestimonials()
         }
-    }, []);
+    }, [_testimonials]);
 
     const fetchTestimonials = async () => {
         try {
@@ -54,8 +53,8 @@ const Testimonials = (props) => {
             <div className="sticky top-3 z-40 pt-1">
                 <Search placeholder="Search" newButton={false} title={'Service'} filters={filters} filter={filter} setFilter={setFilter} text={text} setText={setText} />
             </div>
-            <div className={styles.testimonialContainer}>
-                {isLoading ? <Activity2 /> : testimonials.map((testimonial, index) => <Testimonial testimonial={testimonial} />)}
+            <div className={'w-full grid grid-cols-1 md:grid-cols-2 gap-7'}>
+                {isLoading ? <div className="flex justify-center my-30 col-span-1 md:col-span-2 md:row-span-5"><Activity2 /></div> : testimonials.map((testimonial, index) => <Testimonial testimonial={testimonial} key={index} />)}
             </div>
         </section>
     )

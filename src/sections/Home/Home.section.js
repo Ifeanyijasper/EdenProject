@@ -13,7 +13,7 @@ import { IoArrowForward } from 'react-icons/io5';
 import { BASE_URL } from '../../utils/globalVariable';
 
 const HomeSection = (props) => {
-    const {welcome, products, services, testimonials} = props;
+    const {welcome, products, services, testimonials, gallery} = props;
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
@@ -29,68 +29,104 @@ const HomeSection = (props) => {
     }
 
     useEffect(() => {
-        setIsLoading(true);
-        fetch(`${BASE_URL}/product/`)
-            .then(res => {
-                const response = res.json();
-                return response;
-            })
-            .then(res => {
-                props.setProducts(res);
-                setIsLoading(false);
-            })
-            .catch(err => {
-                setIsLoading(false);
-            });
-    }, [])
+        if (services?.length === 0) {
+            setIsLoading(true);
+            fetchServices();
+        }
+        setServices(services);
+        return () => {
+            fetchServices()
+        }
+    }, [services]);
+
+    const fetchServices = async () => {
+        try {
+            const response = await fetch(`${BASE_URL}/service/`);
+            const services = await response.json();
+            props.setServices(services);
+            setIsLoading(false);
+            return services;
+        }
+        catch (err) {
+            console.log(err, 'Received error');
+            setIsLoading(false)
+        }
+    };
 
     useEffect(() => {
-        setIsLoading(true);
-        fetch(`${BASE_URL}/testimonial/`)
-            .then(res => {
-                const response = res.json();
-                return response;
-            })
-            .then(res => {
-                props.setTestimonials(res)
-                setIsLoading(false);
-            })
-            .catch(err => {
-                setIsLoading(false);
-            })
-    }, [])
+        if (products?.length === 0) {
+            setIsLoading(true);
+            fetchProducts()
+        }
+        setProducts(products);
+        return () => {
+            fetchProducts()
+        }
+    }, [products]);
+    
+    const fetchProducts = async () => {
+        try {
+            const response = await fetch(`${BASE_URL}/product/`);
+            const products = await response.json();
+            props.setProducts(products);
+            setIsLoading(false)
+            return products;
+        }
+        catch (err) {
+            console.log(err, 'Received error');
+            setIsLoading(false)
+        }
+    };
 
     useEffect(() => {
-        setIsLoading(true);
-        fetch(`${BASE_URL}/service/`)
-            .then(res => {
-                const response = res.json();
-                return response;
-            })
-            .then(res => {
-                props.setServices(res);
-                setIsLoading(false);
-            })
-            .catch(err => {
-                setIsLoading(false);
-            })
-    }, []);
+        setTestimonials(testimonials)
+        if (testimonials?.length === 0) {
+            setIsLoading(true);
+            fetchTestimonials();
+        }
+        return () => {
+            fetchTestimonials()
+        }
+    }, [testimonials]);
+
+    const fetchTestimonials = async () => {
+        try {
+            const response = await fetch(`${BASE_URL}/testimonial/`);
+            const testimonials = await response.json();
+            props.setTestimonials(testimonials);
+            setIsLoading(false);
+            return testimonials;
+        }
+        catch (err) {
+            console.log(err, 'Received error');
+            setIsLoading(false);
+        }
+    };
 
     useEffect(() => {
-        setIsLoading(true);
-        fetch(`${BASE_URL}/gallery/`)
-            .then(res => {
-                const response = res.json();
-                return response;
-            })
-            .then(res => {
-                props.setGallery(res);
-                setIsLoading(false);
-            })
-            .catch(err => {
-                setIsLoading(false);
-            })
-    }, []);
+        setGallery(gallery)
+        if (gallery?.length === 0) {
+            setIsLoading(true);
+            fetchGallery();
+        }
+        return () => {
+            fetchGallery()
+        }
+    }, [gallery]);
+
+    const fetchGallery = async () => {
+        try {
+            const response = await fetch(`${BASE_URL}/Gallery/`);
+            const gallery = await response.json();
+            props.setGallery(gallery);
+            setIsLoading(false);
+            return gallery;
+        }
+        catch (err) {
+            console.log(err, 'Received error');
+            setIsLoading(false);
+        }
+    };
 
     return (
         <div className={`flex flex-col ${styles.home}`}>
@@ -112,23 +148,23 @@ const HomeSection = (props) => {
             </div>
             <h1 className={`text-gray-800 bg-white text-center text-xl lg:text-2xl pt-7 pb-1`} id="services">Services</h1>
             <h3 className={`bg-white text-gray-500 text-xs lg:text-sm font-semibold text-center pb-6`}>At Company we offer the best of</h3>
-            <div className={'flex bg-cover bg-fixed bg-center py-10 px-4 lg:px-12 grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-7 justify-center'} style={{backgroundImage: "linear-gradient(to right, #92fe9d79, #00c8ff50), url(" + eden + ")"}}>
-                {isLoading ? (<Activity2 />) : services.map((service, index) => ((Math.floor(Number(service.discount)) < 10 && index < 6)&&
+            <div className={'flex bg-cover bg-fixed bg-center py-10 px-2 lg:px-12 grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-7 justify-center'} style={{backgroundImage: "linear-gradient(to right, #92fe9d79, #00c8ff50), url(" + eden + ")"}}>
+                {isLoading ? (<div className="flex justify-center col-span-2 md:col-span-3"><Activity2 /></div>) : services.map((service, index) => ((Math.floor(Number(service.discount)) < 10 && index < 6)&&
                 <ItemCard item={service} onClick={() => active()} key={service.id} />
                 ))}
             </div>
             <h1 className={`text-gray-800 bg-white text-center text-xl lg:text-2xl pt-7 pb-1`} id="services">Testimonials</h1>
             <h3 className={`bg-white text-gray-500 text-xs lg:text-sm font-semibold text-center pb-6`}>What our Clients are saying...</h3>
-            <div className={styles.testiCardCon}>
-                <div className={styles.testiCard}>
-                    {isLoading ? (<Activity2 />) : testimonials.map((testimony, index) => <TestimonialCard testimony={testimony} />)}
+            <div className={'bg-gray-300 flex flex-col py-6 px-4 flex-wrap justify-evenly items-center mt-4'}>
+                <div className={`w-full flex justify-center items-center grid grid-cols-1 lg:grid-cols-2 gap-5 px-2 md:px-5 mb-5`}>
+                    {isLoading ? (<div className="flex justify-center col-span-1 lg:col-span-2"><Activity2 /></div>) : testimonials.map((testimony, index) => <TestimonialCard testimony={testimony} key={index} />)}
                 </div>
                 <Button title="READ MORE" onClick={() => props.history.push({pathname: '/testimonials'})} />
             </div>
             <h1 className={`text-gray-800 bg-white text-center text-xl lg:text-2xl pt-7 pb-1`} id="products">Products</h1>
             <h3 className={`bg-white text-gray-500 text-xs lg:text-sm font-semibold text-center pb-6`}>At Company we offer the best of</h3>
             <div className={'flex bg-cover bg-fixed bg-center py-10 px-4 lg:px-12 grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-7 justify-center'} style={{backgroundImage: "linear-gradient(to right, #00c8ff50, #92fe9d79), url(" + beauty + ")"}}>
-                {isLoading ? (<Activity2 />) : products.map((product, index) => ((Math.floor(Number(product.discount)) < 10 && index < 6)&&
+                {isLoading ? (<div className="flex justify-center col-span-2 md:col-span-3"><Activity2 /></div>) : products.map((product, index) => ((Math.floor(Number(product.discount)) < 10 && index < 6)&&
                 <ItemCard item={product} onClick={() => active()} key={product.id} />))}
             </div>
             <Modal 
@@ -154,6 +190,7 @@ const mapStateToProps = ({welcome, data}) => {
         products: data.products,
         services: data.services,
         testimonials: data.testimonials,
+        gallery: data.gallery,
     }
 }
 

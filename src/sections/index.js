@@ -12,14 +12,12 @@ import WorkerSection from './Workers/Worker.section';
 import FinanceSection from './Finance/Finance.section';
 import ProductSection from './Products/Product.section';
 import ServiceSection from './Services/Service.section';
-import NewPurchase from './NewPurchase/NewPurchase.section';
 import Service from './Service/Service.section';
 import Product from './Product/Product.section';
 import Services from './ServiceSection/Service.section';
 import Products from './ProductSection/Product.section';
 import ClientFinance from './ClientFinance/Finance.section';
 import Profile from './Profile/Profile.section';
-import EditPassword from './EditPassword/EditPassword.section';
 import Checkout from './Checkout/Checkout.section';
 import ClientCheckout from './ClientCheckout/Checkout.section';
 import AddTestimonial from './AddTestimonial/AddTestimonial.section';
@@ -46,7 +44,6 @@ export {
     FinanceSection,
     ProductSection,
     ServiceSection,
-    NewPurchase,
     Service,
     Product,
     Services,
@@ -55,7 +52,6 @@ export {
     EditClient,
     EditWorker,
     Profile,
-    EditPassword,
     Checkout,
     ClientCheckout,
     AddTestimonial,
