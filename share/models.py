@@ -2,6 +2,10 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.urls import reverse
+from django_rest_passwordreset.signals import reset_password_token_created
+from django.core.mail import send_mail  
+from django.conf import settings
 
 # Create your models here.
 class User(AbstractUser):
@@ -78,3 +82,26 @@ class Gallery(models.Model):
     name     = models.CharField(max_length=100)
     img      = models.FileField(null=True, blank=True)
     event    = models.CharField(max_length=150)
+
+
+@receiver(reset_password_token_created)
+def password_reset_token_created(sender, instance,reset_password_token, *args, **kwargs):
+    
+    email = 'Hello!\n'
+    email +='We received a request to reset the password for your account for this email address. \n' 
+    email +='To initiate the password reset process for your account, click the link below.'+ "https://http://inspireafrica-edenbeauty.com{}?token={}".format(reverse('password_reset:reset-password-request'), reset_password_token.key) 
+    email +='\nThis link can only be used once. If you need to reset your password again, please request another reset link. If you did not make this request, you can ignore this email.\n' 
+    email +='Sincerely,\n'
+    email +='The Eden Beauty Team\n' 
+    
+
+    send_mail(
+        # title:
+        "Password Reset from {title}".format(title="Edenbeauty Account"),
+        # message:
+        email,
+        # from:
+        settings.EMAIL_HOST_USER,
+        # to:
+        [reset_password_token.user.email]
+    )
