@@ -48,7 +48,7 @@ const FinanceDetail = (props) => {
                 <h2 className={styles.subTitle}>Items</h2>
                 <ol className={styles.list}>
                 {detail.item !== null && detail.item !== undefined && detail.item.map((item, index) => (
-                        <li>{item.name} &times; {item.count} = {item.price * item.count} XAF</li>
+                        <li key={index}>{item.name} &times; {item.count} = {item.price * item.count} XAF</li>
                         ))}
                 </ol>
                 {/* {detail && detail?.total && <h2 className={styles.subTitle}>Total = {detail.total} XAF</h2>} */}
