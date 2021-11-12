@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { IoAddCircleOutline, IoBody, IoBriefcase, IoClose, IoHandLeft, IoLeaf } from 'react-icons/io5';
+import { IoClose, IoHandLeft, IoLeaf } from 'react-icons/io5';
 import Select from 'react-select';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { Activity, Button, Notification } from '../../../components';
+import { Button, Notification } from '../../../components';
 import { BASE_URL } from '../../../utils/globalVariable';
 import { addFinance } from '../../../redux/Actions/Data.actions';
 import { setClearPurchase } from '../../../redux/Actions/Purchase.actions';
@@ -15,7 +15,7 @@ const AddPurchase = (props) => {
     const { add, setAdd, username, password, user, product, total, _clients, _workers} = props;
 
     const [options, setOptions] = useState([]);
-    const [client, setClient] = useState('');
+    const [client, setClient] = useState({});
     const [list, setList] = useState([]);
     const [purchase, setPurchase] = useState('Products');
     const [notify, setNotify] = useState(false);
@@ -129,13 +129,13 @@ const AddPurchase = (props) => {
             ));
         }
         setOptions([..._referals]);
-        return () => {
-        }
     }, [add, _clients, _workers]);
 
     const exit = () => {
         setAdd(false);
         props.setClearPurchase();
+        setClient({});
+        console.log(client, '&&', product)
     }
 
     const purchased = () => {
@@ -167,9 +167,9 @@ const AddPurchase = (props) => {
             })
             .then(res => {
                 setIsLoading(false);
+                setClient({});
                 props.addFinance(res)
                 props.setClearPurchase();
-                console.log(res)
                 props.setPoint(client.value, total / 2000, friend[0].friend);
                 setNotify(true);
                 setMsg({
@@ -232,6 +232,8 @@ const AddPurchase = (props) => {
             .then(res => {
                 setTimeout(() => {
                     setAdd(false);
+                    setClient({});
+                    props.setClearPurchase();
                 }, 3000);
             })
             .catch(err => {
@@ -247,16 +249,16 @@ const AddPurchase = (props) => {
 
     return (
         <>
-            <div onClick={() => setAdd(false)} className={`h-full bg-gray-50 bg-opacity-10 fixed z-50 top-0 backdrop-filter backdrop-blur-sm transition-all duration-500 ease-in-out ${add ? 'right-0 w-full opacity-100' : '-right-16 opacity-0 w-0'} `}>
+            <div onClick={() => exit()} className={`h-full bg-gray-50 bg-opacity-10 fixed z-50 top-0 backdrop-filter backdrop-blur-sm transition-all duration-500 ease-in-out ${add ? 'right-0 w-full opacity-100' : '-right-16 opacity-0 w-0'} `}>
                 <div onClick={(e) => stop(e)} className={`fixed shadow-xl h-screen overflow-y-auto overflowY -top-0 z-30 bg-white text-gray-700 p-5 transition-all delay-100 ease-in-out ${add ? 'right-0 w-full opacity-100' : '-right-16 opacity-0 w-0'}`}>
                     <div className="flex justify-between items-center md:mt-2 text-xl font-semibold text-green-700 bg-white bg-opacity-30 backdrop-filter backdrop-blur-md sticky -top-4 md:top-0 z-40 pt-1">
                         <h2 className="text-sm md:text-base lg:text-xl">New Purchase</h2>
-                        <Select
+                        {add && <Select
                             options={options}
                             styles={customStyles}
                             className={'ml-auto mr-4 md:mr-7 w-44 md:w-52 lg:w-60 text-xs md:text-sm p-0 mb-2 border-b-2 border-gray-700 cursor-pointer'}
                             onChange={(value) => setClient(value)}
-                        />
+                        />}
                         <button onClick={() => exit()} className="flex items-center rounded-full outline-none text-base py-1 px-2 text-gray-900 bg-white shadow-md mx-1.5 transition duration-500 ease-in-out hover:shadow-xl"><IoClose /></button>
                     </div>
                     <hr className="my-5" />
@@ -267,12 +269,12 @@ const AddPurchase = (props) => {
                         </ul>
                         <hr className={'my-4 mx-2'} />
                     </nav>
-                    <div className="mb-10">
+                    {add && <div className="mb-10">
                         {purchase === "Products" ? (
                             <Product onClick={() => purchased()} loading={isLoading} />
                         ) : (
                             <div>
-                                    <Service onClick={() => purchased()} loading={isLoading} />
+                                <Service onClick={() => purchased()} loading={isLoading} />
                             </div>
                         )}
                         <div className="w-full">
@@ -282,7 +284,7 @@ const AddPurchase = (props) => {
                                 <Button title="Close" onClick={() => exit()} />
                             </div>
                         </div>
-                    </div>
+                    </div>}
                 </div>
                 <Notification notify={notify} setNotify={setNotify} msg={msg} />
             </div>

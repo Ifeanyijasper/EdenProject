@@ -111,7 +111,7 @@ const FinanceList = (props) => {
                     text={text}
                     setText={setText} />
             </div>
-            {isLoading ? <div className={styles.actCenter}><Activity2 /></div> : Object.values(purchases).map((finances, index) => index < load && 
+            {isLoading ? <div className={'w-full flex items-center justify-center h-56'}><Activity2 /></div> : Object.values(purchases).map((finances, index) => index < load && 
                 <div key={index}>
                     <h2 className={'text-gray-500 text-2xl mt-3 mx-2'}>{DateString(Object.keys(purchases)[index])}</h2>
                     <div className={styles.tableContainer}>

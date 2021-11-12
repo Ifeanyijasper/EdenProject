@@ -41,7 +41,7 @@ const PurchaseReducer = (state = INITIAL_STATE, action) => {
             }
             return {...state, product: _product, total: total};
         case SET_CLEARPURCHASE:
-            return {...state, product: [], total: 0, service: []}
+            return {...state, product: [], total: 0}
         default:
             return state;
     }
