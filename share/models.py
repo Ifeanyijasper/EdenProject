@@ -89,7 +89,7 @@ def password_reset_token_created(sender, instance,reset_password_token, *args, *
     
     email = 'Hello!\n'
     email +='We received a request to reset the password for your account for this email address. \n' 
-    email +='To initiate the password reset process for your account, click the link below.'+ "https://http://inspireafrica-edenbeauty.com{}?token={}".format(reverse('password_reset:reset-password-request'), reset_password_token.key) 
+    email +='To initiate the password reset process for your account, click the link below.'+ "https://inspireafrica-edenbeauty.com{}confirm/?token={}".format(reverse('password_reset:reset-password-request'), reset_password_token.key) 
     email +='\nThis link can only be used once. If you need to reset your password again, please request another reset link. If you did not make this request, you can ignore this email.\n' 
     email +='Sincerely,\n'
     email +='The Eden Beauty Team\n' 
