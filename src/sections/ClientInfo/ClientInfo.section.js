@@ -5,52 +5,43 @@ import { NavLink, Route } from 'react-router-dom';
 
 import { ClientFinance, Products, Referal, Services, Profile, ClientCheckout, AddTestimonial } from '..';
 import { RankRate } from '../../components';
-import styles from './ClientInfo.module.css';
 
 const ClientInfo = (props) => {
     const {user} = props;
-    const [filter, setFilter] = useState('');
-    const [filters] = useState([
-        'Week',
-        'Months',
-        'Years',
-        'Name',
-        'Worker'
-    ])
     const [showDets, setShowDets] = useState(false);
     const [add, setAdd] = useState(false);
 
     return (
-        <div className={styles.clientInfo}>
-            <div className={styles.clientContainer}>
-                <h1 className={styles.clientName}>{user.fullname || user.username}</h1>
-                <div className={styles.clientButtons}>
-                    <button className={styles.clientButton} onClick={() => setShowDets(!showDets)}>{showDets ? 'Hide Bonuses' : 'Show Bonuses'}</button>
-                    <button className={styles.clientButton} onClick={() => setAdd(!add)}>Add Testimonial</button>
+        <div className={`h-screen md:h-auto w-full lg:rounded-r-xl overflow-x-hidden overflowY bg-white px-2 py-5 md:px-4`}>
+            <div className={'flex items-center justify-between'}>
+                <h1 className={'text-3xl'}>{user.fullname || user.username}</h1>
+                <div className={'flex justify-around'}>
+                    <button className={'outline-none text-sm text-white bg-primary rounded tracking-wider cursor-pointer py-2 px-2.5 shadow-md mx-1'} onClick={() => setShowDets(!showDets)}>{showDets ? 'Hide Bonuses' : 'Show Bonuses'}</button>
+                    <button className={'outline-none text-sm text-white bg-primary rounded tracking-wider cursor-pointer py-2 px-2.5 shadow-md mx-1'} onClick={() => setAdd(!add)}>Add Testimonial</button>
                 </div>
             </div>
             {/* <p className={styles.lastVisit}>Last Visit: Mon, 22<sup>nd</sup> Dec, 2020</p> */}
             {/* <p className={styles.lastVisit}>Last Visit: 22/12/2020</p> */}
             { showDets &&
-                <>
-                    <div className={styles.clientHeader}>
-                        <h2 className={styles.clientRating}>My Bonuses</h2>
+                <div className="flex justify-center items-center w-full mt-4 grid grid-cols-1 lg:grid-cols-2 gap-7">
+                    <div className={'flex flex-col justify-center items-start'}>
+                        <h2 className={'text-lg'}>My Bonuses</h2>
                         <RankRate user={user} bonus={'my_bonus'} rate={user.my_bonus || 0} />
                     </div>
-                    <div className={styles.clientHeader}>
-                        <h2 className={styles.clientRating}>Referer Bonuses</h2>
+                    <div className={'flex flex-col justify-center items-start'}>
+                        <h2 className={'text-lg'}>Referer Bonuses</h2>
                         <RankRate user={user} bonus={'refer_bonus'} rate={user.refer_bonus || 0} />
                     </div>
-                </>
+                </div>
             }
-            <nav className={styles.navContainer}>
-                <ul className={styles.navList}>
-                    <li className={styles.navItem}><NavLink to="/client" exact className={styles.navLink} activeClassName={styles.navActive}><IoStatsChart /> TimeLine</NavLink></li>
-                    <li className={styles.navItem}><NavLink to="/client/referrals" className={styles.navLink} activeClassName={styles.navActive}><IoPeople /> Referred</NavLink></li>
-                    <li className={styles.navItem}><NavLink to="/client/checkout" className={styles.navLink} activeClassName={styles.navActive}><IoCash /> Checkouts</NavLink></li>
-                    <li className={styles.navItem}><NavLink to="/client/profile" className={styles.navLink} activeClassName={styles.navActive}><IoPeople /> Profile</NavLink></li>
+            <nav className={'mt-5 bg-white bg-opacity-30 backdrop-filter backdrop-blur-md sticky -top-5 md:top-3 z-0 pl-2 w-full py-2 rounded'}>
+                <ul className={'flex justify-start items-center'}>
+                    <li className={'cursor-pointer mx-1'}><NavLink to="/client" exact className={'text-sm my-0.5 mr-3 p-1 px-2 flex items-center text-green-700 border-b-2 border-transparent transition duration-500 hover:border-green-400'} activeClassName={'border-green-600 hover:border-green-600'}><IoStatsChart className="mr-1.5" /> TimeLine</NavLink></li>
+                    <li className={'cursor-pointer mx-1'}><NavLink to="/client/referrals" className={'text-sm my-0.5 mr-3 p-1 px-2 flex items-center text-green-700 border-b-2 border-transparent transition duration-500 hover:border-green-400'} activeClassName={'border-green-600 hover:border-green-600'}><IoPeople className="mr-1.5" /> Referred</NavLink></li>
+                    <li className={'cursor-pointer mx-1'}><NavLink to="/client/checkout" className={'text-sm my-0.5 mr-3 p-1 px-2 flex items-center text-green-700 border-b-2 border-transparent transition duration-500 hover:border-green-400'} activeClassName={'border-green-600 hover:border-green-600'}><IoCash className="mr-1.5" /> Checkouts</NavLink></li>
+                    <li className={'cursor-pointer mx-1'}><NavLink to="/client/profile" className={'text-sm my-0.5 mr-3 p-1 px-2 flex items-center text-green-700 border-b-2 border-transparent transition duration-500 hover:border-green-400'} activeClassName={'border-green-600 hover:border-green-600'}><IoPeople className="mr-1.5" /> Profile</NavLink></li>
                 </ul>
-                <hr className={styles.navLine}/>
+                <hr className={'-mt-1'}/>
             </nav>
             <Route path="/client" exact component={ClientFinance} />
             <Route path="/client/referrals" component={Referal} />

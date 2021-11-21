@@ -12,26 +12,27 @@ import {resetUser} from '../../redux/Actions/Auth.actions'
 const ClientSide = (props) => {
     const {user} = props;
     return (
-        <div className={styles.clientSide}>
-            <div className={styles.imageContainer}>
+        <div className={`w-full md:w-17/100 flex md:flex-col justify-between items-center p-2 md:py-5 lg:px-3 bg-sec ${styles.clientSide}`}>
+            <div className={'styles.imageContainer'}>
                 {user.img ? 
-                    <img src={img_4} alt="Client Name" className={styles.userImage} />: 
-                    <h2 className={styles.userIni}>{extractInitials(user.fullname || user.username || 'Eden Beauty')}</h2>
+                    <img src={img_4} alt="Client Name" className={"h-44 w-44 rounded-full bg-center bg-cover"} />: 
+                    <h2 className={'h-8 w-8 md:h-20 lg:h-40 md:w-20 lg:w-40 bg-white flex items-center justify-center rounded-full md:text-2xl lg:text-5xl tracking-wider shadow-md'}>{extractInitials(user.fullname || user.username || 'Eden Beauty')}</h2>
                 }
             </div>
-            <div className={styles.clientInfoContainer}>
-                <p className={styles.clientInfoTitle}>Contact</p>
-                <h2 className={styles.clientInfoDetails}><IoCard className={styles.clientIcon} />{user.username}</h2>
-                <h2 className={styles.clientInfoDetails}><IoMail className={styles.clientIcon} />{user.email}</h2>
-                <h2 className={styles.clientInfoDetails}><IoLocation className={styles.clientIcon} />{user.location} </h2>
-                <h2 className={styles.clientInfoDetails}><IoPhonePortrait className={styles.clientIcon} />{user.phone} </h2>
-            </div>
-            <ul className={styles.linksNavSide}>
-                <li className={[styles.linksItem, styles.logOut].join(' ')} onClick={() => props.resetUser()}><NavLink to='/' exact className={styles.linksLink} activeClassName={styles.linksActive}><IoLogOut className={styles.icons} />Logout</NavLink></li>
-                <li className={styles.linkLogout} onClick={() => props.resetUser()}><NavLink to="/" exact className={styles.linksLogout}><IoPower className={styles.linksIcons}/></NavLink></li>
-            </ul>
-            <div className={styles.footerContainer}>
-                <p className={styles.footerContainerText}>Copyright @ <NavLink to='/summit-tech' className={styles.footerLink}>Summit Tech</NavLink></p>
+            {/* <div className={"md:mt-1.5 text-base"}>
+                <h2 className={"text-left font-semibold"}>Contact</h2>
+                <h4 className={"flex items-center text-gray-600 text-sm mt-2"}><IoCard className="mr-3" />{user.username}</h4>
+                <h4 className={"flex items-center text-gray-600 text-sm mt-2"}><IoMail className="mr-3" />{user.email}</h4>
+                <h4 className={"flex items-center text-gray-600 text-sm mt-2"}><IoLocation className="mr-3" />{user.location} </h4>
+                <h4 className={"flex items-center text-gray-600 text-sm mt-2"}><IoPhonePortrait className="mr-3" />{user.phone} </h4>
+            </div> */}
+            <div className="w-full">
+                <div className={`hidden md:flex flex-col mt-4 w-full mt-36`}>
+                    <NavLink to='/'  onClick={() => props.resetUser()} exact className={`flex items-center p-2 rounded text-xs md:text-sm text-gray-500 font-semibold my-1.5 transition-all duration-500 hover:bg-green-200 hover:bg-opacity-10 hover:text-gray-300`}><IoLogOut className={'mr-2'} />Logout</NavLink>
+                </div>
+                <div className={`mt-auto hidden md:block text-center text-white text-xs`}>
+                    <p>Copyright @ <a href='https://summittech-eng.org/' target="_blank" rel="noreferrer"   className={styles.footerLink}>Summit Tech</a></p>
+                </div>
             </div>
         </div>
     )

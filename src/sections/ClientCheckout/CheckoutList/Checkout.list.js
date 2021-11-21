@@ -1,20 +1,18 @@
 import React, {useEffect, useState} from "react";
-import { NewPurchase } from "../..";
-
-import { Activity2, RouteIndicator, Search } from "../../../components";
-import styles from './CheckoutList.module.css';
-import search from '../../../utils/search';
-import { BASE_URL } from "../../../utils/globalVariable";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+
+import { Activity2, Search } from "../../../components";
+import search from '../../../utils/search';
+import { BASE_URL } from "../../../utils/globalVariable";
 import { setData } from '../../../redux/Actions/Data.actions';
 
 const CheckoutList = (props) => {
     const {
-        isDetail, 
-        setIsDetail, 
-        user, 
-        password, 
+        isDetail,
+        setIsDetail,
+        user,
+        password,
         setDetail,
         data,
         refresh,
@@ -48,7 +46,7 @@ const CheckoutList = (props) => {
                 return response;
             })
             .then(res => {
-                let  _res = res.reverse().filter(data => data.client_id === user.id);
+                let _res = res.reverse().filter(data => data.client_id === user.id);
                 props.setData(_res);
                 setCheckouts(_res);
                 setIsLoading(false);
@@ -66,46 +64,59 @@ const CheckoutList = (props) => {
     }
 
     return (
-        <div className={isDetail ? styles.listContainerDetail : styles.listContainer}>
-            <Search 
-                placeholder="Search" 
-                isOpen={isOpen} 
-                setIsOpen={setIsOpen} 
-                newButton={false} 
-                filters={filters} 
-                filter={filter} 
+        <div className={`w-full z-30`}>
+            <Search
+                placeholder="Search"
+                isOpen={isOpen}
+                setIsOpen={setIsOpen}
+                newButton={false}
+                filters={filters}
+                filter={filter}
                 setFilter={setFilter}
                 text={text}
                 setText={setText} />
             {/* <h2 className={styles.durationTitle}>Today</h2> */}
-            <div className={styles.tableContainer}>
-                <table className={styles.table}>
-                    <thead className={styles.tableHead}>
-                        <td className={styles.tableHeadData}>Client Name</td>
-                        <td className={styles.tableHeadData}>Time</td>
-                        <td className={styles.tableHeadData}>Status</td>
-                        <td className={styles.tableHeadData}>Bonus</td>
-                        <td className={styles.tableHeadData}>Total</td>
-                        <td className={styles.tableHeadData}>Details</td>
+            <div className={'flex flex-wrap justify-center mt-4'}>
+                <table className={"min-w-full rounded-xl my-3 overflow-hidden border-collapse block md:table"}>
+                    <thead className={"block md:table-header-group"}>
+                        <tr className="md:border-none block md:table-row absolute -top-full md:top-auto -left-full md:left-auto  md:relative">
+                            <td className={"bg-primary text-lg p-3.5 text-gray-100 font-semibold md:border md:border-grey-500 text-left block md:table-cell"}>Day</td>
+                            <td className={"bg-primary text-lg p-3.5 text-gray-100 font-semibold md:border md:border-grey-500 text-left block md:table-cell"}>Time</td>
+                            <td className={"bg-primary text-lg p-3.5 text-gray-100 font-semibold md:border md:border-grey-500 text-left block md:table-cell"}>Status</td>
+                            <td className={"bg-primary text-lg p-3.5 text-gray-100 font-semibold md:border md:border-grey-500 text-left block md:table-cell"}>Bonus</td>
+                            <td className={"bg-primary text-lg p-3.5 text-gray-100 font-semibold md:border md:border-grey-500 text-left block md:table-cell"}>Total</td>
+                            <td className={"bg-primary text-lg p-3.5 text-gray-100 font-semibold md:border md:border-grey-500 text-left block md:table-cell"}>Details</td>
+                        </tr>
                     </thead>
-                    {isLoading ? (<td colSpan={5} style={{margin: 'auto', paddingTop: '10px'}}><Activity2 /></td>) : checkouts.map((checkout, index) => 
-                        (<tr className={styles.tableRow}>
-                            <td className={styles.tableData}>{checkout.client}</td>
-                            <td className={styles.tableData}>{new Date(checkout.date).toLocaleTimeString('en-US')}</td>
-                            <td className={styles.tableData}>{checkout.status}</td>
-                            <td className={styles.tableData}>{checkout.bonus}</td>
-                            <td className={styles.tableData}>{checkout.amount}</td>
-                            <td className={styles.tableData}><button className={styles.tableButton} onClick={() => showDetail(checkout)}>Details</button></td>
-                        </tr>)
-                    )
-                    }
+                    {isLoading ?
+                        <tbody>
+                            <tr>
+                                <td colSpan={6}>
+                                    <div className="flex justify-center"><Activity2 /></div>
+                                </td>
+                            </tr>
+                        </tbody> :
+                        <tbody className="block md:table-row-group">
+                            {checkouts.map((checkout, index) =>
+                                <tr key={index} className={"bg-white py-2 px-3 md:p-3 md:border-none block md:table-row"}>
+                                    <td className={"py-2 px-3 md:p-3 md:border md:border-grey-500 text-left block md:table-cell"}><span class="inline-block w-1/3 md:hidden font-bold">Day</span>{checkout.client}</td>
+                                    <td className={"py-2 px-3 md:p-3 md:border md:border-grey-500 text-left block md:table-cell"}><span class="inline-block w-1/3 md:hidden font-bold">Time</span>{new Date(checkout.date).toLocaleTimeString('en-US')}</td>
+                                    <td className={"py-2 px-3 md:p-3 md:border md:border-grey-500 text-left block md:table-cell"}><span class="inline-block w-1/3 md:hidden font-bold">Status</span>{checkout.status}</td>
+                                    <td className={"py-2 px-3 md:p-3 md:border md:border-grey-500 text-left block md:table-cell"}><span class="inline-block w-1/3 md:hidden font-bold">Bonus</span>{checkout.bonus}</td>
+                                    <td className={"py-2 px-3 md:p-3 md:border md:border-grey-500 text-left block md:table-cell"}><span class="inline-block w-1/3 md:hidden font-bold">Total</span>{checkout.amount}</td>
+                                    <td className={"py-2 px-3 md:p-3 md:border md:border-grey-500 text-left block md:table-cell"}><span class="inline-block w-1/3 md:hidden font-bold">Details</span>
+                                        <button className={`outline-none text-sm text-primary font-semibold rounded tracking-wider cursor-pointer py-1.5 px-2.5 shadow-md`} onClick={() => showDetail(checkout)}>Details</button>
+                                    </td>
+                                </tr>
+                            )}
+                        </tbody>}
                     
                 </table>
             </div>
             {/* <NewPurchase isOpen={isOpen} setIsOpen={setIsOpen} /> */}
         </div>
     )
-}
+};
 
 const mapStateToProps = ({auth, data, refresh}) => {
     return {

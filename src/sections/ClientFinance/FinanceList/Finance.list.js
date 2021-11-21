@@ -24,8 +24,8 @@ const FinanceList = (props) => {
     const [isLoading, setIsLoading] = useState(false);
     const [purchases, setPurchases] = useState([]);
     const [filters] = useState([
-        'Client',
         'Worker',
+        'Day',
     ])
 
     useEffect(() => {
@@ -64,19 +64,18 @@ const FinanceList = (props) => {
     }
 
     return (
-        <div className={`w-full`}>
+        <div className={`w-full z-30`}>
             <Search 
                 placeholder="Search" 
                 isOpen={isOpen} 
                 setIsOpen={setIsOpen} 
-                newButton={false} 
-                title="Purchase" 
+                newButton={false}
                 filters={filters} 
                 filter={filter} 
                 setFilter={setFilter}
                 text={text}
                 setText={setText} />
-            <div className={styles.tableContainer}>
+            <div className={'flex flex-wrap justify-center mt-4'}>
                 <table className={"min-w-full rounded-xl my-3 overflow-hidden border-collapse block md:table"}>
                     <thead className={"block md:table-header-group"}>
                         <tr className="md:border-none block md:table-row absolute -top-full md:top-auto -left-full md:left-auto  md:relative">
