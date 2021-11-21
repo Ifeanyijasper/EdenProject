@@ -14,10 +14,10 @@ const ClientInfo = (props) => {
     return (
         <div className={`h-screen md:h-auto w-full lg:rounded-r-xl overflow-x-hidden overflowY bg-white px-2 py-5 md:px-4`}>
             <div className={'flex items-center justify-between'}>
-                <h1 className={'text-3xl'}>{user.fullname || user.username}</h1>
+                <h1 className={'text-xl md:text-3xl'}>{user.fullname || user.username}</h1>
                 <div className={'flex justify-around'}>
-                    <button className={'outline-none text-sm text-white bg-primary rounded tracking-wider cursor-pointer py-2 px-2.5 shadow-md mx-1'} onClick={() => setShowDets(!showDets)}>{showDets ? 'Hide Bonuses' : 'Show Bonuses'}</button>
-                    <button className={'outline-none text-sm text-white bg-primary rounded tracking-wider cursor-pointer py-2 px-2.5 shadow-md mx-1'} onClick={() => setAdd(!add)}>Add Testimonial</button>
+                    <button className={'outline-none text-xs md:text-sm text-white bg-primary rounded md:tracking-wider cursor-pointer py-2 px-1.5 md:px-2.5 shadow-md mx-1'} onClick={() => setShowDets(!showDets)}>{showDets ? 'Hide Bonuses' : 'Show Bonuses'}</button>
+                    <button className={'outline-none text-xs md:text-sm text-white bg-primary rounded md:tracking-wider cursor-pointer py-2 px-1.5 md:px-2.5 shadow-md mx-1'} onClick={() => setAdd(!add)}>Add Testimonial</button>
                 </div>
             </div>
             {/* <p className={styles.lastVisit}>Last Visit: Mon, 22<sup>nd</sup> Dec, 2020</p> */}
@@ -36,10 +36,10 @@ const ClientInfo = (props) => {
             }
             <nav className={'mt-5 bg-white bg-opacity-30 backdrop-filter backdrop-blur-md sticky -top-5 md:top-3 z-0 pl-2 w-full py-2 rounded'}>
                 <ul className={'flex justify-start items-center'}>
-                    <li className={'cursor-pointer mx-1'}><NavLink to="/client" exact className={'text-sm my-0.5 mr-3 p-1 px-2 flex items-center text-green-700 border-b-2 border-transparent transition duration-500 hover:border-green-400'} activeClassName={'border-green-600 hover:border-green-600'}><IoStatsChart className="mr-1.5" /> TimeLine</NavLink></li>
-                    <li className={'cursor-pointer mx-1'}><NavLink to="/client/referrals" className={'text-sm my-0.5 mr-3 p-1 px-2 flex items-center text-green-700 border-b-2 border-transparent transition duration-500 hover:border-green-400'} activeClassName={'border-green-600 hover:border-green-600'}><IoPeople className="mr-1.5" /> Referred</NavLink></li>
-                    <li className={'cursor-pointer mx-1'}><NavLink to="/client/checkout" className={'text-sm my-0.5 mr-3 p-1 px-2 flex items-center text-green-700 border-b-2 border-transparent transition duration-500 hover:border-green-400'} activeClassName={'border-green-600 hover:border-green-600'}><IoCash className="mr-1.5" /> Checkouts</NavLink></li>
-                    <li className={'cursor-pointer mx-1'}><NavLink to="/client/profile" className={'text-sm my-0.5 mr-3 p-1 px-2 flex items-center text-green-700 border-b-2 border-transparent transition duration-500 hover:border-green-400'} activeClassName={'border-green-600 hover:border-green-600'}><IoPeople className="mr-1.5" /> Profile</NavLink></li>
+                    <li className={'cursor-pointer mx-1'}><NavLink to="/client" exact className={'text-xs md:text-sm my-0.5 md:mr-2 p-1 px-2 flex items-center text-green-700 border-b-2 border-transparent transition duration-500 hover:border-green-400'} activeClassName={'border-green-600 hover:border-green-600'}><IoStatsChart className="mr-0.5 md:mr-1.5" /> TimeLine</NavLink></li>
+                    <li className={'cursor-pointer mx-1'}><NavLink to="/client/referrals" className={'text-xs md:text-sm my-0.5 md:mr-2 p-1 px-2 flex items-center text-green-700 border-b-2 border-transparent transition duration-500 hover:border-green-400'} activeClassName={'border-green-600 hover:border-green-600'}><IoPeople className="mr-0.5 md:mr-1.5" /> Referred</NavLink></li>
+                    <li className={'cursor-pointer mx-1'}><NavLink to="/client/checkout" className={'text-xs md:text-sm my-0.5 md:mr-2 p-1 px-2 flex items-center text-green-700 border-b-2 border-transparent transition duration-500 hover:border-green-400'} activeClassName={'border-green-600 hover:border-green-600'}><IoCash className="mr-0.5 md:mr-1.5" /> Checkouts</NavLink></li>
+                    <li className={'cursor-pointer mx-1'}><NavLink to="/client/profile" className={'text-xs md:text-sm my-0.5 md:mr-2 p-1 px-2 flex items-center text-green-700 border-b-2 border-transparent transition duration-500 hover:border-green-400'} activeClassName={'border-green-600 hover:border-green-600'}><IoPeople className="mr-0.5 md:mr-1.5" /> Profile</NavLink></li>
                 </ul>
                 <hr className={'-mt-1'}/>
             </nav>

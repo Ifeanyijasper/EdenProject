@@ -64,7 +64,7 @@ const FinanceList = (props) => {
     }
 
     return (
-        <div className={`w-full z-30`}>
+        <div className={`w-full`}>
             <Search 
                 placeholder="Search" 
                 isOpen={isOpen} 

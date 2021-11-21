@@ -30,6 +30,9 @@ const ClientSide = (props) => {
                 <div className={`hidden md:flex flex-col mt-4 w-full mt-36`}>
                     <NavLink to='/'  onClick={() => props.resetUser()} exact className={`flex items-center p-2 rounded text-xs md:text-sm text-gray-500 font-semibold my-1.5 transition-all duration-500 hover:bg-green-200 hover:bg-opacity-10 hover:text-gray-300`}><IoLogOut className={'mr-2'} />Logout</NavLink>
                 </div>
+                <div className={`block md:hidden`}>
+                    <NavLink to='/'  onClick={() => props.resetUser()} exact className={`flex items-center justify-end p-2 rounded text-sm text-gray-50 font-semibold my-1.5 transition-all duration-500 hover:bg-green-200 hover:bg-opacity-10 hover:text-gray-300`}><IoLogOut className={'mr-2'} /></NavLink>
+                </div>
                 <div className={`mt-auto hidden md:block text-center text-white text-xs`}>
                     <p>Copyright @ <a href='https://summittech-eng.org/' target="_blank" rel="noreferrer"   className={styles.footerLink}>Summit Tech</a></p>
                 </div>

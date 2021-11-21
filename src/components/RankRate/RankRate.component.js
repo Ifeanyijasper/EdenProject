@@ -63,9 +63,9 @@ const RankRate = (props) => {
 
     return (
         <>
-            <div className={'flex items-baseline w-4/5 justify-start'}>
+            <div className={'flex items-baseline w-9/10 md:w-4/5 justify-start'}>
                 <div className={'w-full flex flex-col items-center justify-center'}>
-                    <div className={'h-2 rounded overflow-hidden bg-gray-400 mb-1 w-4/5'}><div className={styles.rateBar} style={{width: `${(rate / 100)}%` }} /></div>
+                    <div className={'h-2 rounded overflow-hidden bg-gray-400 mb-1 w-9/10 md:w-4/5'}><div className={styles.rateBar} style={{width: `${(rate / 100)}%` }} /></div>
                     <h2 className={'text-gray-600 text-sm'}>{rate} / 10,000 XAF</h2>
                 </div>
                 <button className={`flex items-center justify-center outline-none text-sm text-primary bg-white rounded tracking-wider py-2 px-2.5 shadow-md ml-4 ${rate < 10000 ? 'cursor-not-allowed' : 'cursor-pointer' }`} onClick={() => Checkout()}><IoWallet className={'mr-2'} />Checkout</button>
