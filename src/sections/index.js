@@ -28,6 +28,7 @@ import WorkerDetail from './Workers/WorkerList/WorkerDetail.section';
 import EditWorker from './Workers/WorkerList/EditWorker.section';
 import ClientDetail from './Clients/ClientList/ClientDetail.section';
 import EditClient from './Clients/ClientList/EditClient.section';
+import FinanceDetail from './Finance/FinanceList/FinanceDetail.section';
 
 export {
     SideNav, 
@@ -60,4 +61,5 @@ export {
     AdminGallery,
     WorkerDetail,
     ClientDetail,
+    FinanceDetail,
 }

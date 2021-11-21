@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 
-import styles from './Referal.module.css';
 import { Activity2, ClientCard } from '../../components';
 import { BASE_URL } from '../../utils/globalVariable';
 import { connect } from 'react-redux';
@@ -42,8 +41,8 @@ const Referal = (props) => {
     }, []);
 
     return (
-        <div className={styles.referedContainer}>
-            {loading ? <Activity2 /> : refered.map((worker, index) => <ClientCard client={worker} />)}
+        <div className={'grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 lg:gap-7 px-0 md:px-2 lg:px-8 mt-4 md:mt-6'}>
+            {loading ? <div className="flex justify-center col-span-2 md:col-span-3 lg:col-span-4"><Activity2 /></div> : refered.map((worker, index) => <ClientCard client={worker} />)}
         </div>
     )
 }
