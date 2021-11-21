@@ -3,8 +3,9 @@ import {  IoCash, IoPeople, IoStatsChart } from 'react-icons/io5';
 import { connect } from 'react-redux';
 import { NavLink, Route } from 'react-router-dom';
 
-import { ClientFinance, Products, Referal, Services, Profile, ClientCheckout, AddTestimonial } from '..';
+import { ClientFinance, Products, Referal, Services, Profile, ClientCheckout } from '..';
 import { RankRate } from '../../components';
+import AddTestimonial from './AddTestimonial.section';
 
 const ClientInfo = (props) => {
     const {user} = props;
@@ -49,7 +50,7 @@ const ClientInfo = (props) => {
             <Route path="/client/checkout" component={ClientCheckout} />
             <Route path="/client/services" component={Services} />
             <Route path="/client/products" component={Products} />
-            <AddTestimonial isOpen={add} setIsOpen={setAdd} />
+            <AddTestimonial add={add} setAdd={setAdd} />
         </div>
     )
 }
