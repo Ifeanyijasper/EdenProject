@@ -9,6 +9,7 @@ import { setData } from '../../../redux/Actions/Data.actions';
 import { BASE_URL } from "../../../utils/globalVariable";
 import { DateString } from "../../../utils/date";
 import { FinanceDetail } from "../..";
+import { Thousand } from "../../../utils/number";
 
 const FinanceList = (props) => {
     const {
@@ -101,7 +102,7 @@ const FinanceList = (props) => {
                                     <td className={"py-2 px-3 md:p-3 md:border md:border-grey-500 text-left block md:table-cell"}><span className="inline-block w-1/3 md:hidden font-bold">Day</span>{DateString(purchase.date)}</td>
                                     <td className={"py-2 px-3 md:p-3 md:border md:border-grey-500 text-left block md:table-cell"}><span className="inline-block w-1/3 md:hidden font-bold">Time</span>{new Date(purchase.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</td>
                                     <td className={"py-2 px-3 md:p-3 md:border md:border-grey-500 text-left block md:table-cell"}><span className="inline-block w-1/3 md:hidden font-bold">Worker</span>{purchase.worker}</td>
-                                    <td className={"py-2 px-3 md:p-3 md:border md:border-grey-500 text-left block md:table-cell"}><span className="inline-block w-1/3 md:hidden font-bold">Total</span>{purchase.total}</td>
+                                    <td className={"py-2 px-3 md:p-3 md:border md:border-grey-500 text-left block md:table-cell"}><span className="inline-block w-1/3 md:hidden font-bold">Total</span>{Thousand(purchase?.total)} XAF</td>
                                     <td className={"py-2 px-3 md:p-3 md:border md:border-grey-500 text-left block md:table-cell"}><span className="inline-block w-1/3 md:hidden font-bold">Details</span>
                                         <button className={`outline-none text-sm text-primary font-semibold rounded tracking-wider cursor-pointer py-1.5 px-2.5 shadow-md`} onClick={() => showDetail(purchase)}>Details</button>
                                     </td>
