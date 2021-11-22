@@ -100,7 +100,7 @@ const WorkerDetail = (props) => {
                     <hr className="my-3" />
                     <h2 className="text-left font-semibold">Invited</h2>
                     <div className="md:mt-1.5 text-base mb-5">
-                        <div className={'styles.referedList'}>
+                        <div className={'grid grid-cols-2 gap-4'}>
                             {referers.map((referer, index) => <ReferCard refer={referer} key={referer.id} />)}
                         </div>
                     </div>

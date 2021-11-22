@@ -20,6 +20,9 @@ module.exports = {
       },
       transitionProperty: {
         'spacing': 'margin, padding',
+      },
+      zIndex: {
+        '-10': '-10',
       }
     },
   },

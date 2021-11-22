@@ -1,9 +1,0 @@
-.clientPage {
-    display: flex;
-}
-
-@media only screen and (max-width: 56.25rem) {
-    .clientPage {
-        flex-direction: column;
-    }
-}

@@ -1,11 +1,9 @@
 import React from 'react';
 import { ClientSide, ClientInfo } from '../../sections';
 
-import styles from './Client.module.css';
-
 const Client = () => {
     return (
-        <div className={styles.clientPage}>
+        <div className={'h-screen overflow-hidden md:p-0 lg:p-4 flex flex-col md:flex-row'}>
             <ClientSide />
             <ClientInfo />
         </div>
