@@ -13,7 +13,7 @@ const RankRate = (props) => {
     const [msg, setMsg] = useState({});
 
     const Checkout = () => {
-        if (Number(rate) < 10000) {
+        if (Number(rate) < 100000) {
             setNotify(true);
             setMsg({
                 title: 'Cannot checkout',

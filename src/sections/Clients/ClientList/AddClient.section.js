@@ -7,6 +7,7 @@ import { bindActionCreators } from 'redux';
 import { Activity, Button, Input,  Notification } from '../../../components';
 import { BASE_URL } from '../../../utils/globalVariable';
 import { addClient } from '../../../redux/Actions/Data.actions';
+import validateEmail from '../../../utils/email.auth';
 
 const AddClient = (props) => {
     const { add, setAdd, username, password, _clients, _workers } = props;
@@ -72,7 +73,7 @@ const AddClient = (props) => {
             setReferError(true);
         }
 
-        if (email.length < 8) {
+        if (!validateEmail(email)) {
             hasError = true;
             setEmailError(true);
         }
