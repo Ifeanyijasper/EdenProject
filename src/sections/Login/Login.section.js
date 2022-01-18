@@ -13,6 +13,7 @@ import { BASE_URL } from '../../utils/globalVariable';
 import {setUser} from '../../redux/Actions/Auth.actions';
 import styles from './Login.module.css';
 import validateEmail from '../../utils/email.auth';
+import checkPasswordValidation from '../../utils/password.auth';
 
 const Login = (props) => {
     const [userName, setUserName] = useState('');
@@ -165,8 +166,6 @@ const Login = (props) => {
             });
             return false;
         }
-
-        console.log(email)
         const body = {
             email
         };
@@ -240,12 +239,25 @@ const Login = (props) => {
             return false;
         }
 
+        if (!checkPasswordValidation(password)[0]) {
+            let finalCheck = checkPasswordValidation(password);
+            setConPasswordError(true);
+            setPasswordError(true);
+            setNotify(true);
+            setMsg({
+                title: 'Weak Password',
+                message: finalCheck[1],
+            });
+            setIsLoading(false);
+            return false;
+        }
+
         if (hasError) {
             setIsLoading(false);
             setNotify(true);
             setMsg({
                 title: 'Wrong Credentials',
-                message: 'Please enter a valid email address.'
+                message: 'Please check your inputs'
             });
             return false;
         }
@@ -326,13 +338,14 @@ const Login = (props) => {
                                     setError={() => setPasswordError(false)} />
                                 <LoginButton title="Login" loading={isLoading} onClick={() => authenticate()} />
                                 <div className={'text-center mt-5 w-40 cursor-pointer ml-auto'} onClick={() => setAction('forgot')}><p className={'text-sm'}>Forgot Password?</p></div>
-                            </> : action === 'forgot' ?
+                            </> :
+                                action === 'forgot' ?
                                 <>
                                     <p className={'text-sm -mt-5 mb-4 text-center text-gray-600'}>Please enter your email and click next, you will receive a token which you will use in changing your password.</p>
                                     <Input
                                         label="Email"
                                         placeholder="beautycomplex@gmail.com"
-                                        secureText={false}
+                                        secureText={true}
                                         type="email"
                                         value={email}
                                         setValue={(event) => setEmail(event.target.value)}
@@ -341,7 +354,8 @@ const Login = (props) => {
                                     <LoginButton title="Next" loading={isLoading} onClick={() => forgot()} />
                                     <div className={'text-center mt-5 w-40 cursor-pointer ml-auto'} onClick={() => setAction('login')}><p className={'text-sm'}>Login</p></div>
                                         
-                                </> : <>
+                                </> : 
+                                <>
                                     <p className={'text-sm -mt-5 mb-4 text-center text-gray-600'}>Please copy the token we've sent to your email and fill below.</p>
                                     <Input
                                         label="Token"
